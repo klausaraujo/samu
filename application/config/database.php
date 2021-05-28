@@ -7,7 +7,7 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => getenv('DB_HOST'),
+	'hostname' => '127.0.0.1',
 	'username' => 'root',//getenv('DB_USER'),
 	'password' => '12345678',//getenv('DB_PASS'),
 	'database' => 'samu',//getenv('DB_NAME'),

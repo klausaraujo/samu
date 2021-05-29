@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Ministrio de Salud - Iniciar Sesión</title>
+    <title>Ministerio de Salud - Iniciar Sesión</title>
     <?php $this->load->view("layout/resources");?>
     <link rel="stylesheet" href="<?=base_url()?>public/css/style.css">
     <link rel="stylesheet" href="<?=base_url()?>public/css/skin_color.css">
     <link rel="icon" href="<?=base_url()?>public/images/favicon.ico">
 </head>
-<body class="hold-transition theme-primary bg-img" data-overlay="5" background="fondo.jpg")">	
+<body class="hold-transition theme-primary bg-img" data-overlay="5">	
 	<div class="container h-p100">
 		<div class="row align-items-center justify-content-md-center h-p100">	
 			<div class="col-12">

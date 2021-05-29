@@ -1,0 +1,59 @@
+DROP TABLE IF EXISTS usuarios;
+DROP TABLE IF EXISTS region;
+DROP TABLE IF EXISTS perfil;
+
+CREATE TABLE perfil (
+  idperfil smallint(4) AUTO_INCREMENT primary key,
+  perfil varchar(20) NOT NULL,
+  activo char(1) DEFAULT '1') ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO perfil (idperfil, perfil) VALUES (1, 'Administrador'),(2, 'Operador'),(3,'Regulador'),(4,'Despacho'),(5,'Jefe de Guardia'),(6,'Coordinador'),(7,'Piloto'),(8,'Enfermero'),(9,'Médico');
+
+CREATE TABLE region (
+  idregion varchar(2) PRIMARY KEY,
+  region varchar(30) DEFAULT NULL,
+  activo char(1) DEFAULT '1') ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ 
+INSERT INTO region (idregion, region, activo) VALUES
+('01', 'Amazonas', '1'),
+('02', 'Áncash', '1'),
+('03', 'Apurímac', '1'),
+('04', 'Arequipa', '1'),
+('05', 'Ayacucho', '1'),
+('06', 'Cajamarca', '1'),
+('07', 'Callao', '1'),
+('08', 'Cusco', '1'),
+('09', 'Huancavelica', '1'),
+('10', 'Huánuco', '1'),
+('11', 'Ica', '1'),
+('12', 'Junín', '1'),
+('13', 'La Libertad', '1'),
+('14', 'Lambayeque', '1'),
+('15', 'Lima', '1'),
+('16', 'Loreto', '1'),
+('17', 'Madre de Dios', '1'),
+('18', 'Moquegua', '1'),
+('19', 'Pasco', '1'),
+('20', 'Piura', '1'),
+('21', 'Puno', '1'),
+('22', 'San Martín', '1'),
+('23', 'Tacna', '1'),
+('24', 'Tumbes', '1'),
+('25', 'Ucayali', '1');
+
+CREATE TABLE usuarios (
+  idusuario smallint(4) AUTO_INCREMENT primary key,
+  dni varchar(8) DEFAULT NULL,
+  avatar varchar(30) DEFAULT NULL,
+  apellidos varchar(50) DEFAULT NULL,
+  nombres varchar(50) DEFAULT NULL,
+  usuario varchar(50) DEFAULT NULL,
+  passwd varchar(50) DEFAULT NULL,
+  idperfil smallint(4) NOT NULL,
+  idregion varchar(2) NOT NULL,
+  activo char(1) DEFAULT '1',
+  foreign key (idperfil) references perfil(idperfil) on delete cascade on update cascade,
+  foreign key (idregion) references region(idregion) on delete cascade on update cascade) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO usuarios (idusuario, dni, avatar, apellidos, nombres, usuario, passwd, idperfil, idregion, activo) VALUES
+(1, '42545573', '000120190310064855.png', 'ARAUJO CUADROS', 'KLAUS JOSEPH', 'admin', 'e4619e8fb50a0aa59ad1b92364f127afad06afe1', 1, '15', '1')

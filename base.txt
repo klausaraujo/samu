@@ -1,3 +1,6 @@
+
+
+DROP TABLE IF EXISTS modulo;
 DROP TABLE IF EXISTS usuarios;
 DROP TABLE IF EXISTS region;
 DROP TABLE IF EXISTS perfil;
@@ -57,3 +60,21 @@ CREATE TABLE usuarios (
 
 INSERT INTO usuarios (idusuario, dni, avatar, apellidos, nombres, usuario, passwd, idperfil, idregion, activo) VALUES
 (1, '42545573', '000120190310064855.png', 'ARAUJO CUADROS', 'KLAUS JOSEPH', 'admin', 'e4619e8fb50a0aa59ad1b92364f127afad06afe1', 1, '15', '1')
+
+CREATE TABLE modulo(
+	idmodulo tinyint(1)	AUTO_INCREMENT	primary key,	
+	descripcion	varchar(100),
+	menu varchar(30),	
+	icono varchar(25),		
+	url	varchar(25),		
+	imagen char(1),		
+	mini varchar(30),	
+	orden tinyint(4),
+	activo char(1) DEFAULT '1');
+
+INSERT INTO modulo (descripcion,menu,orden) values ('Modulo de Emergecias','Emergecias',1);
+INSERT INTO modulo (descripcion,menu,orden) values ('Modulo de Mantenimiento','Mantenimiento',1);
+INSERT INTO modulo (descripcion,menu,orden) values ('Modulo de Usuarios','Usuarios',1);
+
+
+

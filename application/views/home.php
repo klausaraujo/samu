@@ -7,26 +7,17 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="<?=base_url()?>public/images/favicon.ico">
-
-    <title>Florence Admin - Dashboard</title>
-    
-	<!-- Vendors Style-->
+	<title>Ministerio de Salud - SAMU-106</title>
 	<link rel="stylesheet" href="<?=base_url()?>public/css/vendors_css.css">
 	  
 	<!-- Style-->  
 	<link rel="stylesheet" href="<?=base_url()?>public/css/style.css">
 	<link rel="stylesheet" href="<?=base_url()?>public/css/skin_color.css">
-     
   </head>
-
 <body class="hold-transition light-skin sidebar-mini theme-primary">
-	
 <div class="wrapper">
-
     <?php $this->load->view('layout/header'); ?>
     <?php $this->load->view('layout/sidebar'); ?>
-
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
 	  <div class="container-full">
 		<!-- Main content -->

@@ -30,7 +30,7 @@
 											<div class="input-group-prepend">
 												<span class="input-group-text bg-transparent"><i class="ti-user"></i></span>
 											</div>
-											<input type="text" name="user" class="form-control pl-15 bg-transparent" placeholder="Usuario" autocomplete="false">
+											<input type="text" name="user" class="form-control pl-15 bg-transparent" placeholder="Usuario" autocomplete="off">
 										</div>
 									</div>
 									<div class="form-group">
@@ -38,7 +38,7 @@
 											<div class="input-group-prepend">
 												<span class="input-group-text  bg-transparent"><i class="ti-lock"></i></span>
 											</div>
-											<input type="password" name="password" class="form-control pl-15 bg-transparent" placeholder="Clave" autocomplete=false>
+											<input type="password" name="password" class="form-control pl-15 bg-transparent" placeholder="Clave" autocomplete="off">
 										</div>
 									</div>
 									  <div class="row">
@@ -48,7 +48,7 @@
 									  </div>
                                       <?php $message = $this->session->flashdata('error'); ?>
                                         <?php if($message){ ?>
-                                        <div class="mt-2 alert alert-danger"><span><?= $message ?></span></div>
+                                        <div class="mt-2 alert alert-danger"><span><center><?= $message ?></center></span></div>
                                         <?php } ?>
 								</form>	
 							</div>						

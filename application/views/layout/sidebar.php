@@ -14,18 +14,17 @@
 			</div>
         </div>	
 		
-      <!-- sidebar menu-->
       <ul class="sidebar-menu" data-widget="tree">
 		<li class="treeview">
           <a href="#">
             <i class="ti-dashboard"></i>
-			<span>Dashboard</span>
+			<span>Maestros</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="index.html"><i class="ti-more"></i>Dashboard 1</a></li>
+            <li><a href="index.html"><i class="ti-more"></i>Registro de Bases</a></li>
             <li><a href="index2.html"><i class="ti-more"></i>Dashboard 2</a></li>
             <li><a href="index3.html"><i class="ti-more"></i>Dashboard 3</a></li>
           </ul>

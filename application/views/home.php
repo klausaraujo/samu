@@ -44,7 +44,7 @@
 								</div>
 								<div>
 									<h3 class="text-dark mb-0 font-weight-500">4,235</h3>
-									<p class="text-mute mb-0">Total Patients</p>
+									<p class="text-mute mb-0">Total Atenciones</p>
 								</div>
 							</div>
 						</div>
@@ -71,7 +71,7 @@
 								</div>
 								<div>
 									<h3 class="text-dark mb-0 font-weight-500">394</h3>
-									<p class="text-mute mb-0">Available Staff</p>
+									<p class="text-mute mb-0">Médicos Disponibles</p>
 								</div>
 							</div>
 						</div>
@@ -97,8 +97,8 @@
 									<i class="text-warning mr-0 font-size-20 fa fa-money"></i>
 								</div>
 								<div>
-									<h3 class="text-dark mb-0 font-weight-500">$2,526</h3>
-									<p class="text-mute mb-0">Avg Treat. Costs</p>
+									<h3 class="text-dark mb-0 font-weight-500">25</h3>
+									<p class="text-mute mb-0">Enfermeros Disponibles</p>
 								</div>
 							</div>
 						</div>
@@ -125,7 +125,7 @@
 								</div>
 								<div>
 									<h3 class="text-dark mb-0 font-weight-500">35</h3>
-									<p class="text-mute mb-0">Available Cars</p>
+									<p class="text-mute mb-0">Ambulancias Operativas</p>
 								</div>
 							</div>
 						</div>
@@ -164,17 +164,17 @@
 				<div class="col-xl-5 col-12">
 					<div class="box">
 						<div class="box-header">
-							<h4 class="box-title">Patients by Gender</h4>
+							<h4 class="box-title">Pacientes Atendidos por Género</h4>
 						</div>
 						<div class="box-body">
 							<div class="row">
 								<div class="col-lg-6 col-12">
 									<div id="progressbar2" class="mx-auto w-200 my-25 position-relative text-center"></div>
-									<h4 class="text-center">Male</h4>
+									<h4 class="text-center">Varones</h4>
 								</div>
 								<div class="col-lg-6 col-12">
 									<div id="progressbar3" class="mx-auto w-200 my-25 position-relative text-center"></div>
-									<h4 class="text-center">Female</h4>
+									<h4 class="text-center">Mujeres</h4>
 								</div>
 							</div>
 						</div>

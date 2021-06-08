@@ -225,10 +225,6 @@
 									<h5 class="my-0"><i class="mr-50 w-20 fa fa-plus-square"></i>Oncology</h5>
 									<p class="mb-0">85</p>
 								</div>							
-								<div class="d-flex align-items-center justify-content-between my-15 pr-20">
-									<h5 class="my-0"><i class="mr-50 w-20 fa fa-wheelchair-alt"></i>Emergency</h5>
-									<p class="mb-0">45</p>
-								</div>
 							</div>
 						</div>
 					</div>

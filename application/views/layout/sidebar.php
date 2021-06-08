@@ -5,16 +5,14 @@
 	    <div class="user-profile px-10 py-15">
 			<div class="d-flex align-items-center">			
 				<div class="image">
-				  <img src="<?=base_url()?>public/images/avatar/1.jpg" class="avatar avatar-lg" alt="User Image">
 				</div>
 				<div class="info ml-10">
-					<p class="mb-0">Welcome</p>
-					<h5 class="mb-0">Joan Wilkins</h5>
+          <h5 class="mb-0"><br></h5>
+          <h5 class="mb-0">Menú de Opciones</h5>
 				</div>
 			</div>
         </div>	
-		
-      <ul class="sidebar-menu" data-widget="tree">
+  <ul class="sidebar-menu" data-widget="tree">
 		<li class="treeview">
           <a href="#">
             <i class="ti-dashboard"></i>
@@ -30,7 +28,7 @@
 		<li>
     <li class="treeview">
           <a href="#">
-            <i class="ti-dashboard"></i>
+            <i class="ti-layout-grid2"></i>
 			<span>Mantenimiento</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
@@ -45,8 +43,8 @@
     
     <li class="treeview">
           <a href="#">
-            <i class="ti-dashboard"></i>
-			<span>Usuarios</span>
+            <i class="ti-unlock"></i>
+			      <span>Usuarios</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-right pull-right"></i>
             </span>

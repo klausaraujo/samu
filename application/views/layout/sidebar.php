@@ -35,7 +35,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="index.html"><i class="ti-more"></i>Registro de Bases</a></li>
+            <li><a href="bases"><i class="ti-more"></i>Registro de Bases</a></li>
             <li><a href="index2.html"><i class="ti-more"></i>Registro de Ambulancias</a></li>
           </ul>
         </li>	

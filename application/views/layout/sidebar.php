@@ -50,7 +50,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="index.html"><i class="ti-more"></i>Registro de Usuarios</a></li>
+            <li><a href="usuarios"><i class="ti-more"></i>Registro de Usuarios</a></li>
           </ul>
         </li>	
 		<li>

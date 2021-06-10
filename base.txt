@@ -3,6 +3,10 @@
 DROP VIEW IF EXISTS lista_distritos;
 DROP VIEW IF EXISTS lista_provincias;
 DROP VIEW IF EXISTS lista_departamentos;
+DROP TABLE IF EXISTS ambulancia;
+DROP TABLE IF EXISTS marca;
+DROP TABLE IF EXISTS tipo_combustible;
+DROP TABLE IF EXISTS tipo_ambulancia;
 DROP TABLE IF EXISTS base;
 DROP TABLE IF EXISTS ubigeo;
 DROP TABLE IF EXISTS menu;
@@ -2007,6 +2011,72 @@ create table base(
 	latitud varchar(25),
 	longitud varchar(25),
 	activo char(1) DEFAULT '1') ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+create table marca(
+	idmarca smallint(4) AUTO_INCREMENT primary key, 
+	marca varchar(35),
+	activo char(1) DEFAULT '1') ENGINE=InnoDB DEFAULT CHARSET=utf8;
+	
+insert into marca(marca) values ('TOYOTA');
+insert into marca(marca) values ('HYUNDAI');
+insert into marca(marca) values ('KIA');
+insert into marca(marca) values ('NISSAN');
+insert into marca(marca) values ('CHEVROLET');
+insert into marca(marca) values ('SUZUKI');
+insert into marca(marca) values ('MAZDA');
+insert into marca(marca) values ('RENAULT');
+insert into marca(marca) values ('VOLKSWAGEN');
+insert into marca(marca) values ('MITSUBISHI');
+insert into marca(marca) values ('MERCEDES BENZ');
+insert into marca(marca) values ('PEUGEOT');
+
+create table tipo_combustible(
+	idtipocombustible smallint(4) AUTO_INCREMENT primary key, 
+	combustible varchar(35),
+	activo char(1) DEFAULT '1') ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+insert into tipo_combustible(combustible) values ('GASOLINA');
+insert into tipo_combustible(combustible) values ('PETROLEO');
+insert into tipo_combustible(combustible) values ('GNV');
+insert into tipo_combustible(combustible) values ('GLP');
+insert into tipo_combustible(combustible) values ('ELECTRICO');
+
+create table tipo_ambulancia(
+	idtipoambulancia smallint(4) AUTO_INCREMENT primary key, 
+	tipo varchar(35),
+	activo char(1) DEFAULT '1') ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+insert into tipo_ambulancia(tipo) values ('TIPO I - URBANO');
+insert into tipo_ambulancia(tipo) values ('TIPO II - URBANO');
+insert into tipo_ambulancia(tipo) values ('TIPO III - URBANO');
+insert into tipo_ambulancia(tipo) values ('TIPO IV - URBANO');
+
+insert into tipo_ambulancia(tipo) values ('TIPO I - RURAL');
+insert into tipo_ambulancia(tipo) values ('TIPO II - RURAL');
+insert into tipo_ambulancia(tipo) values ('TIPO III - RURAL');
+insert into tipo_ambulancia(tipo) values ('TIPO IV - RURAL');
+
+create table ambulancia(
+	idambulancia smallint(4) AUTO_INCREMENT primary key, 
+	placa varchar(6),
+	idmarca smallint(4) not null,
+	modelo varchar(20),
+	idtipocombustible smallint(4) not null,
+	gps char(1) default '0',
+	idtipoambulancia smallint(4) not null,
+	serie_motor varchar(30),
+	codigo_patrimonial varchar(10),
+	fabricacion_anio int default 0, 
+	modelo_anio int default 0,
+	condicion char(1),
+	tarjeta varchar(30),
+	fotografia varchar(30),
+	activo char(1) DEFAULT '1',
+	foreign key (idmarca) references marca(idmarca) on delete cascade on update cascade,
+	foreign key (idtipocombustible) references tipo_combustible(idtipocombustible) on delete cascade on update cascade,
+	foreign key (idtipoambulancia) references tipo_ambulancia(idtipoambulancia) on delete cascade on update cascade) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 
 
 

@@ -9,4 +9,5 @@ $route['translate_uri_dashes'] = FALSE;
 $route['bases'] = 'bases/main/index';
 
 
-
+/* AMBULANCIAS  */
+$route['ambulancias'] = 'ambulancias/main/index';

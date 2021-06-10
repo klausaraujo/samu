@@ -3,6 +3,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 $config['base_url'] = 'http://'.$_SERVER["HTTP_HOST"].'/samu/';
+$config['path_url'] = 'http://'.$_SERVER["HTTP_HOST"].'/samu/index.php/';
 
 $config['index_page'] = '';
 

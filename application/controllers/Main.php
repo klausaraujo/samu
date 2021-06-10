@@ -10,7 +10,7 @@ class Main extends CI_Controller {
         $token = $this->session->userdata("token");
         if (empty($token))
         {
-            header("location:" . base_url() . "auth/login");
+            header("location:" . $this->config->item('path_url') . "auth/login");
         }
 	}
 

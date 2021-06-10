@@ -20,7 +20,7 @@ class Auth extends CI_Controller {
 			if ($result->num_rows() > 0)
 			{
 				$this->session->set_userdata("token", $result->first_row());
-				header("location:" . base_url() . "main");
+				header("location:" . $this->config->item('path_url') . "main");
 			} else
 			{
 				$this->session->set_flashdata('error', 'Usuario o contraseña incorrectos');
@@ -33,6 +33,11 @@ class Auth extends CI_Controller {
 
 		$this->load->view('login');
 
+	}
+
+	public function logout() {
+		$this->session->unset_userdata("token");
+		header("location:" . $this->config->item('path_url') . "auth/login");
 	}
 
 	private function findUser($user, $password)  {

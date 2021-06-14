@@ -54,8 +54,10 @@ class Main extends CI_Controller
         validarPermisos($nivel,$idmenu,$this->permisos);
         */
         $this->load->model("Bases_model");
+        $this->load->model("Ubigeo_model");
 
         $listaBases = $this->Bases_model->obtenerBases();
+        $departamentos = $this->Ubigeo_model->departamentos();
 
         if ($listaBases->num_rows() > 0) {
             $listaBases = $listaBases->result();
@@ -64,7 +66,8 @@ class Main extends CI_Controller
         }
 
         $data = array(
-            "listaBases" => json_encode($listaBases)
+            "listaBases" => json_encode($listaBases),
+            "departamentos" => $departamentos->result()
         );
         
         $this->load->view("bases/main_bases", $data);
@@ -72,4 +75,40 @@ class Main extends CI_Controller
         
     }
 	
+    public function cargarProvincias()
+    {
+        $this->load->model("Ubigeo_model");
+        
+        $departamento = $this->input->post("departamento");
+        
+        $this->Ubigeo_model->setcod_dep($departamento);
+        
+        $lista = $this->Ubigeo_model->provincias();
+        
+        $data = array(
+            "lista" => $lista->result()
+        );
+        
+        echo json_encode($data);
+    }
+
+    public function cargarDistritos()
+    {
+        $this->load->model("Ubigeo_model");
+        
+        $departamento = $this->input->post("departamento");
+        $provincia = $this->input->post("provincia");
+        
+        $this->Ubigeo_model->setcod_dep($departamento);
+        $this->Ubigeo_model->setcod_pro($provincia);
+        
+        $lista = $this->Ubigeo_model->distritos();
+        
+        $data = array(
+            "lista" => $lista->result()
+        );
+        
+        echo json_encode($data);
+    }
+
 }

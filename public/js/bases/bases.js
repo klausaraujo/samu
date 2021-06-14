@@ -1,4 +1,5 @@
 var data;
+var validate = 1;
 $(document).ready(function () {
   var table = $('#dt-bases').DataTable({
     data: lista,
@@ -62,28 +63,28 @@ $(document).ready(function () {
       buttons: [{
         extend: 'copy',
         title: 'Lista General de Bases',
-        exportOptions: { columns: [0, 1, 2, 3, 6] },
+        exportOptions: { columns: [1, 2, 3, 4, 5] },
       },
       {
         extend: 'csv',
         title: 'Lista General de Bases',
-        exportOptions: { columns: [0, 1, 2, 3, 6] },
+        exportOptions: { columns: [1, 2, 3, 4, 5] },
       },
       {
         extend: 'excel',
         title: 'Lista General de Bases',
-        exportOptions: { columns: [0, 1, 2, 3, 6] },
+        exportOptions: { columns: [1, 2, 3, 4, 5] },
       },
       {
         extend: 'pdf',
         title: 'Lista General de Bases',
         orientation: 'landscape',
-        exportOptions: { columns: [0, 1, 2, 3, 6] },
+        exportOptions: { columns: [1, 2, 3, 4, 5] },
       },
       {
         extend: 'print',
         title: 'Lista General de Bases',
-        exportOptions: { columns: [0, 1, 2, 3, 6] },
+        exportOptions: { columns: [1, 2, 3, 4, 5] },
         customize: function (win) {
           $(win.document.body).addClass('white-bg');
           $(win.document.body).css('font-size', '10px');
@@ -117,99 +118,49 @@ $(document).ready(function () {
     }
 
   });
-/*
-  $("#file").change(function (event) {
-    readURL(this);
-  });
-
-  $("#file").on('click', function (event) {
-    RecurFadeIn();
-  });
-
-  $("#datetimepicker").datetimepicker({
-    format: "DD/MM/YYYY",
-    maxDate: moment()
-  }); $('#siga').keyup(function (e) {
-    if ((e.keyCode > 47 && e.keyCode < 58) || (e.keyCode < 106 && e.keyCode > 95) || e.keyCode === 8) {
-      if (e.keyCode === 8) return true
-      if (this.value.length > 14) return false;
-      if (this.value.length > 5) {
-        this.value = this.value.replace(/(\d{4})\.?/g, '$1.');
-      } else {
-        this.value = this.value.replace(/(\d{2})\.?/g, '$1.');
-      }
-      return true;
-    } this.value = this.value.replace(/[^\-0-9]/g, '');
-  });
-
-  $("#btnBuscarTitular").on('click', function (event) {
-    var documentNumber = $('#numeroDniTitular').val();
-    searchPerson(documentNumber, '#nombreTitular');
-  });
-
-  $("#btnBuscarSuplente").on('click', function (event) {
-    var documentNumber = $('#numeroDniSuplente').val();
-    searchPerson(documentNumber, '#nombreSuplente');
-  });
 
   $(".btn-nuevo").on('click', function (event) {
-    $('#imagen').attr('src', 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=');
-    $('.custom-file').html(`Escoger Ficha &hellip;`);
+    //$('#imagen').attr('src', 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=');
+    //$('.custom-file').html(`Escoger Ficha &hellip;`);
     data = {};
     $("#formRegistrar")[0].reset();
-    showModal(event, 'Registrar Nuevo Artículo');
+    showModal(event, 'Registrar Nueva Base');
   });
 
-  $("body").on("click", ".actionEdit", function () {
-    var tr = $(this).parents('tr');
-    var row = table.row(tr);
-
-    index = row.index();
-    data = row.data();
-    const { idarticulo, descripcion, idmarca, modelo, dimensiones, peso,
-      idcolor, idclasificacion, idunidadmedida, imagen, estado, codigo_siga } = data;
-    $('#idarticulo').val(idarticulo);
-    $('#nombre').val(descripcion);
-    $('#siga').val(codigo_siga);
-    $('#marca').val(idmarca);
-    $('#modelo').val(modelo);
-    $('#dimensiones').val(dimensiones);
-    $('#peso').val(peso);
-    $('#color').val(idcolor);
-    $('#clasificacion').val(idclasificacion);
-    $('#medida').val(idunidadmedida);
-    $('#imagen').attr('src', URI + 'public/inventarios/fotos/' + imagen);
-    $("#estado").prop("checked", estado === '1' ? true : false);
-    $('.btn-buscar').attr("disabled", "disabled");
-    showModal(event, 'Editar Artículo');
-  });
-
+  function showModal(event, title) {
+    $("#editarModal").modal("show");
+    $("#editarModalLabel").text(title);
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+  }
+/*
   $("#formRegistrar").validate({
     rules: {
-      siga: { required: true },
-      nombre: { required: true },
-      marca: { required: true },
-      medida: { required: true },
-      clasificacion: { required: true }
+      anio: { required: true },
+      fechaEmision: { required: true },
+      tipoIngreso: { required: true },
+      almacen: { required: true },
     },
     messages: {
-      siga: { required: "Campo requerido" },
-      nombre: { required: "Campo requerido" },
-      marca: { required: "Campo requerido" },
-      medida: { required: "Campo requerido" },
-      clasificacion: { required: "Campo requerido" }
+      anio: { required: "Campo requerido" },
+      fechaEmision: { required: "Campo requerido" },
+      tipoIngreso: { required: "Campo requerido" },
+      almacen: { required: "Campo requerido" }
     },
     submitHandler: function (form, event) {
       var formData = new FormData(document.getElementById("formRegistrar"));
-      formData.append("file", document.getElementById("file"));
       formData.append("ficha", document.getElementById("ficha"));
-
+      const data = tableArticuloIngresos.rows().data().toArray();
+      if (data.length === 0) {
+        showAlertForm(`No hay Artículos, <a class="alert-link">seleccione al menos un artículo.</a>`);
+        return;
+      }
+      formData.append("articulos", data.map((item) => item.idarticuloregistro).join('|'));
       $.ajax({
         type: 'POST',
-        url: URI + 'inventario/articulos/guardarArticulo',
+        url: URI + 'inventario/ingresos/guardar',
         data: formData,
-        method: "POST",
-        dataType: "json",
+        dataType: 'json',
         cache: false,
         contentType: false,
         processData: false,
@@ -233,140 +184,68 @@ $(document).ready(function () {
         }
       });
     }
-  });
+  });*/
+  
+  $("#departamento").change(function () {
 
-  $("#file").change(function (event) {
-    readURL(this);
-  });
+    var id = $(this).val();
 
-  $("#ficha").change(function (event) {
-    readURL(this, false);
-  });
+    if (id.length > 0) {
 
-  function readURL(input, isImage = true) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-      var filename = $(input).val();
-      filename = filename.substring(filename.lastIndexOf('\\') + 1);
-      reader.onload = function (e) {
-        if (isImage) $('#imagen').attr('src', e.target.result);
-        $(`${isImage ? '.custom-file-img' : '.custom-file'}`).text(filename);
-      }
-      reader.readAsDataURL(input.files[0]);
-    }
-    $(".alert").removeClass("loading").hide();
-  }
+      $.ajax({
+        data: { departamento: id },
+        url: URI + "bases/main/cargarProvincias",
+        method: "POST",
+        dataType: "json",
+        beforeSend: function () {
+          $("#provincia").html('<option value="">Cargando...</option>');
+          $("#distrito").html('<option value="">--Elija Provincia--</option>');
+        },
+        success: function (data) {
 
-  $('body').on('click', 'td button.actionImage', function () {
-    var tr = $(this).parents('tr');
-    var row = table.row(tr);
+          var $html = '<option value="">--Seleccione--</option>';
+          $.each(data.lista, function (i, e) {
 
-    index = row.index();
-    data = row.data();
-    const { imagen } = data;
-    const imageUrl = `${URI}public/inventarios/fotos/${imagen}`
-    $('#imagepreview').attr('src', imageUrl);
-    $('#imagemodal').modal('show');
-  });
+            $html += '<option value="' + e.Codigo_Provincia + '">' + e.Nombre + '</option>';
 
-  $('body').on('click', 'td button.actionPdf', function () {
-    var tr = $(this).parents('tr');
-    var row = table.row(tr);
+          });
+          $("#provincia").html($html);
 
-    index = row.index();
-    data = row.data();
-    const { ficha } = data;
-    const ruta = `${URI}public/inventarios/fichas/${ficha}`;
-    if (ruta)
-      window.open(ruta);
-  });
+        }
+      });
 
-  $('body').on('click', '#dt-select tr', function () {
-    var tr = $(this);
-    var row = table.row(tr);
-    index = row.index();
-    data = row.data();
-    if (data) {
-      $('.btn-editar').removeClass('active');
-      $('.btn-editar').addClass('active');
-
-      if ($(this).hasClass('selected')) {
-        $('.btn-editar').removeClass('active');
-        $(this).removeClass('selected');
-      } else {
-        table.$('tr.selected').removeClass('selected');
-        $(this).addClass('selected');
-      }
     }
   });
-*/
+
+  $("#provincia").change(function () {
+
+    var id = $(this).val();
+    var departamento = $("#departamento").val();
+
+    if (id.length > 0 && departamento.length > 0) {
+
+      $.ajax({
+        data: { departamento: departamento, provincia: id },
+        url: URI + "bases/main/cargarDistritos",
+        method: "POST",
+        dataType: "json",
+        beforeSend: function () {
+          $("#distrito").html('<option value="">Cargando...</option>');
+        },
+        success: function (data) {
+
+          var $html = '<option value="">--Seleccione--</option>';
+          $.each(data.lista, function (i, e) {
+
+            $html += '<option value="' + e.Codigo_Distrito + '">' + e.Nombre + '</option>';
+
+          });
+          $("#distrito").html($html);
+
+        }
+      });
+
+    }
+  });
+
 });
-/*
-function readURL(input) {
-  if (input.files && input.files[0]) {
-    var reader = new FileReader();
-    var filename = $("#file").val();
-    filename = filename.substring(filename.lastIndexOf('\\') + 1);
-    reader.onload = function (e) {
-      $('#blah').attr('src', e.target.result);
-      $('#blah').hide();
-      $('#blah').fadeIn(500);
-      $('.custom-file-label').text(filename);
-    }
-    reader.readAsDataURL(input.files[0]);
-  }
-  $(".alert").removeClass("loading").hide();
-}
-
-function FadeInAlert(text) {
-  $(".alert").show();
-  $(".alert").text(text).addClass("loading");
-}
-
-function RecurFadeIn() {
-
-}
-
-function loadData(table) {
-  $.ajax({
-    type: 'POST',
-    url: URI + 'inventario/articulos/obtenerLista',
-    data: {},
-    dataType: 'json',
-    success: function (response) {
-      const { data: { listaArticulos } } = response;
-      table.clear();
-      table.rows.add(listaArticulos).draw();
-    }
-  });
-}
-
-function searchPerson(documentNumber, inputName) {
-  $.ajax({
-    url: URI + "brigadistas/curl",
-    data: {
-      type: '01',
-      document: documentNumber
-    },
-    method: 'post',
-    dataType: 'json',
-    beforeSend: function () {
-    },
-    success: function (data) {
-      const { data: { attributes: { nombres, apellido_paterno, apellido_materno } } } = data;
-      $(inputName).val(nombres + ' ' + apellido_paterno + ' ' + apellido_materno);
-    }
-  });
-}
-
-function showModal(event, title) {
-  $("#editarModal").modal("show");
-  $("#editarModalLabel").text(title);
-  event.stopPropagation();
-  event.stopImmediatePropagation();
-}
-
-function toQueryString(params) {
-  const query = Object.keys(params).map(key => key + '=' + params[key]).join('&');
-  return query;
-};*/

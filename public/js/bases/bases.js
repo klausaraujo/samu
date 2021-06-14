@@ -1,6 +1,8 @@
-var data;
-var validate = 1;
+function bases(URI, EVENTO_CODIGO_REGION) {
+
 $(document).ready(function () {
+  var data;
+  var validate = 1;
   var table = $('#dt-bases').DataTable({
     data: lista,
     pageLength: 10,
@@ -186,6 +188,36 @@ $(document).ready(function () {
     }
   });*/
   
+
+  
+  var ejecutarDepa = EVENTO_CODIGO_REGION;
+
+  if (ejecutarDepa.length > 0) {
+
+    $.ajax({
+      data: { departamento: ejecutarDepa },
+      url: URI + "bases/main/cargarProvincias",
+      method: "POST",
+      dataType: "json",
+      beforeSend: function () {
+        $("#provincia").html('<option value="">Cargando...</option>');
+        $("#distrito").html('<option value="">--Elija Provincia--</option>');
+      },
+      success: function (data) {
+
+        var $html = '<option value="">--Seleccione--</option>';
+        $.each(data.lista, function (i, e) {
+
+          $html += '<option value="' + e.cod_pro + '">' + e.provincia + '</option>';
+
+        });
+        $("#provincia").html($html);
+
+      }
+    });
+
+  }
+
   $("#departamento").change(function () {
 
     var id = $(this).val();
@@ -206,7 +238,7 @@ $(document).ready(function () {
           var $html = '<option value="">--Seleccione--</option>';
           $.each(data.lista, function (i, e) {
 
-            $html += '<option value="' + e.Codigo_Provincia + '">' + e.Nombre + '</option>';
+            $html += '<option value="' + e.cod_pro + '">' + e.provincia + '</option>';
 
           });
           $("#provincia").html($html);
@@ -237,7 +269,7 @@ $(document).ready(function () {
           var $html = '<option value="">--Seleccione--</option>';
           $.each(data.lista, function (i, e) {
 
-            $html += '<option value="' + e.Codigo_Distrito + '">' + e.Nombre + '</option>';
+            $html += '<option value="' + e.cod_dis + '">' + e.distrito + '</option>';
 
           });
           $("#distrito").html($html);
@@ -249,3 +281,25 @@ $(document).ready(function () {
   });
 
 });
+
+$("#file").change(function (event) {
+  readURL(this);
+});
+
+}
+
+function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    var filename = $("#file").val();
+    filename = filename.substring(filename.lastIndexOf('\\') + 1);
+    reader.onload = function (e) {
+      $('#blah').attr('src', e.target.result);
+      $('#blah').hide();
+      $('#blah').fadeIn(500);
+      $('.custom-file-label').text(filename);
+    }
+    reader.readAsDataURL(input.files[0]);
+  }
+  $(".alert").removeClass("loading").hide();
+}

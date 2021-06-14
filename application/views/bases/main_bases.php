@@ -10,16 +10,11 @@
 								
 								<?=base_url()?>public/images/favicon.ico">
 								<title>Ministerio de Salud - SAMU-106</title>
-								<link rel="stylesheet" href="
-									
-									<?=base_url()?>public/css/vendors_css.css">
+								<link rel="stylesheet" href="<?=base_url()?>public/css/vendors_css.css">
 									<!-- Style-->
-									<link rel="stylesheet" href="
-										
-										<?=base_url()?>public/css/style.css">
-										<link rel="stylesheet" href="
-											
-											<?=base_url()?>public/css/skin_color.css">
+										<link rel="stylesheet" href="<?=base_url()?>public/css/style.css">
+										<link rel="stylesheet" href="<?=base_url()?>public/css/skin_color.css">
+										<link rel="stylesheet" href="<?=base_url()?>public/css/bases/main.css" />
 										</head>
 										<body class="hold-transition light-skin sidebar-mini theme-primary">
 											<div class="wrapper">
@@ -99,6 +94,20 @@
 																									</div>
 																								</div>
 																						</div>
+																						<?php
+																						$region = 15;
+                																		$listaDepartamento = array();
+                																		    
+																							foreach ($departamentos as $row) :
+                																		        if ($region == $row->cod_dep) {
+                																		            $listaDepartamento[] = array(
+                																		                "cod_dep" => $row->cod_dep,
+                																		                "departamento" => $row->departamento
+                																		            );
+                																		        }
+                																		    endforeach;
+																						
+                																		?>
 																						<div class="col-sm-6">
 																								<div class="form-group row">
 																									<label class="modal-label col-sm-5 col-form-label py-10">Region: </label>
@@ -106,7 +115,7 @@
 																										<select class="form-control" name="departamento" id="departamento">
 																											<option value="">-- Regi&oacute;n --</option>
                       								  														<?php foreach($departamentos as $row): ?>
-                      								  														<option value="<?=$row->cod_dep?>"><?=$row->departamento?></option>
+																												<option value="<?=$row->cod_dep?>"><?=$row->departamento?></option>
                       								  														<?php endforeach; ?>
                       																					</select>
 																									</div>
@@ -138,8 +147,7 @@
 																								<div class="col-sm-7">
 																									<div class="form-group">
 																										<div class='input-group'>
-																											<input type="date" class="form-control" name="fechainicio" id="fechainicio" value="
-																												<?php echo date('Y-m-d'); ?>"/>
+																											<input type="date" class="form-control" name="fechainicio" id="fechainicio" value="<?php echo date('Y-m-d'); ?>"/>
 																											</div>
 																										</div>
 																									</div>
@@ -147,6 +155,20 @@
 																							</div>																							
 																							
 																						</div>
+																						<div class="col-sm-6">
+                          																  <div class="form-group row" style="justify-content: center;">
+                          																    <div id='product-tumb' class="img_content">
+                          																      <img class="img_form" id="imagen" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="/>
+                          																    </div>
+                          																    <div class="col-sm-12 pt-20">
+                          																      <div class="col-sm-12">
+                          																          <input type="file" name="file" id="file" class="inputfile inputfile-1" aria-describedby="inputGroupFileAddon01" />
+                          																          <label for="file"><i class="fa fa-upload" aria-hidden="true"></i> <span class="custom-file-img">Escoger Imagen&hellip;</span></label>
+                          																      </div>
+                          																    </div>
+                          																    </div>
+                          																  </div>
+                          																</div>
 																						<hr />
 																					</div>
 																					<div class="modal-footer">
@@ -174,12 +196,15 @@
 													<script src="								
 														<?=base_url()?>public/assets/vendor_components/datatable/datatables.min.js">
 													</script>
+													<script src="<?=base_url()?>public/js/bases/bases.js"></script>
 													<script> 
                         							const canDelete = "1";
                         							const canEdit = "1";
-							                        var lista = JSON.parse('<?=$listaBases?>'); 											
+							                        var lista = JSON.parse('<?=$listaBases?>');													
 													</script>
-													<script src="<?=base_url()?>public/js/bases/bases.js">
+													<script>
+														bases("<?=base_url()?>","<?=$region?>");
 													</script>
+
 												</body>
 											</html>

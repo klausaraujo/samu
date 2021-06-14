@@ -1,0 +1,127 @@
+.custom-file{
+  display: initial;
+}
+
+.img_content{
+  border-radius: 5px;
+    border: 3px solid #dfdfdf!important;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    width: 380px;
+}
+
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.inputfile + label {
+  width: 100%;
+  font-size: 13px;
+  margin-bottom: 0;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+  padding: 10px 30px;
+}
+
+.inputfile:focus + label,
+.inputfile.has-focus + label {
+  outline: 1px dotted #000;
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
+.inputfile + label i {
+  font-size: 12px;
+  vertical-align: middle;
+  color: #FFF;    
+  right: 15px;
+  top: 50%;
+  position: absolute;
+  margin-top: -6px;
+}
+
+.inputfile-1 + label {
+  color: #FFF;
+  background-color: #555;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+}
+
+.inputfile-1:focus + label,
+.inputfile-1.has-focus + label,
+.inputfile-1 + label:hover {
+  background-color: #0f9eed;
+}
+
+.inputfile1 {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.inputfile1 + label {
+  width: 100%;
+  font-size: 13px;
+  margin-bottom: 0;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+  padding: 10px 30px;
+}
+
+.inputfile1:focus + label,
+.inputfile1.has-focus + label {
+  outline: 1px dotted #000;
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
+.inputfile1 + label i {
+  font-size: 12px;
+  vertical-align: middle;
+  color: #FFF;    
+  right: 15px;
+  top: 50%;
+  position: absolute;
+  margin-top: -6px;
+}
+
+.inputfile1-1 + label {
+  color: #FFF;
+  background-color: #555;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+}
+
+.inputfile1-1:focus + label,
+.inputfile1-1.has-focus + label,
+.inputfile1-1 + label:hover {
+  background-color: #0f9eed;
+}
+
+.img_form{
+  display: block;
+  height: 500px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px;
+}
+

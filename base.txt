@@ -1999,7 +1999,7 @@ SELECT cod_dep,cod_pro,provincia FROM ubigeo group by cod_dep,cod_pro;
 
 create view lista_distritos
 as
-SELECT cod_dep,cod_pro,cod_dis,distrito FROM ubigeo group by cod_dep,cod_pro,cod_dis;
+SELECT cod_dep,cod_pro,cod_dis,distrito,latitud,longitud FROM ubigeo group by cod_dep,cod_pro,cod_dis,latitud,longitud;
 
 create table base(
 	idbase smallint(4) AUTO_INCREMENT primary key, 
@@ -2075,6 +2075,7 @@ create table ambulancia(
 	foreign key (idmarca) references marca(idmarca) on delete cascade on update cascade,
 	foreign key (idtipocombustible) references tipo_combustible(idtipocombustible) on delete cascade on update cascade,
 	foreign key (idtipoambulancia) references tipo_ambulancia(idtipoambulancia) on delete cascade on update cascade) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 
 

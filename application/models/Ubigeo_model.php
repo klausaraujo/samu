@@ -31,29 +31,23 @@ class Ubigeo_model extends CI_Model
     }
     public function departamentos()
     {
-        $this->db->select("cod_dep,cod_pro,cod_dis,ubigeo,departamento,activo");
-        $this->db->from("ubigeo");
-        $this->db->where("cod_dep!=", "00");
-        $this->db->where("cod_pro", "00");
-        $this->db->where("cod_dis", "00");
+        $this->db->select("cod_dep,departamento");
+        $this->db->from("lista_departamentos");
         return $this->db->get();
     }
     public function provincias()
     {
-        $this->db->select("cod_dep,cod_pro,cod_dis,ubigeo,provincia,activo");
-        $this->db->from("ubigeo");
+        $this->db->select("cod_dep,cod_pro,provincia");
+        $this->db->from("lista_provincias");
         $this->db->where("cod_dep", $this->cod_dep);
-        $this->db->where("cod_pro!=", "00");
-        $this->db->where("cod_dis", "00");
         return $this->db->get();
     }
     public function distritos()
     {
-        $this->db->select("cod_dep,cod_pro,cod_dis,ubigeo,distrito,activo");
-        $this->db->from("ubigeo");
+        $this->db->select("cod_dep,cod_pro,cod_dis,distrito,latitud,longitud");
+        $this->db->from("lista_distritos");
         $this->db->where("cod_dep", $this->cod_dep);
         $this->db->where("cod_pro", $this->cod_pro);
-        $this->db->where("cod_dis!=", "00");
         return $this->db->get();
     }
 

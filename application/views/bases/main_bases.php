@@ -68,7 +68,7 @@
 																				<span aria-hidden="true">&times;</span>
 																			</button>
 																		</div>
-																		<form id="formRegistrar" method="post" action="" autocomplete="off" enctype="multipart/form-data">
+																		<form id="formRegistrar" name="formRegistrar" method="post" action="" autocomplete="off" enctype="multipart/form-data">
 																			<div class="modal-body">
 																				<input type="hidden" name="idbase" id="idbase">
 																					<div class="alert alert-warning ingresos__alert" role="alert" hidden>
@@ -198,6 +198,7 @@
 													<script src="								
 														<?=base_url()?>public/assets/vendor_components/datatable/datatables.min.js">
 													</script>
+													<script src="<?=base_url()?>public/js/jquery.validate.min.js"></script>
 													<script src="<?=base_url()?>public/js/bases/bases.js"></script>
 													<script> 
                         							const canDelete = "1";

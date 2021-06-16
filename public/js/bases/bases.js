@@ -122,8 +122,8 @@ $(document).ready(function () {
   });
 
   $(".btn-nuevo").on('click', function (event) {
-    //$('#imagen').attr('src', 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=');
-    //$('.custom-file').html(`Escoger Ficha &hellip;`);
+    $('#imagen').attr('src', 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=');
+    $('.custom-file').html(`Escoger Ficha &hellip;`);
     data = {};
     $("#formRegistrar")[0].reset();
     showModal(event, 'Registrar Nueva Base');
@@ -135,22 +135,27 @@ $(document).ready(function () {
     event.stopPropagation();
     event.stopImmediatePropagation();
   }
-/*
+
   $("#formRegistrar").validate({
     rules: {
-      anio: { required: true },
-      fechaEmision: { required: true },
-      tipoIngreso: { required: true },
-      almacen: { required: true },
+      nombre: { required: true },
+      direccion: { required: true },
+      departamento: { required: true },
+      provincia: { required: true },
+      distrito: { required: true },
+      fechainicio: { required: true },
     },
     messages: {
-      anio: { required: "Campo requerido" },
-      fechaEmision: { required: "Campo requerido" },
-      tipoIngreso: { required: "Campo requerido" },
-      almacen: { required: "Campo requerido" }
+      nombre: { required: "Campo requerido" },
+      direccion: { required: "Campo requerido" },
+      departamento: { required: "Campo requerido" },
+      provincia: { required: "Campo requerido" },
+      distrito: { required: "Campo requerido" },
+      fechainicio: { required: "Campo requerido" }
     },
     submitHandler: function (form, event) {
       var formData = new FormData(document.getElementById("formRegistrar"));
+      /*
       formData.append("ficha", document.getElementById("ficha"));
       const data = tableArticuloIngresos.rows().data().toArray();
       if (data.length === 0) {
@@ -158,9 +163,10 @@ $(document).ready(function () {
         return;
       }
       formData.append("articulos", data.map((item) => item.idarticuloregistro).join('|'));
+      */
       $.ajax({
         type: 'POST',
-        url: URI + 'inventario/ingresos/guardar',
+        url: URI + 'bases/main/guardarBase',
         data: formData,
         dataType: 'json',
         cache: false,
@@ -186,10 +192,8 @@ $(document).ready(function () {
         }
       });
     }
-  });*/
-  
+  });
 
-  
   var ejecutarDepa = EVENTO_CODIGO_REGION;
 
   if (ejecutarDepa.length > 0) {
@@ -280,13 +284,17 @@ $(document).ready(function () {
     }
   });
 
-});
 
-$("#file").change(function (event) {
-  readURL(this);
-});
+  $("#file").change(function (event) {
+    readURL(this);
+  });
 
-}
+  $("#ficha").change(function (event) {
+    readURL(this, false);
+  });
+
+
+});
 
 function readURL(input) {
   if (input.files && input.files[0]) {
@@ -303,3 +311,21 @@ function readURL(input) {
   }
   $(".alert").removeClass("loading").hide();
 }
+
+function readURL(input, isImage = true) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    var filename = $(input).val();
+    filename = filename.substring(filename.lastIndexOf('\\') + 1);
+    reader.onload = function (e) {
+      if (isImage) $('#imagen').attr('src', e.target.result);
+      $(`${isImage ? '.custom-file-img' : '.custom-file'}`).text(filename);
+    }
+    reader.readAsDataURL(input.files[0]);
+  }
+  $(".alert").removeClass("loading").hide();
+}
+
+}
+
+

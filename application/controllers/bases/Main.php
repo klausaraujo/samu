@@ -111,4 +111,77 @@ class Main extends CI_Controller
         echo json_encode($data);
     }
 
+    public function guardarBase() {
+
+        $this->load->model("Bases_model");
+        
+        $idbase = $this->input->post("idbase");
+        $nombre = $this->input->post("nombre");
+        $direccion = $this->input->post("direccion");
+        $departamento = $this->input->post("departamento");
+        $provincia = $this->input->post("provincia");
+        $distrito = $this->input->post("distrito");
+
+        $foto = $_FILES["file"];
+        /*
+        if ($estado) {
+           $estado = 1;
+        } else {
+           $estado = 0;
+        }
+        */
+        $this->Bases_model->setidBase($idbase);
+        $this->Bases_model->setNombre($nombre);
+        $this->Bases_model->setDireccion($direccion);
+        $this->Bases_model->setDepartamento($departamento);
+        $this->Bases_model->setProvincia($provincia);
+        $this->Bases_model->setDistrito($distrito);
+        /*
+        $this->Articulo_model->setPeso($peso);
+        $this->Articulo_model->setIdColor($color);
+        $this->Articulo_model->setIdClasificacion($clasificacion);
+        $this->Articulo_model->setFichaTecnica($fichaTecnica);
+        $this->Articulo_model->setMedida($medida);
+        $this->Articulo_model->setEstado($estado);
+        $this->Articulo_model->setObservacion($observacion);
+        $this->Articulo_model->setUsuarioRegistro($this->session->userdata("idusuario"));
+        */
+        $status = 500;
+        $message = "Error al registrar, vuelva a intentar";
+
+        /*
+        $dataFoto = $this->agregarFoto($foto);
+        if($dataFoto["estado"] > 0){
+            $this->Articulo_model->setImagen($dataFoto["foto"]);
+        }
+        $archivo = false;
+        if (filesize($_FILES["ficha"]["tmp_name"])>0) {
+            $archivo = $this->cargarArchivo($_FILES["ficha"], false, 0);
+        }
+
+        if ($archivo != false) {
+            $this->Articulo_model->setFichaTecnica($archivo);
+        }
+        */
+        
+        if ($idbase > 0) {
+            if ($this->Bases_model->actualizarBase()) {
+                $status = 200;
+                $message = "Base actualizada exitosamente";
+            }
+        } else {
+            if ($this->Bases_model->guardarBase()) {
+                $status = 200;
+                $message = "Base registrada exitosamente";
+            }
+        }
+        
+        $data = array(
+            "status" => $status,
+            "message" => $message
+        );
+
+        echo json_encode($data);
+    }
+
 }

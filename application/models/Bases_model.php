@@ -11,6 +11,8 @@ class Bases_model extends CI_Model
     private $deparamento;
     private $provincia;
     private $distrito;
+    private $fechainicio;
+    private $ubigeo;
 
     public function setidBase($data){
         $this->idBase = $this->db->escape_str($data);
@@ -30,6 +32,12 @@ class Bases_model extends CI_Model
     public function setDistrito($data){
         $this->distrito = $this->db->escape_str($data);
     }
+    public function setFechainicio($data){
+        $this->fechainicio = $this->db->escape_str($data);
+    }
+    public function setUbigeo($data){
+        $this->ubigeo = $this->db->escape_str($data);
+    }
 
     public function __construct()
     {
@@ -37,9 +45,10 @@ class Bases_model extends CI_Model
     }
     public function obtenerBases()
     {
-        $this->db->select("bs.*");
-        $this->db->from("base bs");
-        $this->db->order_by("bs.idbase ASC");
+        $this->db->select("b.idbase, b.nombre, b.domicilio, b.ubigeo, CONCAT_WS( ' - ', u.departamento, u.provincia, u.distrito ) AS 'ubicacion', b.fecha, b.activo");
+        $this->db->from("base b");
+        $this->db->join("ubigeo u","u.ubigeo = b.ubigeo");
+        $this->db->order_by("b.idbase ASC");
         return $this->db->get();
     }
    
@@ -47,10 +56,9 @@ class Bases_model extends CI_Model
     {
         $data = array(
             "nombre" => $this->nombre,
-            "direccion" => $this->direccion,
-            "departamento" => $this->departamento,
-            "provincia" => $this->provincia,
-            "distrito" => $this->distrito
+            "domicilio" => $this->direccion,
+            "ubigeo" => $this->ubigeo,
+            "fecha" => $this->fechainicio
         );
         if($this->db->insert("base", $data)) {
             return $this->db->insert_id();

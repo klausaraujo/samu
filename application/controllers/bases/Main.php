@@ -121,6 +121,7 @@ class Main extends CI_Controller
         $departamento = $this->input->post("departamento");
         $provincia = $this->input->post("provincia");
         $distrito = $this->input->post("distrito");
+        $fechainicio = $this->input->post("fechainicio");
 
         $foto = $_FILES["file"];
         /*
@@ -130,12 +131,15 @@ class Main extends CI_Controller
            $estado = 0;
         }
         */
+        $ubigeo = $departamento . $provincia . $distrito;
+
+        $fechainicio = $fechainicio .' 00:00:00';
+
         $this->Bases_model->setidBase($idbase);
         $this->Bases_model->setNombre($nombre);
         $this->Bases_model->setDireccion($direccion);
-        $this->Bases_model->setDepartamento($departamento);
-        $this->Bases_model->setProvincia($provincia);
-        $this->Bases_model->setDistrito($distrito);
+        $this->Bases_model->setUbigeo($ubigeo);
+        $this->Bases_model->setFechainicio($fechainicio);
         /*
         $this->Articulo_model->setPeso($peso);
         $this->Articulo_model->setIdColor($color);
@@ -163,7 +167,7 @@ class Main extends CI_Controller
             $this->Articulo_model->setFichaTecnica($archivo);
         }
         */
-        
+
         if ($idbase > 0) {
             if ($this->Bases_model->actualizarBase()) {
                 $status = 200;
@@ -182,6 +186,32 @@ class Main extends CI_Controller
         );
 
         echo json_encode($data);
+    }
+
+    public function listabases() {
+
+        /* */
+        $this->load->model("Bases_model");
+
+        $listaBases = $this->Bases_model->obtenerBases();
+       
+        if ($listaBases->num_rows() > 0) {
+            $listaBases = $listaBases->result();
+        } else {
+            $listaBases = array();
+        }
+
+        $detalle = array(
+          "listaBases" => $listaBases
+        );
+
+        $data = array(
+            "status" => 200,
+            "data" => $detalle
+        );
+
+        echo json_encode($data);
+
     }
 
 }

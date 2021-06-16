@@ -41,7 +41,7 @@ $(document).ready(function () {
       },
       { data: "nombre" },
       { data: "domicilio" },
-      { data: "ubigeo" },
+      { data: "ubicacion" },
       { data: "fecha" },
       {
         data: "activo",
@@ -324,6 +324,20 @@ function readURL(input, isImage = true) {
     reader.readAsDataURL(input.files[0]);
   }
   $(".alert").removeClass("loading").hide();
+}
+
+function loadData(table) {
+  $.ajax({
+    type: 'POST',
+    url: URI + 'bases/main/listabases',
+    data: {},
+    dataType: 'json',
+    success: function (response) {
+      const { data: { listaBases } } = response;
+      table.clear();
+      table.rows.add(listaBases).draw();
+    }
+  });
 }
 
 }

@@ -175,6 +175,19 @@
 															</div>
 														</div>
 													</div>
+													<div class="col-sm-6">
+														<div class="form-group row" style="justify-content: center;">
+															<div id='product-tumb' class="img_content">
+																<img class="img_form" id="imagen" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="/>
+															</div>
+															<div class="col-sm-12 pt-20">
+																<div class="col-sm-12">
+																	<input type="file" name="file" id="file" accept="image/*" class="inputfile inputfile-1" aria-describedby="inputGroupFileAddon01" />
+																	<label for="file"><i class="fa fa-upload" aria-hidden="true"></i> <span class="custom-file-img">Escoger Imagen&hellip;</span></label>
+																</div>
+															</div>
+														</div>
+													</div>
 												</div>
 										</div>
 										<div class="modal-footer">
@@ -199,6 +212,8 @@
 			const canDelete = "1";
 			const canEdit = "1";
 			var lista = JSON.parse('<?=$listaAmbulancias?>');  
+
 		</script>
+		<script>ambulancias("<?=base_url()?>","<?=$region?>");</script>
 	</body>
 </html>

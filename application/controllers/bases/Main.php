@@ -140,16 +140,7 @@ class Main extends CI_Controller
         $this->Bases_model->setDireccion($direccion);
         $this->Bases_model->setUbigeo($ubigeo);
         $this->Bases_model->setFechainicio($fechainicio);
-        /*
-        $this->Articulo_model->setPeso($peso);
-        $this->Articulo_model->setIdColor($color);
-        $this->Articulo_model->setIdClasificacion($clasificacion);
-        $this->Articulo_model->setFichaTecnica($fichaTecnica);
-        $this->Articulo_model->setMedida($medida);
-        $this->Articulo_model->setEstado($estado);
-        $this->Articulo_model->setObservacion($observacion);
-        $this->Articulo_model->setUsuarioRegistro($this->session->userdata("idusuario"));
-        */
+
         $status = 500;
         $message = "Error al registrar, vuelva a intentar";
 

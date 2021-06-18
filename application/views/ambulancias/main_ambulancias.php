@@ -89,7 +89,7 @@
 														<div class="form-group row">
 															<label class="modal-label col-sm-5 col-form-label py-10">Modelo: </label>
 															<div class="col-sm-7">
-																<input type="text" class="form-control" name="modelo" id="modelo" />
+																<input type="text" class="form-control" name="modelo" id="modelo" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="20"/>
 															</div>
 														</div>
 													</div>
@@ -99,7 +99,9 @@
 															<div class="col-sm-7">
 																<select class="form-control" name="combustible" id="combustible">
 																	<option value="">-- Tipo Combustible --</option>
-																	
+																	<?php foreach($listaCombustibles as $row): ?>
+																	<option value="<?=$row->idtipocombustible?>"><?=$row->combustible?></option>
+																	<?php endforeach; ?>
 																</select>
 															</div>
 														</div>
@@ -122,6 +124,9 @@
 															<div class="col-sm-7">
 																<select class="form-control" name="tipoambulancia" id="tipoambulancia">
 																	<option value="">-- Elija Tipo --</option>
+																	<?php foreach($listaTiposAmbulancias as $row): ?>
+																	<option value="<?=$row->idtipoambulancia?>"><?=$row->tipo?></option>
+																	<?php endforeach; ?>
 																</select>
 															</div>
 														</div>
@@ -130,7 +135,7 @@
 														<div class="form-group row">
 															<label class="modal-label col-sm-5 col-form-label py-10">Serie del Motor: </label>
 															<div class="col-sm-7">
-																<input type="text" class="form-control" name="seriemotor" id="seriemotor" />
+																<input type="text" class="form-control" name="seriemotor" id="seriemotor" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="30" />
 															</div>
 														</div>
 													</div>
@@ -138,7 +143,7 @@
 														<div class="form-group row">
 															<label class="modal-label col-sm-5 col-form-label py-10">Codigo Patrimonial: </label>
 															<div class="col-sm-7">
-																<input type="text" class="form-control" name="codigopatrimonial" id="codigopatrimonial" />
+																<input type="text" class="form-control" name="codigopatrimonial" id="codigopatrimonial" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="10"/>
 															</div>
 														</div>
 													</div>
@@ -146,7 +151,7 @@
 														<div class="form-group row">
 															<label class="modal-label col-sm-5 col-form-label py-10">Año Fabricación: </label>
 															<div class="col-sm-7">
-																<input type="text" class="form-control" name="aniofabricacion" id="aniofabricacion" />
+																<input type="text" value="" maxlength="4" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" class="form-control" name="aniofabricacion" id="aniofabricacion" />
 															</div>
 														</div>
 													</div>
@@ -154,7 +159,7 @@
 														<div class="form-group row">
 															<label class="modal-label col-sm-5 col-form-label py-10">Año Modelo: </label>
 															<div class="col-sm-7">
-																<input type="text" class="form-control" name="aniomodelo" id="aniomodelo" />
+																<input type="text" value="" maxlength="4" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" class="form-control" name="aniomodelo" id="aniomodelo" />
 															</div>
 														</div>
 													</div>

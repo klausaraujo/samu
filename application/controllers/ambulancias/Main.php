@@ -55,10 +55,13 @@ class Main extends CI_Controller
         */
         $this->load->model("Ambulancias_model");
         $this->load->model("Marcas_model");
-
+        $this->load->model("Combustibles_model");
+        $this->load->model("TipoAmbulancia_model");
 
         $listaAmbulancias = $this->Ambulancias_model->obtenerAmbulancias();
         $listaMarcas = $this->Marcas_model->obtenerMarcas();
+        $listaCombustibles = $this->Combustibles_model->obtenerTiposCombustibles();
+        $listaTiposAmbulancias = $this->TipoAmbulancia_model->obtenerTiposAmbulancias();
 
         if ($listaAmbulancias->num_rows() > 0) {
             $listaAmbulancias = $listaAmbulancias->result();
@@ -68,7 +71,9 @@ class Main extends CI_Controller
 
         $data = array(
             "listaAmbulancias" => json_encode($listaAmbulancias),
-            "listaMarcas" => $listaMarcas->result()
+            "listaMarcas" => $listaMarcas->result(),
+            "listaCombustibles" => $listaCombustibles->result(),
+            "listaTiposAmbulancias" => $listaTiposAmbulancias->result()
 
         );
         

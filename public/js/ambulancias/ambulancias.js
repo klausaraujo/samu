@@ -1,4 +1,4 @@
-function ambulancias(URI, EVENTO_CODIGO_REGION) {
+function ambulancias(URI) {
 
   $(document).ready(function () {
     var data;
@@ -186,6 +186,7 @@ function ambulancias(URI, EVENTO_CODIGO_REGION) {
       }
     });
   
+    /*
     var ejecutarDepa = EVENTO_CODIGO_REGION;
   
     if (ejecutarDepa.length > 0) {
@@ -213,7 +214,7 @@ function ambulancias(URI, EVENTO_CODIGO_REGION) {
       });
   
     }
-  
+    */
     $("#departamento").change(function () {
   
       var id = $(this).val();

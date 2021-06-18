@@ -214,6 +214,6 @@
 			var lista = JSON.parse('<?=$listaAmbulancias?>');  
 
 		</script>
-		<script>ambulancias("<?=base_url()?>","<?=$region?>");</script>
+		<script>ambulancias("<?=base_url()?>");</script>
 	</body>
 </html>

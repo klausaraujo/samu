@@ -89,15 +89,6 @@
 													</div>
 													<?php
 													$region = 15;
-													$listaDepartamento = array();
-														foreach ($departamentos as $row) :
-															if ($region == $row->cod_dep) {
-																$listaDepartamento[] = array(
-																	"cod_dep" => $row->cod_dep,
-																	"departamento" => $row->departamento
-																);
-															}
-														endforeach;
 													?>
 													<div class="col-sm-6">
 														<div class="form-group row">

@@ -54,8 +54,11 @@ class Main extends CI_Controller
         validarPermisos($nivel,$idmenu,$this->permisos);
         */
         $this->load->model("Ambulancias_model");
+        $this->load->model("Marcas_model");
+
 
         $listaAmbulancias = $this->Ambulancias_model->obtenerAmbulancias();
+        $listaMarcas = $this->Marcas_model->obtenerMarcas();
 
         if ($listaAmbulancias->num_rows() > 0) {
             $listaAmbulancias = $listaAmbulancias->result();
@@ -64,7 +67,9 @@ class Main extends CI_Controller
         }
 
         $data = array(
-            "listaAmbulancias" => json_encode($listaAmbulancias)
+            "listaAmbulancias" => json_encode($listaAmbulancias),
+            "listaMarcas" => $listaMarcas->result()
+
         );
         
         $this->load->view("ambulancias/main_ambulancias", $data);

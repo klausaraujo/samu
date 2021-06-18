@@ -118,6 +118,25 @@ $(document).ready(function () {
     }
 
   });
+
+  $(".btn-nuevo").on('click', function (event) {
+    data = {};
+    $("#formRegistrar")[0].reset();
+    showModal(event, 'Registrar Nueva Ambulancia');
+  });
+
+  function showModal(event, title) {
+    $("#editarModal").modal("show");
+    $("#editarModalLabel").text(title);
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+  }
+
+
+
+
+
+
 /*
   $("#file").change(function (event) {
     readURL(this);

@@ -73,63 +73,100 @@
 												</div>
 												<div class="row">
 													<div class="col-sm-6">
-															<div class="form-group row">
-																<label class="modal-label col-sm-5 col-form-label py-10">Nombre Base: </label>
-																<div class="col-sm-7">
-																	<input type="text" class="form-control" name="nombre" id="nombre" />
-																</div>
+														<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">Marca: </label>
+															<div class="col-sm-7">
+																<select class="form-control" name="marca" id="marca">
+																	<option value="">-- Marca --</option>
+																	<?php foreach($listaMarcas as $row): ?>
+																	<option value="<?=$row->idmarca?>"><?=$row->marca?></option>
+																	<?php endforeach; ?>
+																</select>
 															</div>
+														</div>
 													</div>																					
 													<div class="col-sm-6">
-															<div class="form-group row">
-																<label class="modal-label col-sm-5 col-form-label py-10">Dirección: </label>
-																<div class="col-sm-7">
-																	<input type="text" class="form-control" name="direccion" id="direccion" />
-																</div>
+														<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">Modelo: </label>
+															<div class="col-sm-7">
+																<input type="text" class="form-control" name="modelo" id="modelo" />
 															</div>
+														</div>
 													</div>
 													<div class="col-sm-6">
-															<div class="form-group row">
-																<label class="modal-label col-sm-5 col-form-label py-10">Region: </label>
-																<div class="col-sm-7">
-																	<select class="form-control" name="departamento" id="departamento">
-																		<option value="">-- Regi&oacute;n --</option>
-																		<?php foreach($departamentos as $row): ?>
-																			<option value="<?=$row->cod_dep?>"><?=$row->departamento?></option>
-																		<?php endforeach; ?>
-																	</select>
-																</div>
+														<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">Tipo Combustible: </label>
+															<div class="col-sm-7">
+																<select class="form-control" name="combustible" id="combustible">
+																	<option value="">-- Tipo Combustible --</option>
+																	
+																</select>
 															</div>
+														</div>
 													</div>
 													<div class="col-sm-6">
-															<div class="form-group row">
-																<label class="modal-label col-sm-5 col-form-label py-10">Provincia: </label>
-																<div class="col-sm-7">
-																	<select class="form-control" name="provincia" id="provincia">
-																		<option value="">-- Elija Provincia --</option>
-																	</select>
-																</div>
+														<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">GPS: </label>
+															<div class="col-sm-7">
+																<select class="form-control" name="provincia" id="provincia">
+																	<option value="">-- Elija Opcion --</option>
+																	<option value="1">SI</option>
+																	<option value="0">NO</option>
+																</select>
 															</div>
+														</div>
 													</div>
 													<div class="col-sm-6">
-															<div class="form-group row">
-																<label class="modal-label col-sm-5 col-form-label py-10">Distrito: </label>
-																<div class="col-sm-7">
-																	<select class="form-control" name="distrito" id="distrito">
-																		<option value="">-- Elija Distrito --</option>
-																	</select>
-																</div>
+														<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">Tipo Ambulancia: </label>
+															<div class="col-sm-7">
+																<select class="form-control" name="tipoambulancia" id="tipoambulancia">
+																	<option value="">-- Elija Tipo --</option>
+																</select>
 															</div>
+														</div>
 													</div>																																												
 													<div class="col-sm-6">
 														<div class="form-group row">
-															<label class="modal-label col-sm-5 col-form-label py-10">Fecha de Inicio: </label>
+															<label class="modal-label col-sm-5 col-form-label py-10">Serie del Motor: </label>
 															<div class="col-sm-7">
-																<div class="form-group">
-																	<div class='input-group'>
-																		<input type="date" class="form-control" name="fechainicio" id="fechainicio" value="<?php echo date('Y-m-d'); ?>"/>
-																	</div>
-																</div>
+																<input type="text" class="form-control" name="seriemotor" id="seriemotor" />
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6">
+														<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">Codigo Patrimonial: </label>
+															<div class="col-sm-7">
+																<input type="text" class="form-control" name="codigopatrimonial" id="codigopatrimonial" />
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6">
+														<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">Año Fabricación: </label>
+															<div class="col-sm-7">
+																<input type="text" class="form-control" name="aniofabricacion" id="aniofabricacion" />
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6">
+														<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">Año Modelo: </label>
+															<div class="col-sm-7">
+																<input type="text" class="form-control" name="aniomodelo" id="aniomodelo" />
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6">
+														<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">Condición: </label>
+															<div class="col-sm-7">
+																<select class="form-control" name="provincia" id="provincia">
+																	<option value="">-- Elija Opcion --</option>
+																	<option value="1">Operativo</option>
+																	<option value="0">Inoperativo</option>
+																</select>
 															</div>
 														</div>
 													</div>

@@ -158,7 +158,7 @@ function ambulancias(URI) {
         var formData = new FormData(document.getElementById("formRegistrar"));
         $.ajax({
           type: 'POST',
-          url: URI + 'bases/main/guardarBase',
+          url: URI + 'ambulancias/main/guardarAmbulancia',
           data: formData,
           dataType: 'json',
           cache: false,
@@ -185,98 +185,6 @@ function ambulancias(URI) {
         });
       }
     });
-  
-    /*
-    var ejecutarDepa = EVENTO_CODIGO_REGION;
-  
-    if (ejecutarDepa.length > 0) {
-  
-      $.ajax({
-        data: { departamento: ejecutarDepa },
-        url: URI + "bases/main/cargarProvincias",
-        method: "POST",
-        dataType: "json",
-        beforeSend: function () {
-          $("#provincia").html('<option value="">Cargando...</option>');
-          $("#distrito").html('<option value="">--Elija Provincia--</option>');
-        },
-        success: function (data) {
-  
-          var $html = '<option value="">--Seleccione--</option>';
-          $.each(data.lista, function (i, e) {
-  
-            $html += '<option value="' + e.cod_pro + '">' + e.provincia + '</option>';
-  
-          });
-          $("#provincia").html($html);
-  
-        }
-      });
-  
-    }
-    */
-    $("#departamento").change(function () {
-  
-      var id = $(this).val();
-  
-      if (id.length > 0) {
-  
-        $.ajax({
-          data: { departamento: id },
-          url: URI + "bases/main/cargarProvincias",
-          method: "POST",
-          dataType: "json",
-          beforeSend: function () {
-            $("#provincia").html('<option value="">Cargando...</option>');
-            $("#distrito").html('<option value="">--Elija Provincia--</option>');
-          },
-          success: function (data) {
-  
-            var $html = '<option value="">--Seleccione--</option>';
-            $.each(data.lista, function (i, e) {
-  
-              $html += '<option value="' + e.cod_pro + '">' + e.provincia + '</option>';
-  
-            });
-            $("#provincia").html($html);
-  
-          }
-        });
-  
-      }
-    });
-  
-    $("#provincia").change(function () {
-  
-      var id = $(this).val();
-      var departamento = $("#departamento").val();
-  
-      if (id.length > 0 && departamento.length > 0) {
-  
-        $.ajax({
-          data: { departamento: departamento, provincia: id },
-          url: URI + "bases/main/cargarDistritos",
-          method: "POST",
-          dataType: "json",
-          beforeSend: function () {
-            $("#distrito").html('<option value="">Cargando...</option>');
-          },
-          success: function (data) {
-  
-            var $html = '<option value="">--Seleccione--</option>';
-            $.each(data.lista, function (i, e) {
-  
-              $html += '<option value="' + e.cod_dis + '">' + e.distrito + '</option>';
-  
-            });
-            $("#distrito").html($html);
-  
-          }
-        });
-  
-      }
-    });
-  
   
     $("#file").change(function (event) {
       readURL(this);

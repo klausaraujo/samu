@@ -74,6 +74,14 @@
 												<div class="row">
 													<div class="col-sm-6">
 														<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">Placa: </label>
+															<div class="col-sm-7">
+																<input type="text" class="form-control" name="placa" id="placa" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="6"/>
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6">
+														<div class="form-group row">
 															<label class="modal-label col-sm-5 col-form-label py-10">Marca: </label>
 															<div class="col-sm-7">
 																<select class="form-control" name="marca" id="marca">
@@ -110,7 +118,7 @@
 														<div class="form-group row">
 															<label class="modal-label col-sm-5 col-form-label py-10">GPS: </label>
 															<div class="col-sm-7">
-																<select class="form-control" name="provincia" id="provincia">
+																<select class="form-control" name="gps" id="gps">
 																	<option value="">-- Elija Opcion --</option>
 																	<option value="1">SI</option>
 																	<option value="0">NO</option>
@@ -167,11 +175,19 @@
 														<div class="form-group row">
 															<label class="modal-label col-sm-5 col-form-label py-10">Condición: </label>
 															<div class="col-sm-7">
-																<select class="form-control" name="provincia" id="provincia">
+																<select class="form-control" name="Condición" id="Condición">
 																	<option value="">-- Elija Opcion --</option>
 																	<option value="1">Operativo</option>
 																	<option value="0">Inoperativo</option>
 																</select>
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-6">
+														<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10"> </label>
+															<div class="col-sm-7">
+																
 															</div>
 														</div>
 													</div>

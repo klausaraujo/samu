@@ -45,7 +45,7 @@ class Bases_model extends CI_Model
     }
     public function obtenerBases()
     {
-        $this->db->select("b.idbase, b.nombre, b.domicilio, b.ubigeo, CONCAT_WS( ' - ', u.departamento, u.provincia, u.distrito ) AS 'ubicacion', b.fecha, b.activo");
+        $this->db->select("b.idbase, b.nombre, b.domicilio, b.ubigeo, CONCAT_WS( ' - ', u.departamento, u.provincia, u.distrito ) AS 'ubicacion',b.fecha , b.activo");
         $this->db->from("base b");
         $this->db->join("ubigeo u","u.ubigeo = b.ubigeo");
         $this->db->order_by("b.idbase ASC");

@@ -80,5 +80,48 @@ class Main extends CI_Controller
         $this->load->view("ambulancias/main_ambulancias", $data);
                 
     }
+    public function guardarAmbulancia() {
+
+        $this->load->model("Ambulancias_model");
+        
+        $this->Ambulancias_model->setidambulancia($idambulancia);
+        $this->Ambulancias_model->setplaca ($placa);
+        $this->Ambulancias_model->setidmarca ($idmarca);
+        $this->Ambulancias_model->setmodelo ($modelo);
+        $this->Ambulancias_model->setidtipocombustible ($idtipocombustible);
+        $this->Ambulancias_model->setgps ($gps);
+        $this->Ambulancias_model->setidtipoambulancia ($idtipoambulancia);
+        $this->Ambulancias_model->setserie_motor ($serie_motor);
+        $this->Ambulancias_model->setcodigo_patrimonial ($codigo_patrimonial);
+        $this->Ambulancias_model->setfabricacion_anio ($fabricacion_anio);
+        $this->Ambulancias_model->setmodelo_anio ($modelo_anio);
+        $this->Ambulancias_model->setcondicion ($condicion);
+        $this->Ambulancias_model->settarjeta ($tarjeta);
+        $this->Ambulancias_model->setfotografia ($fotografia);
+
+        $fotografia = $_FILES["file"];
+       
+        $status = 500;
+        $message = "Error al registrar, vuelva a intentar";
+
+        if ($idambulancia > 0) {
+            if ($this->Bases_model->actualizarAmbulancia()) {
+                $status = 200;
+                $message = "Base actualizada exitosamente";
+            }
+        } else {
+            if ($this->Bases_model->guardarAmbulancia()) {
+                $status = 200;
+                $message = "Base registrada exitosamente";
+            }
+        }
+        
+        $data = array(
+            "status" => $status,
+            "message" => $message
+        );
+
+        echo json_encode($data);
+    }
 	
 }

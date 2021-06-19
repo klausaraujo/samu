@@ -84,6 +84,25 @@ class Main extends CI_Controller
 
         $this->load->model("Ambulancias_model");
         
+        //ESTO TE FALTÓ
+
+        $idambulancia = $this->input->post("idambulancia");
+        $placa = $this->input->post("placa");
+        $idmarca = $this->input->post("idmarca");
+        $modelo = $this->input->post("modelo");
+        $idtipocombustible = $this->input->post("idtipocombustible");
+        $gps = $this->input->post("gps");
+        $idtipoambulancia = $this->input->post("idtipoambulancia");
+        $serie_motor = $this->input->post("serie_motor");
+        $codigo_patrimonial = $this->input->post("codigo_patrimonial");
+        $fabricacion_anio = $this->input->post("fabricacion_anio");
+        $modelo_anio = $this->input->post("modelo_anio");
+        $condicion = $this->input->post("condicion");
+        $tarjeta = $this->input->post("tarjeta");
+        $fotografia = $this->input->post("fotografia");
+
+        //GRRR
+
         $this->Ambulancias_model->setidambulancia($idambulancia);
         $this->Ambulancias_model->setplaca ($placa);
         $this->Ambulancias_model->setidmarca ($idmarca);

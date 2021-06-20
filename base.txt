@@ -1,5 +1,5 @@
 
-
+DROP VIEW IF EXISTS lista_ambulancias;
 DROP VIEW IF EXISTS lista_distritos;
 DROP VIEW IF EXISTS lista_provincias;
 DROP VIEW IF EXISTS lista_departamentos;
@@ -2075,6 +2075,12 @@ create table ambulancia(
 	foreign key (idmarca) references marca(idmarca) on delete cascade on update cascade,
 	foreign key (idtipocombustible) references tipo_combustible(idtipocombustible) on delete cascade on update cascade,
 	foreign key (idtipoambulancia) references tipo_ambulancia(idtipoambulancia) on delete cascade on update cascade) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+	
+
+create View lista_ambulancias
+as
+select a.idambulancia,a.placa,a.idmarca,m.marca,a.modelo,a.idtipocombustible,tc.combustible, (case gps when '1' then 'SI' when '0' then 'NO' end) as 'gps',a.idtipoambulancia,ta.tipo,a.serie_motor,a.codigo_patrimonial,a.fabricacion_anio,a.modelo_anio,(case a.condicion when '1' then 'Operativa' when '0' then 'Inoperativa' when '2' then 'En Mantenimiento' end) as 'condicion', a.tarjeta,a.fotografia,(case a.activo when '1' then 'Activo' when '0' then 'Inactivo' end) as 'estado'
+from ambulancia as a inner join marca as m on a.idmarca =  m.idmarca inner join tipo_combustible as tc on tc.idtipocombustible=a.idtipocombustible inner join tipo_ambulancia as ta on ta.idtipoambulancia=a.idtipoambulancia;
 
 
 

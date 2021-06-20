@@ -124,12 +124,12 @@ class Main extends CI_Controller
         $message = "Error al registrar, vuelva a intentar";
 
         if ($idambulancia > 0) {
-            if ($this->Bases_model->actualizarAmbulancia()) {
+            if ($this->Ambulancias_model->actualizarAmbulancia()) {
                 $status = 200;
                 $message = "Base actualizada exitosamente";
             }
         } else {
-            if ($this->Bases_model->guardarAmbulancia()) {
+            if ($this->Ambulancias_model->guardarAmbulancia()) {
                 $status = 200;
                 $message = "Base registrada exitosamente";
             }

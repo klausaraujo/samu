@@ -46,6 +46,7 @@
 													<th>GPS</th>
 													<th>Tipo</th>
 													<th>Condicion</th>
+													<th>Estado</th>
 												</tr>
 											</thead>
 										</table>
@@ -64,7 +65,7 @@
 									</div>
 									<form id="formRegistrar" name="formRegistrar" method="post" action="" autocomplete="off" enctype="multipart/form-data">
 										<div class="modal-body">
-											<input type="hidden" name="idbase" id="idbase">
+											<input type="hidden" name="idambulancia" id="idambulancia">
 												<div class="alert alert-warning ingresos__alert" role="alert" hidden>
 													<span class="alert__span"></span>
 													<button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -84,7 +85,7 @@
 														<div class="form-group row">
 															<label class="modal-label col-sm-5 col-form-label py-10">Marca: </label>
 															<div class="col-sm-7">
-																<select class="form-control" name="marca" id="marca">
+																<select class="form-control" name="idmarca" id="idmarca">
 																	<option value="">-- Marca --</option>
 																	<?php foreach($listaMarcas as $row): ?>
 																	<option value="<?=$row->idmarca?>"><?=$row->marca?></option>
@@ -105,7 +106,7 @@
 														<div class="form-group row">
 															<label class="modal-label col-sm-5 col-form-label py-10">Tipo Combustible: </label>
 															<div class="col-sm-7">
-																<select class="form-control" name="combustible" id="combustible">
+																<select class="form-control" name="idtipocombustible" id="idtipocombustible">
 																	<option value="">-- Tipo Combustible --</option>
 																	<?php foreach($listaCombustibles as $row): ?>
 																	<option value="<?=$row->idtipocombustible?>"><?=$row->combustible?></option>
@@ -130,7 +131,7 @@
 														<div class="form-group row">
 															<label class="modal-label col-sm-5 col-form-label py-10">Tipo Ambulancia: </label>
 															<div class="col-sm-7">
-																<select class="form-control" name="tipoambulancia" id="tipoambulancia">
+																<select class="form-control" name="idtipoambulancia" id="idtipoambulancia">
 																	<option value="">-- Elija Tipo --</option>
 																	<?php foreach($listaTiposAmbulancias as $row): ?>
 																	<option value="<?=$row->idtipoambulancia?>"><?=$row->tipo?></option>
@@ -143,7 +144,7 @@
 														<div class="form-group row">
 															<label class="modal-label col-sm-5 col-form-label py-10">Serie del Motor: </label>
 															<div class="col-sm-7">
-																<input type="text" class="form-control" name="seriemotor" id="seriemotor" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="30" />
+																<input type="text" class="form-control" name="serie_motor" id="serie_motor" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="30" />
 															</div>
 														</div>
 													</div>
@@ -151,7 +152,7 @@
 														<div class="form-group row">
 															<label class="modal-label col-sm-5 col-form-label py-10">Codigo Patrimonial: </label>
 															<div class="col-sm-7">
-																<input type="text" class="form-control" name="codigopatrimonial" id="codigopatrimonial" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="10"/>
+																<input type="text" class="form-control" name="codigo_patrimonial" id="codigo_patrimonial" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="10"/>
 															</div>
 														</div>
 													</div>
@@ -159,7 +160,7 @@
 														<div class="form-group row">
 															<label class="modal-label col-sm-5 col-form-label py-10">Año Fabricación: </label>
 															<div class="col-sm-7">
-																<input type="text" value="" maxlength="4" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" class="form-control" name="aniofabricacion" id="aniofabricacion" />
+																<input type="text" value="" maxlength="4" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" class="form-control" name="fabricacion_anio" id="fabricacion_anio" />
 															</div>
 														</div>
 													</div>
@@ -167,7 +168,7 @@
 														<div class="form-group row">
 															<label class="modal-label col-sm-5 col-form-label py-10">Año Modelo: </label>
 															<div class="col-sm-7">
-																<input type="text" value="" maxlength="4" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" class="form-control" name="aniomodelo" id="aniomodelo" />
+																<input type="text" value="" maxlength="4" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" class="form-control" name="modelo_anio" id="modelo_anio" />
 															</div>
 														</div>
 													</div>
@@ -175,7 +176,7 @@
 														<div class="form-group row">
 															<label class="modal-label col-sm-5 col-form-label py-10">Condición: </label>
 															<div class="col-sm-7">
-																<select class="form-control" name="Condición" id="Condición">
+																<select class="form-control" name="condicion" id="condicion">
 																	<option value="">-- Elija Opcion --</option>
 																	<option value="1">Operativo</option>
 																	<option value="0">Inoperativo</option>

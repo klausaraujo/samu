@@ -31,6 +31,9 @@ class Ambulancias_model extends CI_Model
     public function setidtipocombustible($data){
         $this->idtipocombustible = $this->db->escape_str($data);
     }
+    public function setmodelo($data){
+        $this->modelo = $this->db->escape_str($data);
+    }
     public function setgps($data){
         $this->gps = $this->db->escape_str($data);
     }
@@ -42,6 +45,9 @@ class Ambulancias_model extends CI_Model
     }
     public function setcodigo_patrimonial($data){
         $this->codigo_patrimonial = $this->db->escape_str($data);
+    }
+    public function setfabricacion_anio($data){
+        $this->fabricacion_anio = $this->db->escape_str($data);
     }
     public function setmodelo_anio($data){
         $this->modelo_anio = $this->db->escape_str($data);
@@ -61,10 +67,11 @@ class Ambulancias_model extends CI_Model
     }
     public function obtenerAmbulancias()
     {
-        $this->db->select("am.*");
-        $this->db->from("ambulancia am");
-        $this->db->order_by("am.idambulancia ASC");
+        $this->db->select("l.*");
+        $this->db->from("lista_ambulancias l");
+        $this->db->order_by("l.idambulancia ASC");
         return $this->db->get();
+        
     }
     public function guardarAmbulancia()
     {

@@ -19,14 +19,14 @@ function ambulancias(URI) {
           }*/
   
             render: function (data, type, row, meta) {
-            const btnEdit = data.activo == 1 ? `
+            const btnEdit = data.estado == "Activo" ? `
             <button class="btn btn-warning btn-circle actionEdit" title="Editar Registro" type="button" style="margin-right: 5px;">
                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
             </button>` : `
             <button class="btn btn-warning btn-circle disabled" title="Editar Registro" type="button" style="margin-right: 5px;">
                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
             </button>` ;
-            const btnDelete = data.activo == 1 ? `<button class="btn btn-danger btn-circle actionDeleteComi" title="Anular Registro" type="button style="margin-right: 5px;">
+            const btnDelete = data.estado == "Activo" ? `<button class="btn btn-danger btn-circle actionDeleteComi" title="Anular Registro" type="button style="margin-right: 5px;">
                <i class="fa fa-times" aria-hidden="true"></i>
             </button>` : `<button class="btn btn-danger btn-circle disabled" title="Anular Registro" type="button style="margin-right: 5px;">
                <i class="fa fa-times" aria-hidden="true"></i>
@@ -44,12 +44,8 @@ function ambulancias(URI) {
         { data: "modelo" },
         { data: "gps" },
         { data: "tipo" },
-        {
-          data: "activo",
-          "render": function (data, type, row, meta) {
-            return (data == '1' ? 'Activo' : 'Inactivo');
-          }
-        }
+        { data: "condicion" },
+        { data: "estado"}
       ],
       columnDefs: [],
       select: true,

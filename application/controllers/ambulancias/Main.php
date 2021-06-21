@@ -84,8 +84,6 @@ class Main extends CI_Controller
 
         $this->load->model("Ambulancias_model");
         
-        //ESTO TE FALTÓ
-
         $idambulancia = $this->input->post("idambulancia");
         $placa = $this->input->post("placa");
         $idmarca = $this->input->post("idmarca");
@@ -100,8 +98,6 @@ class Main extends CI_Controller
         $condicion = $this->input->post("condicion");
         $tarjeta = $this->input->post("tarjeta");
         $fotografia = $this->input->post("fotografia");
-
-        //GRRR
 
         $this->Ambulancias_model->setidambulancia($idambulancia);
         $this->Ambulancias_model->setplaca ($placa);
@@ -141,6 +137,31 @@ class Main extends CI_Controller
         );
 
         echo json_encode($data);
+    }
+
+    public function listaambulancias() {
+
+        $this->load->model("Ambulancias_model");
+
+        $listaAmbulancias = $this->Ambulancias_model->obtenerAmbulancias();
+       
+        if ($listaAmbulancias->num_rows() > 0) {
+            $listaAmbulancias = $listaAmbulancias->result();
+        } else {
+            $listaAmbulancias = array();
+        }
+
+        $detalle = array(
+          "listaAmbulancias" => $listaAmbulancias
+        );
+
+        $data = array(
+            "status" => 200,
+            "data" => $detalle
+        );
+
+        echo json_encode($data);
+
     }
 	
 }

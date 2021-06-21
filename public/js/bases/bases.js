@@ -151,19 +151,11 @@ $(document).ready(function () {
       departamento: { required: "Campo requerido" },
       provincia: { required: "Campo requerido" },
       distrito: { required: "Campo requerido" },
-      fechainicio: { required: "Campo requerido" }
+      fechainicio: { required: "Campo requerido" },
     },
     submitHandler: function (form, event) {
       var formData = new FormData(document.getElementById("formRegistrar"));
-      /*
-      formData.append("ficha", document.getElementById("ficha"));
-      const data = tableArticuloIngresos.rows().data().toArray();
-      if (data.length === 0) {
-        showAlertForm(`No hay Artículos, <a class="alert-link">seleccione al menos un artículo.</a>`);
-        return;
-      }
-      formData.append("articulos", data.map((item) => item.idarticuloregistro).join('|'));
-      */
+     
       $.ajax({
         type: 'POST',
         url: URI + 'bases/main/guardarBase',

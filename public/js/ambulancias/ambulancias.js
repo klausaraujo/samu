@@ -132,23 +132,32 @@ function ambulancias(URI) {
       event.stopPropagation();
       event.stopImmediatePropagation();
     }
-  
     $("#formRegistrar").validate({
       rules: {
-        nombre: { required: true },
-        direccion: { required: true },
-        departamento: { required: true },
-        provincia: { required: true },
-        distrito: { required: true },
-        fechainicio: { required: true },
+        placa: { required: true },
+        idmarca: { required: true },
+        modelo: { required: true },
+        idtipocombustible: { required: true },
+        gps: { required: true },
+        idtipoambulancia: { required: true },
+        serie_motor: { required: true },
+        codigo_patrimonial: { required: true },
+        fabricacion_anio: { required: true },
+        modelo_anio: { required: true },
+        condicion: { required: true }
       },
       messages: {
-        nombre: { required: "Campo requerido" },
-        direccion: { required: "Campo requerido" },
-        departamento: { required: "Campo requerido" },
-        provincia: { required: "Campo requerido" },
-        distrito: { required: "Campo requerido" },
-        fechainicio: { required: "Campo requerido" }
+        placa: { required: "Campo Requerido" },
+        idmarca: { required: "Campo Requerido" },
+        modelo: { required: "Campo Requerido" },
+        idtipocombustible: { required: "Campo Requerido" },
+        gps: { required: "Campo Requerido" },
+        idtipoambulancia: { required: "Campo Requerido" },
+        serie_motor: { required: "Campo Requerido" },
+        codigo_patrimonial: { required: "Campo Requerido" },
+        fabricacion_anio: { required: "Campo Requerido" },
+        modelo_anio: { required: "Campo Requerido" },
+        condicion: { required: "Campo Requerido" }
       },
       submitHandler: function (form, event) {
         var formData = new FormData(document.getElementById("formRegistrar"));

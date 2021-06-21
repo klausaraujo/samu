@@ -124,13 +124,7 @@ class Main extends CI_Controller
         $fechainicio = $this->input->post("fechainicio");
 
         $foto = $_FILES["file"];
-        /*
-        if ($estado) {
-           $estado = 1;
-        } else {
-           $estado = 0;
-        }
-        */
+
         $ubigeo = $departamento . $provincia . $distrito;
 
         $fechainicio = $fechainicio .' 00:00:00';
@@ -143,21 +137,6 @@ class Main extends CI_Controller
 
         $status = 500;
         $message = "Error al registrar, vuelva a intentar";
-
-        /*
-        $dataFoto = $this->agregarFoto($foto);
-        if($dataFoto["estado"] > 0){
-            $this->Articulo_model->setImagen($dataFoto["foto"]);
-        }
-        $archivo = false;
-        if (filesize($_FILES["ficha"]["tmp_name"])>0) {
-            $archivo = $this->cargarArchivo($_FILES["ficha"], false, 0);
-        }
-
-        if ($archivo != false) {
-            $this->Articulo_model->setFichaTecnica($archivo);
-        }
-        */
 
         if ($idbase > 0) {
             if ($this->Bases_model->actualizarBase()) {
@@ -181,7 +160,6 @@ class Main extends CI_Controller
 
     public function listabases() {
 
-        /* */
         $this->load->model("Bases_model");
 
         $listaBases = $this->Bases_model->obtenerBases();

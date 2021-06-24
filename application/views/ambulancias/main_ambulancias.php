@@ -232,5 +232,13 @@
 
 		</script>
 		<script>ambulancias("<?=base_url()?>");</script>
+
+		<script src="<?=base_url()?>public//assets/vendor_components/apexcharts-bundle/dist/apexcharts.js"></script>
+		<script src="<?=base_url()?>public//assets/vendor_components/progressbar.js-master/dist/progressbar.js"></script>
+		<!-- Florence Admin App -->
+		<script src="<?=base_url()?>public/js/template.js"></script>
+		<script src="<?=base_url()?>public/js/pages/dashboard.js"></script>
+		<script src="<?=base_url()?>public/js/demo.js"></script>
+		
 	</body>
 </html>

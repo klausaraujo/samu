@@ -43,7 +43,3 @@
 <link rel="stylesheet" href="<?=base_url()?>public/assets/vendor_components/fullcalendar/fullcalendar.min.css">
 <link rel="stylesheet" href="<?=base_url()?>public/assets/vendor_components/fullcalendar/fullcalendar.print.min.css">
 <link rel="stylesheet" href="<?=base_url()?>public/assets/vendor_components/weather-icons/weather-icons.css">
-
-
-
-

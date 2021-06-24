@@ -54,8 +54,14 @@ class Main extends CI_Controller
         validarPermisos($nivel,$idmenu,$this->permisos);
         */
         $this->load->model("Ambulancias_model");
+        $this->load->model("Marcas_model");
+        $this->load->model("Combustibles_model");
+        $this->load->model("TipoAmbulancia_model");
 
         $listaAmbulancias = $this->Ambulancias_model->obtenerAmbulancias();
+        $listaMarcas = $this->Marcas_model->obtenerMarcas();
+        $listaCombustibles = $this->Combustibles_model->obtenerTiposCombustibles();
+        $listaTiposAmbulancias = $this->TipoAmbulancia_model->obtenerTiposAmbulancias();
 
         if ($listaAmbulancias->num_rows() > 0) {
             $listaAmbulancias = $listaAmbulancias->result();
@@ -64,11 +70,98 @@ class Main extends CI_Controller
         }
 
         $data = array(
-            "listaAmbulancias" => json_encode($listaAmbulancias)
+            "listaAmbulancias" => json_encode($listaAmbulancias),
+            "listaMarcas" => $listaMarcas->result(),
+            "listaCombustibles" => $listaCombustibles->result(),
+            "listaTiposAmbulancias" => $listaTiposAmbulancias->result()
+
         );
         
         $this->load->view("ambulancias/main_ambulancias", $data);
                 
+    }
+    public function guardarAmbulancia() {
+
+        $this->load->model("Ambulancias_model");
+        
+        $idambulancia = $this->input->post("idambulancia");
+        $placa = $this->input->post("placa");
+        $idmarca = $this->input->post("idmarca");
+        $modelo = $this->input->post("modelo");
+        $idtipocombustible = $this->input->post("idtipocombustible");
+        $gps = $this->input->post("gps");
+        $idtipoambulancia = $this->input->post("idtipoambulancia");
+        $serie_motor = $this->input->post("serie_motor");
+        $codigo_patrimonial = $this->input->post("codigo_patrimonial");
+        $fabricacion_anio = $this->input->post("fabricacion_anio");
+        $modelo_anio = $this->input->post("modelo_anio");
+        $condicion = $this->input->post("condicion");
+        $tarjeta = $this->input->post("tarjeta");
+        $fotografia = $this->input->post("fotografia");
+
+        $this->Ambulancias_model->setidambulancia($idambulancia);
+        $this->Ambulancias_model->setplaca ($placa);
+        $this->Ambulancias_model->setidmarca ($idmarca);
+        $this->Ambulancias_model->setmodelo ($modelo);
+        $this->Ambulancias_model->setidtipocombustible ($idtipocombustible);
+        $this->Ambulancias_model->setgps ($gps);
+        $this->Ambulancias_model->setidtipoambulancia ($idtipoambulancia);
+        $this->Ambulancias_model->setserie_motor ($serie_motor);
+        $this->Ambulancias_model->setcodigo_patrimonial ($codigo_patrimonial);
+        $this->Ambulancias_model->setfabricacion_anio ($fabricacion_anio);
+        $this->Ambulancias_model->setmodelo_anio ($modelo_anio);
+        $this->Ambulancias_model->setcondicion ($condicion);
+        $this->Ambulancias_model->settarjeta ($tarjeta);
+        $this->Ambulancias_model->setfotografia ($fotografia);
+
+        $fotografia = $_FILES["file"];
+       
+        $status = 500;
+        $message = "Error al registrar, vuelva a intentar";
+
+        if ($idambulancia > 0) {
+            if ($this->Ambulancias_model->actualizarAmbulancia()) {
+                $status = 200;
+                $message = "Base actualizada exitosamente";
+            }
+        } else {
+            if ($this->Ambulancias_model->guardarAmbulancia()) {
+                $status = 200;
+                $message = "Base registrada exitosamente";
+            }
+        }
+        
+        $data = array(
+            "status" => $status,
+            "message" => $message
+        );
+
+        echo json_encode($data);
+    }
+
+    public function listaambulancias() {
+
+        $this->load->model("Ambulancias_model");
+
+        $listaAmbulancias = $this->Ambulancias_model->obtenerAmbulancias();
+       
+        if ($listaAmbulancias->num_rows() > 0) {
+            $listaAmbulancias = $listaAmbulancias->result();
+        } else {
+            $listaAmbulancias = array();
+        }
+
+        $detalle = array(
+          "listaAmbulancias" => $listaAmbulancias
+        );
+
+        $data = array(
+            "status" => 200,
+            "data" => $detalle
+        );
+
+        echo json_encode($data);
+
     }
 	
 }

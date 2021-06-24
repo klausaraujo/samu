@@ -54,8 +54,10 @@ class Main extends CI_Controller
         validarPermisos($nivel,$idmenu,$this->permisos);
         */
         $this->load->model("Bases_model");
+        $this->load->model("Ubigeo_model");
 
         $listaBases = $this->Bases_model->obtenerBases();
+        $departamentos = $this->Ubigeo_model->departamentos();
 
         if ($listaBases->num_rows() > 0) {
             $listaBases = $listaBases->result();
@@ -64,7 +66,8 @@ class Main extends CI_Controller
         }
 
         $data = array(
-            "listaBases" => json_encode($listaBases)
+            "listaBases" => json_encode($listaBases),
+            "departamentos" => $departamentos->result()
         );
         
         $this->load->view("bases/main_bases", $data);
@@ -72,4 +75,112 @@ class Main extends CI_Controller
         
     }
 	
+    public function cargarProvincias()
+    {
+        $this->load->model("Ubigeo_model");
+        
+        $departamento = $this->input->post("departamento");
+        
+        $this->Ubigeo_model->setcod_dep($departamento);
+        
+        $lista = $this->Ubigeo_model->provincias();
+        
+        $data = array(
+            "lista" => $lista->result()
+        );
+        
+        echo json_encode($data);
+    }
+
+    public function cargarDistritos()
+    {
+        $this->load->model("Ubigeo_model");
+        
+        $departamento = $this->input->post("departamento");
+        $provincia = $this->input->post("provincia");
+        
+        $this->Ubigeo_model->setcod_dep($departamento);
+        $this->Ubigeo_model->setcod_pro($provincia);
+        
+        $lista = $this->Ubigeo_model->distritos();
+        
+        $data = array(
+            "lista" => $lista->result()
+        );
+        
+        echo json_encode($data);
+    }
+
+    public function guardarBase() {
+
+        $this->load->model("Bases_model");
+        
+        $idbase = $this->input->post("idbase");
+        $nombre = $this->input->post("nombre");
+        $direccion = $this->input->post("direccion");
+        $departamento = $this->input->post("departamento");
+        $provincia = $this->input->post("provincia");
+        $distrito = $this->input->post("distrito");
+        $fechainicio = $this->input->post("fechainicio");
+
+        $foto = $_FILES["file"];
+
+        $ubigeo = $departamento . $provincia . $distrito;
+
+        $fechainicio = $fechainicio .' 00:00:00';
+
+        $this->Bases_model->setidBase($idbase);
+        $this->Bases_model->setNombre($nombre);
+        $this->Bases_model->setDireccion($direccion);
+        $this->Bases_model->setUbigeo($ubigeo);
+        $this->Bases_model->setFechainicio($fechainicio);
+
+        $status = 500;
+        $message = "Error al registrar, vuelva a intentar";
+
+        if ($idbase > 0) {
+            if ($this->Bases_model->actualizarBase()) {
+                $status = 200;
+                $message = "Base actualizada exitosamente";
+            }
+        } else {
+            if ($this->Bases_model->guardarBase()) {
+                $status = 200;
+                $message = "Base registrada exitosamente";
+            }
+        }
+        
+        $data = array(
+            "status" => $status,
+            "message" => $message
+        );
+
+        echo json_encode($data);
+    }
+
+    public function listabases() {
+
+        $this->load->model("Bases_model");
+
+        $listaBases = $this->Bases_model->obtenerBases();
+       
+        if ($listaBases->num_rows() > 0) {
+            $listaBases = $listaBases->result();
+        } else {
+            $listaBases = array();
+        }
+
+        $detalle = array(
+          "listaBases" => $listaBases
+        );
+
+        $data = array(
+            "status" => 200,
+            "data" => $detalle
+        );
+
+        echo json_encode($data);
+
+    }
+
 }

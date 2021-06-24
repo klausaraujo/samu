@@ -172,6 +172,14 @@
 		<script src="<?=base_url()?>public/js/bases/bases.js"></script>
 		<script src="<?=base_url()?>public/js/eventos/initMap.js"></script>
 		<script src="https://maps.googleapis.com/maps/api/js?key=<?=getenv('MAP_KEY')?>&libraries=places&callback=initMap" async defer></script>
+
+		<script src="<?=base_url()?>public//assets/vendor_components/apexcharts-bundle/dist/apexcharts.js"></script>
+		<script src="<?=base_url()?>public//assets/vendor_components/progressbar.js-master/dist/progressbar.js"></script>
+		<!-- Florence Admin App -->
+		<script src="<?=base_url()?>public/js/template.js"></script>
+		<script src="<?=base_url()?>public/js/pages/dashboard.js"></script>
+		<script src="<?=base_url()?>public/js/demo.js"></script>
+		
 		<script> 
 			const canDelete = "1";
 			const canEdit = "1";

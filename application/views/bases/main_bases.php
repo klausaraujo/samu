@@ -136,17 +136,25 @@
 															</div>
 														</div>																							
 													</div>
-													<div class="col-sm-6">
-														<div class="form-group row" style="justify-content: center;">
-															<div id='product-tumb' class="img_content">
-																<img class="img_form" id="imagen" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="/>
-															</div>
-															<div class="col-sm-12 pt-20">
-																<div class="col-sm-12">
-																	<input type="file" name="file" id="file" class="inputfile inputfile-1" aria-describedby="inputGroupFileAddon01" />
-																	<label for="file"><i class="fa fa-upload" aria-hidden="true"></i> <span class="custom-file-img">Escoger Imagen&hellip;</span></label>
+													<div class="row">
+														<div class="col-12 col-sm-6">
+															<div class="form-group row" style="justify-content: center;">
+																<div id='product-tumb' class="img_content">
+																	<img class="img_form" id="imagen" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="/>
+																</div>
+																<div class="col-sm-12 pt-20">
+																	<div class="col-sm-12">
+																		<input type="file" name="file" id="file" class="inputfile inputfile-1" aria-describedby="inputGroupFileAddon01" />
+																		<label for="file"><i class="fa fa-upload" aria-hidden="true"></i> <span class="custom-file-img">Escoger Imagen&hellip;</span></label>
+																	</div>
 																</div>
 															</div>
+														</div>
+
+														<div class="col-12 col-sm-6">
+															<div id="map" class="my-3" style="min-height: 400px; width: 100%;"></div>
+															<input type="hidden" class="" name="latitud" id="latitud" value="" />
+                                  							<input type="hidden" class="" name="longitud" id="longitud" value="" />
 														</div>
 													</div>
 																									
@@ -170,8 +178,11 @@
 		<script src="<?=base_url()?>public/assets/vendor_components/datatable/datatables.min.js"></script>
 		<script src="<?=base_url()?>public/js/jquery.validate.min.js"></script>
 		<script src="<?=base_url()?>public/js/bases/bases.js"></script>
-		<script src="<?=base_url()?>public/js/eventos/initMap.js"></script>
-		<script src="https://maps.googleapis.com/maps/api/js?key=<?=getenv('MAP_KEY')?>&libraries=places&callback=initMap" async defer></script>
+		<script>
+			var generalZoom = 13;
+		</script>
+		<script src="<?=base_url()?>public/js/bases/initMapMapa.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=<?='AIzaSyByPoOpv9DTDZfL0dnMxewn5RHnzC8LGpc'?>&libraries=places&callback=initMap" async defer></script>
 
 		<script src="<?=base_url()?>public//assets/vendor_components/apexcharts-bundle/dist/apexcharts.js"></script>
 		<script src="<?=base_url()?>public//assets/vendor_components/progressbar.js-master/dist/progressbar.js"></script>
@@ -185,6 +196,6 @@
 			const canEdit = "1";
 			var lista = JSON.parse('<?=$listaBases?>');													
 		</script>
-		<script>bases("<?=base_url()?>","<?=$region?>");</script>
+		<script>bases("<?=$this->config->item('path_url')?>","<?=$region?>");</script>
 	</body>
 </html>

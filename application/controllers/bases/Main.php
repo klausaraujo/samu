@@ -122,6 +122,8 @@ class Main extends CI_Controller
         $provincia = $this->input->post("provincia");
         $distrito = $this->input->post("distrito");
         $fechainicio = $this->input->post("fechainicio");
+        $latitud = $this->input->post("latitud");
+        $longitud = $this->input->post("longitud");
 
         $foto = $_FILES["file"];
 
@@ -134,6 +136,8 @@ class Main extends CI_Controller
         $this->Bases_model->setDireccion($direccion);
         $this->Bases_model->setUbigeo($ubigeo);
         $this->Bases_model->setFechainicio($fechainicio);
+        $this->Bases_model->setLatitud($latitud);
+        $this->Bases_model->setLongitud($longitud);
 
         $status = 500;
         $message = "Error al registrar, vuelva a intentar";

@@ -13,6 +13,8 @@ class Bases_model extends CI_Model
     private $distrito;
     private $fechainicio;
     private $ubigeo;
+    private $latitud;
+    private $longitud;
 
     public function setidBase($data){
         $this->idBase = $this->db->escape_str($data);
@@ -38,6 +40,12 @@ class Bases_model extends CI_Model
     public function setUbigeo($data){
         $this->ubigeo = $this->db->escape_str($data);
     }
+    public function setLatitud($data){
+        $this->latitud = $this->db->escape_str($data);
+    }
+    public function setLongitud($data){
+        $this->longitud = $this->db->escape_str($data);
+    }
 
     public function __construct()
     {
@@ -58,7 +66,9 @@ class Bases_model extends CI_Model
             "nombre" => $this->nombre,
             "domicilio" => $this->direccion,
             "ubigeo" => $this->ubigeo,
-            "fecha" => $this->fechainicio
+            "fecha" => $this->fechainicio,
+            "latitud" => $this->latitud,
+            "longitud" => $this->longitud
         );
         if($this->db->insert("base", $data)) {
             return $this->db->insert_id();

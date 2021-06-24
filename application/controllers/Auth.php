@@ -35,12 +35,19 @@ class Auth extends CI_Controller {
 
 	}
 
-	public function logout() {
+	private function generateMenu()
+	{
+		
+	}
+
+	public function logout()
+	{
 		$this->session->unset_userdata("token");
 		header("location:" . $this->config->item('path_url') . "auth/login");
 	}
 
-	private function findUser($user, $password)  {
+	private function findUser($user, $password)
+	{
 		$this->load->model('User');
 		$this->User->setUser($user);
 		$this->User->setPassword($password);

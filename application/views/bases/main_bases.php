@@ -149,6 +149,7 @@
 															</div>
 														</div>
 													</div>
+																									
 												</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -169,6 +170,8 @@
 		<script src="<?=base_url()?>public/assets/vendor_components/datatable/datatables.min.js"></script>
 		<script src="<?=base_url()?>public/js/jquery.validate.min.js"></script>
 		<script src="<?=base_url()?>public/js/bases/bases.js"></script>
+		<script src="<?=base_url()?>public/js/eventos/initMap.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=<?=getenv('MAP_KEY')?>&libraries=places&callback=initMap" async defer></script>
 		<script> 
 			const canDelete = "1";
 			const canEdit = "1";

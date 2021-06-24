@@ -11,7 +11,7 @@ $config['uri_protocol']	= 'REQUEST_URI';
 
 $config['url_suffix'] = '';
 
-$config['language']	= 'english';
+$config['language']	= 'spanish';
 
 $config['charset'] = 'UTF-8';
 
@@ -49,7 +49,7 @@ $config['cache_path'] = '';
 
 $config['cache_query_string'] = FALSE;
 
-$config['encryption_key'] = '';
+$config['encryption_key'] = getenv('ENCRYPTION_KEY');
 
 $config['sess_driver'] = 'files';
 

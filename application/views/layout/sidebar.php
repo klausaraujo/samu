@@ -1,5 +1,5 @@
-  <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
+<!-- Left side column. contains the logo and sidebar -->
+<aside class="main-sidebar">
     <!-- sidebar-->
     <section class="sidebar">	
 	    <div class="user-profile px-10 py-15">
@@ -11,48 +11,44 @@
           <h5 class="mb-0">Menú de Opciones</h5>
 				</div>
 			</div>
-        </div>	
+        </div>
+  
   <ul class="sidebar-menu" data-widget="tree">
-		<li class="treeview">
-          <a href="#">
-            <i class="ti-dashboard"></i>
-			<span>Emergencias</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
-            </span>
-          </a>
+
+      <?php 
+            $modulo = $this->session->userdata("modulos");
+            $submenu = $this->session->userdata("submenus");
+            //echo count($modulo)."  ".count($submenu);
+            $i = 0; $j = 0;
+            for($i = 0;$i < count($modulo); $i++){                      
+      ?>
+
+
+      <li class="<? echo ($modulo[$i]['activo'] == 1)? 'treeview': '';?>">
+        <a href="#">
+          <i class="<?echo $modulo[$i]['icono'];?>"></i>
+          <span><?echo $modulo[$i]['menu'];?></span>
+          <span class="pull-right-container"><i class="fa fa-angle-right pull-right"></i></span>
+        </a>
           <ul class="treeview-menu">
-            <li><a href="index.html"><i class="ti-more"></i>Registro de Emergencias</a></li>
-          </ul>
-        </li>	
-		<li>
-    <li class="treeview">
-          <a href="#">
-            <i class="ti-layout-grid2"></i>
-			<span>Mantenimiento</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="bases"><i class="ti-more"></i>Registro de Bases</a></li>
-            <li><a href="ambulancias"><i class="ti-more"></i>Registro de Ambulancias</a></li>
-          </ul>
-        </li>	
-		<li>
-    
-    <li class="treeview">
-          <a href="#">
-            <i class="ti-unlock"></i>
-			      <span>Usuarios</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-right pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="usuarios"><i class="ti-more"></i>Registro de Usuarios</a></li>
-          </ul>
-        </li>	
-		<li>
+      <?php
+          for($j = 0;$j < count($submenu); $j++){
+            if($submenu[$j]['idmodulo'] == $modulo[$i]['idmodulo']){
+      ?>
         
-  </aside>
+              <li><a href="<?echo ($submenu[$j]['href'] != NULL)?$submenu[$j]['href']:'#';?>">
+                <i class="ti-more"></i>
+                <?echo $submenu[$j]['descripcion'];?>
+              </a>
+          </li>
+      <?php
+            }
+          }
+      ?>
+          </ul>
+        </li>
+    <?php } ?>
+      </li>
+    </ul>
+  </section>
+</aside>

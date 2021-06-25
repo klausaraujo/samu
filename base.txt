@@ -1,4 +1,4 @@
-
+DROP VIEW IF EXISTS lista_bases;
 DROP VIEW IF EXISTS lista_ambulancias;
 DROP VIEW IF EXISTS lista_distritos;
 DROP VIEW IF EXISTS lista_provincias;
@@ -2082,7 +2082,10 @@ as
 select a.idambulancia,a.placa,a.idmarca,m.marca,a.modelo,a.idtipocombustible,tc.combustible, (case gps when '1' then 'SI' when '0' then 'NO' end) as 'gps',a.idtipoambulancia,ta.tipo,a.serie_motor,a.codigo_patrimonial,a.fabricacion_anio,a.modelo_anio,(case a.condicion when '1' then 'Operativa' when '0' then 'Inoperativa' when '2' then 'En Mantenimiento' end) as 'condicion', a.tarjeta,a.fotografia,(case a.activo when '1' then 'Activo' when '0' then 'Inactivo' end) as 'estado'
 from ambulancia as a inner join marca as m on a.idmarca =  m.idmarca inner join tipo_combustible as tc on tc.idtipocombustible=a.idtipocombustible inner join tipo_ambulancia as ta on ta.idtipoambulancia=a.idtipoambulancia;
 
-
+create View lista_bases
+as
+select b.idbase,b.nombre,b.domicilio,b.ubigeo,CONCAT_WS( ' - ',u.departamento,u.provincia,u.distrito) as 'ubicacion',b.fotografia,b.latitud,b.longitud,date_format(b.fecha,'%d/%m/%Y') AS 'fecha',(case b.activo when '1' then 'Activo' when '0' then 'Inactivo' end) AS 'estado'
+from base as b inner join ubigeo as u on u.ubigeo=b.ubigeo;
 
 
 

@@ -82,9 +82,9 @@ CREATE TABLE modulo(
 	orden tinyint(4),
 	activo char(1) DEFAULT '1') ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO modulo (descripcion,menu,orden) values ('Módulo de Emergecias','Emergecias',1);
-INSERT INTO modulo (descripcion,menu,orden) values ('Módulo de Mantenimiento','Mantenimiento',2);
-INSERT INTO modulo (descripcion,menu,orden) values ('Módulo de Usuarios','Usuarios',2);
+INSERT INTO modulo (descripcion,menu,orden,icono) values ('Módulo de Emergecias','Emergecias',1,'ti-dashboard');
+INSERT INTO modulo (descripcion,menu,orden,icono) values ('Módulo de Mantenimiento','Mantenimiento',2,'ti-layout-grid2');
+INSERT INTO modulo (descripcion,menu,orden,icono) values ('Módulo de Usuarios','Usuarios',2,'ti-unlock');
 
 CREATE TABLE menu(
 	idmenu smallint(4) AUTO_INCREMENT primary key,	
@@ -96,10 +96,10 @@ CREATE TABLE menu(
 	activo char(1) DEFAULT '1',
 	foreign key (idmodulo) references modulo(idmodulo) on delete cascade on update cascade)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-insert into menu(idmodulo,descripcion,nivel) values(1,'Registro Emergecias',0);
-insert into menu(idmodulo,descripcion,nivel) values(2,'Registro Bases',0);
-insert into menu(idmodulo,descripcion,nivel) values(2,'Registro Ambulancias',0);
-insert into menu(idmodulo,descripcion,nivel) values(3,'Registro Usuarios',0);
+insert into menu(idmodulo,descripcion,nivel,url) values(1,'Registro Emergecias',0,'emergencias');
+insert into menu(idmodulo,descripcion,nivel,url) values(2,'Registro Bases',0,'bases');
+insert into menu(idmodulo,descripcion,nivel,url) values(2,'Registro Ambulancias',0,'ambulancias');
+insert into menu(idmodulo,descripcion,nivel,url) values(3,'Registro Usuarios',0,'usuarios');
 
 Create Table Ubigeo(	
 	idubigeo smallint(4) AUTO_INCREMENT primary key,	

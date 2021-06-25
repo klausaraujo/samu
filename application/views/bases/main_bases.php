@@ -129,7 +129,9 @@
 															<div class="col-sm-7">
 																<div class="form-group">
 																	<div class='input-group'>
-																		<input type="date" class="form-control" name="fechainicio" id="fechainicio" value="<?php echo date('Y-m-d'); ?>"/>
+																		<input type="date" class="form-control" name="fechainicio" id="fechainicio" value="<?php 
+																		date_default_timezone_set('America/Lima');							
+																		echo date('Y-m-d'); ?>"/>
 																		</div>
 																	</div>
 																</div>

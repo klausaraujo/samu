@@ -222,6 +222,7 @@ function usuarios(URI) {
       $("#pass").show();
       $("#etiq").show();
       $("#etiq1").show();
+      $("#buscar").show();
       $("#enviar").text("Guardar");
       $("select").prop('selectedIndex',0);
       showModal(event, 'Registrar Nuevo Usuario');

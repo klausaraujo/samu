@@ -21,6 +21,10 @@ function bases(URI, EVENTO_CODIGO_REGION) {
         const { distritos } = response;
         if (response.status === 200) {
           $("#idbase").val(base[0].idbase);
+          $("#latitud").val(base[0].latitud);
+          $("#longitud").val(base[0].longitud);
+          console.log(base[0].latitud);
+          console.log(base[0].longitud);
           $("#direccion").val(base[0].domicilio);
           const f = new Date(base[0].fecha);
           var dateString = new Date(f.getTime() - (f.getTimezoneOffset()*60000)).toISOString().split("T")[0];
@@ -251,7 +255,6 @@ $(document).ready(function () {
             $('.btn-editar').removeClass('active');
             loadData(table);
             $('.alert-success').fadeIn(1000);
-            botonesAction();
           } else {
             $('.alert-danger').fadeIn(1000);
           }

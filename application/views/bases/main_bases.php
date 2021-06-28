@@ -64,6 +64,7 @@
 									<form id="formRegistrar" name="formRegistrar" method="post" action="" autocomplete="off" enctype="multipart/form-data">
 										<div class="modal-body">
 											<input type="hidden" name="idbase" id="idbase">
+											<input type="hidden" name="act" id="act">
 												<div class="alert alert-warning ingresos__alert" role="alert" hidden>
 													<span class="alert__span"></span>
 													<button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -74,14 +75,15 @@
 													<div class="col-sm-6">
 															<div class="form-group row">
 																<label class="modal-label col-sm-5 col-form-label py-10">Nombre Base: </label>
-																<div class="col-sm-7">
+																<div class="col-sm-5">
 																	<input type="text" class="form-control" name="nombre" id="nombre" />
 																</div>
+																<div class="col-sm-1"><a id="buscar" href="#"><i class="glyphicon glyphicon-search"></i></a></div>	
 															</div>
 													</div>																					
 													<div class="col-sm-6">
 														<div class="form-group row">
-															<label class="modal-label col-sm-5 col-form-label py-10">Dirección: </label>
+															<label class="modal-label col-sm-4 col-form-label py-10">Dirección: </label>
 															<div class="col-sm-7">
 																<input type="text" class="form-control" name="direccion" id="direccion" />
 															</div>
@@ -95,7 +97,7 @@
 															<label class="modal-label col-sm-5 col-form-label py-10">Region: </label>
 															<div class="col-sm-7">
 																<select class="form-control" name="departamento" id="departamento">
-																	<option value="">-- Regi&oacute;n --</option>
+																	<option value="0">-- Regi&oacute;n --</option>
 																	<?php foreach($departamentos as $row): ?>
 																	<option value="<?=$row->cod_dep?>"><?=$row->departamento?></option>
 																	<?php endforeach; ?>
@@ -105,10 +107,10 @@
 													</div>
 													<div class="col-sm-6">
 														<div class="form-group row">
-															<label class="modal-label col-sm-5 col-form-label py-10">Provincia: </label>
+															<label class="modal-label col-sm-4 col-form-label py-10">Provincia: </label>
 															<div class="col-sm-7">
 																<select class="form-control" name="provincia" id="provincia">
-																	<option value="">-- Elija Provincia --</option>
+																	<option value="0">-- Elija Provincia --</option>
 																</select>
 															</div>
 														</div>
@@ -118,20 +120,18 @@
 															<label class="modal-label col-sm-5 col-form-label py-10">Distrito: </label>
 															<div class="col-sm-7">
 																<select class="form-control" name="distrito" id="distrito">
-																	<option value="">-- Elija Distrito --</option>
+																	<option value="0">-- Elija Distrito --</option>
 																</select>
 															</div>
 														</div>
 													</div>																																												
 													<div class="col-sm-6">
 														<div class="form-group row">
-															<label class="modal-label col-sm-5 col-form-label py-10">Fecha de Inicio: </label>
+															<label class="modal-label col-sm-3 col-form-label py-10">Fecha de Inicio: </label>
 															<div class="col-sm-7">
 																<div class="form-group">
 																	<div class='input-group'>
-																		<input type="date" class="form-control" name="fechainicio" id="fechainicio" value="<?php 
-																		date_default_timezone_set('America/Lima');							
-																		echo date('Y-m-d'); ?>"/>
+																		<input type="date" class="form-control" name="fechainicio" id="fechainicio" value=""/>
 																		</div>
 																	</div>
 																</div>
@@ -163,7 +163,7 @@
 												</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-													<button type="submit" class="btn btn-primary">Guardar</button>
+													<button id="enviar" type="submit" class="btn btn-primary">Guardar</button>
 												</div>
 										</div>
 									</form>

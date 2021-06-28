@@ -142,7 +142,8 @@ class Main extends CI_Controller
         $status = 500;
         $message = "Error al registrar, vuelva a intentar";
 
-        if ($idbase > 0) {
+        if ($this->input->post("act") > 0) {
+            $this->Bases_model->setidBase($this->input->post("idbase"));
             if ($this->Bases_model->actualizarBase()) {
                 $status = 200;
                 $message = "Base actualizada exitosamente";
@@ -181,6 +182,62 @@ class Main extends CI_Controller
         $data = array(
             "status" => 200,
             "data" => $detalle
+        );
+
+        echo json_encode($data);
+
+    }
+
+    public function extraerBase() {
+
+        $provincias;
+        $distritos;
+        $data;
+        $base;
+        $status;
+        $cod_dep;$cod_pro;$cod_dis;
+        $this->load->model("Bases_model");
+        $this->load->model("Ubigeo_model");
+
+        $departamentos = $this->Ubigeo_model->departamentos();        
+        $this->Bases_model->setNombre($this->input->post("base"));
+        $listaBase = $this->Bases_model->extraerBase();
+       
+        if ($listaBase->num_rows() > 0) {
+            $status = 200;
+            $base = $listaBase->result();
+            $departamentos = $departamentos->result();
+            foreach($base as $mod){
+                $this->Ubigeo_model->setcod_ubicgeo($mod->ubigeo);
+            }
+            $provDist = $this->Ubigeo_model->extraeProDist();
+            $provDist = $provDist->result();
+            foreach($provDist as $dep){
+                $cod_dep = $dep->cod_dep;
+                $cod_pro = $dep->cod_pro;
+                $cod_dis = $dep->cod_dis;
+            }
+            $this->Ubigeo_model->setcod_dep($cod_dep);
+            $this->Ubigeo_model->setcod_pro($cod_pro);
+            $provincias = $this->Ubigeo_model->provincias();
+            $distritos = $this->Ubigeo_model->distritos();
+        } else {
+            $status = 500;
+            $base = array();
+            $departamentos = array();
+            $provincias = array();
+            $distritos = array();
+        }
+
+        $data = array(
+            "status" => $status,
+            "base" => $base,
+            "departamentos" => $departamentos,
+            "provincias" => $provincias->result(),
+            "distritos" => $distritos->result(),
+            'departamento' => $cod_dep,
+            'provincia' => $cod_pro,
+            'distrito' => $cod_dis
         );
 
         echo json_encode($data);

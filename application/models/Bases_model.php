@@ -76,4 +76,29 @@ class Bases_model extends CI_Model
             return 0;
         }
     }
+
+    public function extraerBase()
+    {
+        $this->db->select("*");
+        $this->db->from("base");
+        $this->db->where("nombre", $this->nombre);
+        return $this->db->get();
+    }
+
+    public function actualizarBase()
+    {
+        $data = array(
+            "nombre" => $this->nombre,
+            "domicilio" => $this->direccion,
+            "ubigeo" => $this->ubigeo,
+            "fecha" => $this->fechainicio,
+            "latitud" => $this->latitud,
+            "longitud" => $this->longitud
+        );
+
+        $this->db->where("idbase",$this->idBase);
+        $result = $this->db->update("base", $data);
+        if($result) return true;
+        else return false;
+    }
 }

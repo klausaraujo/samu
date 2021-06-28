@@ -66,6 +66,7 @@
 									<form id="formRegistrar" name="formRegistrar" method="post" action="" autocomplete="off" enctype="multipart/form-data">
 										<div class="modal-body">
 											<input type="hidden" name="idambulancia" id="idambulancia">
+											<input type="hidden" name="act" id="act">
 												<div class="alert alert-warning ingresos__alert" role="alert" hidden>
 													<span class="alert__span"></span>
 													<button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -76,14 +77,15 @@
 													<div class="col-sm-6">
 														<div class="form-group row">
 															<label class="modal-label col-sm-5 col-form-label py-10">Placa: </label>
-															<div class="col-sm-7">
+															<div class="col-sm-5">
 																<input type="text" class="form-control" name="placa" id="placa" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="6"/>
 															</div>
+															<div class="col-sm-1"><a id="buscar" href="#"><i class="glyphicon glyphicon-search"></i></a></div>
 														</div>
 													</div>
 													<div class="col-sm-6">
 														<div class="form-group row">
-															<label class="modal-label col-sm-5 col-form-label py-10">Marca: </label>
+															<label class="modal-label col-sm-4 col-form-label py-10">Marca: </label>
 															<div class="col-sm-7">
 																<select class="form-control" name="idmarca" id="idmarca">
 																	<option value="">-- Marca --</option>
@@ -104,7 +106,7 @@
 													</div>
 													<div class="col-sm-6">
 														<div class="form-group row">
-															<label class="modal-label col-sm-5 col-form-label py-10">Tipo Combustible: </label>
+															<label class="modal-label col-sm-4 col-form-label py-10">Tipo Combustible: </label>
 															<div class="col-sm-7">
 																<select class="form-control" name="idtipocombustible" id="idtipocombustible">
 																	<option value="">-- Tipo Combustible --</option>
@@ -129,7 +131,7 @@
 													</div>
 													<div class="col-sm-6">
 														<div class="form-group row">
-															<label class="modal-label col-sm-5 col-form-label py-10">Tipo Ambulancia: </label>
+															<label class="modal-label col-sm-4 col-form-label py-10">Tipo Ambulancia: </label>
 															<div class="col-sm-7">
 																<select class="form-control" name="idtipoambulancia" id="idtipoambulancia">
 																	<option value="">-- Elija Tipo --</option>
@@ -150,7 +152,7 @@
 													</div>
 													<div class="col-sm-6">
 														<div class="form-group row">
-															<label class="modal-label col-sm-5 col-form-label py-10">Codigo Patrimonial: </label>
+															<label class="modal-label col-sm-4 col-form-label py-10">Codigo Patrimonial: </label>
 															<div class="col-sm-7">
 																<input type="text" class="form-control" name="codigo_patrimonial" id="codigo_patrimonial" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="10"/>
 															</div>
@@ -166,7 +168,7 @@
 													</div>
 													<div class="col-sm-6">
 														<div class="form-group row">
-															<label class="modal-label col-sm-5 col-form-label py-10">Año Modelo: </label>
+															<label class="modal-label col-sm-4 col-form-label py-10">Año Modelo: </label>
 															<div class="col-sm-7">
 																<input type="text" value="" maxlength="4" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" class="form-control" name="modelo_anio" id="modelo_anio" />
 															</div>
@@ -186,7 +188,7 @@
 													</div>
 													<div class="col-sm-6">
 														<div class="form-group row">
-															<label class="modal-label col-sm-5 col-form-label py-10"> </label>
+															<label class="modal-label col-sm-4 col-form-label py-10"> </label>
 															<div class="col-sm-7">
 																
 															</div>
@@ -209,7 +211,7 @@
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-											<button type="submit" class="btn btn-primary">Guardar</button>
+											<button id="enviar" type="submit" class="btn btn-primary">Guardar</button>
 										</div>	
 									</form>
 								</div>

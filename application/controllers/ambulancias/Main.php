@@ -82,7 +82,7 @@ class Main extends CI_Controller
     }
     public function guardarAmbulancia() {
 
-        $this->load->model("Ambulancias_model");
+       $this->load->model("Ambulancias_model");
         
         $idambulancia = $this->input->post("idambulancia");
         $placa = $this->input->post("placa");
@@ -135,8 +135,9 @@ class Main extends CI_Controller
             "status" => $status,
             "message" => $message
         );
-
+        
         echo json_encode($data);
+        
     }
 
     public function listaambulancias() {
@@ -162,6 +163,53 @@ class Main extends CI_Controller
 
         echo json_encode($data);
 
+    }
+
+
+    public function guardarUsuario() {
+
+        $this->load->model("Usuarios_model");
+        
+        $dni = $this->input->post("dni");
+        $nombre = $this->input->post("nombres");
+        $apellido = $this->input->post("apellidos");
+        $region = $this->input->post("region");
+        $perfil = $this->input->post("perfil");
+        $estatus = $this->input->post("estatus");
+        $user = $this->input->post("user");
+        $pass = $this->input->post("pass");
+
+        $this->Usuarios_model->setDni($dni);
+        $this->Usuarios_model->setAvatar("");
+        $this->Usuarios_model->setNombres($nombre);
+        $this->Usuarios_model->setApellidos($apellido);
+        $this->Usuarios_model->setRegion($region);
+        $this->Usuarios_model->setPerfil($perfil);
+        $this->Usuarios_model->setEstatus($estatus);
+        $this->Usuarios_model->setUser($user);
+        $this->Usuarios_model->setPass($pass);
+
+        $status = 500;
+        $message = "Error al registrar, vuelva a intentar";
+
+        if ($idbase > 0) {
+            if ($this->Usuarios_model->actualizarUsuario()) {
+                $status = 200;
+                $message = "Usuario actualizado exitosamente";
+            }
+        } else {
+            if ($this->Usuarios_model->guardarUsuario()) {
+                $status = 200;
+                $message = "Usuario registrado exitosamente";
+            }
+        }
+        
+        $data = array(
+            "status" => $status,
+            "message" => $message
+        );
+
+        echo json_encode($data);
     }
 	
 }

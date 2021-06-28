@@ -23,7 +23,7 @@ class Auth extends CI_Controller {
 				$this->load->model("Menu_model");
 				
 				$modulos = $this->Menu_model->modulos();
-				if ($result->num_rows() > 0)
+				if ($modulos->num_rows() > 0)
 				{
 					$menu1desc = array();
 					$menu2desc = array();

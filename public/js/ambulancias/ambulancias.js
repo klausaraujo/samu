@@ -125,6 +125,13 @@ function ambulancias(URI) {
       $("#formRegistrar")[0].reset();
       showModal(event, 'Registrar Nueva Ambulancia');
     });
+
+    $(".actionEdit").on('click', function (event) {
+      /*$("#act").val(1);
+      $("#enviar").text("Actualizar");
+      $("select").prop('selectedIndex',0);*/
+      showModal(event, 'Editar Base');
+    });
   
     function showModal(event, title) {
       $("#editarModal").modal("show");

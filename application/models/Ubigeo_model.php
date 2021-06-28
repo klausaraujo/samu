@@ -6,6 +6,7 @@ class Ubigeo_model extends CI_Model
     private $cod_dep;
     private $cod_pro;
     private $cod_dis;
+    private $ubicgeo;
     public function setcod_dep($data)
     {
         $this->cod_dep = $this->db->escape_str($data);
@@ -18,13 +19,17 @@ class Ubigeo_model extends CI_Model
     {
         $this->cod_dis = $this->db->escape_str($data);
     }
+    public function setcod_ubicgeo($data)
+    {
+        $this->ubicgeo = $this->db->escape_str($data);
+    }
     public function __construct()
     {
         parent::__construct();
     }
     public function obtenerRegiones()
     {
-        $this->db->select("Codigo_Region,UPPER(Nombre_Region) Nombre_Region");
+        $this->db->select("idregion,UPPER(region) region");
         $this->db->from("region");
         $this->db->where("Activo =", "1");
         return $this->db->get();
@@ -59,6 +64,13 @@ class Ubigeo_model extends CI_Model
         $this->db->where("cod_dep", $this->cod_dep);
         $this->db->where("cod_pro", $this->cod_pro);
         $this->db->where("cod_dis", $this->cod_dis);
+        return $this->db->get();
+    }
+
+    public function extraeProDist(){
+        $this->db->select("*");
+        $this->db->from("ubigeo");
+        $this->db->where("ubigeo", $this->ubicgeo);
         return $this->db->get();
     }
 }

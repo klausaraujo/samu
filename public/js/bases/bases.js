@@ -1,5 +1,71 @@
 function bases(URI, EVENTO_CODIGO_REGION) {
 
+  function showModal(event, title) {
+    $("#editarModal").modal("show");
+    $("#editarModalLabel").text(title);
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+  }
+  
+  function buscar () {
+    var base = $("#nombre").val();    
+    $.ajax({
+      type: 'POST',
+      url: URI + 'bases/main/extraerBase',
+      data: {base:base},
+      dataType: 'json',
+      success: function (response) {
+        const { base } = response;
+        const { departamentos } = response;
+        const { provincias } = response;
+        const { distritos } = response;
+        if (response.status === 200) {
+          $("#idbase").val(base[0].idbase);
+          $("#direccion").val(base[0].domicilio);
+          const f = new Date(base[0].fecha);
+          var dateString = new Date(f.getTime() - (f.getTimezoneOffset()*60000)).toISOString().split("T")[0];
+          $("#fechainicio").val(dateString);
+          var i=0;
+          var html = '<option value="primero" class="lista">---Seleccione---</option>';
+            for(i in departamentos) {
+              if(departamentos[i].cod_dep == response.departamento){
+                reg = departamentos[i].departamento;
+                idreg = departamentos[i].cod_dep;
+                html += '<option value="'+idreg+'" selected>'+reg+'</option>';
+              }else
+                html += '<option value="' + departamentos[i].cod_dep + '">' + departamentos[i].departamento + '</option>';
+            }
+            $("#departamento").html(html);
+            i=0;
+            var html = '<option value="primero" class="lista">---Seleccione---</option>';
+            for(i in provincias) {
+              if(provincias[i].cod_pro == response.provincia){
+                reg = provincias[i].provincia;
+                idreg = provincias[i].cod_pro;
+                html += '<option value="'+idreg+'" selected>'+reg+'</option>';
+              }else
+                html += '<option value="' + provincias[i].cod_pro + '">' + provincias[i].provincia + '</option>';
+            }
+            $("#provincia").html(html);
+            i=0;
+            var html = '<option value="primero" class="lista">---Seleccione---</option>';
+            for(i in distritos) {
+              if(distritos[i].cod_dis == response.distrito){
+                reg = distritos[i].distrito;
+                idreg = distritos[i].cod_dis;
+                html += '<option value="'+idreg+'" selected>'+reg+'</option>';
+              }else
+                html += '<option value="' + distritos[i].cod_dis + '">' + distritos[i].distrito + '</option>';
+            }
+            $("#distrito").html(html);
+          
+        } else {
+          alert("No existe el usuario");
+        }
+      }
+    });
+  }
+
 $(document).ready(function () {
   var data;
   var validate = 1;
@@ -118,18 +184,9 @@ $(document).ready(function () {
 
   });
 
-  function botonesAction(){
-    $(".actionEdit").on('click', function (event) {
-      $("#act").val(1);
-      $("#enviar").text("Actualizar");
-      $("select").prop('selectedIndex',0);
-      showModal(event, 'Editar Base');
-    });
-  }
-
   $(".btn-nuevo").on('click', function (event) {
-    /*$('#imagen').attr('src', 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=');
-    $('.custom-file').html(`Escoger Ficha &hellip;`);*/
+    $('#imagen').attr('src', 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=');
+    $('.custom-file').html(`Escoger Ficha &hellip;`);
     $("#act").val(0);
     $("#formRegistrar")[0].reset();
     $("#enviar").text("Guardar");
@@ -139,80 +196,21 @@ $(document).ready(function () {
   });
 
   $(".actionEdit").on('click', function (event) {
+    var valor ="", i = 0;
+      $(this).parents("tr").find("td").each(function(){
+        if(i == 1)
+          valor = $(this).html();
+        i++;
+      });
+    
     $("#act").val(1);
+    $("#formRegistrar")[0].reset();
+    $("#nombre").val(valor);
     $("#enviar").text("Actualizar");
     $("select").prop('selectedIndex',0);
+    buscar();
     showModal(event, 'Editar Base');
   });
-
-  $("#buscar").on('click', function (event) {
-    var base = $("#nombre").val();    
-    $.ajax({
-      type: 'POST',
-      url: URI + 'bases/main/extraerBase',
-      data: {base:base},
-      dataType: 'json',
-      success: function (response) {
-        const { base } = response;
-        const { departamentos } = response;
-        const { provincias } = response;
-        const { distritos } = response;
-        if (response.status === 200) {
-          $("#idbase").val(base[0].idbase);
-          $("#direccion").val(base[0].domicilio);
-          const f = new Date(base[0].fecha);
-          var dateString = new Date(f.getTime() - (f.getTimezoneOffset()*60000)).toISOString().split("T")[0];
-          console.log(dateString);
-
-          $("#fechainicio").val(dateString);
-          var i=0;
-          //console.log(base);
-          var html = '<option value="primero" class="lista">---Seleccione---</option>';
-            for(i in departamentos) {
-              if(departamentos[i].cod_dep == response.departamento){
-                reg = departamentos[i].departamento;
-                idreg = departamentos[i].cod_dep;
-                html += '<option value="'+idreg+'" selected>'+reg+'</option>';
-              }else
-                html += '<option value="' + departamentos[i].cod_dep + '">' + departamentos[i].departamento + '</option>';
-            }
-            $("#departamento").html(html);
-            i=0;
-            var html = '<option value="primero" class="lista">---Seleccione---</option>';
-            for(i in provincias) {
-              if(provincias[i].cod_pro == response.provincia){
-                reg = provincias[i].provincia;
-                idreg = provincias[i].cod_pro;
-                html += '<option value="'+idreg+'" selected>'+reg+'</option>';
-              }else
-                html += '<option value="' + provincias[i].cod_pro + '">' + provincias[i].provincia + '</option>';
-            }
-            $("#provincia").html(html);
-            i=0;
-            var html = '<option value="primero" class="lista">---Seleccione---</option>';
-            for(i in distritos) {
-              if(distritos[i].cod_dis == response.distrito){
-                reg = distritos[i].distrito;
-                idreg = distritos[i].cod_dis;
-                html += '<option value="'+idreg+'" selected>'+reg+'</option>';
-              }else
-                html += '<option value="' + distritos[i].cod_dis + '">' + distritos[i].distrito + '</option>';
-            }
-            $("#distrito").html(html);
-          
-        } else {
-          alert("No existe el usuario");
-        }
-      }
-    });
-  });
-
-  function showModal(event, title) {
-    $("#editarModal").modal("show");
-    $("#editarModalLabel").text(title);
-    event.stopPropagation();
-    event.stopImmediatePropagation();
-  }
 
   $("#formRegistrar").validate({
     rules: {
@@ -407,6 +405,22 @@ function loadData(table) {
       const { data: { listaBases } } = response;
       table.clear();
       table.rows.add(listaBases).draw();
+      $(".actionEdit").on('click', function (event) {
+        var valor ="", i = 0;
+          $(this).parents("tr").find("td").each(function(){
+            if(i == 1)
+              valor = $(this).html();
+            i++;
+          });
+        
+        $("#act").val(1);
+        $("#formRegistrar")[0].reset();
+        $("#nombre").val(valor);
+        $("#enviar").text("Actualizar");
+        $("select").prop('selectedIndex',0);
+        buscar();
+        showModal(event, 'Editar Base');
+      });
     }
   });
 }

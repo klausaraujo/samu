@@ -1,7 +1,80 @@
 function usuarios(URI) {
+  
+  function showModal(event,title) {
+    $("#editarModal").modal("show");
+    $("#editarModalLabel").text(title);
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+  }
 
+  function buscar() {
+    var dni = $("#dni").val();
+
+    var i = 0;
+    //Recorrer todos los td de la tabla
+    /*$('#dt-usuarios').each(function(){
+      $(this).find('td').each(function(){
+        console.log($(this).text());
+        console.log($(this).rowIndex());
+      });
+    });*/
+    
+    $.ajax({
+      type: 'POST',
+      url: URI + 'usuarios/main/extraeUsuario',
+      data: {dni:dni},
+      dataType: 'json',
+      success: function (response) {
+        if (response.status === 200) {
+          const { regiones } = response;
+          const { perfiles } = response;
+          const { data } = response;
+          var i = 0;
+          var reg, idreg;
+          $("#iduser").val(data[0].idusuario);
+          $("#nombres").val(data[0].nombres);
+          $("#apellidos").val(data[0].apellidos);
+          var html = '<option value="primero" class="lista">---Seleccione---</option>';
+          for(i in regiones) {
+            if(regiones[i].idregion == data[0].idregion){
+              reg = regiones[i].region;
+              idreg = regiones[i].idregion;
+              html += '<option value="'+idreg+'" selected>'+reg+'</option>';
+            }else
+              html += '<option value="' + regiones[i].idregion + '">' + regiones[i].region + '</option>';
+          }
+          $("#region").html(html);
+          i = 0; html = '<option value="primero" class="lista">---Seleccione---</option>';
+          for(i in perfiles) {
+            if(perfiles[i].idperfil == data[0].idperfil){
+              reg = perfiles[i].perfil;
+              idreg = perfiles[i].idperfil;
+              html += '<option value="'+idreg+'" selected>'+reg+'</option>';
+            }else
+              html += '<option value="' + perfiles[i].idperfil + '">' + perfiles[i].perfil + '</option>';
+          }
+          $("#perfil").html(html);
+          html = '<option value="primero" class="lista">---Seleccione---</option>';
+          if(data[0].activo == 1){
+            html += '<option value=1 selected>Activo</option>'+
+                   '<option value=0 >Inactivo</option>';
+          }else{
+            html += '<option value=0 selected>Inactivo</option>'+
+                   '<option value=1 >Activo</option>';
+          }
+          $("#estatus").html(html);
+
+        } else {
+          alert("No existe el usuario");
+        }
+      }
+    });
+  }
+  
+  
   $(document).ready(function () {
     var data;
+    
     var table = $('#dt-usuarios').DataTable({
       data: lista,
       pageLength: 10,
@@ -15,12 +88,13 @@ function usuarios(URI) {
 
             render: function (data, type, row, meta) {
             const btnEdit = data.activo == 1 ? `
-            <button class="btn btn-warning btn-circle actionEdit" title="Editar Registro" type="button" style="margin-right: 5px;" name="editarReg" id="editarReg">
+            <button class="btn btn-warning btn-circle actionEdit" title="Editar Registro" type="button" style="margin-right: 5px;"">
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
             </button>` : `
             <button class="btn btn-warning btn-circle disabled" title="Editar Registro" type="button" style="margin-right: 5px;">
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
             </button>` ;
+
             const btnDelete = data.activo == 1 ? `<button class="btn btn-danger btn-circle actionDeleteComi" title="Anular Registro" type="button style="margin-right: 5px;">
               <i class="fa fa-times" aria-hidden="true"></i>
             </button>` : `<button class="btn btn-danger btn-circle disabled" title="Anular Registro" type="button style="margin-right: 5px;">
@@ -118,15 +192,27 @@ function usuarios(URI) {
 
     });
 
-    function botonesAction(){
-      $(".actionEdit").on('click', function (event) {
-        $("#act").val(1);
-        $("#enviar").text("Actualizar");
-        $("select").prop('selectedIndex',0);
-        showModal(event, 'Editar Base');
+    $(".actionEdit").on('click', function (event) {
+      var valor ="", i = 0;
+      $(this).parents("tr").find("td").each(function(){
+        if(i == 1)
+          valor = $(this).html();
+        i++;
       });
-    }
-
+      
+      $("#act").val(1);
+      $("#formRegistrar")[0].reset();
+      $("#user").hide();
+      $("#pass").hide();
+      $("#etiq").hide();
+      $("#etiq1").hide();
+      $("#buscar").hide();
+      $("#dni").val(valor);
+      $("#enviar").text("Actualizar");
+      $("select").prop('selectedIndex',0);
+      buscar();
+      showModal(event, 'Editar Usuario');
+    });
 
     $(".btn-nuevo").on('click', function (event) {
       data = {};
@@ -140,85 +226,6 @@ function usuarios(URI) {
       $("select").prop('selectedIndex',0);
       showModal(event, 'Registrar Nuevo Usuario');
     });
-
-    $(".actionEdit").on('click', function (event) {
-      $("#act").val(1);
-      $("#formRegistrar")[0].reset();
-      $("#user").hide();
-      $("#pass").hide();
-      $("#etiq").hide();
-      $("#etiq1").hide();      
-      $("#enviar").text("Actualizar");
-      $("select").prop('selectedIndex',0);
-      showModal(event, 'Editar Usuario');
-    });
-
-    $("#buscar").on('click', function (event) {
-      var dni = $("#dni").val();
-      
-      $.ajax({
-        type: 'POST',
-        url: URI + 'usuarios/main/extraeUsuario',
-        data: {dni:dni},
-        dataType: 'json',
-        success: function (response) {
-          if (response.status === 200) {
-            const { regiones } = response;
-            const { perfiles } = response;
-            const { data } = response;
-            var i = 0;
-            var reg, idreg;
-            $("#iduser").val(data[0].idusuario);
-            $("#nombres").val(data[0].nombres);
-            $("#apellidos").val(data[0].apellidos);
-            console.log(data[0].usuario);
-            console.log($("#iduser").val());
-            console.log($("#user").val());
-            console.log($("#pass").val());
-            var html = '<option value="primero" class="lista">---Seleccione---</option>';
-            for(i in regiones) {
-              if(regiones[i].idregion == data[0].idregion){
-                reg = regiones[i].region;
-                idreg = regiones[i].idregion;
-                html += '<option value="'+idreg+'" selected>'+reg+'</option>';
-              }else
-                html += '<option value="' + regiones[i].idregion + '">' + regiones[i].region + '</option>';
-            }
-            $("#region").html(html);
-            i = 0; html = '<option value="primero" class="lista">---Seleccione---</option>';
-            for(i in perfiles) {
-              if(perfiles[i].idperfil == data[0].idperfil){
-                console.log(perfiles[i].perfil);
-                reg = perfiles[i].perfil;
-                idreg = perfiles[i].idperfil;
-                html += '<option value="'+idreg+'" selected>'+reg+'</option>';
-              }else
-                html += '<option value="' + perfiles[i].idperfil + '">' + perfiles[i].perfil + '</option>';
-            }
-            $("#perfil").html(html);
-            html = '<option value="primero" class="lista">---Seleccione---</option>';
-            if(data[0].activo == 1){
-              html += '<option value=1 selected>Activo</option>'+
-                     '<option value=0 >Inactivo</option>';
-            }else{
-              html += '<option value=0 selected>Inactivo</option>'+
-                     '<option value=1 >Activo</option>';
-            }
-            $("#estatus").html(html);
-
-          } else {
-            alert("No existe el usuario");
-          }
-        }
-      });
-    });
-  
-    function showModal(event, title) {
-      $("#editarModal").modal("show");
-      $("#editarModalLabel").text(title);
-      event.stopPropagation();
-      event.stopImmediatePropagation();
-    }
   
   
     $("#formRegistrar").validate({      
@@ -257,27 +264,24 @@ function usuarios(URI) {
   
           },
           success: function (response) {
-            console.log(response);
             $("#editarModal").modal('hide');
             if (response.status === 200) {
               $("#formRegistrar")[0].reset();
               $('.btn-editar').removeClass('active');
               loadData(table);
               $('.alert-success').fadeIn(1000);
-              botonesAction();
             } else {
               $('.alert-danger').fadeIn(1000);
             }
-            setTimeout(() => {
+            /*setTimeout(() => {
               $('.alert').fadeOut(1000);
-            }, 1500);
+            }, 1500);*/
           }
         });
       }
     });
 
   });
-  
 
   function loadData(table) {
     $.ajax({
@@ -289,6 +293,27 @@ function usuarios(URI) {
         const { data: { listaUsuarios } } = response;
         table.clear();
         table.rows.add(listaUsuarios).draw();
+        $(".actionEdit").on('click', function (event) {
+          var valor ="", i = 0;
+          $(this).parents("tr").find("td").each(function(){
+            if(i == 1)
+              valor = $(this).html();
+            i++;
+          });
+          
+          $("#act").val(1);
+          $("#formRegistrar")[0].reset();
+          $("#user").hide();
+          $("#pass").hide();
+          $("#etiq").hide();
+          $("#etiq1").hide();
+          $("#buscar").hide();
+          $("#dni").val(valor);
+          $("#enviar").text("Actualizar");
+          $("select").prop('selectedIndex',0);
+          buscar();
+          showModal(event, 'Editar Usuario');
+        });
       }
     });
   }

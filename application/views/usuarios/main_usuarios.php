@@ -10,7 +10,6 @@
 		<title>Ministerio de Salud - SAMU-106</title>
 		<link rel="stylesheet" href="<?=base_url()?>public/css/vendors_css.css">
 		<link rel="stylesheet" href="<?=base_url()?>public/css/style.css">
-		<link rel="stylesheet" href="<?=base_url()?>public/css/skin_color.css">
 		<link rel="stylesheet" href="<?=base_url()?>public/css/bases/main.css" />
 	</head>
 	<body class="hold-transition light-skin sidebar-mini theme-primary">

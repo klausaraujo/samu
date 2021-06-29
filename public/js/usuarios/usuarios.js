@@ -9,8 +9,8 @@ function usuarios(URI) {
 
   function buscar() {
     var dni = $("#dni").val();
-
     var i = 0;
+    var opt = '<option value="" class="lista">---Seleccione---</option>';
     //Recorrer todos los td de la tabla
     /*$('#dt-usuarios').each(function(){
       $(this).find('td').each(function(){
@@ -34,7 +34,7 @@ function usuarios(URI) {
           $("#iduser").val(data[0].idusuario);
           $("#nombres").val(data[0].nombres);
           $("#apellidos").val(data[0].apellidos);
-          var html = '<option value="primero" class="lista">---Seleccione---</option>';
+          html = opt;
           for(i in regiones) {
             if(regiones[i].idregion == data[0].idregion){
               reg = regiones[i].region;
@@ -44,7 +44,8 @@ function usuarios(URI) {
               html += '<option value="' + regiones[i].idregion + '">' + regiones[i].region + '</option>';
           }
           $("#region").html(html);
-          i = 0; html = '<option value="primero" class="lista">---Seleccione---</option>';
+          i = 0;
+          html = opt;
           for(i in perfiles) {
             if(perfiles[i].idperfil == data[0].idperfil){
               reg = perfiles[i].perfil;
@@ -54,7 +55,7 @@ function usuarios(URI) {
               html += '<option value="' + perfiles[i].idperfil + '">' + perfiles[i].perfil + '</option>';
           }
           $("#perfil").html(html);
-          html = '<option value="primero" class="lista">---Seleccione---</option>';
+          html = opt;
           if(data[0].activo == 1){
             html += '<option value=1 selected>Activo</option>'+
                    '<option value=0 >Inactivo</option>';
@@ -199,14 +200,14 @@ function usuarios(URI) {
           valor = $(this).html();
         i++;
       });
-      
-      $("#act").val(1);
+            
       $("#formRegistrar")[0].reset();
       $("#user").hide();
       $("#pass").hide();
       $("#etiq").hide();
       $("#etiq1").hide();
       $("#buscar").hide();
+      $("#act").val(1);
       $("#dni").val(valor);
       $("#enviar").text("Actualizar");
       $("select").prop('selectedIndex',0);
@@ -215,14 +216,13 @@ function usuarios(URI) {
     });
 
     $(".btn-nuevo").on('click', function (event) {
-      data = {};
-      $("#act").val(0);
       $("#formRegistrar")[0].reset();
       $("#user").show();
       $("#pass").show();
       $("#etiq").show();
       $("#etiq1").show();
       $("#buscar").show();
+      $("#act").val(0);
       $("#enviar").text("Guardar");
       $("select").prop('selectedIndex',0);
       showModal(event, 'Registrar Nuevo Usuario');
@@ -302,13 +302,13 @@ function usuarios(URI) {
             i++;
           });
           
-          $("#act").val(1);
           $("#formRegistrar")[0].reset();
           $("#user").hide();
           $("#pass").hide();
           $("#etiq").hide();
           $("#etiq1").hide();
           $("#buscar").hide();
+          $("#act").val(1);
           $("#dni").val(valor);
           $("#enviar").text("Actualizar");
           $("select").prop('selectedIndex',0);

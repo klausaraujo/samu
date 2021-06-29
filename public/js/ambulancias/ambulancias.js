@@ -1,5 +1,88 @@
 function ambulancias(URI) {
 
+  function showModal(event, title) {
+    $("#editarModal").modal("show");
+    $("#editarModalLabel").text(title);
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+  }
+
+  function buscar () {
+    var placa = $("#placa").val();
+    var opt = '<option value="" class="lista">---Seleccione---</option>';
+    var html = "";
+
+    $.ajax({
+      type: 'POST',
+      url: URI + 'ambulancias/main/extraerAmbulancia',
+      data: {placa:placa},
+      dataType: 'json',
+      success: function (response) {
+        const { data } = response;
+        const { tipo } = response;
+        const { marca } = response;
+        const { comb } = response;
+        //console.log(response);
+        if (response.status === 200) {
+          var i=0;
+          $("#idambulancia").val(data[0].idambulancia);
+          $("#modelo").val(data[0].modelo);
+          $("#serie_motor").val(data[0].serie_motor);
+          $("#codigo_patrimonial").val(data[0].codigo_patrimonial);
+          $("#fabricacion_anio").val(data[0].fabricacion_anio);
+          $("#modelo_anio").val(data[0].modelo_anio);
+          html = '<option value="" class="lista">---Seleccione---</option>';
+          if(data[0].gps == "NO")
+            html = opt + '<option value="1">SI</option><option value="0" selected>NO</option>';
+          else if(data[0].gps == "SI")
+            html = opt + '<option value="1" selected>SI</option><option value="0">NO</option>';
+          $("#gps").html(html);
+          html = opt;
+          if(data[0].condicion == "Inoperativa")
+            html += '<option value="1">Operativa</option><option value="0" selected>Inoperativa</option>';
+          else if(data[0].condicion == "Operativa")
+            html += '<option value="1" selected>Operativa</option><option value="0">Inoperativa</option>';
+          $("#condicion").html(html);
+          html = opt;
+          for(i in marca) {
+            if(marca[i].idmarca == data[0].idmarca){
+              reg = marca[i].marca;
+              idreg = marca[i].idmarca;
+              html += '<option value="'+idreg+'" selected>'+reg+'</option>';
+            }else
+              html += '<option value="' + marca[i].idmarca + '">' + marca[i].marca + '</option>';
+          }
+          $("#idmarca").html(html);
+          html = opt;
+          i=0;
+          for(i in comb) {
+            if(comb[i].idtipocombustible == data[0].idtipocombustible){
+              reg = comb[i].combustible;
+              idreg = comb[i].idtipocombustible;
+              html += '<option value="'+idreg+'" selected>'+reg+'</option>';
+            }else
+              html += '<option value="' + comb[i].idtipocombustible + '">' + comb[i].combustible + '</option>';
+          }
+          $("#idtipocombustible").html(html);
+          html = opt;
+          i=0;
+          for(i in tipo) {
+            if(tipo[i].idtipoambulancia == data[0].idtipoambulancia){
+              reg = tipo[i].tipo;
+              idreg = tipo[i].idtipoambulancia;
+              html += '<option value="'+idreg+'" selected>'+reg+'</option>';
+            }else
+              html += '<option value="' + tipo[i].idtipoambulancia + '">' + tipo[i].tipo + '</option>';
+          }
+          $("#idtipoambulancia").html(html);
+
+        } else {
+          alert("No existe el registro");
+        }
+      }
+    });
+  }
+  
   $(document).ready(function () {
     var data;
     var validate = 1;
@@ -123,22 +206,28 @@ function ambulancias(URI) {
       $('.custom-file').html(`Escoger Ficha &hellip;`);
       data = {};
       $("#formRegistrar")[0].reset();
+      $("#act").val(0);
+      $("#enviar").text("Guardar");
+      $("select").prop('selectedIndex',0);
       showModal(event, 'Registrar Nueva Ambulancia');
     });
 
     $(".actionEdit").on('click', function (event) {
-      /*$("#act").val(1);
+      var valor ="", i = 0;
+      $(this).parents("tr").find("td").each(function(){
+        if(i == 1)
+          valor = $(this).html();
+        i++;
+      });
+      $("#formRegistrar")[0].reset();
+      $("#placa").val(valor);
+      $("#act").val(1);
       $("#enviar").text("Actualizar");
-      $("select").prop('selectedIndex',0);*/
-      showModal(event, 'Editar Base');
+      $("select").prop('selectedIndex',0);
+      buscar();
+      showModal(event, 'Editar Ambulancia');
     });
-  
-    function showModal(event, title) {
-      $("#editarModal").modal("show");
-      $("#editarModalLabel").text(title);
-      event.stopPropagation();
-      event.stopImmediatePropagation();
-    }
+
     $("#formRegistrar").validate({
       rules: {
         placa: { required: true },
@@ -249,6 +338,21 @@ function ambulancias(URI) {
         const { data: { listaAmbulancias } } = response;
         table.clear();
         table.rows.add(listaAmbulancias).draw();
+        $(".actionEdit").on('click', function (event) {
+          var valor ="", i = 0;
+          $(this).parents("tr").find("td").each(function(){
+            if(i == 1)
+              valor = $(this).html();
+            i++;
+          });
+          $("#formRegistrar")[0].reset();
+          $("#placa").val(valor);
+          $("#act").val(1);
+          $("#enviar").text("Actualizar");
+          $("select").prop('selectedIndex',0);
+          buscar();
+          showModal(event, 'Editar Ambulancia');
+        });
       }
     });
   }

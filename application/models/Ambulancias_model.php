@@ -97,6 +97,36 @@ class Ambulancias_model extends CI_Model
             return 0;
         }
     }
+
+    public function actualizarAmbulancia()
+    {
+        $data = array(
+            "placa" => $this->placa,
+            "idmarca" => $this->idmarca,
+            "modelo" => $this->modelo,
+            "idtipocombustible" => $this->idtipocombustible,
+            "gps" => $this->gps,
+            "idtipoambulancia" => $this->idtipoambulancia,
+            "serie_motor" => $this->serie_motor,
+            "codigo_patrimonial" => $this->codigo_patrimonial,
+            "fabricacion_anio" => $this->fabricacion_anio,
+            "modelo_anio" => $this->modelo_anio,
+            "condicion" => $this->condicion,
+            "tarjeta" => $this->tarjeta,
+            "fotografia" => $this->fotografia
+        );
+        $this->db->where("idambulancia",$this->idambulancia);
+        $result = $this->db->update("ambulancia", $data);
+        if($result) return true;
+        else return false;
+    }
+
+    public function extraerAmbulancia(){
+        $this->db->select("*");
+        $this->db->from("lista_ambulancias");
+        $this->db->where("placa", $this->placa);
+        return $this->db->get();
+    }
 }
 
 

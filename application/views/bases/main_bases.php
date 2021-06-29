@@ -75,10 +75,9 @@
 													<div class="col-sm-6">
 															<div class="form-group row">
 																<label class="modal-label col-sm-5 col-form-label py-10">Nombre Base: </label>
-																<div class="col-sm-5">
+																<div class="col-sm-7">
 																	<input type="text" class="form-control" name="nombre" id="nombre" />
 																</div>
-																<div class="col-sm-1"><a id="buscar" href="#"><i class="glyphicon glyphicon-search"></i></a></div>	
 															</div>
 													</div>																					
 													<div class="col-sm-6">
@@ -127,7 +126,7 @@
 													</div>																																												
 													<div class="col-sm-6">
 														<div class="form-group row">
-															<label class="modal-label col-sm-3 col-form-label py-10">Fecha de Inicio: </label>
+															<label class="modal-label col-sm-4 col-form-label py-10">Fecha de Inicio: </label>
 															<div class="col-sm-7">
 																<div class="form-group">
 																	<div class='input-group'>

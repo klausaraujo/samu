@@ -8,7 +8,10 @@ function bases(URI, EVENTO_CODIGO_REGION) {
   }
   
   function buscar () {
-    var base = $("#nombre").val();    
+    var base = $("#nombre").val();
+    var opt = '<option value="" class="lista">---Seleccione---</option>';
+    var html = "";
+
     $.ajax({
       type: 'POST',
       url: URI + 'bases/main/extraerBase',
@@ -23,14 +26,12 @@ function bases(URI, EVENTO_CODIGO_REGION) {
           $("#idbase").val(base[0].idbase);
           $("#latitud").val(base[0].latitud);
           $("#longitud").val(base[0].longitud);
-          console.log(base[0].latitud);
-          console.log(base[0].longitud);
           $("#direccion").val(base[0].domicilio);
           const f = new Date(base[0].fecha);
           var dateString = new Date(f.getTime() - (f.getTimezoneOffset()*60000)).toISOString().split("T")[0];
           $("#fechainicio").val(dateString);
           var i=0;
-          var html = '<option value="primero" class="lista">---Seleccione---</option>';
+          html = opt;
             for(i in departamentos) {
               if(departamentos[i].cod_dep == response.departamento){
                 reg = departamentos[i].departamento;
@@ -41,7 +42,7 @@ function bases(URI, EVENTO_CODIGO_REGION) {
             }
             $("#departamento").html(html);
             i=0;
-            var html = '<option value="primero" class="lista">---Seleccione---</option>';
+            var html = opt;
             for(i in provincias) {
               if(provincias[i].cod_pro == response.provincia){
                 reg = provincias[i].provincia;
@@ -52,7 +53,7 @@ function bases(URI, EVENTO_CODIGO_REGION) {
             }
             $("#provincia").html(html);
             i=0;
-            var html = '<option value="primero" class="lista">---Seleccione---</option>';
+            var html = opt;
             for(i in distritos) {
               if(distritos[i].cod_dis == response.distrito){
                 reg = distritos[i].distrito;
@@ -195,7 +196,6 @@ $(document).ready(function () {
     $("#formRegistrar")[0].reset();
     $("#enviar").text("Guardar");
     $("select").prop('selectedIndex',0);
-    $("#formRegistrar")[0].reset();
     showModal(event, 'Registrar Nueva Base');
   });
 
@@ -206,9 +206,9 @@ $(document).ready(function () {
           valor = $(this).html();
         i++;
       });
-    
-    $("#act").val(1);
+
     $("#formRegistrar")[0].reset();
+    $("#act").val(1);
     $("#nombre").val(valor);
     $("#enviar").text("Actualizar");
     $("select").prop('selectedIndex',0);
@@ -415,9 +415,9 @@ function loadData(table) {
               valor = $(this).html();
             i++;
           });
-        
-        $("#act").val(1);
+                
         $("#formRegistrar")[0].reset();
+        $("#act").val(1);
         $("#nombre").val(valor);
         $("#enviar").text("Actualizar");
         $("select").prop('selectedIndex',0);

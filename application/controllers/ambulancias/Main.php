@@ -166,50 +166,50 @@ class Main extends CI_Controller
     }
 
 
-    public function guardarUsuario() {
+    public function extraerAmbulancia() {
 
-        $this->load->model("Usuarios_model");
+        $status;
+        $this->load->model("Ambulancias_model");
+        $this->load->model("Combustibles_model");
+        $this->load->model("Marcas_model");
+        $this->load->model("TipoAmbulancia_model");
+        //$this->load->model("Ubigeo_model");
+        //$this->load->model("Perfil_model");
         
-        $dni = $this->input->post("dni");
-        $nombre = $this->input->post("nombres");
-        $apellido = $this->input->post("apellidos");
-        $region = $this->input->post("region");
-        $perfil = $this->input->post("perfil");
-        $estatus = $this->input->post("estatus");
-        $user = $this->input->post("user");
-        $pass = $this->input->post("pass");
-
-        $this->Usuarios_model->setDni($dni);
-        $this->Usuarios_model->setAvatar("");
-        $this->Usuarios_model->setNombres($nombre);
-        $this->Usuarios_model->setApellidos($apellido);
-        $this->Usuarios_model->setRegion($region);
-        $this->Usuarios_model->setPerfil($perfil);
-        $this->Usuarios_model->setEstatus($estatus);
-        $this->Usuarios_model->setUser($user);
-        $this->Usuarios_model->setPass($pass);
-
-        $status = 500;
-        $message = "Error al registrar, vuelva a intentar";
-
-        if ($idbase > 0) {
-            if ($this->Usuarios_model->actualizarUsuario()) {
-                $status = 200;
-                $message = "Usuario actualizado exitosamente";
-            }
+        
+        $this->Ambulancias_model->setplaca($this->input->post("placa"));
+        
+        $amb = $this->Ambulancias_model->extraerAmbulancia();
+        $marca = $this->Marcas_model->obtenerMarcas();
+        $tipoAmb = $this->TipoAmbulancia_model->obtenerTiposAmbulancias();
+        $tipoComb = $this->Combustibles_model-> obtenerTiposCombustibles();
+        //$regiones = $this->Ubigeo_model->obtenerRegiones();
+        //$perfiles = $this->Perfil_model->obtenerPerfil();
+       
+        if ($amb->num_rows() > 0) {
+            $status = 200;
+            $amb = $amb->result();
+            $marca = $marca->result();
+            $tipoAmb = $tipoAmb->result();
+            $tipoComb = $tipoComb->result();
         } else {
-            if ($this->Usuarios_model->guardarUsuario()) {
-                $status = 200;
-                $message = "Usuario registrado exitosamente";
-            }
+            $status = 500;
+            $amb = array();
+            $marca = array();
+            $tipoAmb = array();
+            $tipoComb = array();
         }
-        
+
         $data = array(
             "status" => $status,
-            "message" => $message
+            "data" => $amb,
+            "marca" => $marca,
+            "tipo" => $tipoAmb,
+            "comb" => $tipoComb
         );
 
         echo json_encode($data);
+
     }
 	
 }

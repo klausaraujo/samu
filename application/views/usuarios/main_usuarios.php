@@ -76,7 +76,7 @@
 													<div class="form-group row">
 														<label class="modal-label col-sm-3 col-form-label py-10">DNI: </label>
 														<div class="col-sm-5">
-															<input value ="" type="text" class="form-control" name="dni" id="dni" />
+															<input value ="" type="text" class="form-control" name="dni" id="dni" maxlength="8" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
 														</div>
 														<div class="col-sm-1"><a id="buscar" href="#"><i class="glyphicon glyphicon-search"></i></a></div>														
 													</div>
@@ -85,7 +85,7 @@
 													<div class="form-group row">
 														<label class="modal-label col-sm-3 col-form-label py-10">Nombres: </label>
 														<div class="col-sm-7">
-															<input value ="" type="text" class="form-control" name="nombres" id="nombres" />
+															<input value ="" type="text" class="form-control" name="nombres" id="nombres" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="50" />
 														</div>
 													</div>
 												</div>
@@ -93,7 +93,7 @@
 													<div class="form-group row">
 														<label class="modal-label col-sm-3 col-form-label py-10">Apellidos: </label>
 														<div class="col-sm-7">
-															<input value ="" type="text" class="form-control" name="apellidos" id="apellidos" />
+															<input value ="" type="text" class="form-control" name="apellidos" id="apellidos" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="50" />
 														</div>
 													</div>
 												</div>
@@ -181,7 +181,6 @@
 
 		<script src="<?=base_url()?>public//assets/vendor_components/apexcharts-bundle/dist/apexcharts.js"></script>
 		<script src="<?=base_url()?>public//assets/vendor_components/progressbar.js-master/dist/progressbar.js"></script>
-		<!-- Florence Admin App -->
 		<script src="<?=base_url()?>public/js/template.js"></script>
 		<script src="<?=base_url()?>public/js/pages/dashboard.js"></script>
 		<script src="<?=base_url()?>public/js/demo.js"></script>

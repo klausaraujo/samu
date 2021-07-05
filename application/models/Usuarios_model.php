@@ -88,7 +88,7 @@ class Usuarios_model extends CI_Model
             //"passwd" => sha1($this->pass),
             "idperfil" => $this->perfil,
             "idregion" => $this->region,
-            "activo" => $this->estatus
+            //"activo" => $this->estatus
         );
 
         $this->db->where("idusuario",$this->id);

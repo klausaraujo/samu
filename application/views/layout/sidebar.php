@@ -15,9 +15,15 @@
   
   <ul class="sidebar-menu" data-widget="tree">
 
-      <?php 
+      <?php
+      
+            /*foreach($modulos as $filas){
+              echo "<script>console.log('".$filas['menu']."')</script>";
+            }*/
             $modulo = $this->session->userdata("modulos");
             $submenu = $this->session->userdata("submenus");
+
+            //echo "<script>console.log(".json_encode($modulo).")</script>";
             //echo count($modulo)."  ".count($submenu);
             $i = 0; $j = 0;
             for($i = 0;$i < count($modulo); $i++){                      

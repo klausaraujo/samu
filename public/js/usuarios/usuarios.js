@@ -7,10 +7,25 @@ function usuarios(URI) {
     event.stopImmediatePropagation();
   }
 
-  function buscar() {
-    var dni = $("#dni").val();
+  function buscar(valor) {
+    var dni = valor;
     var i = 0;
     var opt = '<option value="" class="lista">---Seleccione---</option>';
+
+    if($("#userStatus").attr("class") != "")
+        $("#userStatus").removeClass($("#userStatus").attr("class"));
+            
+    $("#formRegistrar")[0].reset();
+    $("#labelStatus").show();
+    $('#dni').attr('disabled', 'disabled');
+    $("#dni").val(dni);
+    $("#etiq").hide();
+    $("#etiq1").hide();
+    $("#etiq2").hide();
+    $("#buscar").hide();
+    $("#act").val(1);
+    $("#enviar").text("Actualizar");
+    $("select").prop('selectedIndex',0);
     //Recorrer todos los td de la tabla
     /*$('#dt-usuarios').each(function(){
       $(this).find('td').each(function(){
@@ -31,6 +46,13 @@ function usuarios(URI) {
           const { data } = response;
           var i = 0;
           var reg, idreg;
+          if(data[0].activo == 1){
+            $("#userStatus").addClass("alert-success");
+            $("#userStatus").text("Activo");
+          }else if(data[0].activo == 0){
+            $("#userStatus").addClass("alert-warning");
+            $("#userStatus").text("Inactivo");
+          }
           $("#iduser").val(data[0].idusuario);
           $("#nombres").val(data[0].nombres);
           $("#apellidos").val(data[0].apellidos);
@@ -55,15 +77,6 @@ function usuarios(URI) {
               html += '<option value="' + perfiles[i].idperfil + '">' + perfiles[i].perfil + '</option>';
           }
           $("#perfil").html(html);
-          html = opt;
-          if(data[0].activo == 1){
-            html += '<option value=1 selected>Activo</option>'+
-                   '<option value=0 >Inactivo</option>';
-          }else{
-            html += '<option value=0 selected>Inactivo</option>'+
-                   '<option value=1 >Activo</option>';
-          }
-          $("#estatus").html(html);
 
         } else {
           alert("No existe el usuario");
@@ -88,17 +101,17 @@ function usuarios(URI) {
           data: null,
 
             render: function (data, type, row, meta) {
-            const btnEdit = data.activo == 1 ? `
+            const btnEdit = /*data.activo == 1 ? */`
             <button class="btn btn-warning btn-circle actionEdit" title="Editar Registro" type="button" style="margin-right: 5px;"">
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-            </button>` : `
+            </button>` /*: `
             <button class="btn btn-warning btn-circle disabled" title="Editar Registro" type="button" style="margin-right: 5px;">
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-            </button>` ;
+            </button>` */;
 
-            const btnDelete = data.activo == 1 ? `<button class="btn btn-danger btn-circle actionDeleteComi" title="Anular Registro" type="button style="margin-right: 5px;">
+            const btnDelete = /*data.activo == 1 ? `<button class="btn btn-danger btn-circle actionDeleteComi" title="Anular Registro" type="button style="margin-right: 5px;">
               <i class="fa fa-times" aria-hidden="true"></i>
-            </button>` : `<button class="btn btn-danger btn-circle disabled" title="Anular Registro" type="button style="margin-right: 5px;">
+            </button>` : */`<button class="btn btn-danger btn-circle disabled" title="Anular Registro" type="button style="margin-right: 5px;">
               <i class="fa fa-times" aria-hidden="true"></i>
             </button>`;
 
@@ -200,27 +213,18 @@ function usuarios(URI) {
           valor = $(this).html();
         i++;
       });
-            
-      $("#formRegistrar")[0].reset();
-      $("#user").hide();
-      $("#pass").hide();
-      $("#etiq").hide();
-      $("#etiq1").hide();
-      $("#buscar").hide();
-      $("#act").val(1);
-      $("#dni").val(valor);
-      $("#enviar").text("Actualizar");
-      $("select").prop('selectedIndex',0);
-      buscar();
+
+      buscar(valor);
       showModal(event, 'Editar Usuario');
     });
 
     $(".btn-nuevo").on('click', function (event) {
       $("#formRegistrar")[0].reset();
-      $("#user").show();
-      $("#pass").show();
+      $("#labelStatus").hide();
+      $('#dni').prop('disabled', false);
       $("#etiq").show();
       $("#etiq1").show();
+      $("#etiq2").show();
       $("#buscar").show();
       $("#act").val(0);
       $("#enviar").text("Guardar");
@@ -294,6 +298,7 @@ function usuarios(URI) {
         const { data: { listaUsuarios } } = response;
         table.clear();
         table.rows.add(listaUsuarios).draw();
+        
         $(".actionEdit").on('click', function (event) {
           var valor ="", i = 0;
           $(this).parents("tr").find("td").each(function(){
@@ -301,18 +306,8 @@ function usuarios(URI) {
               valor = $(this).html();
             i++;
           });
-          
-          $("#formRegistrar")[0].reset();
-          $("#user").hide();
-          $("#pass").hide();
-          $("#etiq").hide();
-          $("#etiq1").hide();
-          $("#buscar").hide();
-          $("#act").val(1);
-          $("#dni").val(valor);
-          $("#enviar").text("Actualizar");
-          $("select").prop('selectedIndex',0);
-          buscar();
+    
+          buscar(valor);
           showModal(event, 'Editar Usuario');
         });
       }

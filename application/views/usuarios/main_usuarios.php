@@ -1,3 +1,10 @@
+<?php
+	/*header('Content-type: text/html; charset=UTF-8');
+	if(empty($this->session->userdata("token"))){
+		header("location:" . $this->config->item('path_url') . "auth/login");
+	}*/
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -24,12 +31,12 @@
 								<div class="box">
 									<div class="box-header with-border">
 										<h3 class="box-title">Listado General de Usuarios</h3>
-										<h6 class="box-subtitle">Módulo donde se muestran los Usuarios Registradas en el Sistema</h6>
+										<h6 class="box-subtitle">Módulo donde se muestran los Usuarios Registrados en el Sistema</h6>
 									</div>
 									<div class="box-body">
 										<div class="col-sm-12 col-md-5 col-md-offset-5 pa-10">
 											<button type="button" class="btn btn-primary btn-nuevo" data-toggle="modal" id="btnRegistrar">
-												<i class="fa fa-file-text-o" aria-hidden="true"></i>Registrar Usuarios
+												<i class="fa fa-file-text-o" aria-hidden="true">&nbsp;</i>Registrar Usuarios
                                             </button>
 										</div></br>
 										<div class="table-responsive">
@@ -56,10 +63,10 @@
 							<div class="modal-dialog modal-lg" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
-										<span class="modal-title" id="editarModalLabel"></span>
+										<span class="modal-title" id="editarModalLabel" style="color:blue;font-size:14pt"></span>
 										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 											<span aria-hidden="true">&times;</span>
-										</button>
+										</button>										
 									</div>
 									<form id="formRegistrar" name="formRegistrar" method="post" action="" autocomplete="off" enctype="multipart/form-data">
 									<input type="hidden" name="iduser" id="iduser" />
@@ -71,12 +78,22 @@
 													<span aria-hidden="true">&times;</span>
 												</button>
 											</div>
+											<div id="labelStatus">
+												<div class="row">
+													<div class="col-sm-9"></div>												
+													<div class="col-md-3">
+														<label>Estatus&nbsp;&nbsp;&nbsp;</label>
+														<span id="userStatus" style="padding:2px;padding-left:15px;padding-right:15px" class=""></span>
+													</div>
+												</div>
+												<div class="row"><span class="col-md-12" style="margin:10px"></span></div>
+											</div>
 											<div class="row">
 												<div class="col-sm-6">
 													<div class="form-group row">
 														<label class="modal-label col-sm-3 col-form-label py-10">DNI: </label>
 														<div class="col-sm-5">
-															<input value ="" type="text" class="form-control" name="dni" id="dni" maxlength="8" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
+															<input type="text" class="form-control" name="dni" id="dni" maxlength="8" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
 														</div>
 														<div class="col-sm-1"><a id="buscar" href="#"><i class="glyphicon glyphicon-search"></i></a></div>														
 													</div>
@@ -123,19 +140,19 @@
 														</div>
 													</div>
 												</div>
-												<div class="col-sm-6">
+												<div id="etiq" class="col-sm-6">
 													<div class="form-group row">
 														<label class="modal-label col-sm-3 col-form-label py-10">Estatus: </label>
 														<div class="col-sm-7">
 															<select class="form-control" name="estatus" id="estatus">
 																<option value="" class="lista">-- Estatus --</option>
 																<option value="1">Activo</option>
-																<option value="2">Inactivo</option>
+																<option value="0">Inactivo</option>
 															</select>
 														</div>
 													</div>
 												</div>
-												<div class="col-sm-6">
+												<div id="etiq1" class="col-sm-6">
 													<div class="form-group row">
 														<label id="etiq" class="modal-label col-sm-3 col-form-label py-10">Usuario: </label>
 														<div class="col-sm-7">
@@ -143,7 +160,7 @@
 														</div>
 													</div>
 												</div>
-												<div class="col-sm-6">
+												<div id="etiq2" class="col-sm-6">
 													<div class="form-group row">
 														<label id="etiq1" class="modal-label col-sm-3 col-form-label py-10">Password: </label>
 														<div class="col-sm-7">

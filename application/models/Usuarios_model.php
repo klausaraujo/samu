@@ -81,14 +81,14 @@ class Usuarios_model extends CI_Model
     public function actualizarUsuario()
     {
          $data = array(
-            "dni" => $this->dni,
+            //"dni" => $this->dni,
             "apellidos" => $this->apellidos,
             "nombres" => $this->nombres,
             //"usuario" => $this->user,
             //"passwd" => sha1($this->pass),
             "idperfil" => $this->perfil,
             "idregion" => $this->region,
-            "activo" => $this->estatus
+            //"activo" => $this->estatus
         );
 
         $this->db->where("idusuario",$this->id);

@@ -1,3 +1,10 @@
+<?php
+	/*header('Content-type: text/html; charset=UTF-8');
+	if(empty($this->session->userdata("token"))){
+		header("location:" . $this->config->item('path_url') . "auth/login");
+	}*/
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>

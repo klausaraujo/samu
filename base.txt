@@ -11,9 +11,12 @@ DROP TABLE IF EXISTS base;
 DROP TABLE IF EXISTS ubigeo;
 DROP TABLE IF EXISTS menu;
 DROP TABLE IF EXISTS modulo;
+DROP TABLE IF EXISTS usuarios_region;
 DROP TABLE IF EXISTS usuarios;
 DROP TABLE IF EXISTS region;
 DROP TABLE IF EXISTS perfil;
+DROP TABLE IF EXISTS tipo_llamada;
+DROP TABLE IF EXISTS tipo_incidente;
 
 CREATE TABLE perfil (
   idperfil smallint(4) AUTO_INCREMENT primary key,
@@ -63,13 +66,45 @@ CREATE TABLE usuarios (
   usuario varchar(50) DEFAULT NULL,
   passwd varchar(50) DEFAULT NULL,
   idperfil smallint(4) NOT NULL,
-  idregion varchar(2) NOT NULL,
   activo char(1) DEFAULT '1',
-  foreign key (idperfil) references perfil(idperfil) on delete cascade on update cascade,
-  foreign key (idregion) references region(idregion) on delete cascade on update cascade) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  foreign key (idperfil) references perfil(idperfil) on delete cascade on update cascade) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ 
+INSERT INTO usuarios (idusuario, dni, avatar, apellidos, nombres, usuario, passwd, idperfil,  activo) VALUES
+(1, '42545573', '000120190310064855.png', 'ARAUJO CUADROS', 'KLAUS JOSEPH', 'admin', 'e4619e8fb50a0aa59ad1b92364f127afad06afe1', 1, '1'); 
 
-INSERT INTO usuarios (idusuario, dni, avatar, apellidos, nombres, usuario, passwd, idperfil, idregion, activo) VALUES
-(1, '42545573', '000120190310064855.png', 'ARAUJO CUADROS', 'KLAUS JOSEPH', 'admin', 'e4619e8fb50a0aa59ad1b92364f127afad06afe1', 1, '15', '1');
+CREATE TABLE usuarios_region(
+	idusuarioregion smallint(4) AUTO_INCREMENT primary key,
+	idusuario smallint(4) NOT NULL,
+	idregion varchar(2) NOT NULL,
+	activo char(1) DEFAULT '1',
+	foreign key (idregion) references region(idregion) on delete cascade on update cascade,
+	foreign key (idusuario) references usuarios(idusuario) on delete cascade on update cascade)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+	
+INSERT INTO usuarios_region(idusuario,idregion) values(1,'01');
+INSERT INTO usuarios_region(idusuario,idregion) values(1,'02');
+INSERT INTO usuarios_region(idusuario,idregion) values(1,'03');
+INSERT INTO usuarios_region(idusuario,idregion) values(1,'04');
+INSERT INTO usuarios_region(idusuario,idregion) values(1,'05');
+INSERT INTO usuarios_region(idusuario,idregion) values(1,'06');
+INSERT INTO usuarios_region(idusuario,idregion) values(1,'07');
+INSERT INTO usuarios_region(idusuario,idregion) values(1,'08');
+INSERT INTO usuarios_region(idusuario,idregion) values(1,'09');
+INSERT INTO usuarios_region(idusuario,idregion) values(1,'10');
+INSERT INTO usuarios_region(idusuario,idregion) values(1,'11');
+INSERT INTO usuarios_region(idusuario,idregion) values(1,'12');
+INSERT INTO usuarios_region(idusuario,idregion) values(1,'13');
+INSERT INTO usuarios_region(idusuario,idregion) values(1,'14');
+INSERT INTO usuarios_region(idusuario,idregion) values(1,'15');
+INSERT INTO usuarios_region(idusuario,idregion) values(1,'16');
+INSERT INTO usuarios_region(idusuario,idregion) values(1,'17');
+INSERT INTO usuarios_region(idusuario,idregion) values(1,'18');
+INSERT INTO usuarios_region(idusuario,idregion) values(1,'19');
+INSERT INTO usuarios_region(idusuario,idregion) values(1,'20');
+INSERT INTO usuarios_region(idusuario,idregion) values(1,'21');
+INSERT INTO usuarios_region(idusuario,idregion) values(1,'22');
+INSERT INTO usuarios_region(idusuario,idregion) values(1,'23');
+INSERT INTO usuarios_region(idusuario,idregion) values(1,'24');
+INSERT INTO usuarios_region(idusuario,idregion) values(1,'25');
 
 CREATE TABLE modulo(
 	idmodulo smallint(4)AUTO_INCREMENT	primary key,	
@@ -2087,6 +2122,74 @@ as
 select b.idbase,b.nombre,b.domicilio,b.ubigeo,CONCAT_WS( ' - ',u.departamento,u.provincia,u.distrito) as 'ubicacion',b.fotografia,b.latitud,b.longitud,date_format(b.fecha,'%d/%m/%Y') AS 'fecha',(case b.activo when '1' then 'Activo' when '0' then 'Inactivo' end) AS 'estado'
 from base as b inner join ubigeo as u on u.ubigeo=b.ubigeo;
 
+
+create table tipo_llamada(
+	idtipollamada smallint(4) AUTO_INCREMENT primary key,
+	tipo_llamada varchar(15),
+	activo char(1) DEFAULT '1') ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+insert into tipo_llamada(tipo_llamada) values ('Normal');
+insert into tipo_llamada(tipo_llamada) values ('Perturbadora');
+insert into tipo_llamada(tipo_llamada) values ('Silente');
+insert into tipo_llamada(tipo_llamada) values ('Falsa');
+insert into tipo_llamada(tipo_llamada) values ('Otros');
+
+create table tipo_incidente(
+	idincidentetipo smallint(4) AUTO_INCREMENT primary key,
+	tipo_prioridad smallint(4),
+	tipo_incidente varchar(50),
+	activo char(1) DEFAULT '1') ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+insert into tipo_incidente(tipo_prioridad,tipo_incidente) Values(0,'Accidente por Inmersión');
+insert into tipo_incidente(tipo_prioridad,tipo_incidente) Values(0,'Reacción Alérgica');
+insert into tipo_incidente(tipo_prioridad,tipo_incidente) Values(0,'Quemado');
+insert into tipo_incidente(tipo_prioridad,tipo_incidente) Values(0,'Agresión Sexual');
+insert into tipo_incidente(tipo_prioridad,tipo_incidente) Values(0,'Accidente de Tránsito con herido(s)');
+insert into tipo_incidente(tipo_prioridad,tipo_incidente) Values(0,'Caída');
+insert into tipo_incidente(tipo_prioridad,tipo_incidente) Values(0,'Crisis Convulsiva');
+insert into tipo_incidente(tipo_prioridad,tipo_incidente) Values(0,'Dolor Abdominal');
+insert into tipo_incidente(tipo_prioridad,tipo_incidente) Values(0,'Dolor de pecho');
+insert into tipo_incidente(tipo_prioridad,tipo_incidente) Values(0,'Emergencia obstétrica');
+insert into tipo_incidente(tipo_prioridad,tipo_incidente) Values(0,'Herido');
+insert into tipo_incidente(tipo_prioridad,tipo_incidente) Values(0,'Intoxicado');
+insert into tipo_incidente(tipo_prioridad,tipo_incidente) Values(0,'Inconsciente');
+insert into tipo_incidente(tipo_prioridad,tipo_incidente) Values(0,'Paro Cardio Respiratorio');
+insert into tipo_incidente(tipo_prioridad,tipo_incidente) Values(0,'Dificultad Respiratorio');
+insert into tipo_incidente(tipo_prioridad,tipo_incidente) Values(0,'Trastorno de la Presión Arterial');
+insert into tipo_incidente(tipo_prioridad,tipo_incidente) Values(0,'Obstrucción de las Vías Aéreas por Cuerpo Extraño');
+insert into tipo_incidente(tipo_prioridad,tipo_incidente) Values(0,'Evento Vasculo-Cerebral');
+insert into tipo_incidente(tipo_prioridad,tipo_incidente) Values(0,'Crisis Diabética');
+insert into tipo_incidente(tipo_prioridad,tipo_incidente) Values(0,'Sangrado abundante');
+insert into tipo_incidente(tipo_prioridad,tipo_incidente) Values(0,'Emergencia Ginecológica u Obstétrica');
+insert into tipo_incidente(tipo_prioridad,tipo_incidente) Values(0,'Persona Atrapada, Prensada o Aplastada');
+insert into tipo_incidente(tipo_prioridad,tipo_incidente) Values(0,'Problemas Cardíacos');
+insert into tipo_incidente(tipo_prioridad,tipo_incidente) Values(0,'Intento de suicidio');
+insert into tipo_incidente(tipo_prioridad,tipo_incidente) Values(0,'Desorientado');
+insert into tipo_incidente(tipo_prioridad,tipo_incidente) Values(0,'Diarrea');
+insert into tipo_incidente(tipo_prioridad,tipo_incidente) Values(0,'Vómito');
+insert into tipo_incidente(tipo_prioridad,tipo_incidente) Values(0,'Comportamiento Anormal');
+insert into tipo_incidente(tipo_prioridad,tipo_incidente) Values(0,'Mordedura');
+insert into tipo_incidente(tipo_prioridad,tipo_incidente) Values(0,'Atención del Parto en Curso');
+insert into tipo_incidente(tipo_prioridad,tipo_incidente) Values(0,'Otros');
+
+
+
+create table prioridad_emergencia(
+	idprioridadincidente smallint(4) AUTO_INCREMENT primary key,
+	prioridad_emergencia varchar(15),
+	activo char(1) DEFAULT '1') ENGINE=InnoDB DEFAULT CHARSET=utf8;
+	
+insert into prioridad_emergencia (prioridad_emergencia) values ('Prioridad 1');
+insert into prioridad_emergencia (prioridad_emergencia) values ('Prioridad 2');
+insert into prioridad_emergencia (prioridad_emergencia) values ('Prioridad 3');
+insert into prioridad_emergencia (prioridad_emergencia) values ('Prioridad 4');
+
+create table emergencia
+	idemergencia smallint(4) AUTO_INCREMENT primary key,
+	telefono01 varchar(9),
+	telefono02 varchar(9),
+	
+	
 
 
 

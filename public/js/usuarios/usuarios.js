@@ -1,5 +1,68 @@
 function usuarios(URI) {
-  
+  var vacia = false;
+  var clon;
+  var i = 0;
+  var grid = "<div class='col-sm-4 offset-sm-4'><div id='insert_reg'"+
+  "class='panel panel-primary'>	<div class='panel-heading text-center row'>"+
+	"<div class='col-sm-12'>Regiones Asignadas</div></div></div></div>";
+  var resetSelect = "";
+
+  $("#region option").each(function(){
+    if ($(this).val() != "" ){        
+      resetSelect += "<option value='"+$(this).val()+"'>"+$(this).text()+"</option>\n";
+    }
+  });
+
+  function clonar(){
+    clon = $("#selectRegion").clone(true,true);
+  }
+
+  function addRegion(){
+
+    $("#agregar").on('click', function(event){
+      var div = "<div class='row black'>";
+      var fila = "";
+      $('#region option:selected').each(function() {
+        fila += div + "<div class='col-sm-9 border border-info'>"+$(this).text()+
+        "<input name='grupoReg[]' type='hidden' value='"+$(this).val()+"' /><input type='hidden' value="+
+        $(this).index()+" /></div><div class='col-sm-3 border border-info text-center'><a href='#' class='"+
+        "link-dark'><i class='fa fa-trash fa-lg' aria-hidden='true' title='Borrar'></i></a></div></div>";
+        i++;
+      });
+      $("#insert_reg").append(fila);
+      $("#asignar").val(i);
+
+     // alert($(".black").prev().prop('tagName'));
+
+      $(".link-dark").on('click', function(event){
+        
+        var divPadre = this.parentNode;
+        var divHerm = divPadre.previousSibling;
+        var txt = $(divHerm).text();
+        var index = divHerm.lastChild;
+        var value = index.previousSibling;
+        if($("#region option").length == 0) vacia = true;
+
+        if(vacia)
+          $("#region").append("<option value='"+value.value+"'>"+txt+"</option>");
+        else
+          $('#region option').eq(index.value).before($("<option></option>").val(value.value).html(txt));
+        
+        if(i == 1) i = "";
+        if(i > 1) i--;
+        
+        $(divHerm).remove();
+        $(divPadre).remove();
+        $("#asignar").val(i);       
+          
+      });
+
+      $('#region option:selected').remove();
+      
+      //alert($("#insert_reg div:last-child").text());
+    });
+  }
+
   function showModal(event,title) {
     $("#editarModal").modal("show");
     $("#editarModalLabel").text(title);
@@ -9,7 +72,6 @@ function usuarios(URI) {
 
   function buscar(valor) {
     var dni = valor;
-    var i = 0;
     var opt = '<option value="" class="lista">---Seleccione---</option>';
 
     if($("#userStatus").attr("class") != "")
@@ -40,12 +102,19 @@ function usuarios(URI) {
       data: {dni:dni},
       dataType: 'json',
       success: function (response) {
+        
         if (response.status === 200) {
+          const { data } = response;
           const { regiones } = response;
           const { perfiles } = response;
-          const { data } = response;
-          var i = 0;
+          const { regiones_user } = response;
+          //console.log(regiones_user);
+          var k = 0; j = 0;
           var reg, idreg;
+          var html = "";
+          var datagrid1 = "";
+          var log = "";
+          var div = "<div class='row black'>";
           if(data[0].activo == 1){
             $("#userStatus").addClass("alert-success");
             $("#userStatus").text("Activo");
@@ -56,25 +125,39 @@ function usuarios(URI) {
           $("#iduser").val(data[0].idusuario);
           $("#nombres").val(data[0].nombres);
           $("#apellidos").val(data[0].apellidos);
-          html = opt;
-          for(i in regiones) {
-            if(regiones[i].idregion == data[0].idregion){
-              reg = regiones[i].region;
-              idreg = regiones[i].idregion;
-              html += '<option value="'+idreg+'" selected>'+reg+'</option>';
-            }else
-              html += '<option value="' + regiones[i].idregion + '">' + regiones[i].region + '</option>';
+          
+          $("#grilla").html(grid);
+          for(k in regiones) {
+            reg = regiones[k].region;
+            idreg = regiones[k].idregion;
+            for(j in regiones_user){
+              if(idreg == regiones_user[j].idregion){
+                log = regiones_user[j].idregion;
+                datagrid1 += div + "<div class='col-sm-9 border border-info'>"+reg+
+                "<input name='grupoReg[]' type='hidden' value='"+idreg+"' /><input type='hidden' value="+
+                i+" /></div><div class='col-sm-3 border border-info text-center'><a href='#' class='"+
+                "link-dark'><i class='fa fa-trash fa-lg' aria-hidden='true' title='Borrar'></i></a></div></div>";
+                i++;
+              }
+            }
+            if(log !== idreg){
+              html += '<option value="'+idreg+'">'+reg+'</option>';
+            }
           }
+          $("#region").empty();
           $("#region").html(html);
-          i = 0;
+          $("#insert_reg").append(datagrid1);
+          $("#asignar").val(i);
+          addRegion();
+
           html = opt;
-          for(i in perfiles) {
-            if(perfiles[i].idperfil == data[0].idperfil){
-              reg = perfiles[i].perfil;
-              idreg = perfiles[i].idperfil;
+          for(k in perfiles) {
+            if(perfiles[k].idperfil == data[0].idperfil){
+              reg = perfiles[k].perfil;
+              idreg = perfiles[k].idperfil;
               html += '<option value="'+idreg+'" selected>'+reg+'</option>';
             }else
-              html += '<option value="' + perfiles[i].idperfil + '">' + perfiles[i].perfil + '</option>';
+              html += '<option value="' + perfiles[k].idperfil + '">' + perfiles[k].perfil + '</option>';
           }
           $("#perfil").html(html);
 
@@ -88,6 +171,8 @@ function usuarios(URI) {
   
   $(document).ready(function () {
     var data;
+    addRegion();
+    clonar();
     
     var table = $('#dt-usuarios').DataTable({
       data: lista,
@@ -101,17 +186,17 @@ function usuarios(URI) {
           data: null,
 
             render: function (data, type, row, meta) {
-            const btnEdit = /*data.activo == 1 ? */`
+            const btnEdit = data.activo == 1 ? `
             <button class="btn btn-warning btn-circle actionEdit" title="Editar Registro" type="button" style="margin-right: 5px;"">
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-            </button>` /*: `
+            </button>` : `
             <button class="btn btn-warning btn-circle disabled" title="Editar Registro" type="button" style="margin-right: 5px;">
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-            </button>` */;
+            </button>` ;
 
-            const btnDelete = /*data.activo == 1 ? `<button class="btn btn-danger btn-circle actionDeleteComi" title="Anular Registro" type="button style="margin-right: 5px;">
+            const btnDelete = data.activo == 1 ? `<button class="btn btn-danger btn-circle actionDeleteComi" title="Anular Registro" type="button style="margin-right: 5px;">
               <i class="fa fa-times" aria-hidden="true"></i>
-            </button>` : */`<button class="btn btn-danger btn-circle disabled" title="Anular Registro" type="button style="margin-right: 5px;">
+            </button>` : `<button class="btn btn-danger btn-circle disabled" title="Anular Registro" type="button style="margin-right: 5px;">
               <i class="fa fa-times" aria-hidden="true"></i>
             </button>`;
 
@@ -127,7 +212,7 @@ function usuarios(URI) {
         { data: "nombres" },
         { data: "usuario" },
         { data: "perfil" },
-        { data: "region" },
+        { data: "regiones" },
         {
           data: "activo",
           "render": function (data, type, row, meta) {
@@ -214,11 +299,23 @@ function usuarios(URI) {
         i++;
       });
 
+      vacia = false;
       buscar(valor);
       showModal(event, 'Editar Usuario');
     });
 
     $(".btn-nuevo").on('click', function (event) {
+      //divNuevo = "<div id='nuevoDiv' style='display: none' ></div>";
+      $("#padreRegion").empty();
+      $("#padreRegion").html(clon);
+      $("#region").empty();
+      $("#region").html(resetSelect);
+      $("#grilla").html(grid);
+      addRegion();
+      i = 0;
+      
+      //console.log(clon);
+      //console.log($("#selectRegion"));
       $("#formRegistrar")[0].reset();
       $("#labelStatus").hide();
       $('#dni').prop('disabled', false);
@@ -229,34 +326,39 @@ function usuarios(URI) {
       $("#act").val(0);
       $("#enviar").text("Guardar");
       $("select").prop('selectedIndex',0);
+      vacia = false;
       showModal(event, 'Registrar Nuevo Usuario');
     });
+
+    
   
   
-    $("#formRegistrar").validate({      
+    $("#formRegistrar").validate({     
       rules: {
         dni: { required: true, minlength: 8, maxlength: 8 },
         nombres: { required: true },
         apellidos: { required: true },
-        region: { required: true },
         perfil: { required: true },
         estatus: { required: true },
         user: { required: true },
         pass: { required: true },
+        asignar: { required: true },
       },
       messages: {
         dni: { required: "Campo requerido" },
         nombres: { required: "Campo requerido" },
         apellidos: { required: "Campo requerido" },
-        region: { required: "Campo requerido" },
         perfil: { required: "Campo requerido" },
         estatus: { required: "Campo requerido" },
         user: { required: "Campo requerido" },
         pass: { required: "Campo requerido" },
+        asignar: { required: "Campo Requerido" },
       },
       submitHandler: function (form, event) {
         var formData = new FormData(document.getElementById("formRegistrar"));
-       
+        /*for(let [name, value] of formData) {
+          alert(`${name} = ${value}`); // key1 = value1, luego key2 = value2
+        }*/
         $.ajax({
           type: 'POST',
           url: URI + 'usuarios/main/guardarUsuario',
@@ -269,7 +371,13 @@ function usuarios(URI) {
   
           },
           success: function (response) {
+            /*$("#nuevoDiv").clone().html("#selectRegion");
+            $("#nuevoDiv").remove();
+            $("#selectRegion").show();*/
             $("#editarModal").modal('hide');
+            //console.log(response);
+            /*$("#selectRegion").remove();
+            $("#nuevoDiv").show();*/
             if (response.status === 200) {
               $("#formRegistrar")[0].reset();
               $('.btn-editar').removeClass('active');

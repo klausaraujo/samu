@@ -1,9 +1,7 @@
 <?php
-	/*header('Content-type: text/html; charset=UTF-8');
-	if(empty($this->session->userdata("token"))){
-		header("location:" . $this->config->item('path_url') . "auth/login");
-	}*/
-
+	ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1);
+	error_reporting(E_ALL);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,7 +47,7 @@
 														<th>Nombres</th>
 														<th>Usuario</th>
 														<th>Perfil</th>
-                                                        <th>Region</th>
+                                                        <th>Regiones</th>
 														<th>Estado</th>
 													</tr>
 												</thead>
@@ -83,7 +81,7 @@
 													<div class="col-sm-9"></div>												
 													<div class="col-md-3">
 														<label>Estatus&nbsp;&nbsp;&nbsp;</label>
-														<span id="userStatus" style="padding:2px;padding-left:15px;padding-right:15px" class=""></span>
+														<span id="userStatus" style="padding:2px;padding-left:15px;padding-right:15px;color:white" class=""></span>
 													</div>
 												</div>
 												<div class="row"><span class="col-md-12" style="margin:10px"></span></div>
@@ -116,19 +114,6 @@
 												</div>
 												<div class="col-sm-6">
 													<div class="form-group row">
-														<label class="modal-label col-sm-3 col-form-label py-10">Region: </label>
-														<div class="col-sm-7">
-															<select class="form-control" name="region" id="region">
-																<option value="" class="lista">-- Regi&oacute;n --</option>
-																<?php foreach($departamentos as $row): ?>
-																<option value="<?=$row->idregion?>"><?=$row->region?></option>
-																<?php endforeach; ?>
-															</select>
-														</div>
-													</div>
-												</div>
-												<div class="col-sm-6">
-													<div class="form-group row">
 														<label class="modal-label col-sm-3 col-form-label py-10">Perfil: </label>
 														<div class="col-sm-7">
 															<select class="form-control" name="perfil" id="perfil">
@@ -136,18 +121,6 @@
 																<?php foreach($perfiles as $row): ?>
 																<option value="<?=$row->idperfil?>"><?=$row->perfil?></option>
 																<?php endforeach; ?>
-															</select>
-														</div>
-													</div>
-												</div>
-												<div id="etiq" class="col-sm-6">
-													<div class="form-group row">
-														<label class="modal-label col-sm-3 col-form-label py-10">Estatus: </label>
-														<div class="col-sm-7">
-															<select class="form-control" name="estatus" id="estatus">
-																<option value="" class="lista">-- Estatus --</option>
-																<option value="1">Activo</option>
-																<option value="0">Inactivo</option>
 															</select>
 														</div>
 													</div>
@@ -168,7 +141,26 @@
 														</div>
 													</div>
 												</div>
-											</div>											
+												<div class="col-sm-12">
+													<div class="form-group row">
+														<div id="padreRegion" class="col-sm-6 offset-sm-3">
+															<div id="selectRegion" class="row align-items-center">
+																<label class="modal-label col-sm-3 col-form-label py-10">Regiones: </label>
+																<select size=3 class="form-control col-sm-7" name="region" id="region" multiple>
+																	<?php foreach($departamentos as $row): ?>
+																	<option value="<?=$row->idregion?>"><?=$row->region?></option>
+																	<?php endforeach; ?>
+																</select>
+																<a id="agregar" href="#">
+																	<i class="glyphicon glyphicon-plus-sign col-sm-2 text-success fa-lg" title="Agregar"></i>
+																</a>
+																<input id="asignar" name="asignar" type="text" style="width:20px" />
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="grilla" class="row"></div>											
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

@@ -37,23 +37,28 @@ class Main extends CI_Controller
         $dni = $this->input->post("dni");
         $nombre = $this->input->post("nombres");
         $apellido = $this->input->post("apellidos");
-        $region = $this->input->post("region");
+        //$region = $this->input->post("region");
         $perfil = $this->input->post("perfil");
         $estatus = $this->input->post("estatus");
         $user = $this->input->post("user");
         $pass = $this->input->post("pass");
+        $regs = $this->input->post("grupoReg");
 
         $this->Usuarios_model->setDni($dni);
         $this->Usuarios_model->setNombres($nombre);
         $this->Usuarios_model->setApellidos($apellido);
-        $this->Usuarios_model->setRegion($region);
+        //$this->Usuarios_model->setRegion($region);
         $this->Usuarios_model->setPerfil($perfil);
-        $this->Usuarios_model->setEstatus($estatus);
+        $this->Usuarios_model->setEstatus(1);
         $this->Usuarios_model->setUser($user);
         $this->Usuarios_model->setPassword($pass);
 
         $status = 500;
         $message = "Error al registrar, vuelva a intentar";
+        $codid = "";
+        $usuario = "";
+        $dniU = "";
+        $msg = "";
 
         if ($this->input->post("act") > 0) {
             $this->Usuarios_model->setIdUsuario($this->input->post("iduser"));
@@ -63,6 +68,25 @@ class Main extends CI_Controller
             }
         } else {
             if ($this->Usuarios_model->guardarUsuario()) {
+
+                $usuario = $this->Usuarios_model->extraeUsuario();
+                $usuario = $usuario->result();
+
+                foreach($usuario as $us):
+                    $codid = $us->idusuario;
+                    $dniU = $us->dni;
+                endforeach;
+                $this->Usuarios_model->setIdUsuario($codid);
+                foreach($regs as $reg):
+                    //$msg += $reg;
+                    $this->Usuarios_model->setRegion($reg);
+                    if($this->Usuarios_model->guardarRegionesUsuario()){
+                        $msg = "Se registraron las regiones";
+                    }else{
+                        $msg = "No se registraron las regiones";
+                    }
+                endforeach;
+
                 $status = 200;
                 $message = "Usuario registrado exitosamente";
             }
@@ -70,7 +94,11 @@ class Main extends CI_Controller
 
         $data = array(
             "status" => $status,
-            "message" => $message
+            "message" => $message,
+            "cod" => $codid,
+            "dni" => $dniU,
+            "usuario" => $usuario,
+            "msg" => $msg
         );
 
         echo json_encode($data);
@@ -103,6 +131,12 @@ class Main extends CI_Controller
 
     public function extraeUsuario() {
 
+        $status = "";
+        $usuario = null;
+        $regionUs = array();
+        $perfiles = null;
+        $regiones = null;
+
         $this->load->model("Usuarios_model");
         $this->load->model("Ubigeo_model");
         $this->load->model("Perfil_model");
@@ -112,12 +146,24 @@ class Main extends CI_Controller
         $usuario = $this->Usuarios_model->extraeUsuario();
         $regiones = $this->Ubigeo_model->obtenerRegiones();
         $perfiles = $this->Perfil_model->obtenerPerfil();
-       
+        $i = 0;
         if ($usuario->num_rows() > 0) {
             $status = 200;
             $usuario = $usuario->result();
             $regiones = $regiones->result();
             $perfiles = $perfiles->result();
+            foreach($usuario as $us):
+                $codid = $us->idusuario;
+                $idreg = $us->idregion;
+                $idperf = $us->idperfil;
+                foreach($regiones as $reg):
+                    if($reg->idregion == $idreg){
+                        $regionUs[$i]['idregion'] = $idreg;
+                        $regionUs[$i]['region'] = $reg->region;
+                        $i++;
+                    }
+                endforeach;
+            endforeach;
         } else {
             $status = 500;
             $usuario = array();
@@ -129,7 +175,8 @@ class Main extends CI_Controller
             "status" => $status,
             "data" => $usuario,
             "perfiles" => $perfiles,
-            "regiones" => $regiones
+            "regiones" => $regiones,
+            "regiones_user" => $regionUs
         );
 
         echo json_encode($data);

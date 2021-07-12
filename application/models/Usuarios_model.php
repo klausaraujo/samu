@@ -112,6 +112,14 @@ class Usuarios_model extends CI_Model
         return $this->db->get();
     }
 
+    public function extraeId()
+    {
+        $this->db->select("*");
+        $this->db->from("usuarios");
+        $this->db->where("dni", $this->dni);
+        return $this->db->get();
+    }
+
     public function guardarRegionesUsuario(){
         $data = array(
             "idusuario" => $this->id,
@@ -121,6 +129,14 @@ class Usuarios_model extends CI_Model
         if($this->db->insert("usuarios_region", $data))
             return $this->db->insert_id();
         else 
+            return 0;
+    }
+
+    public function borrarRegionesUsuario(){
+        $this->db->where( 'idusuario' ,  $this->id);
+        if($this->db->delete("usuarios_region"))
+            return 1;
+        else
             return 0;
     }
    

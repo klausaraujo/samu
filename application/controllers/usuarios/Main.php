@@ -56,7 +56,7 @@ class Main extends CI_Controller
         $status = 500;
         $message = "Error al registrar, vuelva a intentar";
         $codid = "";
-        $usuario = "";
+        $usuario = null;
         $dniU = "";
         $msg = "";
 
@@ -65,18 +65,8 @@ class Main extends CI_Controller
             if ($this->Usuarios_model->actualizarUsuario()) {
                 $status = 200;
                 $message = "Usuario actualizado exitosamente";
-            }
-        } else {
-            if ($this->Usuarios_model->guardarUsuario()) {
-
-                $usuario = $this->Usuarios_model->extraeUsuario();
-                $usuario = $usuario->result();
-
-                foreach($usuario as $us):
-                    $codid = $us->idusuario;
-                    $dniU = $us->dni;
-                endforeach;
-                $this->Usuarios_model->setIdUsuario($codid);
+                
+                $this->Usuarios_model->borrarRegionesUsuario();
                 foreach($regs as $reg):
                     //$msg += $reg;
                     $this->Usuarios_model->setRegion($reg);
@@ -86,9 +76,34 @@ class Main extends CI_Controller
                         $msg = "No se registraron las regiones";
                     }
                 endforeach;
-
+            }
+        } else {
+            if ($this->Usuarios_model->guardarUsuario()) {
+                
                 $status = 200;
                 $message = "Usuario registrado exitosamente";
+                
+                $usuario = $this->Usuarios_model->extraeId();
+
+                if ($usuario->num_rows() > 0) {
+                    $usuario = $usuario->result();
+                    foreach($usuario as $us):
+                        $codid = $us->idusuario;
+                        $dniU = $us->dni;
+                    endforeach;
+                    $this->Usuarios_model->setIdUsuario($codid);
+
+                    foreach($regs as $reg):
+                        //$msg += $reg;
+                        $this->Usuarios_model->setRegion($reg);
+                        if($this->Usuarios_model->guardarRegionesUsuario()){
+                            $msg = "Se registraron las regiones";
+                        }else{
+                            $msg = "No se registraron las regiones";
+                        }
+                    endforeach;
+                }  
+                
             }
         }
 

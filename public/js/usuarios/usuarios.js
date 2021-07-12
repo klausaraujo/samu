@@ -73,9 +73,17 @@ function usuarios(URI) {
   function buscar(valor) {
     var dni = valor;
     var opt = '<option value="" class="lista">---Seleccione---</option>';
+    i = 0;
 
     if($("#userStatus").attr("class") != "")
         $("#userStatus").removeClass($("#userStatus").attr("class"));
+    
+    
+    $("#padreRegion").empty();
+    $("#padreRegion").html(clon);
+    $("#region").empty();
+    $("#region").html(resetSelect);
+    $("#grilla").html(grid);
             
     $("#formRegistrar")[0].reset();
     $("#labelStatus").show();
@@ -113,7 +121,6 @@ function usuarios(URI) {
           var reg, idreg;
           var html = "";
           var datagrid1 = "";
-          var log = "";
           var div = "<div class='row black'>";
           if(data[0].activo == 1){
             $("#userStatus").addClass("alert-success");
@@ -125,30 +132,56 @@ function usuarios(URI) {
           $("#iduser").val(data[0].idusuario);
           $("#nombres").val(data[0].nombres);
           $("#apellidos").val(data[0].apellidos);
-          
-          $("#grilla").html(grid);
+
           for(k in regiones) {
             reg = regiones[k].region;
             idreg = regiones[k].idregion;
             for(j in regiones_user){
               if(idreg == regiones_user[j].idregion){
-                log = regiones_user[j].idregion;
-                datagrid1 += div + "<div class='col-sm-9 border border-info'>"+reg+
-                "<input name='grupoReg[]' type='hidden' value='"+idreg+"' /><input type='hidden' value="+
-                i+" /></div><div class='col-sm-3 border border-info text-center'><a href='#' class='"+
+                var indice = ""; txt = ""; valor = "";
+                $("#region option").each(function(){
+                  if ($(this).val() == idreg ){
+                    valor = $(this).val();
+                    txt = $(this).text();
+                    indice = $(this).index();
+                    $(this).remove();
+                    //console.log(valor+" "+txt+" "+indice);
+                  }
+                });
+                datagrid1 = div + "<div class='col-sm-9 border border-info' id='div"+i+"'>"+reg+
+                "<input id='input"+i+"' name='grupoReg[]' type='hidden' value='"+idreg+"' /><input type='hidden' value="+
+                indice+" /></div><div class='col-sm-3 border border-info text-center'><a href='#' class='"+
                 "link-dark'><i class='fa fa-trash fa-lg' aria-hidden='true' title='Borrar'></i></a></div></div>";
+                
+                $("#insert_reg").append(datagrid1);
+                $(".link-dark").on('click', function(event){
+        
+                  var divPadre = this.parentNode;
+                  var divHerm = divPadre.previousSibling;
+                  var txt = $(divHerm).text();
+                  var index = divHerm.lastChild;
+                  var value = index.previousSibling;
+                  if($("#region option").length == 0) vacia = true;
+          
+                  if(vacia)
+                    $("#region").append("<option value='"+value.value+"'>"+txt+"</option>");
+                  else
+                    $('#region option').eq(index.value).before($("<option></option>").val(value.value).html(txt));
+                  
+                  if(i == 1) i = "";
+                  if(i > 1) i--;
+                  
+                  $(divHerm).remove();
+                  $(divPadre).remove();
+                  $("#asignar").val(i);       
+                    
+                });
                 i++;
               }
             }
-            if(log !== idreg){
-              html += '<option value="'+idreg+'">'+reg+'</option>';
-            }
           }
-          $("#region").empty();
-          $("#region").html(html);
-          $("#insert_reg").append(datagrid1);
-          $("#asignar").val(i);
           addRegion();
+          $("#asignar").val(i);
 
           html = opt;
           for(k in perfiles) {
@@ -171,7 +204,6 @@ function usuarios(URI) {
   
   $(document).ready(function () {
     var data;
-    addRegion();
     clonar();
     
     var table = $('#dt-usuarios').DataTable({
@@ -375,7 +407,7 @@ function usuarios(URI) {
             $("#nuevoDiv").remove();
             $("#selectRegion").show();*/
             $("#editarModal").modal('hide');
-            //console.log(response);
+            console.log(response);
             /*$("#selectRegion").remove();
             $("#nuevoDiv").show();*/
             if (response.status === 200) {

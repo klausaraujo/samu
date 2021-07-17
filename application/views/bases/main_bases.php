@@ -138,13 +138,13 @@
 																<div class="form-group">
 																	<div class='input-group'>
 																		<input type="date" class="form-control" name="fechainicio" id="fechainicio" value=""/>
-																		</div>
 																	</div>
 																</div>
 															</div>
-														</div>																							
-													</div>
-													<div class="row">
+														</div>
+													</div>																							
+												</div>
+												<div class="row">
 														<div class="col-12 col-sm-6">
 															<div class="form-group row" style="justify-content: center;">
 																<div id='product-tumb' class="img_content">

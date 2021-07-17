@@ -13,3 +13,6 @@ $route['ambulancias'] = 'ambulancias/main/index';
 
 /* USUARIOS  */
 $route['usuarios'] = 'usuarios/main/index';
+
+/* EMERGENCIAS  */
+$route['emergencias'] = 'emergencias/main/index';

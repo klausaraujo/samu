@@ -4,12 +4,18 @@ if (!defined('BASEPATH')) {
 }
 class Emergencias_model extends CI_Model
 {
+    private $idUsuario;
+    private $fechaActual;
     private $idEmergencia;
     private $telf;
-    private $tipoLlamada;
+    private $idTipoLlamada;
     private $telf2;
     private $tipoDoc;
     private $nroDoc;
+    private $nombres;
+    private $apellidos;
+    private $paciente;
+    private $masivo;
     private $tipoIncid;
     private $fecha;
     private $priori;
@@ -17,7 +23,15 @@ class Emergencias_model extends CI_Model
     private $region;
     private $provincia;
     private $distrito;
+    private $latitud;
+    private $longitud;
 
+    public function setIdUsuario($data){
+        $this->idUsuario = $this->db->escape_str($data);
+    }
+    public function setFechaActual($data){
+        $this->fechaActual = $this->db->escape_str($data);
+    }
     public function setidEmergencia($data){
         $this->idEmergencia = $this->db->escape_str($data);
     }
@@ -25,7 +39,7 @@ class Emergencias_model extends CI_Model
         $this->telf = $this->db->escape_str($data);
     }
     public function setTipoLlamada($data){
-        $this->tipoLlamada = $this->db->escape_str($data);
+        $this->idTipoLlamada = $this->db->escape_str($data);
     }
     public function setTelf2($data){
         $this->telf2 = $this->db->escape_str($data);
@@ -35,6 +49,18 @@ class Emergencias_model extends CI_Model
     }
     public function setNroDoc($data){
         $this->nroDoc = $this->db->escape_str($data);
+    }
+    public function setApellidos($data){
+        $this->apellidos = $this->db->escape_str($data);
+    }
+    public function setNombres($data){
+        $this->nombres = $this->db->escape_str($data);
+    }
+    public function setPaciente($data){
+        $this->paciente = $this->db->escape_str($data);
+    }
+    public function setMasivo($data){
+        $this->masivo = $this->db->escape_str($data);
     }
     public function setTipoIncid($data){
         $this->tipoIncid = $this->db->escape_str($data);
@@ -56,6 +82,43 @@ class Emergencias_model extends CI_Model
     }
     public function setDistrito($data){
         $this->distrito = $this->db->escape_str($data);
+    }
+    public function setLatitud($data){
+        $this->latitud = $this->db->escape_str($data);
+    }
+    public function setLongitud($data){
+        $this->longitud = $this->db->escape_str($data);
+    }
+
+    public function guardarEmergencia(){
+        
+        $data = array(
+            "telefono01" => $this->telf,
+            "telefono02" => $this->telf2,
+            "idtipollamada" => $this->idTipoLlamada,
+            "tipo_documento" => $this->tipoDoc,
+            "numero_documento" => $this->nroDoc,
+            "apellidos" => $this->apellidos,
+            "nombres" => $this->nombres,
+            "es_paciente" => $this->paciente,
+            "masivo" => $this->masivo,
+            //"fecha_nacimiento" => $fechaNacimiento,
+            "ubigeo" => $this->region.$this->provincia.$this->distrito,
+            "latitud" => $this->latitud,
+            "longitud" => $this->longitud,
+            "idtipoincidente" => $this->tipoIncid,
+            "fecha_incidente" => $this->fecha,
+            "idusuario_registro" => $this->idUsuario,
+            "fecha_registro" => $this->fechaActual,
+            "activo" => 1
+        );
+        if($this->db->insert("emergencia", $data)) {
+            return $this->db->insert_id();
+        }
+        else {
+            return 0;
+        }
+
     }
 
     public function tipoLlamada()

@@ -128,7 +128,7 @@
 												<div class="col-sm-6">
 													<div class="form-group row">
 														<div class="form-check col-sm-6">
-															<input type="checkbox" class="form-check-input" name="sipaciente" id="sipaciente" value="" >
+															<input type="checkbox" class="form-check-input" name="sipaciente" id="sipaciente" value="1" >
 															<label class="form-check-label" for="sipaciente"> ¿Es el Paciente? </label>
 														</div>
 													</div>
@@ -136,7 +136,7 @@
 												<div class="col-sm-6">
 												<div class="form-group row">
 														<div class="form-check col-sm-6">
-															<input type="checkbox" class="form-check-input" name="simasivo" id="simasivo" value="" >
+															<input type="checkbox" class="form-check-input" name="simasivo" id="simasivo" value="1" >
 															<label class="form-check-label" for="simasivo"> ¿Evento Masivo? </label>
 														</div>
 													</div>
@@ -228,6 +228,11 @@
 													<div class="form-group row">
                                                     </div>
 												</div>
+												<div class="col-sm-12">
+													<div id="map" class="my-3" style="min-height: 200px; width: 100%;"></div>
+													<input type="hidden" class="" name="latitud" id="latitud" value="" />
+                                  					<input type="hidden" class="" name="longitud" id="longitud" value="" />
+												</div>
                                             </div>									
 										</div>
 										<div class="modal-footer">
@@ -248,6 +253,13 @@
 		<script src="<?=base_url()?>public/assets/vendor_components/datatable/datatables.min.js"></script>
 		<script src="<?=base_url()?>public/js/jquery.validate.min.js"></script>
 		<script src="<?=base_url()?>public/js/emergencias/emergencias.js"></script>
+
+		<script>
+			var generalZoom = 13;
+		</script>
+		<script src="<?=base_url()?>public/js/emergencias/initMapMapa.js"></script>
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=<?='AIzaSyByPoOpv9DTDZfL0dnMxewn5RHnzC8LGpc'?>&libraries=places&callback=initMap" ></script>
+
 		<script> 
 			const canDelete = "1";
 			const canEdit = "1"; 

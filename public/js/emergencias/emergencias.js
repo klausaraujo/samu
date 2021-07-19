@@ -8,13 +8,13 @@ function emergencias(URI) {
     }
 
     $(document).ready(function () {
-        $(".btn-nuevo").on('click', function (event) {
-            $("#formRegistrar")[0].reset();
-            $("#act").val(0);
-            $("#enviar").text("Guardar");
-            $("select").prop('selectedIndex',0);
-            showModal(event, 'Registrar Nueva Emergencia');
-          });
+      $(".btn-nuevo").on('click', function (event) {
+        $("#formRegistrar")[0].reset();
+        $("#act").val(0);
+        $("#enviar").text("Guardar");
+        $("#formRegistrar select").prop('selectedIndex',0);
+        showModal(event, 'Registrar Nueva Emergencia');
+      });
     
     });
 
@@ -88,7 +88,8 @@ function emergencias(URI) {
     });
 
     $("#departamento").change(function () {
-
+        if($(".btn-nuevo").prop("disabled"))
+          $(".btn-nuevo").prop("disabled", false);
         var id = $(this).val();
     
         if (id.length > 0) {

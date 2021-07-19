@@ -139,5 +139,13 @@ class Usuarios_model extends CI_Model
         else
             return 0;
     }
+
+    public function extraeRegionesUsuario(){
+        $this->db->select("ur.idregion,r.region");
+        $this->db->from("usuarios_region ur");
+        $this->db->join("region r","ur.idregion=r.idregion");
+        $this->db->where("idusuario", $this->id);
+        return $this->db->get();
+    }
    
 }

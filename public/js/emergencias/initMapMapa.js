@@ -3,25 +3,25 @@ var lon = -75.234375;
 
 var escAncho = screen.width;
 var escAlto = screen.height;
-var escala = 6;
+var escala = 12;
 if (escAncho == 1920 && escAlto == 1080)
-	var escala = 6;
+	var escala = 12;
 if (escAncho == 1680 && escAlto == 1050)
-	var escala = 6;
+	var escala = 12;
 if (escAncho == 1600 && escAlto == 900)
-	var escala = 6;
+	var escala = 12;
 if (escAncho == 1440 && escAlto == 900)
-	var escala = 6;
+	var escala = 12;
 if (escAncho == 1400 && escAlto == 1050)
-	var escala = 6;
+	var escala = 12;
 if (escAncho == 1360 && escAlto == 768)
-	var escala = 5;
+	var escala = 12;
 if (escAncho == 1280 && escAlto == 1024)
-	var escala = 6;
+	var escala = 12;
 if (escAncho == 1024 && escAlto == 768)
-	var escala = 5;
+	var escala = 10;
 if (escAncho == 800 && escAlto == 600)
-	var escala = 5;
+	var escala = 10;
 
 var map;
 var mapMarkers = new Array();
@@ -305,13 +305,21 @@ function initMap() {
 		},
 		zoom: generalZoom
 	});
-	var input = document.getElementById('ubicacion');
+	const input = document.getElementById('ubicacion');
+	
+	const options = {
+		componentRestrictions: { country: "pe" },
+		fields: ["formatted_address", "geometry", "name"],
+		strictBounds: false,
+		types: ["establishment"],
+	  };
 
-	var autocomplete = new google.maps.places.Autocomplete(input);
+	const autocomplete = new google.maps.places.Autocomplete(input,options);
 	autocomplete.bindTo('bounds', map);
 
-	var infowindow = new google.maps.InfoWindow();
-	var marker = new google.maps.Marker({
+	const infowindow = new google.maps.InfoWindow();
+	infowindow.setContent(infowindowContent);
+	const marker = new google.maps.Marker({
 		map: map,
 		anchorPoint: new google.maps.Point(0, -29),
 		draggable: true,
@@ -340,7 +348,7 @@ function initMap() {
 					map.fitBounds(place.geometry.viewport);
 				} else {
 					map.setCenter(place.geometry.location);
-					map.setZoom(17);
+					map.setZoom(15);
 				}
 				marker.setIcon(({
 					url: place.icon,
@@ -363,7 +371,8 @@ function initMap() {
 							&& place.address_components[2].short_name || '')]
 						.join(' ');
 				}
-
+				/*infowindowContent.children["place-name"].textContent = place.name;
+				infowindowContent.children["place-address"].textContent = place.formatted_address;*/
 				infowindow.setContent('<div><strong>' + place.name
 					+ '</strong><br>' + address);
 				infowindow.open(map, marker);
@@ -435,7 +444,7 @@ function initMap() {
 									.getElementById('longitud').value = lng;
 								marker.setPosition(origin);
 								map.setCenter(origin);
-								map.setZoom(10);
+								map.setZoom(15);
 
 							});
 				}
@@ -452,7 +461,7 @@ function initialize(lat, lon, esc, val) {
 		center: peru,
 		zoom: esc,
 		mapTypeId: google.maps.MapTypeId.TERRAIN,
-		minZoom: 5,
+		minZoom: 15,
 		scrollwheel: true,
 		disableDefaultUI: false,
 		streetViewControl: false,

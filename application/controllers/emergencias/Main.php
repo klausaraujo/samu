@@ -3,16 +3,22 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Main extends CI_Controller
 {
+    private $user;
 
     public function index() {
 
+        $this->load->model("Usuarios_model");
         $this->load->model("Emergencias_model");
         $this->load->model("Ubigeo_model");
+
+        $this->user = $this->session->userdata("token");
+        $this->Usuarios_model->setIdUsuario($this->user->idusuario);
+        $departamentos = $this->Usuarios_model->extraeRegionesUsuario();
 
         $tipoLlamada = $this->Emergencias_model->tipoLlamada();
         $incid = $this->Emergencias_model->tipoIncidente();
         $prioriEm = $this->Emergencias_model->prioriEmergencia();
-        $departamentos = $this->Ubigeo_model->departamentos();
+        //$departamentos = $this->Ubigeo_model->departamentos();
 
         $data = array(
             "departamentos" => $departamentos->result(),
@@ -35,8 +41,8 @@ class Main extends CI_Controller
         $dt = new DateTime("now", $dtz);
         $fechaActual = $dt->format("Y-m-d h:i:s a");
 
-        $user = $this->session->userdata("token");
-        $this->Emergencias_model->setIdUsuario($user->idusuario);
+        $this->user = $this->session->userdata("token");
+        $this->Emergencias_model->setIdUsuario($this->user->idusuario);
         $this->Emergencias_model->setFechaActual($fechaActual);
         
         //$this->Emergencias_model->setidEmergencia($this->input->post("idem"));

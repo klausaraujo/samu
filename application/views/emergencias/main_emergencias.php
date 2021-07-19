@@ -26,14 +26,28 @@
 										<h3 class="box-title">Listado General de Emergencias</h3>
 										<h6 class="box-subtitle">Módulo donde se muestran las Emergencias Registradas en el Sistema</h6>
 									</div>
-									<div class="box-body">
-										<div class="col-sm-12 col-md-5 col-md-offset-5 pa-10">
-											<button type="button" class="btn btn-primary btn-nuevo" data-toggle="modal" id="btnRegistrar">
+									<div class="box-body form-group row">
+										<div class="col-sm-12">
+											<button type="button" class="btn btn-primary btn-nuevo" data-toggle="modal" id="btnRegistrar" disabled>
 												<i class="fa fa-file-text-o" aria-hidden="true">&nbsp;</i>Registrar Emergencias
-                                            </button>
+                                            </button>&nbsp;&nbsp;&nbsp;
+											<label class="modal-label">Seleccione la Region: </label>
+											<select class="" name="departamento" id="departamento">
+												<option value="0">-- Regi&oacute;n --</option>
+												<?php foreach($departamentos as $row): ?>
+												<option value="<?=$row->idregion?>"><?=$row->region?></option>
+												<?php endforeach; ?>
+											</select>
 										</div></br>
+										<? 
+											$dtz = new DateTimeZone("America/Lima");
+											$dt = new DateTime("now", $dtz);
+											$fechaActual = $dt->format("Y-m-d");
+											//$fechaActual = str_replace("-","/",$fechaActual);
+											//echo $fechaActual;
+										?>
 										<div class="table-responsive">
-											
+
 										</div>
 									</div>
 								</div>
@@ -66,7 +80,7 @@
 														<label class="modal-label col-sm-4 col-form-label py-10 offset-sm-1">Tipo Llamada: </label>
 														<div class="col-sm-6">
 															<select class="form-control" name="tipoLl" id="tipoLl">
-																<option value="0">-- Tipo Llamada --</option>
+																<option value="">-- Tipo Llamada --</option>
 																<?php foreach($tipoLlamada as $row): ?>
 																<option value="<?=$row->idtipollamada?>"><?=$row->tipo_llamada?></option>
 																<?php endforeach; ?>
@@ -87,9 +101,9 @@
 														<label class="modal-label col-sm-4 col-form-label py-10 offset-sm-1">Tipo Documento: </label>
 														<div class="col-sm-6">
 														<select class="form-control" name="tipoDoc" id="tipoDoc">
-																<option value="0">-- Tipo Documento --</option>
-																<option value="1">DNI</option>
-																<option value="2">CARNET DE EXTRANJERIA</option>
+																<option value="">-- Tipo Documento --</option>
+																<option value="01">DNI</option>
+																<option value="03">CARNET DE EXTRANJERIA</option>
 															</select>
 														</div>
 													</div>
@@ -97,12 +111,10 @@
                                                 <div class="col-sm-6">
 													<div class="form-group row">
 														<label class="modal-label col-sm-5 col-form-label py-10">Numero Documento: </label>
-														<div class="col-sm-4">
+														<div class="col-sm-5">
 															<input value ="" type="text" class="form-control" name="doc" id="doc" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" maxlength="8" />
 														</div>
-                                                        <div class="col-sm-3">
-															<input type="button" id="buscar" value="Buscar" />
-														</div>
+                                                        <div class="col-sm-1"><a id="buscar" href="#"><i class="glyphicon glyphicon-search"></i></a></div>
 													</div>
 												</div>
                                                 <div class="col-sm-6">
@@ -146,7 +158,7 @@
 														<label class="modal-label col-sm-5 col-form-label py-10">Tipo Incidente: </label>
 														<div class="col-sm-6">
 															<select class="form-control" name="incidente" id="incidente">
-																<option value="0">-- Tipo Incidente --</option>
+																<option value="">-- Tipo Incidente --</option>
 																<?php foreach($incid as $row): ?>
 																<option value="<?=$row->idtipoincidente?>"><?=$row->tipo_incidente?></option>
 																<?php endforeach; ?>
@@ -160,7 +172,7 @@
 														<div class="col-sm-6">
 															<div class="form-group">
 																<div class='input-group'>
-																	<input type="date" class="form-control" name="fecha" id="fecha" value=""/>
+																	<input type="date" class="form-control" name="fecha" id="fecha" value="<?=$fechaActual?>"/>
 																</div>
 															</div>
 														</div>
@@ -171,7 +183,7 @@
 														<label class="modal-label col-sm-5 col-form-label py-10">Prioridad: </label>
 														<div class="col-sm-6">
 															<select class="form-control" name="prioridad" id="prioridad">
-																<option value="0">-- Prioridad Emergencia --</option>
+																<option value="">-- Prioridad Emergencia --</option>
 																<?php foreach($priori as $row): ?>
 																<option value="<?=$row->idprioridadincidente?>"><?=$row->prioridad_emergencia?></option>
 																<?php endforeach; ?>
@@ -191,35 +203,22 @@
 														</div>
 													</div>
 												</div>
-                                                <div class="col-sm-6">
-													<div class="form-group row">
-														<label class="modal-label col-sm-5 col-form-label py-10">Region: </label>
-														<div class="col-sm-6">
-															<select class="form-control" name="departamento" id="departamento">
-																<option value="0">-- Regi&oacute;n --</option>
-																<?php foreach($departamentos as $row): ?>
-																<option value="<?=$row->cod_dep?>"><?=$row->departamento?></option>
-																<?php endforeach; ?>
-															</select>
-														</div>
-													</div>
-												</div>
 												<div class="col-sm-6">
 													<div class="form-group row">
-														<label class="modal-label col-sm-4 col-form-label py-10 offset-sm-1">Provincia: </label>
+														<label class="modal-label col-sm-5 col-form-label py-10 offset-sm-1">Provincia: </label>
 														<div class="col-sm-6">
 															<select class="form-control" name="provincia" id="provincia">
-																<option value="0">-- Elija Provincia --</option>
+																<option value="">-- Elija Provincia --</option>
 															</select>
 														</div>
 													</div>
 												</div>
                                                 <div class="col-sm-6">
 													<div class="form-group row">
-														<label class="modal-label col-sm-5 col-form-label py-10">Distrito: </label>
+														<label class="modal-label col-sm-4 col-form-label py-10">Distrito: </label>
 														<div class="col-sm-6">
 															<select class="form-control" name="distrito" id="distrito">
-																<option value="0">-- Elija Distrito --</option>
+																<option value="">-- Elija Distrito --</option>
 															</select>
 														</div>
 													</div>
@@ -229,7 +228,7 @@
                                                     </div>
 												</div>
 												<div class="col-sm-12">
-													<div id="map" class="my-3" style="min-height: 200px; width: 100%;"></div>
+													<div id="map" class="my-3" style="min-height: 250px; width: 100%;"></div>
 													<input type="hidden" class="" name="latitud" id="latitud" value="" />
                                   					<input type="hidden" class="" name="longitud" id="longitud" value="" />
 												</div>
@@ -252,19 +251,17 @@
 		<script src="<?=base_url()?>public/assets/icons/feather-icons/feather.min.js"></script>
 		<script src="<?=base_url()?>public/assets/vendor_components/datatable/datatables.min.js"></script>
 		<script src="<?=base_url()?>public/js/jquery.validate.min.js"></script>
-		<script src="<?=base_url()?>public/js/emergencias/emergencias.js"></script>
-
+				
 		<script>
-			var generalZoom = 13;
+			var generalZoom = 15;
+			const canDelete = "1";
+			const canEdit = "1";
 		</script>
+
 		<script src="<?=base_url()?>public/js/emergencias/initMapMapa.js"></script>
 		<script async defer src="https://maps.googleapis.com/maps/api/js?key=<?='AIzaSyByPoOpv9DTDZfL0dnMxewn5RHnzC8LGpc'?>&libraries=places&callback=initMap" ></script>
+		<script src="<?=base_url()?>public/js/emergencias/emergencias.js"></script>
 
-		<script> 
-			const canDelete = "1";
-			const canEdit = "1"; 
-
-		</script>
         <script>emergencias("<?=base_url()?>");</script>
 
 		<script src="<?=base_url()?>public//assets/vendor_components/apexcharts-bundle/dist/apexcharts.js"></script>

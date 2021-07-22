@@ -38,7 +38,9 @@
 												<option value="<?=$row->idregion?>"><?=$row->region?></option>
 												<?php endforeach; ?>
 											</select>
-										</div></br>
+										</div>
+										<div class="col-sm-12" style="height:30px"></div>
+										
 										<? 
 											$dtz = new DateTimeZone("America/Lima");
 											$dt = new DateTime("now", $dtz);
@@ -47,6 +49,18 @@
 											//echo $fechaActual;
 										?>
 										<div class="table-responsive">
+										<table id="dt-emergencias" class="table table-bordered table-hover display nowrap margin-top-10 w-p100">
+											<thead>
+												<tr>
+													<th>Acciones</th>
+													<th>Telefono ppal</th>
+													<th>Telefono 2</th>
+													<th>Nombres</th>
+													<th>Apellidos</th>
+													<th>Incidente</th>
+												</tr>
+											</thead>
+										</table>
 
 										</div>
 									</div>
@@ -111,21 +125,27 @@
                                                 <div class="col-sm-6">
 													<div class="form-group row">
 														<label class="modal-label col-sm-5 col-form-label py-10">Numero Documento: </label>
-														<div class="col-sm-5">
+														<div class="col-sm-4">
 															<input value ="" type="text" class="form-control" name="doc" id="doc" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" maxlength="8" />
 														</div>
-                                                        <div class="col-sm-1"><a id="buscar" href="#"><i class="glyphicon glyphicon-search"></i></a></div>
+                                                        <div class="col-sm-3">
+															<button type="button" id="btn-buscar" class="btn btn-info btn-sm">
+																<i class="fa fa-search" aria-hidden="true"></i>&nbsp;&nbsp;Buscar
+															</button>
+														</div>
 													</div>
 												</div>
                                                 <div class="col-sm-6">
-													<div class="form-group row">
+													<div class="form-group row" id="datos">
+														<div class="col-sm-12"><label ><small>Direccion:&nbsp;&nbsp;</label><span id="dir"></span></small></div>
+														<div class="col-sm-12"><label ><small>Fecha de Nacimiento:&nbsp;&nbsp;</label><span id="nac"></span></small></div>
                                                     </div>
 												</div>
 												<div class="col-sm-6">
 													<div class="form-group row">
 														<label class="modal-label col-sm-5 col-form-label py-10">Apellidos: </label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" name="apellidos" id="apellidos" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="50" />
+															<input type="text" class="form-control" name="apellidos" id="apellidos" readonly />
 														</div>
 													</div>
 												</div>
@@ -133,7 +153,7 @@
 													<div class="form-group row">
 														<label class="modal-label col-sm-4 col-form-label py-10  offset-sm-1">Nombres: </label>
 														<div class="col-sm-6">
-															<input type="text" class="form-control" name="nombres" id="nombres" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="50" />
+															<input type="text" class="form-control" name="nombres" id="nombres"  readonly />
 														</div>
 													</div>
 												</div>
@@ -256,6 +276,7 @@
 			var generalZoom = 15;
 			const canDelete = "1";
 			const canEdit = "1";
+			var emerg = JSON.parse('<?=$listaEmergencias?>');
 		</script>
 
 		<script src="<?=base_url()?>public/js/emergencias/initMapMapa.js"></script>

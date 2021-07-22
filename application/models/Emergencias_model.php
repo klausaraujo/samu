@@ -144,4 +144,15 @@ class Emergencias_model extends CI_Model
         $this->db->where("activo = 1");
         return $this->db->get();
     }
+
+    public function listarEmergencias(){
+        $sel = "em.idemergencia,em.telefono01,em.telefono02,em.idtipollamada,em.tipo_documento,".
+                "em.numero_documento,em.apellidos,em.nombres,em.ubigeo,em.latitud,em.longitud,".
+                "em.idtipoincidente,em.fecha_incidente,em.activo,tl.tipo_llamada,ti.tipo_incidente";
+        $this->db->select($sel);
+        $this->db->from("emergencia em");
+        $this->db->join("tipo_llamada tl","tl.idtipollamada=em.idtipollamada");
+        $this->db->join("tipo_incidente ti","em.idtipoincidente=ti.idtipoincidente");
+        return $this->db->get();
+    }
 }

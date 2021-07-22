@@ -305,21 +305,14 @@ function initMap() {
 		},
 		zoom: generalZoom
 	});
-	const input = document.getElementById('ubicacion');
 	
-	const options = {
-		componentRestrictions: { country: "pe" },
-		fields: ["formatted_address", "geometry", "name"],
-		strictBounds: false,
-		types: ["establishment"],
-	  };
+	var input = document.getElementById('ubicacion');
 
-	const autocomplete = new google.maps.places.Autocomplete(input,options);
+	var autocomplete = new google.maps.places.Autocomplete(input);
 	autocomplete.bindTo('bounds', map);
 
-	const infowindow = new google.maps.InfoWindow();
-	infowindow.setContent(infowindowContent);
-	const marker = new google.maps.Marker({
+	var infowindow = new google.maps.InfoWindow();
+	var marker = new google.maps.Marker({
 		map: map,
 		anchorPoint: new google.maps.Point(0, -29),
 		draggable: true,

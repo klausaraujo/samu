@@ -19,8 +19,16 @@ class Main extends CI_Controller
         $incid = $this->Emergencias_model->tipoIncidente();
         $prioriEm = $this->Emergencias_model->prioriEmergencia();
         //$departamentos = $this->Ubigeo_model->departamentos();
+        $listaEm = $this->Emergencias_model->listarEmergencias();
+
+        if ($listaEm->num_rows() > 0) {
+            $listaEm = $listaEm->result();
+        } else {
+            $listaEm = array();
+        }
 
         $data = array(
+            "listaEmergencias" => json_encode($listaEm),
             "departamentos" => $departamentos->result(),
             "tipoLlamada" => $tipoLlamada->result(),
             "incid" => $incid->result(),
@@ -120,6 +128,29 @@ class Main extends CI_Controller
         );
         
         echo json_encode($data);
+    }
+
+    public function curl()
+    {
+        $tipo_documento = $this->input->post("type");
+        $documento = $this->input->post("document");
+        $api = "http://mpi.minsa.gob.pe/api/v1/ciudadano/ver/";
+        $token = "Bearer d90f5ad5d9c64268a00efaa4bd62a2a0";
+        $handler = curl_init();
+        curl_setopt($handler, CURLOPT_URL,  $api. $tipo_documento . "/" . $documento . "/");
+        curl_setopt($handler, CURLOPT_HEADER, false);
+        curl_setopt($handler, CURLOPT_HTTPHEADER, array(
+            "Authorization: " . $token,
+            "Content-Type: application/json"
+        ));
+        curl_setopt($handler, CURLOPT_RETURNTRANSFER, true);
+        $data = curl_exec($handler);
+        $code = curl_getinfo($handler, CURLINFO_HTTP_CODE);
+
+        curl_close($handler);
+
+        echo $data;
+
     }
 	
 }

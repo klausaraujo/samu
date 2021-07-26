@@ -77,11 +77,12 @@
 										</button>										
 									</div>
 									<form id="formRegistrar" name="formRegistrar" method="post" action="" autocomplete="off" enctype="multipart/form-data">
-                                        <input type="hidden" name="idem" id="idem" />
-                                        <input type="hidden" name="act" id="act" value=0 />
+                                    <input type="hidden" name="idem" id="idem" value="" />    
+									<input type="hidden" name="act" id="act" value=0 />
+									<input type="hidden" name="fechNac" id="fechNac" value="" />
 										<div class="modal-body">
                                             <div class="row">
-												<div class="col-sm-6">
+												<div class="col-sm-6 etiq">
 													<div class="form-group row">
 														<label class="modal-label col-sm-5 col-form-label py-10">Numero de Telefono: </label>
 														<div class="col-sm-6">
@@ -110,7 +111,7 @@
 														</div>
 													</div>
 												</div>
-												<div class="col-sm-6">
+												<div class="col-sm-6 etiq">
 													<div class="form-group row">
 														<label class="modal-label col-sm-4 col-form-label py-10 offset-sm-1">Tipo Documento: </label>
 														<div class="col-sm-6">
@@ -122,11 +123,11 @@
 														</div>
 													</div>
 												</div>
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-6 etiq">
 													<div class="form-group row">
 														<label class="modal-label col-sm-5 col-form-label py-10">Numero Documento: </label>
 														<div class="col-sm-4">
-															<input value ="" type="text" class="form-control" name="doc" id="doc" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" maxlength="8" />
+															<input value ="" type="text" class="form-control" name="doc" id="doc" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" maxlength="9" />
 														</div>
                                                         <div class="col-sm-3">
 															<button type="button" id="btn-buscar" class="btn btn-info btn-sm">
@@ -135,13 +136,13 @@
 														</div>
 													</div>
 												</div>
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-6 etiq">
 													<div class="form-group row" id="datos">
 														<div class="col-sm-12"><label ><small>Direccion:&nbsp;&nbsp;</label><span id="dir"></span></small></div>
 														<div class="col-sm-12"><label ><small>Fecha de Nacimiento:&nbsp;&nbsp;</label><span id="nac"></span></small></div>
                                                     </div>
 												</div>
-												<div class="col-sm-6">
+												<div class="col-sm-6 etiq">
 													<div class="form-group row">
 														<label class="modal-label col-sm-5 col-form-label py-10">Apellidos: </label>
 														<div class="col-sm-6">
@@ -149,7 +150,7 @@
 														</div>
 													</div>
 												</div>
-												<div class="col-sm-6">
+												<div class="col-sm-6 etiq">
 													<div class="form-group row">
 														<label class="modal-label col-sm-4 col-form-label py-10  offset-sm-1">Nombres: </label>
 														<div class="col-sm-6">
@@ -186,7 +187,7 @@
 														</div>
 													</div>
 												</div>
-												<div class="col-sm-6">
+												<div class="col-sm-6 etiq">
 													<div class="form-group row">
 														<label class="modal-label col-sm-4 col-form-label py-10 offset-sm-1">Fecha: </label>
 														<div class="col-sm-6">
@@ -223,7 +224,7 @@
 														</div>
 													</div>
 												</div>
-												<div class="col-sm-6">
+												<div class="col-sm-6 etiq">
 													<div class="form-group row">
 														<label class="modal-label col-sm-5 col-form-label py-10 offset-sm-1">Provincia: </label>
 														<div class="col-sm-6">
@@ -233,7 +234,7 @@
 														</div>
 													</div>
 												</div>
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-6 etiq">
 													<div class="form-group row">
 														<label class="modal-label col-sm-4 col-form-label py-10">Distrito: </label>
 														<div class="col-sm-6">
@@ -247,7 +248,7 @@
 													<div class="form-group row">
                                                     </div>
 												</div>
-												<div class="col-sm-12">
+												<div class="col-sm-12 etiq">
 													<div id="map" class="my-3" style="min-height: 250px; width: 100%;"></div>
 													<input type="hidden" class="" name="latitud" id="latitud" value="" />
                                   					<input type="hidden" class="" name="longitud" id="longitud" value="" />

@@ -362,9 +362,7 @@ function usuarios(URI) {
       showModal(event, 'Registrar Nuevo Usuario');
     });
 
-    
-  
-  
+     
     $("#formRegistrar").validate({     
       rules: {
         dni: { required: true, minlength: 8, maxlength: 8 },
@@ -427,6 +425,71 @@ function usuarios(URI) {
     });
 
   });
+
+  $("#btn-buscar").on("click", function () {
+    var documento_numero = $("#dni").val();
+    var type;
+    if (documento_numero.length >= 8) {
+      type = "01";
+      if (documento_numero.length > 8) {
+        type = "03";
+      }
+
+      $.ajax({
+        url: URI + "emergencias/main/curl",
+        data: { type: type, document: documento_numero },
+        method: 'post',
+        dataType: 'json',
+        error: function (xhr) {
+          $("#btn-buscar").html('<i class="fa fa-search" aria-hidden="true"></Buscar>');
+        },
+        beforeSend: function () { $("#btn-buscar").html('<i class="fa fa-spinner fa-pulse"></i>'); },
+        success: function (response) {            
+          if(response.data){
+            if(!$("#nombres").prop("readonly"))
+              $("#nombres").prop("readonly", true);
+            if(!$("#apellidos").prop("readonly"))
+              $("#apellidos").prop("readonly", true);
+            const { data } = response;
+            const datos = data.attributes;
+            //console.log(datos);
+            $("#btn-buscar").html('<i class="fa fa-search" aria-hidden="true"></i>&nbsp;&nbsp;Buscar');
+            $("#apellidos").val(datos.apellido_paterno+" "+datos.apellido_materno);
+            $("#nombres").val(datos.nombres);
+            //$("#dir").html(datos.domicilio_direccion);
+            //var fecha = (datos.fecha_nacimiento).split("-");
+            //$("#nac").html(fecha[2] + "/" + fecha[1] + "/" + fecha[0]);
+            //$("#datos").show();
+            /*var fecha = (data.data.attributes.fecha_nacimiento).split("-"); $("input[name=fecha_nacimiento]").val(fecha[2] + "/" + fecha[1] + "/" + fecha[0]); $("input[name=edad]").val(data.data.attributes.edad_anios);
+            $("select[name=estado_civil]").val(data.data.attributes.estado_civil);
+            $("select[name=estado_civil]").attr("rel", data.data.attributes.estado_civil);
+            $("select[name=genero]").val(data.data.attributes.sexo);
+            $("select[name=genero]").attr("rel", data.data.attributes.sexo);
+            $("input[name=apellidos]").val(data.data.attributes.apellido_paterno + " " + data.data.attributes.apellido_materno);
+            $("input[name=nombres]").val(data.data.attributes.nombres);
+            $("input[name=domicilio]").val(data.data.attributes.domicilio_direccion); let codigo_region = data.data.attributes.get_departamento_domicilio_ubigeo_inei;
+            let codigo_provincia = data.data.attributes.get_provincia_domicilio_ubigeo_inei.slice(2);
+            let codigo_distrito = data.data.attributes.get_distrito_domicilio_ubigeo_inei.slice(4);
+            $("#departamento").val(codigo_region);
+            listarProvinciasxRegion(codigo_region, codigo_provincia, codigo_distrito); let foto = data.data.attributes.foto;
+            $("#foto_dni_str").val(foto);
+            $("#blah").attr("src", 'data:image/(png|jpg);base64, ' + foto);*/
+          }else{
+            $("#btn-buscar").html('<i class="fa fa-search" aria-hidden="true"></i>&nbsp;&nbsp;Buscar');
+            alert(response.errors[0].detail);
+            if($("#nombres").prop("readonly"))
+              $("#nombres").prop("readonly", false);
+            if($("#apellidos").prop("readonly"))
+              $("#apellidos").prop("readonly", false);
+            $("#apellidos").val("");
+            $("#nombres").val("");
+          }
+        }
+      });
+    }
+  });
+
+
 
   function loadData(table) {
     $.ajax({

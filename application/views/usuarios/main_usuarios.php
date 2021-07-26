@@ -85,10 +85,14 @@
 												<div class="col-sm-6">
 													<div class="form-group row">
 														<label class="modal-label col-sm-3 col-form-label py-10">DNI: </label>
-														<div class="col-sm-5">
+														<div class="col-sm-4">
 															<input type="text" class="form-control" name="dni" id="dni" maxlength="8" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" />
 														</div>
-														<div class="col-sm-1"><a id="buscar" href="#"><i class="glyphicon glyphicon-search"></i></a></div>														
+														<div class="col-sm-3">
+															<button type="button" id="btn-buscar" class="btn btn-info btn-sm">
+																<i class="fa fa-search" aria-hidden="true"></i>&nbsp;&nbsp;Buscar
+															</button>
+														</div>														
 													</div>
 												</div>
 												<div class="col-sm-6">

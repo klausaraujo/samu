@@ -25,6 +25,7 @@ class Emergencias_model extends CI_Model
     private $distrito;
     private $latitud;
     private $longitud;
+    private $fechaNac = "";
 
     public function setIdUsuario($data){
         $this->idUsuario = $this->db->escape_str($data);
@@ -89,6 +90,9 @@ class Emergencias_model extends CI_Model
     public function setLongitud($data){
         $this->longitud = $this->db->escape_str($data);
     }
+    public function setFechaNac($data){
+        $this->fechaNac = $this->db->escape_str($data);
+    }
 
     public function guardarEmergencia(){
         
@@ -102,7 +106,7 @@ class Emergencias_model extends CI_Model
             "nombres" => $this->nombres,
             "es_paciente" => $this->paciente,
             "masivo" => $this->masivo,
-            //"fecha_nacimiento" => $fechaNacimiento,
+            "fecha_nacimiento" => $this->fechaNac,
             "ubigeo" => $this->region.$this->provincia.$this->distrito,
             "latitud" => $this->latitud,
             "longitud" => $this->longitud,
@@ -119,6 +123,23 @@ class Emergencias_model extends CI_Model
             return 0;
         }
 
+    }
+
+    public function actualizarEmergencia(){
+        $data = array(
+            "telefono02" => $this->telf2,
+            "idtipollamada" => $this->idTipoLlamada,
+            "es_paciente" => $this->paciente,
+            "masivo" => $this->masivo,
+            "idtipoincidente" => $this->tipoIncid,
+            "idusuario_modificacion" => $this->idUsuario,
+            "fecha_modificacion" => $this->fechaActual,
+        );
+
+        $this->db->where("idemergencia",$this->idEmergencia);
+        $result = $this->db->update("emergencia", $data);
+        if($result) return true;
+        else return false;
     }
 
     public function tipoLlamada()
@@ -153,6 +174,18 @@ class Emergencias_model extends CI_Model
         $this->db->from("emergencia em");
         $this->db->join("tipo_llamada tl","tl.idtipollamada=em.idtipollamada");
         $this->db->join("tipo_incidente ti","em.idtipoincidente=ti.idtipoincidente");
+        return $this->db->get();
+    }
+
+    public function extraeEmergencia(){
+        $sel = "em.idemergencia,em.telefono01,em.telefono02,em.idtipollamada,em.tipo_documento,".
+                "em.numero_documento,em.apellidos,em.nombres,em.es_paciente,em.masivo,em.ubigeo,em.latitud,".
+                "em.longitud,em.idtipoincidente,em.fecha_incidente,em.activo,tl.tipo_llamada,ti.tipo_incidente";
+        $this->db->select($sel);
+        $this->db->from("emergencia em");
+        $this->db->join("tipo_llamada tl","tl.idtipollamada=em.idtipollamada");
+        $this->db->join("tipo_incidente ti","em.idtipoincidente=ti.idtipoincidente");
+        $this->db->where("idemergencia",$this->idEmergencia);
         return $this->db->get();
     }
 }

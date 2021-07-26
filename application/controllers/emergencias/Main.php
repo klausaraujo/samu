@@ -72,12 +72,17 @@ class Main extends CI_Controller
         $this->Emergencias_model->setDistrito($this->input->post("distrito"));
         $this->Emergencias_model->setLatitud($this->input->post("latitud"));
         $this->Emergencias_model->setLongitud($this->input->post("longitud"));
+        $this->Emergencias_model->setFechaNac($this->input->post("fechNac"));
 
         $status = 500;
         $message = "Error al registrar, vuelva a intentar";
 
         if ($this->input->post("act") > 0) {
-            
+            $this->Emergencias_model->setidEmergencia($this->input->post("idem"));
+            if ($this->Emergencias_model->actualizarEmergencia()) {
+                $status = 200;
+                $message = "Emergencia actualizada exitosamente";
+            }
         } else {
             if ($this->Emergencias_model->guardarEmergencia()) {
                 $status = 200;
@@ -91,7 +96,6 @@ class Main extends CI_Controller
         );
 
         echo json_encode($data);
-        //echo json_encode($this->Emergencias_model->guardarEmergencia());
     }
 
     public function cargarProvincias()
@@ -151,6 +155,55 @@ class Main extends CI_Controller
 
         echo $data;
 
+    }
+
+    public function extraeEmergencia(){
+        
+        $this->load->model("Emergencias_model");
+        $this->Emergencias_model->setidEmergencia($this->input->post("id"));
+        $data = $this->Emergencias_model->extraeEmergencia();
+        $tipoLlamada = $this->Emergencias_model->tipoLlamada();
+        $incid = $this->Emergencias_model->tipoIncidente();
+        $prioriEm = $this->Emergencias_model->prioriEmergencia();
+        $status = 500;
+        $msg = "";
+
+        if ($data->num_rows() > 0) {
+            $data = $data->result();
+            $tipoLlamada = $tipoLlamada->result();
+            $incid = $incid->result();
+            $prioriEm = $prioriEm->result();
+            $status = 200;
+        } else {
+            $data = array();
+        }
+
+        $data = array(
+            "data" => $data,
+            "status" => $status,
+            "tipo" => $tipoLlamada,
+            "incid" => $incid,
+            "priori" => $prioriEm
+        );
+
+        echo json_encode($data);
+
+    }
+
+    public function listarEmergencias(){
+        $this->load->model("Emergencias_model");
+        $listaEm = $this->Emergencias_model->listarEmergencias();
+        if ($listaEm->num_rows() > 0) {
+            $listaEm = $listaEm->result();
+        } else {
+            $listaEm = array();
+        }
+
+        $data = array(
+            "listaEmergencias" => $listaEm
+        );
+
+        echo json_encode($data);
     }
 	
 }

@@ -33,7 +33,7 @@ function emergencias(URI) {
           const { priori } = response;
           const { incid } = response;
           const { tipo } = response;
-          console.log(data);          
+          //console.log(data);          
           var k = 0; j = 0;
           var reg, idreg;
           var html = "";
@@ -422,7 +422,7 @@ function emergencias(URI) {
           data: {},
           dataType: 'json',
           success: function (response) {
-            console.log(response);
+            //console.log(response);
             const { listaEmergencias } = response;
             table.clear();
             table.rows.add(listaEmergencias).draw();

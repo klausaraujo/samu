@@ -27,12 +27,13 @@ function emergencias(URI) {
       data: {id:idEm},
       dataType: 'json',
       success: function (response) {
+        //console.log(response);
         if (response.status === 200) {
           const { data } = response;
           const { priori } = response;
           const { incid } = response;
           const { tipo } = response;
-          //console.log(response);          
+          console.log(data);          
           var k = 0; j = 0;
           var reg, idreg;
           var html = "";
@@ -46,7 +47,7 @@ function emergencias(URI) {
               html += '<option value="' + idreg + '">' + reg + '</option>';
           }
           $("#incidente").html(html);
-          html = opt;
+          html = opt; k = 0;
           for(k in tipo) {
             reg = tipo[k].tipo_llamada;
             idreg = tipo[k].idtipollamada;
@@ -56,11 +57,22 @@ function emergencias(URI) {
               html += '<option value="' + idreg + '">' + reg + '</option>';
           }
           $("#tipoLl").html(html);
+          html = opt; k = 0;
+          for(k in priori) {
+            reg = priori[k].prioridad_emergencia;
+            idreg = priori[k].idprioridademergencia;
+            if(idreg == data[0].idprioridademergencia){
+              html += '<option value="'+idreg+'" selected>'+reg+'</option>';
+            }else
+              html += '<option value="' + idreg + '">' + reg + '</option>';
+          }
+          $("#prioridad").html(html);
           $("#tlf2").val(data[0].telefono02);
           if(data[0].es_paciente == 1)
             $('#sipaciente').prop('checked', true);
           if(data[0].masivo == 1)
             $('#simasivo').prop('checked', true);
+          $("#direccion").val(data[0].direccion_emergencia);
 
         } else {
           alert("No existe la Emergencia");
@@ -239,8 +251,8 @@ function emergencias(URI) {
               $("#nombres").val(datos.nombres);
               $("#dir").html(datos.domicilio_direccion);
               $("#fechNac").val(datos.fecha_nacimiento);
-              var fecha = (datos.fecha_nacimiento).split("-");
-              $("#nac").html(fecha[2] + "/" + fecha[1] + "/" + fecha[0]);
+              /*var fecha = (datos.fecha_nacimiento).split("-");
+              $("#nac").html(fecha[2] + "/" + fecha[1] + "/" + fecha[0]);*/
               $("#datos").show();
               /*var fecha = (data.data.attributes.fecha_nacimiento).split("-"); $("input[name=fecha_nacimiento]").val(fecha[2] + "/" + fecha[1] + "/" + fecha[0]); $("input[name=edad]").val(data.data.attributes.edad_anios);
               $("select[name=estado_civil]").val(data.data.attributes.estado_civil);
@@ -341,8 +353,8 @@ function emergencias(URI) {
     });
 
     $("#departamento").change(function () {
-        if($(".btn-nuevo").prop("disabled"))
-          $(".btn-nuevo").prop("disabled", false);
+        /*if($(".btn-nuevo").prop("disabled"))
+          $(".btn-nuevo").prop("disabled", false);*/
         var id = $(this).val();
     
         if (id.length > 0) {
@@ -410,6 +422,7 @@ function emergencias(URI) {
           data: {},
           dataType: 'json',
           success: function (response) {
+            console.log(response);
             const { listaEmergencias } = response;
             table.clear();
             table.rows.add(listaEmergencias).draw();

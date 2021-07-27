@@ -17,7 +17,7 @@ class Emergencias_model extends CI_Model
     private $paciente;
     private $masivo;
     private $tipoIncid;
-    private $fecha;
+    private $fechaIncid;
     private $priori;
     private $direccion;
     private $region;
@@ -66,8 +66,8 @@ class Emergencias_model extends CI_Model
     public function setTipoIncid($data){
         $this->tipoIncid = $this->db->escape_str($data);
     }
-    public function setFecha($data){
-        $this->fecha = $this->db->escape_str($data);
+    public function setFechaIncid($data){
+        $this->fechaIncid = $this->db->escape_str($data);
     }
     public function setPrioridad($data){
         $this->priori = $this->db->escape_str($data);
@@ -106,12 +106,14 @@ class Emergencias_model extends CI_Model
             "nombres" => $this->nombres,
             "es_paciente" => $this->paciente,
             "masivo" => $this->masivo,
-            "fecha_nacimiento" => $this->fechaNac,
+            "fecha_nacimiento" => ($this->fechaNac != null)? $this->fechaNac : "",
+            "direccion_emergencia" => $this->direccion,
             "ubigeo" => $this->region.$this->provincia.$this->distrito,
             "latitud" => $this->latitud,
             "longitud" => $this->longitud,
             "idtipoincidente" => $this->tipoIncid,
-            "fecha_incidente" => $this->fecha,
+            "fecha_incidente" => $this->fechaIncid,
+            "idprioridademergencia" => $this->priori,
             "idusuario_registro" => $this->idUsuario,
             "fecha_registro" => $this->fechaActual,
             "activo" => 1
@@ -131,7 +133,9 @@ class Emergencias_model extends CI_Model
             "idtipollamada" => $this->idTipoLlamada,
             "es_paciente" => $this->paciente,
             "masivo" => $this->masivo,
+            "direccion_emergencia" => $this->direccion,
             "idtipoincidente" => $this->tipoIncid,
+            "idprioridademergencia" => $this->priori,
             "idusuario_modificacion" => $this->idUsuario,
             "fecha_modificacion" => $this->fechaActual,
         );
@@ -167,25 +171,27 @@ class Emergencias_model extends CI_Model
     }
 
     public function listarEmergencias(){
-        $sel = "em.idemergencia,em.telefono01,em.telefono02,em.idtipollamada,em.tipo_documento,".
+        /*$sel = "em.idemergencia,em.telefono01,em.telefono02,em.idtipollamada,em.tipo_documento,".
                 "em.numero_documento,em.apellidos,em.nombres,em.ubigeo,em.latitud,em.longitud,".
-                "em.idtipoincidente,em.fecha_incidente,em.activo,tl.tipo_llamada,ti.tipo_incidente";
-        $this->db->select($sel);
+                "em.idtipoincidente,em.fecha_incidente,em.activo,tl.tipo_llamada,ti.tipo_incidente";*/
+        $this->db->select("em.*,tl.tipo_llamada,ti.tipo_incidente,pe.prioridad_emergencia");
         $this->db->from("emergencia em");
         $this->db->join("tipo_llamada tl","tl.idtipollamada=em.idtipollamada");
         $this->db->join("tipo_incidente ti","em.idtipoincidente=ti.idtipoincidente");
+        $this->db->join("prioridad_emergencia pe","em.idprioridademergencia=pe.idprioridademergencia");
+        $this->db->order_by("em.idemergencia ASC");
         return $this->db->get();
     }
 
     public function extraeEmergencia(){
-        $sel = "em.idemergencia,em.telefono01,em.telefono02,em.idtipollamada,em.tipo_documento,".
-                "em.numero_documento,em.apellidos,em.nombres,em.es_paciente,em.masivo,em.ubigeo,em.latitud,".
-                "em.longitud,em.idtipoincidente,em.fecha_incidente,em.activo,tl.tipo_llamada,ti.tipo_incidente";
+        $sel = "em.*,tl.tipo_llamada,ti.tipo_incidente,pe.prioridad_emergencia";
         $this->db->select($sel);
         $this->db->from("emergencia em");
         $this->db->join("tipo_llamada tl","tl.idtipollamada=em.idtipollamada");
         $this->db->join("tipo_incidente ti","em.idtipoincidente=ti.idtipoincidente");
+        $this->db->join("prioridad_emergencia pe","em.idprioridademergencia=pe.idprioridademergencia");
         $this->db->where("idemergencia",$this->idEmergencia);
+        $this->db->order_by("em.idemergencia ASC");
         return $this->db->get();
     }
 }

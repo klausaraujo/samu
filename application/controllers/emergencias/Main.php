@@ -55,24 +55,24 @@ class Main extends CI_Controller
         
         //$this->Emergencias_model->setidEmergencia($this->input->post("idem"));
         $this->Emergencias_model->setTelf($this->input->post("tlf"));
-        $this->Emergencias_model->setTipoLlamada($this->input->post("tipoLl"));
-        $this->Emergencias_model->setTelf2($this->input->post("tlf2"));        
+        $this->Emergencias_model->setTelf2($this->input->post("tlf2"));
+        $this->Emergencias_model->setTipoLlamada($this->input->post("tipoLl"));               
         $this->Emergencias_model->setTipoDoc($this->input->post("tipoDoc"));
         $this->Emergencias_model->setNroDoc($this->input->post("doc"));
         $this->Emergencias_model->setApellidos($this->input->post("apellidos"));
         $this->Emergencias_model->setNombres($this->input->post("nombres"));
         $this->Emergencias_model->setPaciente($this->input->post("sipaciente"));
         $this->Emergencias_model->setMasivo($this->input->post("simasivo"));
-        $this->Emergencias_model->setTipoIncid($this->input->post("incidente"));
-        $this->Emergencias_model->setFecha($this->input->post("fecha"));
-        $this->Emergencias_model->setPrioridad($this->input->post("prioridad"));
+        $this->Emergencias_model->setFechaNac($this->input->post("fechNac"));
         $this->Emergencias_model->setDireccion($this->input->post("direccion"));
         $this->Emergencias_model->setRegion($this->input->post("departamento"));
         $this->Emergencias_model->setProvincia($this->input->post("provincia"));
         $this->Emergencias_model->setDistrito($this->input->post("distrito"));
         $this->Emergencias_model->setLatitud($this->input->post("latitud"));
         $this->Emergencias_model->setLongitud($this->input->post("longitud"));
-        $this->Emergencias_model->setFechaNac($this->input->post("fechNac"));
+        $this->Emergencias_model->setTipoIncid($this->input->post("incidente"));
+        $this->Emergencias_model->setFechaIncid($this->input->post("fechaIncid"));
+        $this->Emergencias_model->setPrioridad($this->input->post("prioridad"));        
 
         $status = 500;
         $message = "Error al registrar, vuelva a intentar";

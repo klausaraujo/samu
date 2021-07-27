@@ -26,18 +26,24 @@
 										<h3 class="box-title">Listado General de Emergencias</h3>
 										<h6 class="box-subtitle">Módulo donde se muestran las Emergencias Registradas en el Sistema</h6>
 									</div>
-									<div class="box-body form-group row">
-										<div class="col-sm-12">
-											<button type="button" class="btn btn-primary btn-nuevo" data-toggle="modal" id="btnRegistrar" disabled>
-												<i class="fa fa-file-text-o" aria-hidden="true">&nbsp;</i>Registrar Emergencias
-                                            </button>&nbsp;&nbsp;&nbsp;
-											<label class="modal-label">Seleccione la Region: </label>
-											<select class="" name="departamento" id="departamento">
-												<option value="0">-- Regi&oacute;n --</option>
-												<?php foreach($departamentos as $row): ?>
-												<option value="<?=$row->idregion?>"><?=$row->region?></option>
-												<?php endforeach; ?>
-											</select>
+									<div class="box-body row align-items-center">
+										<div class="col-sm-5">
+											<div class="form-group row">
+												<button class="btn btn-primary btn-nuevo" data-toggle="modal" id="btnRegistrar">
+													<i class="fa fa-file-text-o" aria-hidden="true">&nbsp;</i>Registrar Emergencias
+												</button>
+											</div>
+										</div>
+										<div class="col-sm-7">
+											<div class="form-group row">
+												<label class="modal-label col-sm-6 col-form-label py-10">Seleccione la Region:&nbsp;&nbsp;&nbsp;</label>
+												<select class="form-control col-sm-5" style="height:30px" name="region" id="region">
+													<option value="0">-- Regi&oacute;n --</option>
+													<?php foreach($departamentos as $row): ?>
+													<option value="<?=$row->idregion?>"><?=$row->region?></option>
+													<?php endforeach; ?>
+												</select>
+											</div>
 										</div>
 										<div class="col-sm-12" style="height:30px"></div>
 										
@@ -138,8 +144,7 @@
 												</div>
                                                 <div class="col-sm-6 etiq">
 													<div class="form-group row" id="datos">
-														<div class="col-sm-12"><label ><small>Direccion:&nbsp;&nbsp;</label><span id="dir"></span></small></div>
-														<div class="col-sm-12"><label ><small>Fecha de Nacimiento:&nbsp;&nbsp;</label><span id="nac"></span></small></div>
+														<div class="col-sm-10 offset-sm-2"><label ><small>Direccion:&nbsp;&nbsp;</label><span id="dir"></span></small></div>
                                                     </div>
 												</div>
 												<div class="col-sm-6 etiq">
@@ -193,7 +198,7 @@
 														<div class="col-sm-6">
 															<div class="form-group">
 																<div class='input-group'>
-																	<input type="date" class="form-control" name="fecha" id="fecha" value="<?=$fechaActual?>"/>
+																	<input type="date" class="form-control" name="fechaIncid" id="fechaIncid" value="<?=$fechaActual?>"/>
 																</div>
 															</div>
 														</div>
@@ -206,7 +211,7 @@
 															<select class="form-control" name="prioridad" id="prioridad">
 																<option value="">-- Prioridad Emergencia --</option>
 																<?php foreach($priori as $row): ?>
-																<option value="<?=$row->idprioridadincidente?>"><?=$row->prioridad_emergencia?></option>
+																<option value="<?=$row->idprioridademergencia?>"><?=$row->prioridad_emergencia?></option>
 																<?php endforeach; ?>
 															</select>
 														</div>
@@ -221,6 +226,19 @@
 														<label class="modal-label col-sm-3 col-form-label py-10">Direccion Emergencia: </label>
 														<div class="col-sm-8">
 															<input value ="" type="text" class="form-control" name="direccion" id="direccion" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="50" />
+														</div>
+													</div>
+												</div>
+												<div class="col-sm-6 etiq">
+													<div class="form-group row">
+														<label class="modal-label col-sm-4 col-form-label py-10">Seleccione la Region:&nbsp;&nbsp;&nbsp;</label>
+														<div class="col-sm-6">
+															<select class="form-control" style="height:30px" name="departamento" id="departamento">
+																<option value="0">-- Regi&oacute;n --</option>
+																<?php foreach($departamentos as $row): ?>
+																<option value="<?=$row->idregion?>"><?=$row->region?></option>
+																<?php endforeach; ?>
+															</select>
 														</div>
 													</div>
 												</div>

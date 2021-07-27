@@ -1,8 +1,11 @@
+DROP VIEW IF EXISTS lista_usuarios;
+DROP VIEW IF EXISTS lista_regiones_usuario;
 DROP VIEW IF EXISTS lista_bases;
 DROP VIEW IF EXISTS lista_ambulancias;
 DROP VIEW IF EXISTS lista_distritos;
 DROP VIEW IF EXISTS lista_provincias;
 DROP VIEW IF EXISTS lista_departamentos;
+DROP VIEW IF EXISTS lista_emergencias;
 DROP TABLE IF EXISTS ambulancia;
 DROP TABLE IF EXISTS marca;
 DROP TABLE IF EXISTS tipo_combustible;
@@ -17,6 +20,8 @@ DROP TABLE IF EXISTS region;
 DROP TABLE IF EXISTS perfil;
 DROP TABLE IF EXISTS tipo_llamada;
 DROP TABLE IF EXISTS tipo_incidente;
+DROP TABLE IF EXISTS prioridad_emergencia;
+DROP TABLE IF EXISTS emergencia;
 
 CREATE TABLE perfil (
   idperfil smallint(4) AUTO_INCREMENT primary key,
@@ -2135,7 +2140,7 @@ insert into tipo_llamada(tipo_llamada) values ('Falsa');
 insert into tipo_llamada(tipo_llamada) values ('Otros');
 
 create table tipo_incidente(
-	idincidentetipo smallint(4) AUTO_INCREMENT primary key,
+	idtipoincidente smallint(4) AUTO_INCREMENT primary key,
 	tipo_prioridad smallint(4),
 	tipo_incidente varchar(50),
 	activo char(1) DEFAULT '1') ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -2172,10 +2177,8 @@ insert into tipo_incidente(tipo_prioridad,tipo_incidente) Values(0,'Mordedura');
 insert into tipo_incidente(tipo_prioridad,tipo_incidente) Values(0,'Atención del Parto en Curso');
 insert into tipo_incidente(tipo_prioridad,tipo_incidente) Values(0,'Otros');
 
-
-
 create table prioridad_emergencia(
-	idprioridadincidente smallint(4) AUTO_INCREMENT primary key,
+	idprioridademergencia smallint(4) AUTO_INCREMENT primary key,
 	prioridad_emergencia varchar(15),
 	activo char(1) DEFAULT '1') ENGINE=InnoDB DEFAULT CHARSET=utf8;
 	
@@ -2184,14 +2187,57 @@ insert into prioridad_emergencia (prioridad_emergencia) values ('Prioridad 2');
 insert into prioridad_emergencia (prioridad_emergencia) values ('Prioridad 3');
 insert into prioridad_emergencia (prioridad_emergencia) values ('Prioridad 4');
 
-create table emergencia
+create table emergencia(
 	idemergencia smallint(4) AUTO_INCREMENT primary key,
 	telefono01 varchar(9),
 	telefono02 varchar(9),
-	
+	idtipollamada smallint(4) NOT NULL,
+	tipo_documento char(1),
+	numero_documento varchar(10),
+	apellidos varchar(50),
+	nombres varchar(50),
+	es_paciente char(1) default '0',
+	masivo char(1) default '0',
+	fecha_nacimiento datetime,
+	direccion_emergencia varchar(200),
+	ubigeo varchar(6) not null,
+	latitud VarChar(50),
+	longitud VarChar(50),
+	idtipoincidente smallint(4) not null,
+	fecha_incidente datetime,
+	idprioridademergencia smallint(4) not null,
+	idusuario_registro smallint(4),
+	fecha_registro datetime,
+	idusuario_modificacion smallint(4),
+	fecha_modificacion datetime,
+	idusuario_anulacion smallint(4),
+	fecha_anulacion datetime,
+	activo char(1) DEFAULT '1',
+	foreign key (idtipollamada) references tipo_llamada(idtipollamada) on delete cascade on update cascade,
+	foreign key (idtipoincidente) references tipo_incidente(idtipoincidente) on delete cascade on update cascade,
+	foreign key (idprioridademergencia) references prioridad_emergencia(idprioridademergencia) on delete cascade on update cascade
+	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 	
 
+create view lista_regiones_usuario
+As
+	select idusuario,count(*)as 'regiones' from usuarios_region group by idusuario;
 
+create view lista_usuarios
+As
+	select u.idusuario,u.dni,u.avatar,u.apellidos,u.nombres,u.usuario,u.passwd,u.idperfil,p.perfil,l.regiones,u.activo 
+	from usuarios u inner join perfil p on p.idperfil = u.idperfil inner join lista_regiones_usuario l on l.idusuario=u.idusuario;	
+
+create view lista_emergencias
+as
+select e.idemergencia,e.telefono01,e.telefono02,e.idtipollamada,t.tipo_llamada,(case e.tipo_documento when '1' then 'DNI' when '3' then 'CARNET EXT.' end) as 'tipo_documento',
+e.numero_documento,e.apellidos,e.nombres,(case e.es_paciente when '1' then 'SI' when '0' then 'NO' end) as 'paciente',
+(case e.masivo when '1' then 'SI' when '0' then 'NO' end) as 'masivo',e.fecha_nacimiento,e.ubigeo, concat_ws(' - ',u.departamento,u.provincia,u.distrito) AS 'ubicacion',
+e.latitud,e.longitud,e.idtipoincidente, ti.tipo_incidente,e.fecha_incidente,e.idprioridademergencia,pe.prioridad_emergencia,
+e.idusuario_registro,e.fecha_registro,(case e.activo when '1' then 'Activo' when '2' then 'Regulacion' when '3' then 'Cerrado' when '0' then 'Anulado' end) as 'estado'
+from emergencia as e inner join tipo_llamada as t on t.idtipollamada = e.idtipollamada 
+inner join tipo_incidente as ti on ti.idtipoincidente = e.idtipoincidente inner JOIN
+prioridad_emergencia as pe on pe.idprioridademergencia = e.idprioridademergencia inner join ubigeo as u on u.ubigeo = e.ubigeo
 
 
 

@@ -123,8 +123,8 @@
 														<div class="col-sm-6">
 														<select class="form-control" name="tipoDoc" id="tipoDoc">
 																<option value="">-- Tipo Documento --</option>
-																<option value="01">DNI</option>
-																<option value="03">CARNET DE EXTRANJERIA</option>
+																<option value="1">DNI</option>
+																<option value="3">CARNET DE EXTRANJERIA</option>
 															</select>
 														</div>
 													</div>

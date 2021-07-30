@@ -129,12 +129,22 @@ class Emergencias_model extends CI_Model
 
     public function actualizarEmergencia(){
         $data = array(
+            "telefono01" => $this->telf,
             "telefono02" => $this->telf2,
             "idtipollamada" => $this->idTipoLlamada,
+            "tipo_documento" => $this->tipoDoc,
+            //"numero_documento" => $this->nroDoc,
+            //"apellidos" => $this->apellidos,
+            //"nombres" => $this->nombres,
             "es_paciente" => $this->paciente,
             "masivo" => $this->masivo,
+            //"fecha_nacimiento" => ($this->fechaNac != null)? $this->fechaNac : "",
             "direccion_emergencia" => $this->direccion,
+            "ubigeo" => $this->region.$this->provincia.$this->distrito,
+            "latitud" => $this->latitud,
+            "longitud" => $this->longitud,
             "idtipoincidente" => $this->tipoIncid,
+            "fecha_incidente" => $this->fechaIncid,
             "idprioridademergencia" => $this->priori,
             "idusuario_modificacion" => $this->idUsuario,
             "fecha_modificacion" => $this->fechaActual,

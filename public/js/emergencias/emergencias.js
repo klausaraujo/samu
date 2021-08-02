@@ -16,7 +16,7 @@ function emergencias(URI) {
     var opt = '<option value="" class="lista">---Seleccione---</option>';
             
     $("#formRegistrar")[0].reset();
-    $(".etiq").hide();
+    //$(".etiq").hide();
     $("#act").val(1);
     $("#enviar").text("Actualizar");
     $("#formRegistrar select").prop('selectedIndex',0);
@@ -33,15 +33,37 @@ function emergencias(URI) {
           const { priori } = response;
           const { incid } = response;
           const { tipo } = response;
+          const { prov } = response;
+          const { dist } = response;
           //console.log(data);          
           var k = 0; j = 0;
           var reg, idreg;
           var html = "";
+          var dep = (data.ubigeo).substr(0,2);
+          var pro = (data.ubigeo).substr(2,2);
+          var dis = (data.ubigeo).substr(4,2);
+          var fecha = (data.fecha_incidente).substr(0,10);
+          
+          //console.log(fecha);
+
+          $("#fechaIncid").val(fecha);
+          
+          $("#departamento option").each(function(){
+            if ($(this).val() == dep ){        
+              $(this).attr("selected",true);
+            }
+          });
+
+          $("#tipoDoc option").each(function(){
+            if ($(this).val() == data.tipo_documento ){        
+              $(this).attr("selected",true);
+            }
+          });
           html = opt;
           for(k in incid) {
             reg = incid[k].tipo_incidente;
             idreg = incid[k].idtipoincidente;
-            if(idreg == data[0].idtipoincidente){
+            if(idreg == data.idtipoincidente){
               html += '<option value="'+idreg+'" selected>'+reg+'</option>';
             }else
               html += '<option value="' + idreg + '">' + reg + '</option>';
@@ -51,7 +73,7 @@ function emergencias(URI) {
           for(k in tipo) {
             reg = tipo[k].tipo_llamada;
             idreg = tipo[k].idtipollamada;
-            if(idreg == data[0].idtipollamada){
+            if(idreg == data.idtipollamada){
               html += '<option value="'+idreg+'" selected>'+reg+'</option>';
             }else
               html += '<option value="' + idreg + '">' + reg + '</option>';
@@ -61,18 +83,114 @@ function emergencias(URI) {
           for(k in priori) {
             reg = priori[k].prioridad_emergencia;
             idreg = priori[k].idprioridademergencia;
-            if(idreg == data[0].idprioridademergencia){
+            if(idreg == data.idprioridademergencia){
               html += '<option value="'+idreg+'" selected>'+reg+'</option>';
             }else
               html += '<option value="' + idreg + '">' + reg + '</option>';
           }
           $("#prioridad").html(html);
-          $("#tlf2").val(data[0].telefono02);
-          if(data[0].es_paciente == 1)
+          html = opt; k = 0;
+          for(k in prov) {
+            reg = prov[k].provincia;
+            idreg = prov[k].cod_pro;
+            if(idreg == pro){
+              html += '<option value="'+idreg+'" selected>'+reg+'</option>';
+            }else
+              html += '<option value="' + idreg + '">' + reg + '</option>';
+          }
+          $("#provincia").html(html);
+          html = opt; k = 0;
+          for(k in dist) {
+            reg = dist[k].distrito;
+            idreg = dist[k].cod_dis;
+            if(idreg == dis){
+              html += '<option value="'+idreg+'" selected>'+reg+'</option>';
+            }else
+              html += '<option value="' + idreg + '">' + reg + '</option>';
+          }
+          $("#distrito").html(html);
+          
+          $("#tlf2").val(data.telefono02);
+          if(data.es_paciente == 1)
             $('#sipaciente').prop('checked', true);
-          if(data[0].masivo == 1)
+          if(data.masivo == 1)
             $('#simasivo').prop('checked', true);
-          $("#direccion").val(data[0].direccion_emergencia);
+          $("#direccion").val(data.direccion_emergencia);
+          $("#apellidos").val(data.apellidos);
+          $("#nombres").val(data.nombres);
+          $("#doc").val(data.numero_documento);
+          $("#doc").prop("disabled", true);
+          $("#direccion").val(data.direccion_emergencia);
+          $("#tlf").val(data.telefono01);
+          $("#btn-buscar").hide();
+          $("#datos").hide();          
+
+          var latitud = data.latitud;
+          var longitud = data.longitud;
+
+          $("#latitud").val(latitud);
+          $("#longitud").val(longitud);
+          
+          initialize(latitud,longitud,15, "");
+          var marker = new google.maps.Marker({
+            map: map,
+            anchorPoint: new google.maps.Point(0, -29),
+            draggable: true,
+            position: new google.maps.LatLng(latitud, longitud)
+          });
+          
+          google.maps.event.addListener(marker, "dragend", function (event) {
+
+            lat = marker.getPosition().lat();
+            lng = marker.getPosition().lng();
+        
+            document.getElementById("latitud").value = lat;
+            document.getElementById("longitud").value = lng;
+            });
+          
+            var distrito = document.getElementById("distrito");
+
+            google.maps.event
+              .addDomListener(
+                distrito,
+                "change",
+                function () {
+          
+                  var geocoder = new google.maps.Geocoder();
+          
+                  var distritoV = distrito.value;
+                  if (distritoV.length > 1) {
+                    var departamentoT = document
+                      .getElementById('departamento').options[document
+                        .getElementById('departamento').selectedIndex].text;
+                    var distritoT = document.getElementById('distrito').options[document
+                      .getElementById('distrito').selectedIndex].text;
+                    var ubicacion = distritoT + ", " + departamentoT
+                      + ", Peru";
+                    geocoder
+                      .geocode(
+                        {
+                          "address": ubicacion
+                        },
+                        function (data) {
+                          var lat = data[0].geometry.location
+                            .lat();
+                          var lng = data[0].geometry.location
+                            .lng();
+                          var origin = new google.maps.LatLng(
+                            lat, lng);
+                          document
+                            .getElementById('latitud').value = lat;
+                          document
+                            .getElementById('longitud').value = lng;
+                          marker.setPosition(origin);
+                          map.setCenter(origin);
+                          map.setZoom(15);
+          
+                        });
+                  }
+          
+                });
 
         } else {
           alert("No existe la Emergencia");

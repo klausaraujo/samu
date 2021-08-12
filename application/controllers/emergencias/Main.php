@@ -7,32 +7,31 @@ class Main extends CI_Controller
 
     public function index() {
 
-        $this->load->model("Usuarios_model");
         $this->load->model("Emergencias_model");
-        $this->load->model("Ubigeo_model");
-
-        $this->user = $this->session->userdata("token");
-        $this->Usuarios_model->setIdUsuario($this->user->idusuario);
-        $departamentos = $this->Usuarios_model->extraeRegionesUsuario();
 
         $tipoLlamada = $this->Emergencias_model->tipoLlamada();
         $incid = $this->Emergencias_model->tipoIncidente();
         $prioriEm = $this->Emergencias_model->prioriEmergencia();
-        //$departamentos = $this->Ubigeo_model->departamentos();
-        $listaEm = $this->Emergencias_model->listarEmergencias();
 
-        if ($listaEm->num_rows() > 0) {
+        $emergDpto = $this->listarEmergencias();
+        $departamentos = $emergDpto["departamentos"];
+        $listaEm = $emergDpto["listaEmergencias"];
+
+        //$regi = $emergDpto["region"];
+        //$listaEm = str_replace("\\", "", $listaEm);
+        /*if ($listaEm->num_rows() > 0) {
             $listaEm = $listaEm->result();
         } else {
             $listaEm = array();
-        }
+        }*/
 
         $data = array(
             "listaEmergencias" => json_encode($listaEm),
-            "departamentos" => $departamentos->result(),
+            "departamentos" => $departamentos,
             "tipoLlamada" => $tipoLlamada->result(),
             "incid" => $incid->result(),
-            "priori" => $prioriEm->result()
+            "priori" => $prioriEm->result(),
+            //"prueba" => json_encode($reg)
         );
         
         $this->load->view("emergencias/main_emergencias",$data);
@@ -213,21 +212,39 @@ class Main extends CI_Controller
     }
 
     public function listarEmergencias(){
+        
+        $this->load->model("Usuarios_model");
         $this->load->model("Emergencias_model");
 
-        $listaEm = $this->Emergencias_model->listarEmergencias();
-
-        if ($listaEm->num_rows() > 0) {
-            $listaEm = $listaEm->result();
-        } else {
-            $listaEm = array();
-        }
+        $this->user = $this->session->userdata("token");
+        $this->Usuarios_model->setIdUsuario($this->user->idusuario);
+        $departamentos = $this->Usuarios_model->extraeRegionesUsuario();
+        
+        $reg = array();
+        $emerg = array();
+        //$listaEm = null;
+        //$departamentos = $this->Ubigeo_model->departamentos();
+        foreach($departamentos->result() as $row):
+            $this->Emergencias_model->setRegion($row->idregion);
+            $listaEm = $this->Emergencias_model->listarEmergencias();
+            if ($listaEm->num_rows() > 0) {
+                foreach($listaEm->result_array() as $em):
+                    $emerg[] = $em;
+                endforeach;
+                $reg[] = $row->idregion;
+            }
+        endforeach;
 
         $data = array(
-            "listaEmergencias" => $listaEm
+            "listaEmergencias" => $emerg,
+            "departamentos" => $departamentos->result()
         );
 
-        echo json_encode($data);
+        if($this->input->post("actualiza"))
+            echo json_encode($emerg);
+        else
+            return $data;
+            
     }
 	
 }

@@ -37,7 +37,7 @@ function emergencias(URI) {
           const { dist } = response;
           //console.log(data);          
           var k = 0; j = 0;
-          var reg, idreg;
+          var reg, idreg, tipod;
           var html = "";
           var dep = (data.ubigeo).substr(0,2);
           var pro = (data.ubigeo).substr(2,2);
@@ -50,15 +50,16 @@ function emergencias(URI) {
           
           $("#departamento option").each(function(){
             if ($(this).val() == dep ){        
-              $(this).attr("selected",true);
+              $(this).prop("selected",true);
             }
           });
 
           $("#tipoDoc option").each(function(){
             if ($(this).val() == data.tipo_documento ){        
-              $(this).attr("selected",true);
+              $(this).prop("selected",true);
             }
           });
+
           html = opt;
           for(k in incid) {
             reg = incid[k].tipo_incidente;
@@ -240,6 +241,7 @@ function emergencias(URI) {
         }
 
         },
+        { data: "region" },
         { data: "telefono01" },
         { data: "telefono02" },
         { data: "nombres" },
@@ -263,28 +265,28 @@ function emergencias(URI) {
         buttons: [{
           extend: 'copy',
           title: 'Lista General de Emergencias',
-          exportOptions: { columns: [1, 2, 3, 4, 5] },
+          exportOptions: { columns: [1, 2, 3, 4, 5, 6] },
         },
         {
           extend: 'csv',
           title: 'Lista General de Emergencias',
-          exportOptions: { columns: [1, 2, 3, 4, 5] },
+          exportOptions: { columns: [1, 2, 3, 4, 5, 6] },
         },
         {
           extend: 'excel',
           title: 'Lista General de Emergencias',
-          exportOptions: { columns: [1, 2, 3, 4, 5] },
+          exportOptions: { columns: [1, 2, 3, 4, 5, 6] },
         },
         {
           extend: 'pdf',
           title: 'Lista General de Emergencias',
           orientation: 'landscape',
-          exportOptions: { columns: [1, 2, 3, 4, 5] },
+          exportOptions: { columns: [1, 2, 3, 4, 5, 6] },
         },
         {
           extend: 'print',
           title: 'Lista General de Emergencias',
-          exportOptions: { columns: [1, 2, 3, 4, 5] },
+          exportOptions: { columns: [1, 2, 3, 4, 5, 6] },
           customize: function (win) {
             $(win.document.body).addClass('white-bg');
             $(win.document.body).css('font-size', '10px');
@@ -334,18 +336,27 @@ function emergencias(URI) {
       $("#act").val(0);
       $("#enviar").text("Guardar");
       $("#formRegistrar select").prop('selectedIndex',0);
+      if($("#nombres").is('[readonly]'))
+        $("#nombres").prop("readonly", false);
+      if($("#apellidos").is('[readonly]'))
+        $("#apellidos").prop("readonly", false);
+      if($("#doc").prop("disabled"))
+        $("#doc").prop("disabled", false);
+      $("#btn-buscar").show();
       showModal(event, 'Registrar Nueva Emergencia');
     });
 
     $("#btn-buscar").on("click", function () {
 			var documento_numero = $("input[name=doc]").val();
-      var type;
-      if (documento_numero.length >= 8) {
+      var type = $("select#tipoDoc").children("option:selected").val();
+      //console.log(tipo);
+      //var type;
+      /*if (documento_numero.length >= 8) {
 				type = "01";
 				if (documento_numero.length > 8) {
 					type = "03";
-				}
-
+				}*/
+      if(documento_numero != "" && type != ""){
 				$.ajax({
 					url: URI + "emergencias/main/curl",
 					data: { type: type, document: documento_numero },
@@ -400,7 +411,9 @@ function emergencias(URI) {
             }
 					}
 				});
-			}
+			}else{
+        alert("Debe ingresar el numero de documento y el tipo");
+      }
 		});
 
     $("#formRegistrar").validate({
@@ -537,13 +550,13 @@ function emergencias(URI) {
         $.ajax({
           type: 'POST',
           url: URI + 'emergencias/main/listarEmergencias',
-          data: {},
+          data: {'actualiza' : 'si'},
           dataType: 'json',
           success: function (response) {
-            //console.log(response);
-            const { listaEmergencias } = response;
+            console.log(response);
+            //const { listaEmergencias } = response;
             table.clear();
-            table.rows.add(listaEmergencias).draw();
+            table.rows.add(response).draw();
             //console.log(listaEmergencias);
             
             $(".actionEdit").on('click', function (event) {

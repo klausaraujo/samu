@@ -181,14 +181,17 @@ class Emergencias_model extends CI_Model
     }
 
     public function listarEmergencias(){
-        /*$sel = "em.idemergencia,em.telefono01,em.telefono02,em.idtipollamada,em.tipo_documento,".
+        $sel = "em.idemergencia,em.telefono01,em.telefono02,em.idtipollamada,em.tipo_documento,".
                 "em.numero_documento,em.apellidos,em.nombres,em.ubigeo,em.latitud,em.longitud,".
-                "em.idtipoincidente,em.fecha_incidente,em.activo,tl.tipo_llamada,ti.tipo_incidente";*/
-        $this->db->select("em.*,tl.tipo_llamada,ti.tipo_incidente,pe.prioridad_emergencia");
+                "em.idtipoincidente,em.fecha_incidente,em.activo,tl.tipo_llamada,ti.tipo_incidente,".
+                "pe.prioridad_emergencia,re.region";
+        $this->db->select($sel);
         $this->db->from("emergencia em");
         $this->db->join("tipo_llamada tl","tl.idtipollamada=em.idtipollamada");
         $this->db->join("tipo_incidente ti","em.idtipoincidente=ti.idtipoincidente");
         $this->db->join("prioridad_emergencia pe","em.idprioridademergencia=pe.idprioridademergencia");
+        $this->db->join("region re","substr(em.ubigeo,1,2)=re.idregion");
+        $this->db->where("substr(em.ubigeo,1,2)", $this->region);
         $this->db->order_by("em.idemergencia ASC");
         return $this->db->get();
     }

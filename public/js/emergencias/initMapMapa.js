@@ -495,7 +495,11 @@ function initialize(lat, lon, esc, val) {
 
 				map.setCenter(new google.maps.LatLng(y, x));
 			});
-
+	var input = document.getElementById('location');
+          var autocomplete = new google.maps.places.Autocomplete(
+            input,
+            {types: ['geocode']}
+          );
 	// cargarPoligonos(val);
 
 }

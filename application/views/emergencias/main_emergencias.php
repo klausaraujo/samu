@@ -59,7 +59,8 @@
 											<thead>
 												<tr>
 													<th>Acciones</th>
-													<th>Telefono ppal</th>
+													<th>Departamento</th>
+													<th>Telefono</th>
 													<th>Telefono 2</th>
 													<th>Nombres</th>
 													<th>Apellidos</th>

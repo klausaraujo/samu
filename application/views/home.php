@@ -33,7 +33,7 @@
 							  <a class="dropdown-item" href="#"><i class="ti-export"></i> Export</a>
 							  <a class="dropdown-item" href="#"><i class="ti-printer"></i> Print</a>
 							  <div class="dropdown-divider"></div>
-							  <a class="dropdown-item" href="#"><i class="ti-settings"></i> Settings</a>
+							  
 							</div>
 						  </li>
 						</ul>

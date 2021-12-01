@@ -362,9 +362,9 @@
 																	<div class="col-sm-8">
 																		<select class="form-control" name="idtiposoat" id="idtiposoat">
 																			<option value="">-- Tipo SOAT --</option>
-																			<?php foreach($listaCombustibles as $row): ?>
-																			<option value="<?=$row->idtipocombustible?>"><?=$row->combustible?></option>
-																			<?php endforeach; ?>
+																			<option value="1">Rimac Seguros y Reaseguros</option>
+																			<option value="2">Pacífico</option>
+																			<option value="3">Prima</option>																																					
 																		</select>
 																	</div>
 																</div>
@@ -382,9 +382,9 @@
 																	<div class="col-sm-6">
 																		<select class="form-control" name="idtipoeps" id="idtipoeps">
 																			<option value="">-- Tipo EPS --</option>
-																			<?php foreach($listaCombustibles as $row): ?>
-																			<option value="<?=$row->idtipocombustible?>"><?=$row->combustible?></option>
-																			<?php endforeach; ?>
+																			<option value="1">Rimac Seguros y Reaseguros</option>
+																			<option value="2">Pacífico</option>
+																			<option value="3">Prima</option>
 																		</select>
 																	</div>
 																</div>
@@ -449,7 +449,7 @@
 			var lista = JSON.parse('<?=$listaFichaAtencion?>');  
 
 		</script>
-		<script>ambulancias("<?=base_url()?>");</script>
+		<script>fichaatencion("<?=base_url()?>");</script>
 
 		<script src="<?=base_url()?>public//assets/vendor_components/apexcharts-bundle/dist/apexcharts.js"></script>
 		<script src="<?=base_url()?>public//assets/vendor_components/progressbar.js-master/dist/progressbar.js"></script>

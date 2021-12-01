@@ -57,16 +57,17 @@ class Main extends CI_Controller
         $this->load->model("Marcas_model");
         $this->load->model("Combustibles_model");
         $this->load->model("TipoAmbulancia_model");
+        
 
         $listaFichaAtencion = $this->Fichaatencion_model->obtenerFichaAtencion();
         $listaMarcas = $this->Marcas_model->obtenerMarcas();
         $listaCombustibles = $this->Combustibles_model->obtenerTiposCombustibles();
         $listaTiposAmbulancias = $this->TipoAmbulancia_model->obtenerTiposAmbulancias();
 
-        if ($listaAmbulancias->num_rows() > 0) {
-            $listaAmbulancias = $listaAmbulancias->result();
+        if ($listaFichaAtencion->num_rows() > 0) {
+            $listaFichaAtencion = $listaFichaAtencion->result();
         } else {
-            $listaAmbulancias = array();
+            $listaFichaAtencion = array();
         }
 
         $data = array(
@@ -209,6 +210,63 @@ class Main extends CI_Controller
         );
 
         echo json_encode($data);
+
+    }
+
+    public function cargarProvincias()
+    {
+        $this->load->model("Ubigeo_model");        
+        $departamento = $this->input->post("departamento");        
+        $this->Ubigeo_model->setcod_dep($departamento);        
+        $lista = $this->Ubigeo_model->provincias();
+        
+        $data = array(
+            "lista" => $lista->result()
+        );
+        
+        echo json_encode($data);
+    }
+
+    public function cargarDistritos()
+    {
+        $this->load->model("Ubigeo_model");
+        
+        $departamento = $this->input->post("departamento");
+        $provincia = $this->input->post("provincia");
+        
+        $this->Ubigeo_model->setcod_dep($departamento);
+        $this->Ubigeo_model->setcod_pro($provincia);
+        
+        $lista = $this->Ubigeo_model->distritos();
+        
+        $data = array(
+            "lista" => $lista->result()
+        );
+        
+        echo json_encode($data);
+    }
+
+    public function curl()
+    {
+        $tipo_documento = $this->input->post("type");
+        $documento = $this->input->post("document");
+        $api = "http://mpi.minsa.gob.pe/api/v1/ciudadano/ver/";
+        $token = "Bearer d90f5ad5d9c64268a00efaa4bd62a2a0";
+        $handler = curl_init();
+
+        curl_setopt($handler, CURLOPT_URL,  $api. $tipo_documento . "/" . $documento . "/");
+        curl_setopt($handler, CURLOPT_HEADER, false);
+        curl_setopt($handler, CURLOPT_HTTPHEADER, array(
+            "Authorization: " . $token,
+            "Content-Type: application/json"
+        ));
+        curl_setopt($handler, CURLOPT_RETURNTRANSFER, true);
+        $data = curl_exec($handler);
+        $code = curl_getinfo($handler, CURLINFO_HTTP_CODE);
+
+        curl_close($handler);
+
+        echo $data;
 
     }
 	

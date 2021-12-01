@@ -2,7 +2,7 @@
 if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
-class Ambulancias_model extends CI_Model
+class Fichaatencion_model extends CI_Model
 {
     private $idambulancia;
     private $placa;

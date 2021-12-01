@@ -127,6 +127,12 @@ class Fichaatencion_model extends CI_Model
         $this->db->where("placa", $this->placa);
         return $this->db->get();
     }
+    
+    public function listarDepartamentos(){
+        $this->db->select("cod_dep as idregion, departamento as region");
+        $this->db->from("lista_departamentos");
+        return $this->db->get();
+    }
 }
 
 

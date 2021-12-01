@@ -282,7 +282,7 @@
 															<div class="col-sm-5">
 																<select class="form-control" style="height:30px" name="departamento" id="departamento">
 																	<option value="0">-- Regi&oacute;n --</option>
-																	<?php foreach($departamentos as $row): ?>
+																	<?php foreach($listaDepartamentos as $row): ?>
 																	<option value="<?=$row->idregion?>"><?=$row->region?></option>
 																	<?php endforeach; ?>
 																</select>

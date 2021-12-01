@@ -63,6 +63,7 @@ class Main extends CI_Controller
         $listaMarcas = $this->Marcas_model->obtenerMarcas();
         $listaCombustibles = $this->Combustibles_model->obtenerTiposCombustibles();
         $listaTiposAmbulancias = $this->TipoAmbulancia_model->obtenerTiposAmbulancias();
+        $listaDepartamentos = $this->Fichaatencion_model->listarDepartamentos();
 
         if ($listaFichaAtencion->num_rows() > 0) {
             $listaFichaAtencion = $listaFichaAtencion->result();
@@ -74,8 +75,8 @@ class Main extends CI_Controller
             "listaFichaAtencion" => json_encode($listaFichaAtencion),
             "listaMarcas" => $listaMarcas->result(),
             "listaCombustibles" => $listaCombustibles->result(),
-            "listaTiposAmbulancias" => $listaTiposAmbulancias->result()
-
+            "listaTiposAmbulancias" => $listaTiposAmbulancias->result(),
+            "listaDepartamentos" => $listaDepartamentos->result()
         );
         
         $this->load->view("fichaatencion/main_fichaatencion", $data);

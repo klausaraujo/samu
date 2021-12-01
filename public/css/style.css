@@ -112,7 +112,7 @@ body {
 body {
   overflow-x: hidden;
   overflow-y: auto;
-  color: #7792b1;
+  color: #000000;
   font-size: 1rem;
   font-style: normal;
   font-weight: 400;
@@ -125,7 +125,7 @@ body {
 
 /*---basic---*/
 a {
-  color: #7792b1; }
+  color: #ffffff; }
 
 a:hover, a:active, a:focus {
   outline: 0;
@@ -13675,10 +13675,10 @@ body .main-header .navbar .nav > li.search-box > a:hover, body .main-header .nav
   .content-header .breadcrumb {
     padding: 0;
     margin-bottom: 0;
-    color: #7792b1;
+    color: #ffffff;
     background-color: transparent; }
     .content-header .breadcrumb .breadcrumb-item a {
-      color: #7792b1; }
+      color: #ffffff; }
   .content-header > .breadcrumb > li > a {
     color: #98acc3;
     text-decoration: none;
@@ -18708,7 +18708,7 @@ textarea.form-control {
       float: left; }
   .box-comments .comment-text {
     margin-left: 40px;
-    color: #7792b1; }
+    color: #ffffff; }
   .box-comments .username {
     color: #475F7B;
     display: block;
@@ -20092,7 +20092,7 @@ ul.flexbox {
 /*---box nav-tab---*/
 .nav-tabs .nav-link {
   position: relative;
-  color: #7792b1;
+  color: #ffffff;
   padding: 0.5rem 1.25rem;
   border-radius: 0;
   -webkit-transition: 0.5s;
@@ -20515,7 +20515,7 @@ ul.flexbox {
   vertical-align: text-bottom;
   margin-left: -10px;
   margin-bottom: 14px;
-  color: #7792b1; }
+  color: #ffffff; }
 
 /*---todo-list---*/
 .todo-list {
@@ -21736,7 +21736,7 @@ button.btn.dropdown-toggle:after {
   padding: 5px;
   font-size: 12px;
   background: 0 0;
-  color: #7792b1;
+  color: #ffffff;
   cursor: pointer; }
   .btn-box-tool:hover, .btn-box-tool .show .btn-box-tool {
     color: #475F7B; }

@@ -30,7 +30,7 @@ body{
 	font-weight:400;
 	font-family: $bodyfont;
 	line-height:1.5;
-	background-color:#f4f5f9;
+	background-color:#a4a5a8;
 }
 .base-font{
     font-family: $bodyfont; 
@@ -193,7 +193,7 @@ hr {
 
 .theme-switch li a.active{
 	opacity: 0.6;
-    border: 5px solid #ffffff;
+    border: 5px solid #312f2f;
 }
 .dark-skin .theme-switch li a.active{
     border: 5px solid lighten($black, 15%);
@@ -295,7 +295,7 @@ $border-sizes-list: 0 1 2 3 4 5;
   }
 }
 .border-transparent {border-color: transparent !important; }
-.border-white       {border-color: #fff !important; }
+.border-white       {border-color: #000 !important; }
 .border-light       {border-color: $light !important; }
 .border-fade        {border-color: lighten($light, 01%) !important; }
 

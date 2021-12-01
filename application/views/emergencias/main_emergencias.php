@@ -78,7 +78,7 @@
 							<div class="modal-dialog modal-lg" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
-										<span class="modal-title" id="editarModalLabel" style="color:blue;font-size:14pt"></span>
+										<span class="modal-title" id="editarModalLabel" style="color:white;font-size:14pt"></span>
 										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 										</button>										
@@ -137,8 +137,8 @@
 															<input value ="" type="text" class="form-control" name="doc" id="doc" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" maxlength="9" />
 														</div>
                                                         <div class="col-sm-3">
-															<button type="button" id="btn-buscar" class="btn btn-info btn-sm">
-																<i class="fa fa-search" aria-hidden="true"></i>&nbsp;&nbsp;Buscar
+															<button type="button" id="btn-buscar" class="btn btn-primary">
+																<i class="fa fa-search" aria-hidden="true">&nbsp;Buscar</i>
 															</button>
 														</div>
 													</div>

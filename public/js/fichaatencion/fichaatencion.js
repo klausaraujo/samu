@@ -1,4 +1,4 @@
-function emergencias(URI) {
+function fichaatencion(URI) {
     var table = null;
 
     function showModal(event,title) {
@@ -215,7 +215,7 @@ function emergencias(URI) {
 
     $(document).ready(function () {
       var data;
-      table = $('#dt-emergencias').DataTable({
+      table = $('#dt-fichaatecion').DataTable({
       data: emerg,
       pageLength: 10,
       dom: 'Bfrt<"col-sm-12 inline"i> <"col-sm-12 inline"p>',
@@ -226,7 +226,7 @@ function emergencias(URI) {
           data: null,
             render: function (data, type, row, meta) {
             const btnEdit = data.activo == "1" ? `
-            <input type="hidden" value="`+data.idemergencia+`" /><button class="btn btn-warning btn-circle actionEdit" title="Editar Registro" type="button" style="margin-right: 5px;">
+            <input type="hidden" value="`+data.idfichaatencion+`" /><button class="btn btn-warning btn-circle actionEdit" title="Editar Registro" type="button" style="margin-right: 5px;">
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
             </button>` : `
             <button class="btn btn-warning btn-circle disabled" title="Editar Registro" type="button" style="margin-right: 5px;">
@@ -246,12 +246,14 @@ function emergencias(URI) {
                     </div>`;
         }
         },
-        { data: "region" },
-        { data: "telefono01" },
-        { data: "telefono02" },
-        { data: "nombres" },
-        { data: "apellidos" },
-        { data: "tipo_incidente"},      
+        { data: "foco" },
+        { data: "traslado" },
+        { data: "motivo_emergencia" },
+        { data: "idtipodocumento" },
+        { data: "numdoc" },
+        { data: "Paciente"},      
+        { data: "Fecha Ocurrencia"},      
+        { data: "Estado Registro"}
       ],
       columnDefs: [],
       select: true,
@@ -267,28 +269,28 @@ function emergencias(URI) {
         },
         buttons: [{
           extend: 'copy',
-          title: 'Lista General de Emergencias',
+          title: 'Lista General de Fichas de Atención',
           exportOptions: { columns: [1, 2, 3, 4, 5, 6] },
         },
         {
           extend: 'csv',
-          title: 'Lista General de Emergencias',
+          title: 'Lista General de Fichas de Atención',
           exportOptions: { columns: [1, 2, 3, 4, 5, 6] },
         },
         {
           extend: 'excel',
-          title: 'Lista General de Emergencias',
+          title: 'Lista General de Fichas de Atención',
           exportOptions: { columns: [1, 2, 3, 4, 5, 6] },
         },
         {
           extend: 'pdf',
-          title: 'Lista General de Emergencias',
+          title: 'Lista General de Fichas de Atención',
           orientation: 'landscape',
           exportOptions: { columns: [1, 2, 3, 4, 5, 6] },
         },
         {
           extend: 'print',
-          title: 'Lista General de Emergencias',
+          title: 'Lista General de Fichas de Atención',
           exportOptions: { columns: [1, 2, 3, 4, 5, 6] },
           customize: function (win) {
             $(win.document.body).addClass('white-bg');
@@ -334,19 +336,9 @@ function emergencias(URI) {
 
     $(".btn-nuevo").on('click', function (event) {
       $("#formRegistrar")[0].reset();
-      $("#datos").hide();
-      $(".etiq").show();
-      $("#act").val(0);
-      $("#enviar").text("Guardar");
-      $("#formRegistrar select").prop('selectedIndex',0);
-      if($("#nombres").is('[readonly]'))
-        $("#nombres").prop("readonly", false);
-      if($("#apellidos").is('[readonly]'))
-        $("#apellidos").prop("readonly", false);
-      if($("#doc").prop("disabled"))
-        $("#doc").prop("disabled", false);
+
       $("#btn-buscar").show();
-      showModal(event, 'Registrar Nueva Emergencia');
+      showModal(event, 'Registrar Nueva Ficha de Atención');
     });
 
     $("#btn-buscar").on("click", function () {

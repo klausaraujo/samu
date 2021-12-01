@@ -16,22 +16,12 @@ class Main extends CI_Controller
         $emergDpto = $this->listarEmergencias();
         $departamentos = $emergDpto["departamentos"];
         $listaEm = $emergDpto["listaEmergencias"];
-
-        //$regi = $emergDpto["region"];
-        //$listaEm = str_replace("\\", "", $listaEm);
-        /*if ($listaEm->num_rows() > 0) {
-            $listaEm = $listaEm->result();
-        } else {
-            $listaEm = array();
-        }*/
-
         $data = array(
             "listaEmergencias" => json_encode($listaEm),
             "departamentos" => $departamentos,
             "tipoLlamada" => $tipoLlamada->result(),
             "incid" => $incid->result(),
             "priori" => $prioriEm->result(),
-            //"prueba" => json_encode($reg)
         );
         
         $this->load->view("emergencias/main_emergencias",$data);
@@ -54,8 +44,7 @@ class Main extends CI_Controller
         $this->user = $this->session->userdata("token");
         $this->Emergencias_model->setIdUsuario($this->user->idusuario);
         $this->Emergencias_model->setFechaActual($fechaActual);
-        
-        //$this->Emergencias_model->setidEmergencia($this->input->post("idem"));
+    
         $this->Emergencias_model->setTelf($this->input->post("tlf"));
         $this->Emergencias_model->setTelf2($this->input->post("tlf2"));
         $this->Emergencias_model->setTipoLlamada($this->input->post("tipoLl"));               
@@ -222,8 +211,6 @@ class Main extends CI_Controller
         
         $reg = array();
         $emerg = array();
-        //$listaEm = null;
-        //$departamentos = $this->Ubigeo_model->departamentos();
         foreach($departamentos->result() as $row):
             $this->Emergencias_model->setRegion($row->idregion);
             $listaEm = $this->Emergencias_model->listarEmergencias();
@@ -244,6 +231,39 @@ class Main extends CI_Controller
             echo json_encode($emerg);
         else
             return $data;
+            
+    }
+
+    public function listar(){
+        
+        $this->load->model("Usuarios_model");
+        $this->load->model("Emergencias_model");
+
+        $this->user = $this->session->userdata("token");
+        $this->Usuarios_model->setIdUsuario($this->user->idusuario);
+        $departamentos = $this->Usuarios_model->extraeRegionesUsuario();
+        $region = $this->input->post('region');
+        
+        $reg = array();
+        $emerg = array();
+        $this->Emergencias_model->setRegion($region);
+        $listaEm = $this->Emergencias_model->listar();
+        foreach($departamentos->result() as $row):
+            $this->Emergencias_model->setRegion($row->idregion);
+            $listaEme = $this->Emergencias_model->listarEmergencias();
+            if ($listaEme->num_rows() > 0) {
+                foreach($listaEme->result_array() as $em):
+                    $emerg[] = $em;
+                endforeach;
+                $reg[] = $row->idregion;
+            }
+        endforeach;
+        
+        $data = array(
+            "listar" => $listaEm,
+            "departamentos" => $departamentos->result()
+        );
+        $this->load->view("emergencias/main_emergencias", $data);
             
     }
 	

@@ -16,3 +16,7 @@ $route['usuarios'] = 'usuarios/main/index';
 
 /* EMERGENCIAS  */
 $route['emergencias'] = 'emergencias/main/index';
+$route['emergencias/listar'] = 'emergencias/main/listar';
+
+/* FICHA ATENCION */
+$route['fichaatencion'] = 'fichaatencion/main/index';

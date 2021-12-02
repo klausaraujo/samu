@@ -422,8 +422,191 @@
 													
 												</div>
 												
-												</hr>
+												<hr/>
+
+												<div class="row">
+													
+													<div class="col-sm-12">
+														<div class="form-group row">
+															<label class="modal-label col-sm-2 col-form-label py-10">Antecedentes: </label>
+															<div class="col-sm-9">
+															<input type="text" class="form-control" name="antecedentes" id="antecedentes" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="10"/>
+															</div>
+														</div>
+													</div>	
+													<div class="col-sm-12">
+														<div class="form-group row">
+															<label class="modal-label col-sm-2 col-form-label py-10">Alergias: </label>
+															<div class="col-sm-9">
+															<input type="text" class="form-control" name="alergias" id="alergias" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="10"/>
+															</div>
+														</div>
+													</div>																				
+													<div class="col-sm-4">
+														<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">Tipo de Documento: </label>
+															<div class="col-sm-5">
+																<select class="form-control" name="idtipodocumento" id="idtipodocumento">
+																	<option value="">-- Tipo Documento --</option>
+																	<?php foreach($listadocumento as $row): ?>
+																	<option value="<?=$row->idtipodocumento?>"><?=$row->tipo_documento?></option>
+																	<?php endforeach; ?>
+																</select>
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-4">
+														<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">Número de Documento: </label>
+															<div class="col-sm-5">
+																<input type="text" class="form-control" name="numdoc" id="numdoc" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="10"/>
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-4">
+														<div class="form-group row">
+															<label class="modal-label col-sm-3 col-form-label py-10">Paciente: </label>
+															<div class="col-sm-8">
+																<input type="text" class="form-control" name="nomb_comp_paciente" id="nomb_comp_paciente" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="10"/>
+															</div>
+														</div>
+													</div>																																												
+													<div class="col-sm-4">
+														<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">Nacimiento: </label>
+															<div class="col-sm-5">
+																<input type="date" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento" value=""/>
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-4">
+														<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">Edad Actual: </label>
+															<div class="col-sm-5">
+																<input type="text" class="form-control" name="edad_actual" id="edad_actual" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="10"/>
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-4">
+														<div class="form-group row">
+															<label class="modal-label col-sm-2 col-form-label py-10">Sexo: </label>
+															<div class="col-sm-5">
+																<select class="form-control" name="sexo" id="sexo">
+																	<option value="">-- Seleccione --</option>
+																	<option value="1">Femenino</option>
+																	<option value="2">Masculino</option>																
+																</select>
+															</div>
+															<div class="form-group row">
+																	<div class="col-sm-12">
+																	<div class="checkbox checkbox-primary">
+																		<input id="gestante" type="checkbox" name="gestante">
+																		<label for="gestante">
+																		Gestante
+																		</label>
+																	</div>
+																	</div>
+															</div>	
+														</div>
+													</div>
+													<div class="col-sm-4">
+														<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">Dirección: </label>
+															<div class="col-sm-5">
+																<input type="text" class="form-control" name="direccion" id="direccion" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="10"/>
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-4">
+														<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">Departamento: </label>
+															<div class="col-sm-5">
+																<select class="form-control" style="height:30px" name="departamento" id="departamento">
+																	<option value="0">-- Regi&oacute;n --</option>
+																	<?php foreach($listaDepartamentos as $row): ?>
+																	<option value="<?=$row->idregion?>"><?=$row->region?></option>
+																	<?php endforeach; ?>
+																</select>
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-4">
+														<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">Provincia: </label>
+															<div class="col-sm-5">
+																<select class="form-control" name="provincia" id="provincia">
+																	<option value="">-- Elija Provincia --</option>
+																</select>
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-4">
+														<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">Distrito: </label>
+															<div class="col-sm-5">
+																<select class="form-control" name="distrito" id="distrito">
+																	<option value="">-- Elija Distrito --</option>
+																</select>
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-4">
+														<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">Referencia: </label>
+															<div class="col-sm-5">
+																<input type="text" class="form-control" name="referencia" id="referencia" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="10"/>
+															</div>
+														</div>
+													</div>
+												</div>
+
+												<hr/>
+												<label class="modal-label col-sm-5 col-form-label py-10">Enfermedad Actual</label>
+												<div class="row">
 												
+													<div class="col-sm-6">
+														<div class="form-group row">
+															<label class="modal-label col-sm-3 col-form-label py-10">Tiempo de Enfermedad: </label>
+															<div class="col-sm-6">
+															<input type="text" class="form-control" name="antecedentes" id="antecedentes" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="10"/>
+															</div>
+														</div>
+													</div>	
+													<div class="col-sm-3">
+														<div class="form-group row">
+															<label class="modal-label col-sm-3 col-form-label py-10">Fecha Inicio: </label>
+															<div class="col-sm-6">
+																<input type="date" class="form-control" name="fecha_inicio_enfermedad" id="fecha_inicio_enfermedad" value=""/>
+															</div>
+														</div>
+													</div>		
+													<div class="col-sm-3">
+														<div class="form-group row">
+															<label class="modal-label col-sm-3 col-form-label py-10">Curso: </label>
+															<div class="col-sm-6">
+																<input type="date" class="form-control" name="fecha_curso_enfermedad" id="fecha_curso_enfermedad" value=""/>
+															</div>
+														</div>
+													</div>		
+													
+												</div>
+
+												<hr/>
+
+												<label class="modal-label col-sm-5 col-form-label py-10">RELATO DEL EVENTO:</label>
+												<div class="row">
+												
+													<div class="col-sm-12">
+														<div class="form-group row">
+															<div class="col-sm-8">
+															<textarea class="form-control" name="antecedentes" id="antecedentes" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="10" style= "height:158px"> </textarea>
+															</div>
+														</div>
+													</div>			
+													
+												</div>
+
+												<hr/>
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

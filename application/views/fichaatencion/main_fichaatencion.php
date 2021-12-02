@@ -208,8 +208,9 @@
 															<div class="col-sm-5">
 																<select class="form-control" name="idtipodocumento" id="idtipodocumento">
 																	<option value="">-- Tipo Documento --</option>
-																	<option value="1">DNI</option>
-																	<option value="3">CARNET DE EXTRANJERIA</option>
+																	<?php foreach($listadocumento as $row): ?>
+																	<option value="<?=$row->idtipodocumento?>"><?=$row->tipo_documento?></option>
+																	<?php endforeach; ?>
 																</select>
 															</div>
 														</div>
@@ -251,7 +252,7 @@
 															<label class="modal-label col-sm-2 col-form-label py-10">Sexo: </label>
 															<div class="col-sm-5">
 																<select class="form-control" name="sexo" id="sexo">
-																	<option value="">-- Tipo Documento --</option>
+																	<option value="">-- Seleccione --</option>
 																	<option value="1">Femenino</option>
 																	<option value="2">Masculino</option>																
 																</select>

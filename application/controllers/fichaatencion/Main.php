@@ -64,6 +64,7 @@ class Main extends CI_Controller
         $listaCombustibles = $this->Combustibles_model->obtenerTiposCombustibles();
         $listaTiposAmbulancias = $this->TipoAmbulancia_model->obtenerTiposAmbulancias();
         $listaDepartamentos = $this->Fichaatencion_model->listarDepartamentos();
+        $listadocumento = $this->Fichaatencion_model->obtenerTipoDocumento();
 
         if ($listaFichaAtencion->num_rows() > 0) {
             $listaFichaAtencion = $listaFichaAtencion->result();
@@ -76,7 +77,8 @@ class Main extends CI_Controller
             "listaMarcas" => $listaMarcas->result(),
             "listaCombustibles" => $listaCombustibles->result(),
             "listaTiposAmbulancias" => $listaTiposAmbulancias->result(),
-            "listaDepartamentos" => $listaDepartamentos->result()
+            "listaDepartamentos" => $listaDepartamentos->result(),
+            "listadocumento" => $listadocumento->result()
         );
         
         $this->load->view("fichaatencion/main_fichaatencion", $data);

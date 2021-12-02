@@ -68,8 +68,16 @@ class Fichaatencion_model extends CI_Model
     public function obtenerFichaAtencion()
     {
         $this->db->select("l.*");
-        $this->db->from("fichaatencion l");
+        $this->db->from("ficha_atencion l");
         $this->db->order_by("l.idfichaatencion ASC");
+        return $this->db->get();
+        
+    }
+    public function obtenerTipoDocumento()
+    {
+        $this->db->select("l.*");
+        $this->db->from("tipo_documento l");
+        $this->db->order_by("l.idtipodocumento ASC");
         return $this->db->get();
         
     }

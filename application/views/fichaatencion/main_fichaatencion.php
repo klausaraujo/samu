@@ -88,8 +88,8 @@
 															<div class="col-sm-5">
 																<select class="form-control" name="idbase" id="idbase">
 																	<option value="">-- Base --</option>
-																	<?php foreach($listaMarcas as $row): ?>
-																	<option value="<?=$row->idmarca?>"><?=$row->marca?></option>
+																	<?php foreach($listabase as $row): ?>
+																	<option value="<?=$row->idbase?>"><?=$row->nombre?></option>
 																	<?php endforeach; ?>
 																</select>
 															</div>															
@@ -207,7 +207,6 @@
 															<label class="modal-label col-sm-5 col-form-label py-10">Tipo de Documento: </label>
 															<div class="col-sm-5">
 																<select class="form-control" name="idtipodocumento" id="idtipodocumento">
-																	<option value="">-- Tipo Documento --</option>
 																	<?php foreach($listadocumento as $row): ?>
 																	<option value="<?=$row->idtipodocumento?>"><?=$row->tipo_documento?></option>
 																	<?php endforeach; ?>
@@ -218,9 +217,14 @@
 													<div class="col-sm-4">
 														<div class="form-group row">
 															<label class="modal-label col-sm-5 col-form-label py-10">Número de Documento: </label>
-															<div class="col-sm-5">
+															<div class="col-sm-4">
 																<input type="text" class="form-control" name="numdoc" id="numdoc" onkeyup="javascript:this.value=this.value.toUpperCase();" maxlength="10"/>
 															</div>
+															<div class="col-sm-3">
+															<button type="button" id="btn-buscar" class="btn btn-primary">
+																<i class="fa fa-search" aria-hidden="true">&nbsp;Buscar</i>
+															</button>
+														</div>
 														</div>
 													</div>
 													<div class="col-sm-4">
@@ -253,8 +257,8 @@
 															<div class="col-sm-5">
 																<select class="form-control" name="sexo" id="sexo">
 																	<option value="">-- Seleccione --</option>
-																	<option value="1">Femenino</option>
-																	<option value="2">Masculino</option>																
+																	<option value="1">Masculino</option>
+																	<option value="2">Femenino</option>																
 																</select>
 															</div>
 															<div class="form-group row">
@@ -630,8 +634,8 @@
 		<script> 
 			const canDelete = "1";
 			const canEdit = "1";
-			var lista = JSON.parse('<?=$listaFichaAtencion?>');  
-
+			//var lista = JSON.parse('<?=$listaFichaAtencion?>');  
+			var emerg = JSON.parse('<?=$listaFichaAtencion?>');
 		</script>
 		<script>fichaatencion("<?=base_url()?>");</script>
 

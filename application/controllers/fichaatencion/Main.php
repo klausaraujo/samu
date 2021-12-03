@@ -65,6 +65,7 @@ class Main extends CI_Controller
         $listaTiposAmbulancias = $this->TipoAmbulancia_model->obtenerTiposAmbulancias();
         $listaDepartamentos = $this->Fichaatencion_model->listarDepartamentos();
         $listadocumento = $this->Fichaatencion_model->obtenerTipoDocumento();
+        $listabase = $this->Fichaatencion_model->obtenerBases();
 
         if ($listaFichaAtencion->num_rows() > 0) {
             $listaFichaAtencion = $listaFichaAtencion->result();
@@ -78,7 +79,8 @@ class Main extends CI_Controller
             "listaCombustibles" => $listaCombustibles->result(),
             "listaTiposAmbulancias" => $listaTiposAmbulancias->result(),
             "listaDepartamentos" => $listaDepartamentos->result(),
-            "listadocumento" => $listadocumento->result()
+            "listadocumento" => $listadocumento->result(),
+            "listabase" => $listabase->result()
         );
         
         $this->load->view("fichaatencion/main_fichaatencion", $data);
@@ -271,6 +273,41 @@ class Main extends CI_Controller
 
         echo $data;
 
+    }
+
+    public function listarFichasAtencion(){
+        
+        $this->load->model("Usuarios_model");
+        $this->load->model("Fichaatencion_model");
+
+        $this->user = $this->session->userdata("token");
+        $this->Usuarios_model->setIdUsuario($this->user->idusuario);
+        $departamentos = $this->Usuarios_model->extraeRegionesUsuario();
+        $fichaatencion = $this->Fichaatencion_model->obtenerFichaAtencion();
+        
+        $reg = array();
+        $emerg = array();
+        foreach($departamentos->result() as $row):
+            //$this->Emergencias_model->setRegion($row->idregion);
+            $listaFa = $this->Fichaatencion_model->obtenerFichaAtencion();
+            if ($listaFa->num_rows() > 0) {
+                foreach($listaFa->result_array() as $em):
+                    $emerg[] = $em;
+                endforeach;
+                $reg[] = $row->idregion;
+            }
+        endforeach;
+
+        $data = array(
+            "listarFichasAtencion" => $emerg//,
+            //"departamentos" => $departamentos->result()
+        );
+
+        if($this->input->post("actualiza"))
+            echo json_encode($emerg);
+        else
+            return $data;
+            
     }
 	
 }

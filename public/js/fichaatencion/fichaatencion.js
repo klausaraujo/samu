@@ -342,11 +342,11 @@ function fichaatencion(URI) {
     });
 
     $("#btn-buscar").on("click", function () {
-			var documento_numero = $("input[name=doc]").val();
-      var type = $("select#tipoDoc").children("option:selected").val();
+			var documento_numero = $("input[name=numdoc]").val();
+      var type = $("select#idtipodocumento").children("option:selected").val();
       if(documento_numero != "" && type != ""){
 				$.ajax({
-					url: URI + "emergencias/main/curl",
+					url: URI + "fichaatencion/main/curl",
 					data: { type: type, document: documento_numero },
 					method: 'post',
 					dataType: 'json',
@@ -356,27 +356,26 @@ function fichaatencion(URI) {
 					beforeSend: function () { $("#btn-buscar").html('<i class="fa fa-spinner fa-pulse"></i>'); },
 					success: function (response) {            
             if(response.data){
-              if(!$("#nombres").prop("readonly"))
-                $("#nombres").prop("readonly", true);
-              if(!$("#apellidos").prop("readonly"))
-                $("#apellidos").prop("readonly", true);
+              if(!$("#nomb_comp_paciente").prop("readonly"))
+                $("#nomb_comp_paciente").prop("readonly", true);
               const { data } = response;
               const datos = data.attributes;
               $("#btn-buscar").html('<i class="fa fa-search" aria-hidden="true"></i>&nbsp;&nbsp;Buscar');
-              $("#apellidos").val(datos.apellido_paterno+" "+datos.apellido_materno);
-              $("#nombres").val(datos.nombres);
-              $("#dir").html(datos.domicilio_direccion);
-              $("#fechNac").val(datos.fecha_nacimiento);
+              $("#nomb_comp_paciente").val(datos.nombres+ " " +datos.apellido_paterno+ " " +datos.apellido_materno) ;
+              $("#direccion").val(datos.domicilio_direccion);
+              $("#fecha_nacimiento").val(datos.fecha_nacimiento);
+              $("#edad_actual").val(datos.edad_anios);
+              $("#sexo").val(datos.sexo);
               $("#datos").show();
+              if(datos.sexo==1)
+                {
+                  $("#gestante").prop("readonly", false);
+                }
             }else{
               $("#btn-buscar").html('<i class="fa fa-search" aria-hidden="true"></i>&nbsp;&nbsp;Buscar');
               alert(response.errors[0].detail);
-              if($("#nombres").prop("readonly"))
-                $("#nombres").prop("readonly", false);
-              if($("#apellidos").prop("readonly"))
-                $("#apellidos").prop("readonly", false);
-              $("#apellidos").val("");
-              $("#nombres").val("");
+              if($("#nomb_comp_paciente").prop("readonly"))
+                $("#nomb_comp_paciente").prop("readonly", false);
               if($("#datos").show())
                 $("#datos").hide();
             }
@@ -515,7 +514,7 @@ function fichaatencion(URI) {
       function loadData() {
         $.ajax({
           type: 'POST',
-          url: URI + 'emergencias/main/listarEmergencias',
+          url: URI + 'fichaatencion/main/listarFichasAtencion',
           data: {'actualiza' : 'si'},
           dataType: 'json',
           success: function (response) {
@@ -525,7 +524,7 @@ function fichaatencion(URI) {
             $(".actionEdit").on('click', function (event) {
               const inp = this.previousSibling;
               buscar(inp.value);
-              showModal(event, 'Editar Emergencia');
+              showModal(event, 'Editar Ficha Atención');
             });
           }
         });

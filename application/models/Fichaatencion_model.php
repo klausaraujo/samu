@@ -81,6 +81,14 @@ class Fichaatencion_model extends CI_Model
         return $this->db->get();
         
     }
+    public function obtenerBases()
+    {
+        $this->db->select("l.*");
+        $this->db->from("base l");
+        $this->db->order_by("l.idbase ASC");
+        return $this->db->get();
+        
+    }
     public function guardarAmbulancia()
     {
         $data = array(

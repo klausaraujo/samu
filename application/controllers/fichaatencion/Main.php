@@ -66,6 +66,9 @@ class Main extends CI_Controller
         $listaDepartamentos = $this->Fichaatencion_model->listarDepartamentos();
         $listadocumento = $this->Fichaatencion_model->obtenerTipoDocumento();
         $listabase = $this->Fichaatencion_model->obtenerBases();
+        $listaambulancia = $this->Fichaatencion_model->obtenerAmbulancias();
+        $listaprioridademergencia = $this->Fichaatencion_model->obtenerPrioridademergencia();
+        $listaTipoSeguro = $this->Fichaatencion_model->obtenerTipoSeguro();
 
         if ($listaFichaAtencion->num_rows() > 0) {
             $listaFichaAtencion = $listaFichaAtencion->result();
@@ -80,60 +83,118 @@ class Main extends CI_Controller
             "listaTiposAmbulancias" => $listaTiposAmbulancias->result(),
             "listaDepartamentos" => $listaDepartamentos->result(),
             "listadocumento" => $listadocumento->result(),
-            "listabase" => $listabase->result()
+            "listabase" => $listabase->result(),
+            "listaambulancia" => $listaambulancia->result(),
+            "listaprioridademergencia" => $listaprioridademergencia->result(),
+            "listaTipoSeguro" => $listaTipoSeguro->result()
         );
         
         $this->load->view("fichaatencion/main_fichaatencion", $data);
                 
     }
-    public function guardarAmbulancia() {
+    public function guardarFichaAtencion() {
 
-       $this->load->model("Ambulancias_model");
-        
-        $idambulancia = $this->input->post("idambulancia");
-        $placa = $this->input->post("placa");
-        $idmarca = $this->input->post("idmarca");
-        $modelo = $this->input->post("modelo");
-        $idtipocombustible = $this->input->post("idtipocombustible");
-        $gps = $this->input->post("gps");
-        $idtipoambulancia = $this->input->post("idtipoambulancia");
-        $serie_motor = $this->input->post("serie_motor");
-        $codigo_patrimonial = $this->input->post("codigo_patrimonial");
-        $fabricacion_anio = $this->input->post("fabricacion_anio");
-        $modelo_anio = $this->input->post("modelo_anio");
-        $condicion = $this->input->post("condicion");
-        $tarjeta = $this->input->post("tarjeta");
-        $fotografia = $this->input->post("fotografia");
+       $this->load->model("Fichaatencion_model");
+       
+       $departamento = $this->input->post("departamento");
+       $provincia = $this->input->post("provincia");
+       $distrito = $this->input->post("distrito");
 
-        $this->Ambulancias_model->setidambulancia($idambulancia);
-        $this->Ambulancias_model->setplaca ($placa);
-        $this->Ambulancias_model->setidmarca ($idmarca);
-        $this->Ambulancias_model->setmodelo ($modelo);
-        $this->Ambulancias_model->setidtipocombustible ($idtipocombustible);
-        $this->Ambulancias_model->setgps ($gps);
-        $this->Ambulancias_model->setidtipoambulancia ($idtipoambulancia);
-        $this->Ambulancias_model->setserie_motor ($serie_motor);
-        $this->Ambulancias_model->setcodigo_patrimonial ($codigo_patrimonial);
-        $this->Ambulancias_model->setfabricacion_anio ($fabricacion_anio);
-        $this->Ambulancias_model->setmodelo_anio ($modelo_anio);
-        $this->Ambulancias_model->setcondicion ($condicion);
-        $this->Ambulancias_model->settarjeta ($tarjeta);
-        $this->Ambulancias_model->setfotografia ($fotografia);
+       $idfichaatencion = $this->input->post("idfichaatencion");
+       $idtiposeguro = $this->input->post("idtiposeguro");
+       $seguro = $this->input->post("seguro");
+       $idbase = $this->input->post("idbase");
+       $idambulancia = $this->input->post("idambulancia");
+       //$fecha_emision = formatearFechaParaBD($this->input->post("fecha_emision"));
+       $fecha_ocurrencia = $this->input->post("fecha_ocurrencia");
 
-        $fotografia = $_FILES["file"];
+       $despacho_ambulancia = $this->input->post("despacho_ambulancia");
+       $salida_base = $this->input->post("salida_base");
+       $llegada_foco = $this->input->post("llegada_foco");
+       $salida_foco = $this->input->post("salida_foco");
+       $llegada_base = $this->input->post("llegada_base");
+       $lugar_atencion = $this->input->post("lugar_atencion");
+       $motivo_emergencia = $this->input->post("motivo_emergencia");
+       $idprioridademergencia = $this->input->post("idprioridademergencia");
+       $fallecido = $this->input->post("fallecido");
+       $idtipodocumento = $this->input->post("idtipodocumento");
+       $numero_documento = $this->input->post("numero_documento");
+       $paciente_apellidos = $this->input->post("paciente_apellidos");
+       $paciente_nombes = $this->input->post("paciente_nombes");
+       //$fecha_nacimiento = formatearFechaParaBD($this->input->post("fecha_nacimiento"));
+       $fecha_nacimiento = $this->input->post("fecha_nacimiento");
+       $edad_actual = $this->input->post("edad_actual");
+       $sexo = $this->input->post("sexo");
+       $direccion_atencion = $this->input->post("direccion_atencion");
+       $ubigeo = $departamento . '' . $provincia . '' . $distrito;
+       $referencia = $this->input->post("referencia");
+       $latitud = $this->input->post("latitud");
+       $longitud = $this->input->post("longitud");
+       
+       $deamb = explode(":", $despacho_ambulancia);        
+       $horadeamb = $deamb[0] . " " . $deamb[1] . ":00";
+
+
+
+       /*
+       $d = explode("/", $fecha_ocurrencia);
+       $fecha_ocu = $d[2] . "-" . $d[1] . "-" . $d[0];
+
+       $f = explode("/", $fecha_nacimiento);
+       $fecha_nac = $f[2] . "-" . $f[1] . "-" . $f[0];
+       */
+
+       $this->Fichaatencion_model->setidfichaatencion($idfichaatencion);
+       $this->Fichaatencion_model->setidtiposeguro($idtiposeguro);
+       $this->Fichaatencion_model->setseguro($seguro);
+       $this->Fichaatencion_model->setidbase($idbase);
+       $this->Fichaatencion_model->setidambulancia($idambulancia);
+       //$this->Fichaatencion_model->setfecha_emision($fecha_emision);
+       $this->Fichaatencion_model->setfecha_ocurrencia($fecha_ocurrencia);
+       $this->Fichaatencion_model->setdespacho_ambulancia($horadeamb);
+       $this->Fichaatencion_model->setsalida_base($salida_base);
+       /*
+       
+       $this->Fichaatencion_model->setllegada_foco($llegada_foco);
+       $this->Fichaatencion_model->setsalida_foco($salida_foco);
+       $this->Fichaatencion_model->setllegada_base($llegada_base);
+       $this->Fichaatencion_model->setlugar_atencion($lugar_atencion);
+       $this->Fichaatencion_model->setmotivo_emergencia($motivo_emergencia);
+       */
+       $this->Fichaatencion_model->setidprioridademergencia($idprioridademergencia);
+       /*
+       $this->Fichaatencion_model->setfallecido($fallecido);
+       */
+       $this->Fichaatencion_model->setidtipodocumento($idtipodocumento);
+       $this->Fichaatencion_model->setfecha_nacimiento($fecha_nacimiento);
+       /*
+       $this->Fichaatencion_model->setnumero_documento($numero_documento);
+       $this->Fichaatencion_model->setpaciente_apellidos($paciente_apellidos);
+       $this->Fichaatencion_model->setpaciente_nombes($paciente_nombes);
+       
+       $this->Fichaatencion_model->setedad_actual($edad_actual);
+       $this->Fichaatencion_model->setsexo($sexo);
+       $this->Fichaatencion_model->setdireccion_atencion($direccion_atencion);
+       $this->Fichaatencion_model->setubigeo($ubigeo);
+       $this->Fichaatencion_model->setreferencia($referencia);
+       $this->Fichaatencion_model->setlatitud($latitud);
+       $this->Fichaatencion_model->setlongitud($longitud);
+       */
+       
+       //$fotografia = $_FILES["file"];
        
         $status = 500;
         $message = "Error al registrar, vuelva a intentar";
 
-        if ($idambulancia > 0) {
-            if ($this->Ambulancias_model->actualizarAmbulancia()) {
+        if ($idfichaatencion > 0) {
+            if ($this->Fichaatencion_model->actualizarFichaAtencion()) {
                 $status = 200;
-                $message = "Base actualizada exitosamente";
+                $message = "Ficha de Atención actualizada exitosamente";
             }
         } else {
-            if ($this->Ambulancias_model->guardarAmbulancia()) {
+            if ($this->Fichaatencion_model->guardarFichaAtencion()) {
                 $status = 200;
-                $message = "Base registrada exitosamente";
+                $message = "Ficha de Atención registrada exitosamente";
             }
         }
         

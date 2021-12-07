@@ -214,25 +214,27 @@ function fichaatencion(URI) {
   }
 
     $(document).ready(function () {
-      var data;
-      table = $('#dt-fichaatencion').DataTable({
+    var data;
+    var validate = 1;
+    var table = $('#dt-fichaatencion').DataTable({
       data: lista,
       pageLength: 10,
       dom: 'Bfrt<"col-sm-12 inline"i> <"col-sm-12 inline"p>',
+      //language: languageDatatable,
       autoWidth: true,
       lengthMenu: [[10, 25, 50, 100, 500, -1], [10, 25, 50, 100, 500, 'Todas']],
       columns: [
         {
           data: null,
-            render: function (data, type, row, meta) {
+            
+          render: function (data, type, row, meta) {
             const btnEdit = data.activo == "1" ? `
             <input type="hidden" value="`+data.idfichaatencion+`" /><button class="btn btn-warning btn-circle actionEdit" title="Editar Registro" type="button" style="margin-right: 5px;">
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
             </button>` : `
             <button class="btn btn-warning btn-circle disabled" title="Editar Registro" type="button" style="margin-right: 5px;">
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-            </button>` ;
-            
+            </button>` ;            
             const btnDelete = data.activo == "1" ? `
             <button class="btn btn-danger btn-circle actionDeleteComi" title="Anular Registro" type="button style="margin-right: 5px;">
               <i class="fa fa-times" aria-hidden="true"></i>
@@ -269,51 +271,51 @@ function fichaatencion(URI) {
         },
         buttons: [{
           extend: 'copy',
-          title: 'Lista General de Fichas de Atención',
-          exportOptions: { columns: [1, 2, 3, 4, 5, 6] },
+          title: 'Lista General de Ambulancias',
+          exportOptions: { columns: [1, 2, 3, 4, 5] },
         },
         {
           extend: 'csv',
-          title: 'Lista General de Fichas de Atención',
-          exportOptions: { columns: [1, 2, 3, 4, 5, 6] },
+          title: 'Lista General de Ambulancias',
+          exportOptions: { columns: [1, 2, 3, 4, 5] },
         },
         {
           extend: 'excel',
-          title: 'Lista General de Fichas de Atención',
-          exportOptions: { columns: [1, 2, 3, 4, 5, 6] },
+          title: 'Lista General de Ambulancias',
+          exportOptions: { columns: [1, 2, 3, 4, 5] },
         },
         {
           extend: 'pdf',
-          title: 'Lista General de Fichas de Atención',
+          title: 'Lista General de Ambulancias',
           orientation: 'landscape',
-          exportOptions: { columns: [1, 2, 3, 4, 5, 6] },
+          exportOptions: { columns: [1, 2, 3, 4, 5] },
         },
         {
           extend: 'print',
-          title: 'Lista General de Fichas de Atención',
-          exportOptions: { columns: [1, 2, 3, 4, 5, 6] },
+          title: 'Lista General de Ambulancias',
+          exportOptions: { columns: [1, 2, 3, 4, 5] },
           customize: function (win) {
             $(win.document.body).addClass('white-bg');
             $(win.document.body).css('font-size', '10px');
-
+  
             $(win.document.body).find('table')
               .addClass('compact')
               .css('font-size', 'inherit');
-
+  
             var css = '@page { size: landscape; }',
               head = win.document.head || win.document.getElementsByTagName('head')[0],
               style = win.document.createElement('style');
-
+  
             style.type = 'text/css';
             style.media = 'print';
-
+  
             if (style.styleSheet) {
               style.styleSheet.cssText = css;
             }
             else {
               style.appendChild(win.document.createTextNode(css));
             }
-
+  
             head.appendChild(style);
           }
         },
@@ -323,16 +325,8 @@ function fichaatencion(URI) {
           className: 'selectTable'
         }]
       }
-
+  
     });
-
-    $(".actionEdit").on('click', function (event) {
-      const inp = this.previousSibling;
-      buscar(inp.value);
-      showModal(event, 'Editar Emergencia');
-    });
-
-  });
 
     $(".btn-nuevo").on('click', function (event) {
       $("#formRegistrar")[0].reset();
@@ -425,7 +419,6 @@ function fichaatencion(URI) {
       */
       submitHandler: function (form, event) {
         var formData = new FormData(document.getElementById("formRegistrar"));
-       
         $.ajax({
           type: 'POST',
           url: URI + 'fichaatencion/main/guardarFichaAtencion',
@@ -439,18 +432,32 @@ function fichaatencion(URI) {
           },
           success: function (response) {
             $("#editarModal").modal('hide');
-            if (response.status === 200) {
+            const { status } = response;
+            if (status === 200) {
               $("#formRegistrar")[0].reset();
               $('.btn-editar').removeClass('active');
-              loadData();
+              loadData(table)
               $('.alert-success').fadeIn(1000);
             } else {
               $('.alert-danger').fadeIn(1000);
             }
+            setTimeout(() => {
+              $('.alert').fadeOut(1000);
+            }, 1500);
           }
         });
       }
     });
+
+      $(".actionEdit").on('click', function (event) {
+        const inp = this.previousSibling;
+        buscar(inp.value);
+        showModal(event, 'Editar Ficha Atención');
+      });
+
+    });
+
+
 
     $("#departamento").change(function () {
         var id = $(this).val();
@@ -513,20 +520,30 @@ function fichaatencion(URI) {
         }
       });
 
-      function loadData() {
+      function loadData(table) {
         $.ajax({
           type: 'POST',
           url: URI + 'fichaatencion/main/listarFichasAtencion',
-          data: {'actualiza' : 'si'},
+          data: {},
           dataType: 'json',
           success: function (response) {
-            console.log(response);
+            const { data: { listaFichaAtencion } } = response;
             table.clear();
-            table.rows.add(response).draw();            
+            table.rows.add(listaFichaAtencion).draw();
             $(".actionEdit").on('click', function (event) {
-              const inp = this.previousSibling;
-              buscar(inp.value);
-              showModal(event, 'Editar Ficha Atención');
+              var valor ="", i = 0;
+              $(this).parents("tr").find("td").each(function(){
+                if(i == 1)
+                  valor = $(this).html();
+                i++;
+              });
+              /*$("#formRegistrar")[0].reset();
+              $("#placa").val(valor);
+              $("#act").val(1);
+              $("#enviar").text("Actualizar");
+              $("select").prop('selectedIndex',0);*/
+              //buscar();
+              showModal(event, 'Editar Ambulancia');
             });
           }
         });

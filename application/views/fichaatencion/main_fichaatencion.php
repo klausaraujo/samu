@@ -46,7 +46,8 @@
 										<table id="dt-fichaatencion" class="table table-bordered table-hover display nowrap margin-top-10 w-p100">
 											<thead>
 												<tr>
-													<th>Lugar Atencion</th>
+													<th>Acciones</th>
+													<th>Lugar Atención</th>
 													<th>Traslado</th>
 													<th>Motivo Emergencia</th>
 													<th>Tipo de Documento</th>
@@ -136,7 +137,7 @@
 														<div class="form-group row">
 															<label class="modal-label col-sm-5 col-form-label py-10">Hora Llegada a Foco: </label>
 															<div class="col-sm-5">
-																<input type="time" class="form-control" required="required" id="llegada_base" name="llegada_base" value="<?=date(" H:i")?>" />
+																<input type="time" class="form-control" required="required" id="llegada_foco" name="llegada_foco" value="<?=date(" H:i")?>" />
 															</div>
 														</div>
 													</div>																																												
@@ -355,7 +356,7 @@
 														<div class="form-group row">
 															<label class="modal-label col-sm-2 col-form-label py-10">Patologías Previas: </label>
 															<div class="col-sm-9">
-															<input type="text" class="form-control" name="antecedentes" id="antecedentes" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															<input type="text" class="form-control" name="patologias_previas" id="patologias_previas" onkeyup="javascript:this.value=this.value.toUpperCase();" />
 															</div>
 														</div>
 													</div>	

@@ -33,6 +33,25 @@ class Fichaatencion_model extends CI_Model
     private $latitud;
     private $longitud;
 
+    private $patologias_previas;
+    private $fur;
+    private $fpp;
+    private $medicacion;
+    private $fug;
+    private $g;
+    private $p1;
+    private $p2;
+    private $p3;
+    private $p4;
+    private $alergias;
+    private $otros;
+    private $enfermedad_dias;
+    private $enfermedad_horas;
+    private $enfermedad_minutos;
+    private $enfermedad_inicio;
+    private $enfermedad_curso;
+
+
     public function setidfichaatencion($data){$this->idfichaatencion=$this->db->escape_str($data);}
     public function setidtiposeguro($data){$this->idtiposeguro=$this->db->escape_str($data);}
     public function setseguro($data){$this->seguro=$this->db->escape_str($data);}
@@ -61,6 +80,25 @@ class Fichaatencion_model extends CI_Model
     public function setreferencia($data){$this->referencia=$this->db->escape_str($data);}
     public function setlatitud($data){$this->latitud=$this->db->escape_str($data);}
     public function setlongitud($data){$this->longitud=$this->db->escape_str($data);}
+
+    public function setpatologias_previas($data){$this->patologias_previas=$this->db->escape_str($data);}
+    public function setfur($data){$this->fur=$this->db->escape_str($data);}
+    public function setfpp($data){$this->fpp=$this->db->escape_str($data);}
+    public function setmedicacion($data){$this->medicacion=$this->db->escape_str($data);}
+    public function setfug($data){$this->fug=$this->db->escape_str($data);}
+    public function setg($data){$this->g=$this->db->escape_str($data);}
+    public function setp1($data){$this->p1=$this->db->escape_str($data);}
+    public function setp2($data){$this->p2=$this->db->escape_str($data);}
+    public function setp3($data){$this->p3=$this->db->escape_str($data);}
+    public function setp4($data){$this->p4=$this->db->escape_str($data);}
+    public function setalergias($data){$this->alergias=$this->db->escape_str($data);}
+    public function setotros($data){$this->otros=$this->db->escape_str($data);}
+    public function setenfermedad_dias($data){$this->enfermedad_dias=$this->db->escape_str($data);}
+    public function setenfermedad_horas($data){$this->enfermedad_horas=$this->db->escape_str($data);}
+    public function setenfermedad_minutos($data){$this->enfermedad_minutos=$this->db->escape_str($data);}
+    public function setenfermedad_inicio($data){$this->enfermedad_inicio=$this->db->escape_str($data);}
+    public function setenfermedad_curso($data){$this->enfermedad_curso=$this->db->escape_str($data);}
+
 
     public function obtenerFichaAtencion()
     {
@@ -141,7 +179,6 @@ class Fichaatencion_model extends CI_Model
             "latitud" => $this->latitud,
             "longitud" => $this->longitud
 
-
         );
         if($this->db->insert("ficha_atencion", $data)) {
             return $this->db->insert_id();
@@ -151,6 +188,37 @@ class Fichaatencion_model extends CI_Model
         }
     }
 
+    public function guardarFichaAtencion_antecedentes()
+    {
+        $data = array(
+            
+            "idfichaatencion" => $this->idfichaatencion,
+            "patologias_previas" => $this->patologias_previas,
+            "fur" => $this->fur,
+            "fpp" => $this->fpp,
+            "medicacion" => $this->medicacion,
+            "fug" => $this->fug,
+            "g" => $this->g,
+            "p1" => $this->p1,
+            "p2" => $this->p2,
+            "p3" => $this->p3,
+            "p4" => $this->p4,
+            "alergias" => $this->alergias,
+            "otros" => $this->otros,
+            "enfermedad_dias" => $this->enfermedad_dias,
+            "enfermedad_horas" => $this->enfermedad_horas,
+            "enfermedad_minutos" => $this->enfermedad_minutos,
+            "enfermedad_inicio" => $this->enfermedad_inicio,
+            "enfermedad_curso" => $this->enfermedad_curso            
+
+        );
+        if($this->db->insert("ficha_atencion_antecedentes", $data)) {
+            return $this->db->insert_id();
+        }
+        else {
+            return 0;
+        }
+    }
     public function actualizarAmbulancia()
     {
         $data = array(

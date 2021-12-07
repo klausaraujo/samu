@@ -215,7 +215,7 @@ class Main extends CI_Controller
 
             if ($id > 0) {
                 $this->Fichaatencion_model->setidfichaatencion($id);
-                 //$this->Fichaatencion_model->guardarFichaAtencion_antecedentes();
+                $this->Fichaatencion_model->guardarFichaAtencion_antecedentes();
                 //$this->Fichaatencion_model->guardarFichaAtencion_examen_fisico();
                 //$this->Fichaatencion_model->guardarFichaAtencion_momento_evaluacion();
                 $status = 200;

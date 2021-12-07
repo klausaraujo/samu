@@ -197,6 +197,7 @@ class Main extends CI_Controller
        $this->Fichaatencion_model->setenfermedad_minutos($enfermedad_minutos);
        $this->Fichaatencion_model->setenfermedad_inicio($enfermedad_inicio);
        $this->Fichaatencion_model->setenfermedad_curso($enfermedad_curso);
+       $this->Fichaatencion_model->setrelato_evento($relato_evento);
 
 
        //$fotografia = $_FILES["file"];

@@ -50,7 +50,7 @@ class Fichaatencion_model extends CI_Model
     private $enfermedad_minutos;
     private $enfermedad_inicio;
     private $enfermedad_curso;
-
+    private $relato_evento;
 
     public function setidfichaatencion($data){$this->idfichaatencion=$this->db->escape_str($data);}
     public function setidtiposeguro($data){$this->idtiposeguro=$this->db->escape_str($data);}
@@ -98,13 +98,14 @@ class Fichaatencion_model extends CI_Model
     public function setenfermedad_minutos($data){$this->enfermedad_minutos=$this->db->escape_str($data);}
     public function setenfermedad_inicio($data){$this->enfermedad_inicio=$this->db->escape_str($data);}
     public function setenfermedad_curso($data){$this->enfermedad_curso=$this->db->escape_str($data);}
+    public function setrelato_evento($data){$this->relato_evento=$this->db->escape_str($data);}
 
 
     public function obtenerFichaAtencion()
     {
         $this->db->select("l.*");
         $this->db->from("ficha_atencion l");
-        $this->db->order_by("l.idfichaatencion ASC");
+        $this->db->order_by("l.idfichaatencion desc");
         return $this->db->get();
         
     }

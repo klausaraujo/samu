@@ -495,7 +495,7 @@
 													<div class="col-sm-12">
 														<div class="form-group row">
 															<div class="col-sm-8">
-															<textarea class="form-control" name="antecedentes" id="antecedentes" onkeyup="javascript:this.value=this.value.toUpperCase();"  style= "height:158px"> </textarea>
+															<textarea class="form-control" name="relato_evento" id="relato_evento" onkeyup="javascript:this.value=this.value.toUpperCase();"  style= "height:158px"> </textarea>
 															</div>
 														</div>
 													</div>			

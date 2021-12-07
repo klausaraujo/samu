@@ -29,6 +29,35 @@ function fichaatencion(URI) {
       document.body.appendChild(form);
       form.submit();
     }
+    
+    function loadData(table) {
+      $.ajax({
+        type: 'POST',
+        url: URI + 'fichaatencion/main/listarFichasAtencion',
+        data: {},
+        dataType: 'json',
+        success: function (response) {
+          const { data: { listaFichaAtencion } } = response;
+          table.clear();
+          table.rows.add(listaFichaAtencion).draw();
+          $(".actionEdit").on('click', function (event) {
+            var valor ="", i = 0;
+            $(this).parents("tr").find("td").each(function(){
+              if(i == 1)
+                valor = $(this).html();
+              i++;
+            });
+            /*$("#formRegistrar")[0].reset();
+            $("#placa").val(valor);
+            $("#act").val(1);
+            $("#enviar").text("Actualizar");
+            $("select").prop('selectedIndex',0);*/
+            //buscar();
+            showModal(event, 'Editar Ficha Atención');
+          });
+        }
+      });
+    }
 
   function buscar(valor) {
     var idEm = valor;
@@ -519,35 +548,6 @@ function fichaatencion(URI) {
     
         }
       });
-
-      function loadData(table) {
-        $.ajax({
-          type: 'POST',
-          url: URI + 'fichaatencion/main/listarFichasAtencion',
-          data: {},
-          dataType: 'json',
-          success: function (response) {
-            const { data: { listaFichaAtencion } } = response;
-            table.clear();
-            table.rows.add(listaFichaAtencion).draw();
-            $(".actionEdit").on('click', function (event) {
-              var valor ="", i = 0;
-              $(this).parents("tr").find("td").each(function(){
-                if(i == 1)
-                  valor = $(this).html();
-                i++;
-              });
-              /*$("#formRegistrar")[0].reset();
-              $("#placa").val(valor);
-              $("#act").val(1);
-              $("#enviar").text("Actualizar");
-              $("select").prop('selectedIndex',0);*/
-              //buscar();
-              showModal(event, 'Editar Ambulancia');
-            });
-          }
-        });
-      }
 
       $("#region").on("change", function () {
 

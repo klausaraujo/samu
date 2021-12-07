@@ -149,6 +149,7 @@ class Main extends CI_Controller
        $enfermedad_minutos = $this->input->post("enfermedad_minutos");
        $enfermedad_inicio = $this->input->post("enfermedad_inicio");
        $enfermedad_curso = $this->input->post("enfermedad_curso");       
+       $relato_evento = $this->input->post("relato_evento");     
 
 
        $examen_cabeza = $this->input->post("examen_cabeza");
@@ -387,37 +388,27 @@ class Main extends CI_Controller
 
     public function listarFichasAtencion(){
         
-        $this->load->model("Usuarios_model");
         $this->load->model("Fichaatencion_model");
 
-        $this->user = $this->session->userdata("token");
-        $this->Usuarios_model->setIdUsuario($this->user->idusuario);
-        $departamentos = $this->Usuarios_model->extraeRegionesUsuario();
         $fichaatencion = $this->Fichaatencion_model->obtenerFichaAtencion();
-        
-        $reg = array();
-        $emerg = array();
-        foreach($departamentos->result() as $row):
-            //$this->Emergencias_model->setRegion($row->idregion);
-            $listaFa = $this->Fichaatencion_model->obtenerFichaAtencion();
-            if ($listaFa->num_rows() > 0) {
-                foreach($listaFa->result_array() as $em):
-                    $emerg[] = $em;
-                endforeach;
-                $reg[] = $row->idregion;
-            }
-        endforeach;
+       
+        if ($fichaatencion->num_rows() > 0) {
+            $fichaatencion = $fichaatencion->result();
+        } else {
+            $fichaatencion = array();
+        }
 
-        $data = array(
-            "listarFichasAtencion" => $emerg//,
-            //"departamentos" => $departamentos->result()
+        $detalle = array(
+          "listarFichasAtencion" => $fichaatencion
         );
 
-        if($this->input->post("actualiza"))
-            echo json_encode($emerg);
-        else
-            return $data;
-            
+        $data = array(
+            "status" => 200,
+            "data" => $detalle
+        );
+
+        echo json_encode($data);
+                   
     }
 	
 }

@@ -232,7 +232,8 @@ class Fichaatencion_model extends CI_Model
             "enfermedad_horas" => $this->enfermedad_horas,
             "enfermedad_minutos" => $this->enfermedad_minutos,
             "enfermedad_inicio" => $this->enfermedad_inicio,
-            "enfermedad_curso" => $this->enfermedad_curso            
+            "enfermedad_curso" => $this->enfermedad_curso,
+            "relato_evento" => $this->relato_evento
 
         );
         if($this->db->insert("ficha_atencion_antecedentes", $data)) {

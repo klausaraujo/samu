@@ -215,8 +215,8 @@ function fichaatencion(URI) {
 
     $(document).ready(function () {
       var data;
-      table = $('#dt-fichaatecion').DataTable({
-      data: emerg,
+      table = $('#dt-fichaatencion').DataTable({
+      data: lista,
       pageLength: 10,
       dom: 'Bfrt<"col-sm-12 inline"i> <"col-sm-12 inline"p>',
       autoWidth: true,
@@ -246,14 +246,14 @@ function fichaatencion(URI) {
                     </div>`;
         }
         },
-        { data: "foco" },
-        { data: "traslado" },
+        { data: "lugar_atencion" },
+        { data: "idtiposeguro" },
         { data: "motivo_emergencia" },
         { data: "idtipodocumento" },
-        { data: "numdoc" },
-        { data: "Paciente"},      
-        { data: "Fecha Ocurrencia"},      
-        { data: "Estado Registro"}
+        { data: "numero_documento" },
+        { data: "paciente_apellidos"},      
+        { data: "fecha_ocurrencia"},      
+        { data: "idprioridademergencia"}
       ],
       columnDefs: [],
       select: true,
@@ -342,7 +342,7 @@ function fichaatencion(URI) {
     });
 
     $("#btn-buscar").on("click", function () {
-			var documento_numero = $("input[name=numdoc]").val();
+			var documento_numero = $("input[name=numero_documento]").val();
       var type = $("select#idtipodocumento").children("option:selected").val();
       if(documento_numero != "" && type != ""){
 				$.ajax({
@@ -356,13 +356,13 @@ function fichaatencion(URI) {
 					beforeSend: function () { $("#btn-buscar").html('<i class="fa fa-spinner fa-pulse"></i>'); },
 					success: function (response) {            
             if(response.data){
-              if(!$("#nomb_comp_paciente").prop("readonly"))
-                $("#nomb_comp_paciente").prop("readonly", true);
+              if(!$("#paciente_apellidos").prop("readonly"))
+                $("#paciente_apellidos").prop("readonly", true);
               const { data } = response;
               const datos = data.attributes;
               $("#btn-buscar").html('<i class="fa fa-search" aria-hidden="true"></i>&nbsp;&nbsp;Buscar');
-              $("#nomb_comp_paciente").val(datos.nombres+ " " +datos.apellido_paterno+ " " +datos.apellido_materno) ;
-              $("#direccion").val(datos.domicilio_direccion);
+              $("#paciente_apellidos").val(datos.nombres+ " " +datos.apellido_paterno+ " " +datos.apellido_materno) ;
+              $("#direccion_atencion").val(datos.domicilio_direccion);
               $("#fecha_nacimiento").val(datos.fecha_nacimiento);
               $("#edad_actual").val(datos.edad_anios);
               $("#sexo").val(datos.sexo);
@@ -374,8 +374,8 @@ function fichaatencion(URI) {
             }else{
               $("#btn-buscar").html('<i class="fa fa-search" aria-hidden="true"></i>&nbsp;&nbsp;Buscar');
               alert(response.errors[0].detail);
-              if($("#nomb_comp_paciente").prop("readonly"))
-                $("#nomb_comp_paciente").prop("readonly", false);
+              if($("#paciente_apellidos").prop("readonly"))
+                $("#paciente_apellidos").prop("readonly", false);
               if($("#datos").show())
                 $("#datos").hide();
             }
@@ -387,6 +387,7 @@ function fichaatencion(URI) {
 		});
 
     $("#formRegistrar").validate({
+      /*
       rules: {
         tlf: { required: true },
         tipoLl: { required: true },
@@ -421,12 +422,13 @@ function fichaatencion(URI) {
         provincia: { required: "Campo requerido" },
         distrito: { required: "Campo requerido" },
       },
+      */
       submitHandler: function (form, event) {
         var formData = new FormData(document.getElementById("formRegistrar"));
        
         $.ajax({
           type: 'POST',
-          url: URI + 'emergencias/main/guardarEmergencia',
+          url: URI + 'fichaatencion/main/guardarFichaAtencion',
           data: formData,
           dataType: 'json',
           cache: false,

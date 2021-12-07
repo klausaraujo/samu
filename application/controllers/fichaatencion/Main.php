@@ -130,19 +130,38 @@ class Main extends CI_Controller
        $referencia = $this->input->post("referencia");
        $latitud = $this->input->post("latitud");
        $longitud = $this->input->post("longitud");
-       
-       $deamb = explode(":", $despacho_ambulancia);        
-       $horadeamb = $deamb[0] . " " . $deamb[1] . ":00";
 
 
+       $patologias_previas = $this->input->post("patologias_previas");
+       $fur = $this->input->post("fur");
+       $fpp = $this->input->post("fpp");
+       $medicacion = $this->input->post("medicacion");
+       $fug = $this->input->post("fug");
+       $g = $this->input->post("g");
+       $p1 = $this->input->post("p1");
+       $p2 = $this->input->post("p2");
+       $p3 = $this->input->post("p3");
+       $p4 = $this->input->post("p4");
+       $alergias = $this->input->post("alergias");
+       $otros = $this->input->post("otros");
+       $enfermedad_dias = $this->input->post("enfermedad_dias");
+       $enfermedad_horas = $this->input->post("enfermedad_horas");
+       $enfermedad_minutos = $this->input->post("enfermedad_minutos");
+       $enfermedad_inicio = $this->input->post("enfermedad_inicio");
+       $enfermedad_curso = $this->input->post("enfermedad_curso");       
+       $relato_evento = $this->input->post("relato_evento");     
 
-       /*
-       $d = explode("/", $fecha_ocurrencia);
-       $fecha_ocu = $d[2] . "-" . $d[1] . "-" . $d[0];
 
-       $f = explode("/", $fecha_nacimiento);
-       $fecha_nac = $f[2] . "-" . $f[1] . "-" . $f[0];
-       */
+       $examen_cabeza = $this->input->post("examen_cabeza");
+       $examen_cuello = $this->input->post("examen_cuello");
+       $examen_piel_tcsc = $this->input->post("examen_piel_tcsc");
+       $examen_aparato_respiratorio = $this->input->post("examen_aparato_respiratorio");
+       $examen_aparato_cardiovascular = $this->input->post("examen_aparato_cardiovascular");
+       $examen_aparato_digestivo = $this->input->post("examen_aparato_digestivo");
+       $examen_genito_urinario = $this->input->post("examen_genito_urinario");
+       $examen_sistema_osteomioaticular = $this->input->post("examen_sistema_osteomioaticular");
+       $examen_neurologico = $this->input->post("examen_neurologico");
+ 
 
        $this->Fichaatencion_model->setidfichaatencion($idfichaatencion);
        $this->Fichaatencion_model->setidtiposeguro($idtiposeguro);
@@ -151,48 +170,79 @@ class Main extends CI_Controller
        $this->Fichaatencion_model->setidambulancia($idambulancia);
        //$this->Fichaatencion_model->setfecha_emision($fecha_emision);
        $this->Fichaatencion_model->setfecha_ocurrencia($fecha_ocurrencia);
-       $this->Fichaatencion_model->setdespacho_ambulancia($horadeamb);
-       $this->Fichaatencion_model->setsalida_base($salida_base);
-       /*
-       
+       $this->Fichaatencion_model->setdespacho_ambulancia($despacho_ambulancia);
+       $this->Fichaatencion_model->setsalida_base($salida_base);      
        $this->Fichaatencion_model->setllegada_foco($llegada_foco);
        $this->Fichaatencion_model->setsalida_foco($salida_foco);
        $this->Fichaatencion_model->setllegada_base($llegada_base);
        $this->Fichaatencion_model->setlugar_atencion($lugar_atencion);
-       $this->Fichaatencion_model->setmotivo_emergencia($motivo_emergencia);
-       */
-       $this->Fichaatencion_model->setidprioridademergencia($idprioridademergencia);
-       /*
-       $this->Fichaatencion_model->setfallecido($fallecido);
-       */
+       $this->Fichaatencion_model->setmotivo_emergencia($motivo_emergencia);       
+       $this->Fichaatencion_model->setidprioridademergencia($idprioridademergencia);       
+       $this->Fichaatencion_model->setfallecido($fallecido);       
        $this->Fichaatencion_model->setidtipodocumento($idtipodocumento);
-       $this->Fichaatencion_model->setfecha_nacimiento($fecha_nacimiento);
-       /*
+       $this->Fichaatencion_model->setfecha_nacimiento($fecha_nacimiento);       
        $this->Fichaatencion_model->setnumero_documento($numero_documento);
        $this->Fichaatencion_model->setpaciente_apellidos($paciente_apellidos);
-       $this->Fichaatencion_model->setpaciente_nombes($paciente_nombes);
-       
+       $this->Fichaatencion_model->setpaciente_nombes($paciente_nombes);       
        $this->Fichaatencion_model->setedad_actual($edad_actual);
        $this->Fichaatencion_model->setsexo($sexo);
        $this->Fichaatencion_model->setdireccion_atencion($direccion_atencion);
        $this->Fichaatencion_model->setubigeo($ubigeo);
        $this->Fichaatencion_model->setreferencia($referencia);
        $this->Fichaatencion_model->setlatitud($latitud);
-       $this->Fichaatencion_model->setlongitud($longitud);
-       */
+       $this->Fichaatencion_model->setlongitud($longitud);       
        
+
+       $this->Fichaatencion_model->setpatologias_previas($patologias_previas);
+       $this->Fichaatencion_model->setfur($fur);
+       $this->Fichaatencion_model->setfpp($fpp);
+       $this->Fichaatencion_model->setmedicacion($medicacion);
+       $this->Fichaatencion_model->setfug($fug);
+       $this->Fichaatencion_model->setg($g);
+       $this->Fichaatencion_model->setp1($p1);
+       $this->Fichaatencion_model->setp2($p2);
+       $this->Fichaatencion_model->setp3($p3);
+       $this->Fichaatencion_model->setp4($p4);
+       $this->Fichaatencion_model->setalergias($alergias);
+       $this->Fichaatencion_model->setotros($otros);
+       $this->Fichaatencion_model->setenfermedad_dias($enfermedad_dias);
+       $this->Fichaatencion_model->setenfermedad_horas($enfermedad_horas);
+       $this->Fichaatencion_model->setenfermedad_minutos($enfermedad_minutos);
+       $this->Fichaatencion_model->setenfermedad_inicio($enfermedad_inicio);
+       $this->Fichaatencion_model->setenfermedad_curso($enfermedad_curso);
+       $this->Fichaatencion_model->setrelato_evento($relato_evento);
+
+
+       $this->Fichaatencion_model->setexamen_cabeza($examen_cabeza);
+       $this->Fichaatencion_model->setexamen_cuello($examen_cuello);
+       $this->Fichaatencion_model->setexamen_piel_tcsc($examen_piel_tcsc);
+       $this->Fichaatencion_model->setexamen_aparato_respiratorio($examen_aparato_respiratorio);
+       $this->Fichaatencion_model->setexamen_aparato_cardiovascular($examen_aparato_cardiovascular);
+       $this->Fichaatencion_model->setexamen_aparato_digestivo($examen_aparato_digestivo);
+       $this->Fichaatencion_model->setexamen_genito_urinario($examen_genito_urinario);
+       $this->Fichaatencion_model->setexamen_sistema_osteomioaticular($examen_sistema_osteomioaticular);
+       $this->Fichaatencion_model->setexamen_neurologico($examen_neurologico);
+       
+
        //$fotografia = $_FILES["file"];
        
         $status = 500;
         $message = "Error al registrar, vuelva a intentar";
-
+        
         if ($idfichaatencion > 0) {
             if ($this->Fichaatencion_model->actualizarFichaAtencion()) {
                 $status = 200;
                 $message = "Ficha de Atención actualizada exitosamente";
             }
         } else {
-            if ($this->Fichaatencion_model->guardarFichaAtencion()) {
+            
+            $id = $this->Fichaatencion_model->guardarFichaAtencion();
+
+            if ($id > 0) {
+                $this->Fichaatencion_model->setidfichaatencion($id);
+                $this->Fichaatencion_model->guardarFichaAtencion_antecedentes();
+                $this->Fichaatencion_model->guardarFichaAtencion_examen_fisico();
+                //$this->Fichaatencion_model->guardarFichaAtencion_momento_evaluacion();
                 $status = 200;
                 $message = "Ficha de Atención registrada exitosamente";
             }
@@ -336,39 +386,29 @@ class Main extends CI_Controller
 
     }
 
-    public function listarFichasAtencion(){
+    public function listaFichaAtencion(){
         
-        $this->load->model("Usuarios_model");
         $this->load->model("Fichaatencion_model");
 
-        $this->user = $this->session->userdata("token");
-        $this->Usuarios_model->setIdUsuario($this->user->idusuario);
-        $departamentos = $this->Usuarios_model->extraeRegionesUsuario();
         $fichaatencion = $this->Fichaatencion_model->obtenerFichaAtencion();
-        
-        $reg = array();
-        $emerg = array();
-        foreach($departamentos->result() as $row):
-            //$this->Emergencias_model->setRegion($row->idregion);
-            $listaFa = $this->Fichaatencion_model->obtenerFichaAtencion();
-            if ($listaFa->num_rows() > 0) {
-                foreach($listaFa->result_array() as $em):
-                    $emerg[] = $em;
-                endforeach;
-                $reg[] = $row->idregion;
-            }
-        endforeach;
+       
+        if ($fichaatencion->num_rows() > 0) {
+            $fichaatencion = $fichaatencion->result();
+        } else {
+            $fichaatencion = array();
+        }
 
-        $data = array(
-            "listarFichasAtencion" => $emerg//,
-            //"departamentos" => $departamentos->result()
+        $detalle = array(
+          "listaFichaAtencion" => $fichaatencion
         );
 
-        if($this->input->post("actualiza"))
-            echo json_encode($emerg);
-        else
-            return $data;
-            
+        $data = array(
+            "status" => 200,
+            "data" => $detalle
+        );
+
+        echo json_encode($data);
+                   
     }
 	
 }

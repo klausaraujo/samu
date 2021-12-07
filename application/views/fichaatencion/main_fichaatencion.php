@@ -26,6 +26,8 @@
 			<?php $this->load->view('layout/sidebar'); ?>
 			<div class="content-wrapper">
 				<div class="container-full">
+					<div class="alert alert-success" role="alert" style="display:none;" > Registro exitoso </div>
+                    <div class="alert alert-danger" role="alert" style="display:none;" > Ocurrio un error </div>
 					<section class="content">
 						<div class="col-12">
 							<div class="box">
@@ -46,7 +48,8 @@
 										<table id="dt-fichaatencion" class="table table-bordered table-hover display nowrap margin-top-10 w-p100">
 											<thead>
 												<tr>
-													<th>Lugar Atencion</th>
+													<th>Acciones</th>
+													<th>Lugar Atención</th>
 													<th>Traslado</th>
 													<th>Motivo Emergencia</th>
 													<th>Tipo de Documento</th>
@@ -79,8 +82,9 @@
 													<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 														<span aria-hidden="true">&times;</span>
 													</button>
-												</div>												
-												<label class="modal-label col-sm-5 col-form-label py-10">Datos de la Base y la Unidad Operativa</label>
+												</div>
+												<h3 class="box-title">Datos de la Base y la Unidad Operativa</h3>												
+												<label class="modal-label col-sm-5 col-form-label py-10"></label>
 												<div class="row">
 													<div class="col-sm-4">
 														<div class="form-group row">
@@ -136,7 +140,7 @@
 														<div class="form-group row">
 															<label class="modal-label col-sm-5 col-form-label py-10">Hora Llegada a Foco: </label>
 															<div class="col-sm-5">
-																<input type="time" class="form-control" required="required" id="llegada_base" name="llegada_base" value="<?=date(" H:i")?>" />
+																<input type="time" class="form-control" required="required" id="llegada_foco" name="llegada_foco" value="<?=date(" H:i")?>" />
 															</div>
 														</div>
 													</div>																																												
@@ -199,8 +203,8 @@
 												</div>
 
 												<hr />
-
-												<label class="modal-label col-sm-5 col-form-label py-10">Datos de la Emergencia</label>
+												<h3 class="box-title">Datos de la Emergencia</h3>						
+												<label class="modal-label col-sm-5 col-form-label py-10"></label>
 												<div class="row">
 													<div class="col-sm-4">
 														<div class="form-group row">
@@ -350,12 +354,13 @@
 												<hr/>
 
 												<div class="row">
-													<label class="modal-label col-sm-5 col-form-label py-10">Antecedentes</label>
+													<h3 class="box-title">Antecedentes</h3>
+													<label class="modal-label col-sm-5 col-form-label py-10"></label>
 													<div class="col-sm-8">
 														<div class="form-group row">
 															<label class="modal-label col-sm-2 col-form-label py-10">Patologías Previas: </label>
 															<div class="col-sm-9">
-															<input type="text" class="form-control" name="antecedentes" id="antecedentes" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															<input type="text" class="form-control" name="patologias_previas" id="patologias_previas" onkeyup="javascript:this.value=this.value.toUpperCase();" />
 															</div>
 														</div>
 													</div>	
@@ -443,7 +448,8 @@
 												</div>
 
 												<hr/>
-												<label class="modal-label col-sm-5 col-form-label py-10">Enfermedad Actual</label>
+												<h3 class="box-title">Enfermedad Actual</h3>
+												<label class="modal-label col-sm-5 col-form-label py-10"></label>
 												<div class="row">												
 													<div class="col-sm-1">
 														<div class="form-group row">
@@ -487,18 +493,171 @@
 												</div>
 
 												<hr/>
-
-												<label class="modal-label col-sm-5 col-form-label py-10">RELATO DEL EVENTO:</label>
+												<h3 class="box-title">RELATO DEL EVENTO</h3>
+												<label class="modal-label col-sm-5 col-form-label py-10"></label>
 												<div class="row">
 												
 													<div class="col-sm-12">
 														<div class="form-group row">
 															<div class="col-sm-8">
-															<textarea class="form-control" name="antecedentes" id="antecedentes" onkeyup="javascript:this.value=this.value.toUpperCase();"  style= "height:158px"> </textarea>
+															<textarea class="form-control" name="relato_evento" id="relato_evento" onkeyup="javascript:this.value=this.value.toUpperCase();"  style= "height:158px"> </textarea>
 															</div>
 														</div>
 													</div>			
 													
+												</div>
+
+												<hr/>
+
+												<div class="row">
+													<h3 class="box-title">Exámen Físico</h3>
+													<label class="modal-label col-sm-5 col-form-label py-10"></label>
+													<div class="col-sm-8">
+														<div class="form-group row">
+															<label class="modal-label col-sm-2 col-form-label py-10">Cabeza: </label>
+															<div class="col-sm-9">
+															<input type="text" class="form-control" name="examen_cabeza" id="examen_cabeza" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+														</div>
+													</div>	
+													<div class="col-sm-4">
+														<div class="form-group row">
+															
+															<div class="col-sm-8">
+																
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-8">
+														<div class="form-group row">
+															<label class="modal-label col-sm-2 col-form-label py-10">Cuello: </label>
+															<div class="col-sm-9">
+															<input type="text" class="form-control" name="examen_cuello" id="examen_cuello" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+														</div>
+													</div>	
+													<div class="col-sm-4">
+														<div class="form-group row">
+															
+															<div class="col-sm-8">
+																
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-8">
+														<div class="form-group row">
+															<label class="modal-label col-sm-2 col-form-label py-10">Piel y TCSC: </label>
+															<div class="col-sm-9">
+															<input type="text" class="form-control" name="examen_piel_tcsc" id="examen_piel_tcsc" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+														</div>
+													</div>	
+													<div class="col-sm-4">
+														<div class="form-group row">
+															
+															<div class="col-sm-8">
+																
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-8">
+														<div class="form-group row">
+															<label class="modal-label col-sm-2 col-form-label py-10">Aparato Respiratorio: </label>
+															<div class="col-sm-9">
+															<input type="text" class="form-control" name="examen_aparato_respiratorio" id="examen_aparato_respiratorio" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+														</div>
+													</div>	
+													<div class="col-sm-4">
+														<div class="form-group row">
+															
+															<div class="col-sm-8">
+																
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-8">
+														<div class="form-group row">
+															<label class="modal-label col-sm-2 col-form-label py-10">Aparato Cardiovascular: </label>
+															<div class="col-sm-9">
+															<input type="text" class="form-control" name="examen_aparato_cardiovascular" id="examen_aparato_cardiovascular" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+														</div>
+													</div>	
+													<div class="col-sm-4">
+														<div class="form-group row">
+															
+															<div class="col-sm-8">
+																
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-8">
+														<div class="form-group row">
+															<label class="modal-label col-sm-2 col-form-label py-10">Aparato Digestivo: </label>
+															<div class="col-sm-9">
+															<input type="text" class="form-control" name="examen_aparato_digestivo" id="examen_aparato_digestivo" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+														</div>
+													</div>	
+													<div class="col-sm-4">
+														<div class="form-group row">
+															
+															<div class="col-sm-8">
+																
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-8">
+														<div class="form-group row">
+															<label class="modal-label col-sm-2 col-form-label py-10">Genito-Urinario: </label>
+															<div class="col-sm-9">
+															<input type="text" class="form-control" name="examen_genito_urinario" id="examen_genito_urinario" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+														</div>
+													</div>	
+													<div class="col-sm-4">
+														<div class="form-group row">
+															
+															<div class="col-sm-8">
+																
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-8">
+														<div class="form-group row">
+															<label class="modal-label col-sm-2 col-form-label py-10">Sistema-Osteomioarticular: </label>
+															<div class="col-sm-9">
+															<input type="text" class="form-control" name="examen_sistema_osteomioaticular" id="examen_sistema_osteomioaticular" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+														</div>
+													</div>	
+													<div class="col-sm-4">
+														<div class="form-group row">
+															
+															<div class="col-sm-8">
+																
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-8">
+														<div class="form-group row">
+															<label class="modal-label col-sm-2 col-form-label py-10">Neurológico: </label>
+															<div class="col-sm-9">
+															<input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+														</div>
+													</div>	
+													<div class="col-sm-4">
+														<div class="form-group row">
+															
+															<div class="col-sm-8">
+																
+															</div>
+														</div>
+													</div>
+													
+																																
 												</div>
 
 												<hr/>

@@ -33,6 +33,37 @@ class Fichaatencion_model extends CI_Model
     private $latitud;
     private $longitud;
 
+    private $patologias_previas;
+    private $fur;
+    private $fpp;
+    private $medicacion;
+    private $fug;
+    private $g;
+    private $p1;
+    private $p2;
+    private $p3;
+    private $p4;
+    private $alergias;
+    private $otros;
+    private $enfermedad_dias;
+    private $enfermedad_horas;
+    private $enfermedad_minutos;
+    private $enfermedad_inicio;
+    private $enfermedad_curso;
+    private $relato_evento;
+
+    private $examen_cabeza;
+    private $examen_cuello;
+    private $examen_piel_tcsc;
+    private $examen_aparato_respiratorio;
+    private $examen_aparato_cardiovascular;
+    private $examen_aparato_digestivo;
+    private $examen_genito_urinario;
+    private $examen_sistema_osteomioaticular;
+    private $examen_neurologico;
+
+
+
     public function setidfichaatencion($data){$this->idfichaatencion=$this->db->escape_str($data);}
     public function setidtiposeguro($data){$this->idtiposeguro=$this->db->escape_str($data);}
     public function setseguro($data){$this->seguro=$this->db->escape_str($data);}
@@ -62,11 +93,41 @@ class Fichaatencion_model extends CI_Model
     public function setlatitud($data){$this->latitud=$this->db->escape_str($data);}
     public function setlongitud($data){$this->longitud=$this->db->escape_str($data);}
 
+    public function setpatologias_previas($data){$this->patologias_previas=$this->db->escape_str($data);}
+    public function setfur($data){$this->fur=$this->db->escape_str($data);}
+    public function setfpp($data){$this->fpp=$this->db->escape_str($data);}
+    public function setmedicacion($data){$this->medicacion=$this->db->escape_str($data);}
+    public function setfug($data){$this->fug=$this->db->escape_str($data);}
+    public function setg($data){$this->g=$this->db->escape_str($data);}
+    public function setp1($data){$this->p1=$this->db->escape_str($data);}
+    public function setp2($data){$this->p2=$this->db->escape_str($data);}
+    public function setp3($data){$this->p3=$this->db->escape_str($data);}
+    public function setp4($data){$this->p4=$this->db->escape_str($data);}
+    public function setalergias($data){$this->alergias=$this->db->escape_str($data);}
+    public function setotros($data){$this->otros=$this->db->escape_str($data);}
+    public function setenfermedad_dias($data){$this->enfermedad_dias=$this->db->escape_str($data);}
+    public function setenfermedad_horas($data){$this->enfermedad_horas=$this->db->escape_str($data);}
+    public function setenfermedad_minutos($data){$this->enfermedad_minutos=$this->db->escape_str($data);}
+    public function setenfermedad_inicio($data){$this->enfermedad_inicio=$this->db->escape_str($data);}
+    public function setenfermedad_curso($data){$this->enfermedad_curso=$this->db->escape_str($data);}
+    public function setrelato_evento($data){$this->relato_evento=$this->db->escape_str($data);}
+
+    public function setexamen_cabeza($data){$this->examen_cabeza=$this->db->escape_str($data);}
+    public function setexamen_cuello($data){$this->examen_cuello=$this->db->escape_str($data);}
+    public function setexamen_piel_tcsc($data){$this->examen_piel_tcsc=$this->db->escape_str($data);}
+    public function setexamen_aparato_respiratorio($data){$this->examen_aparato_respiratorio=$this->db->escape_str($data);}
+    public function setexamen_aparato_cardiovascular($data){$this->examen_aparato_cardiovascular=$this->db->escape_str($data);}
+    public function setexamen_aparato_digestivo($data){$this->examen_aparato_digestivo=$this->db->escape_str($data);}
+    public function setexamen_genito_urinario($data){$this->examen_genito_urinario=$this->db->escape_str($data);}
+    public function setexamen_sistema_osteomioaticular($data){$this->examen_sistema_osteomioaticular=$this->db->escape_str($data);}
+    public function setexamen_neurologico($data){$this->examen_neurologico=$this->db->escape_str($data);}
+
+
     public function obtenerFichaAtencion()
     {
         $this->db->select("l.*");
         $this->db->from("ficha_atencion l");
-        $this->db->order_by("l.idfichaatencion ASC");
+        $this->db->order_by("l.idfichaatencion desc");
         return $this->db->get();
         
     }
@@ -141,9 +202,64 @@ class Fichaatencion_model extends CI_Model
             "latitud" => $this->latitud,
             "longitud" => $this->longitud
 
-
         );
         if($this->db->insert("ficha_atencion", $data)) {
+            return $this->db->insert_id();
+        }
+        else {
+            return 0;
+        }
+    }
+
+    public function guardarFichaAtencion_antecedentes()
+    {
+        $data = array(
+            
+            "idfichaatencion" => $this->idfichaatencion,
+            "patologias_previas" => $this->patologias_previas,
+            "fur" => $this->fur,
+            "fpp" => $this->fpp,
+            "medicacion" => $this->medicacion,
+            "fug" => $this->fug,
+            "g" => $this->g,
+            "p1" => $this->p1,
+            "p2" => $this->p2,
+            "p3" => $this->p3,
+            "p4" => $this->p4,
+            "alergias" => $this->alergias,
+            "otros" => $this->otros,
+            "enfermedad_dias" => $this->enfermedad_dias,
+            "enfermedad_horas" => $this->enfermedad_horas,
+            "enfermedad_minutos" => $this->enfermedad_minutos,
+            "enfermedad_inicio" => $this->enfermedad_inicio,
+            "enfermedad_curso" => $this->enfermedad_curso,
+            "relato_evento" => $this->relato_evento
+
+        );
+        if($this->db->insert("ficha_atencion_antecedentes", $data)) {
+            return $this->db->insert_id();
+        }
+        else {
+            return 0;
+        }
+    }
+
+    public function guardarFichaAtencion_examen_fisico()
+    {
+        $data = array(
+            
+            "idfichaatencion" => $this->idfichaatencion,
+            "examen_cabeza" => $this->examen_cabeza,
+            "examen_cuello" => $this->examen_cuello,
+            "examen_piel_tcsc" => $this->examen_piel_tcsc,
+            "examen_aparato_respiratorio" => $this->examen_aparato_respiratorio,
+            "examen_aparato_cardiovascular" => $this->examen_aparato_cardiovascular,
+            "examen_aparato_digestivo" => $this->examen_aparato_digestivo,
+            "examen_genito_urinario" => $this->examen_genito_urinario,
+            "examen_sistema_osteomioaticular" => $this->examen_sistema_osteomioaticular,
+            "examen_neurologico" => $this->examen_neurologico
+        );
+        if($this->db->insert("ficha_atencion_examen_fisico", $data)) {
             return $this->db->insert_id();
         }
         else {

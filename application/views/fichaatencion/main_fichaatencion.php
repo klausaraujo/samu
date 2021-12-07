@@ -80,8 +80,9 @@
 													<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 														<span aria-hidden="true">&times;</span>
 													</button>
-												</div>												
-												<label class="modal-label col-sm-5 col-form-label py-10">Datos de la Base y la Unidad Operativa</label>
+												</div>
+												<h3 class="box-title">Datos de la Base y la Unidad Operativa</h3>												
+												<label class="modal-label col-sm-5 col-form-label py-10"></label>
 												<div class="row">
 													<div class="col-sm-4">
 														<div class="form-group row">
@@ -200,8 +201,8 @@
 												</div>
 
 												<hr />
-
-												<label class="modal-label col-sm-5 col-form-label py-10">Datos de la Emergencia</label>
+												<h3 class="box-title">Datos de la Emergencia</h3>						
+												<label class="modal-label col-sm-5 col-form-label py-10"></label>
 												<div class="row">
 													<div class="col-sm-4">
 														<div class="form-group row">
@@ -351,7 +352,8 @@
 												<hr/>
 
 												<div class="row">
-													<label class="modal-label col-sm-5 col-form-label py-10">Antecedentes</label>
+													<h3 class="box-title">Antecedentes</h3>
+													<label class="modal-label col-sm-5 col-form-label py-10"></label>
 													<div class="col-sm-8">
 														<div class="form-group row">
 															<label class="modal-label col-sm-2 col-form-label py-10">Patologías Previas: </label>
@@ -444,7 +446,8 @@
 												</div>
 
 												<hr/>
-												<label class="modal-label col-sm-5 col-form-label py-10">Enfermedad Actual</label>
+												<h3 class="box-title">Enfermedad Actual</h3>
+												<label class="modal-label col-sm-5 col-form-label py-10"></label>
 												<div class="row">												
 													<div class="col-sm-1">
 														<div class="form-group row">
@@ -488,8 +491,8 @@
 												</div>
 
 												<hr/>
-
-												<label class="modal-label col-sm-5 col-form-label py-10">RELATO DEL EVENTO:</label>
+												<h3 class="box-title">RELATO DEL EVENTO</h3>
+												<label class="modal-label col-sm-5 col-form-label py-10"></label>
 												<div class="row">
 												
 													<div class="col-sm-12">
@@ -500,6 +503,159 @@
 														</div>
 													</div>			
 													
+												</div>
+
+												<hr/>
+
+												<div class="row">
+													<h3 class="box-title">Exámen Físico</h3>
+													<label class="modal-label col-sm-5 col-form-label py-10"></label>
+													<div class="col-sm-8">
+														<div class="form-group row">
+															<label class="modal-label col-sm-2 col-form-label py-10">Cabeza: </label>
+															<div class="col-sm-9">
+															<input type="text" class="form-control" name="patologias_previas" id="patologias_previas" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+														</div>
+													</div>	
+													<div class="col-sm-4">
+														<div class="form-group row">
+															
+															<div class="col-sm-8">
+																
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-8">
+														<div class="form-group row">
+															<label class="modal-label col-sm-2 col-form-label py-10">Cuello: </label>
+															<div class="col-sm-9">
+															<input type="text" class="form-control" name="patologias_previas" id="patologias_previas" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+														</div>
+													</div>	
+													<div class="col-sm-4">
+														<div class="form-group row">
+															
+															<div class="col-sm-8">
+																
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-8">
+														<div class="form-group row">
+															<label class="modal-label col-sm-2 col-form-label py-10">Piel y TCSC: </label>
+															<div class="col-sm-9">
+															<input type="text" class="form-control" name="patologias_previas" id="patologias_previas" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+														</div>
+													</div>	
+													<div class="col-sm-4">
+														<div class="form-group row">
+															
+															<div class="col-sm-8">
+																
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-8">
+														<div class="form-group row">
+															<label class="modal-label col-sm-2 col-form-label py-10">Aparato Respiratorio: </label>
+															<div class="col-sm-9">
+															<input type="text" class="form-control" name="patologias_previas" id="patologias_previas" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+														</div>
+													</div>	
+													<div class="col-sm-4">
+														<div class="form-group row">
+															
+															<div class="col-sm-8">
+																
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-8">
+														<div class="form-group row">
+															<label class="modal-label col-sm-2 col-form-label py-10">Aparato Cardiovascular: </label>
+															<div class="col-sm-9">
+															<input type="text" class="form-control" name="patologias_previas" id="patologias_previas" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+														</div>
+													</div>	
+													<div class="col-sm-4">
+														<div class="form-group row">
+															
+															<div class="col-sm-8">
+																
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-8">
+														<div class="form-group row">
+															<label class="modal-label col-sm-2 col-form-label py-10">Aparato Digestivo: </label>
+															<div class="col-sm-9">
+															<input type="text" class="form-control" name="patologias_previas" id="patologias_previas" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+														</div>
+													</div>	
+													<div class="col-sm-4">
+														<div class="form-group row">
+															
+															<div class="col-sm-8">
+																
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-8">
+														<div class="form-group row">
+															<label class="modal-label col-sm-2 col-form-label py-10">Genito-Urinario: </label>
+															<div class="col-sm-9">
+															<input type="text" class="form-control" name="patologias_previas" id="patologias_previas" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+														</div>
+													</div>	
+													<div class="col-sm-4">
+														<div class="form-group row">
+															
+															<div class="col-sm-8">
+																
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-8">
+														<div class="form-group row">
+															<label class="modal-label col-sm-2 col-form-label py-10">Sistema-Osteomioarticular: </label>
+															<div class="col-sm-9">
+															<input type="text" class="form-control" name="patologias_previas" id="patologias_previas" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+														</div>
+													</div>	
+													<div class="col-sm-4">
+														<div class="form-group row">
+															
+															<div class="col-sm-8">
+																
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-8">
+														<div class="form-group row">
+															<label class="modal-label col-sm-2 col-form-label py-10">Neurológico: </label>
+															<div class="col-sm-9">
+															<input type="text" class="form-control" name="patologias_previas" id="patologias_previas" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+														</div>
+													</div>	
+													<div class="col-sm-4">
+														<div class="form-group row">
+															
+															<div class="col-sm-8">
+																
+															</div>
+														</div>
+													</div>
+													
+																																
 												</div>
 
 												<hr/>

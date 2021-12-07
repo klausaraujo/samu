@@ -26,6 +26,8 @@
 			<?php $this->load->view('layout/sidebar'); ?>
 			<div class="content-wrapper">
 				<div class="container-full">
+					<div class="alert alert-success" role="alert" style="display:none;" > Registro exitoso </div>
+                    <div class="alert alert-danger" role="alert" style="display:none;" > Ocurrio un error </div>
 					<section class="content">
 						<div class="col-12">
 							<div class="box">

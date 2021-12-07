@@ -386,7 +386,7 @@ class Main extends CI_Controller
 
     }
 
-    public function listarFichasAtencion(){
+    public function listaFichaAtencion(){
         
         $this->load->model("Fichaatencion_model");
 
@@ -399,7 +399,7 @@ class Main extends CI_Controller
         }
 
         $detalle = array(
-          "listarFichasAtencion" => $fichaatencion
+          "listaFichaAtencion" => $fichaatencion
         );
 
         $data = array(

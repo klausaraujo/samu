@@ -33,7 +33,7 @@ function fichaatencion(URI) {
     function loadData(table) {
       $.ajax({
         type: 'POST',
-        url: URI + 'fichaatencion/main/listarFichasAtencion',
+        url: URI + 'fichaatencion/main/listaFichaAtencion',
         data: {},
         dataType: 'json',
         success: function (response) {
@@ -47,11 +47,7 @@ function fichaatencion(URI) {
                 valor = $(this).html();
               i++;
             });
-            /*$("#formRegistrar")[0].reset();
-            $("#placa").val(valor);
-            $("#act").val(1);
-            $("#enviar").text("Actualizar");
-            $("select").prop('selectedIndex',0);*/
+            $("#formRegistrar")[0].reset();
             //buscar();
             showModal(event, 'Editar Ficha Atención');
           });
@@ -300,28 +296,28 @@ function fichaatencion(URI) {
         },
         buttons: [{
           extend: 'copy',
-          title: 'Lista General de Ambulancias',
+          title: 'Lista General de Ficha de Atención',
           exportOptions: { columns: [1, 2, 3, 4, 5] },
         },
         {
           extend: 'csv',
-          title: 'Lista General de Ambulancias',
+          title: 'Lista General de Ficha de Atención',
           exportOptions: { columns: [1, 2, 3, 4, 5] },
         },
         {
           extend: 'excel',
-          title: 'Lista General de Ambulancias',
+          title: 'Lista General de Ficha de Atención',
           exportOptions: { columns: [1, 2, 3, 4, 5] },
         },
         {
           extend: 'pdf',
-          title: 'Lista General de Ambulancias',
+          title: 'Lista General de Ficha de Atención',
           orientation: 'landscape',
           exportOptions: { columns: [1, 2, 3, 4, 5] },
         },
         {
           extend: 'print',
-          title: 'Lista General de Ambulancias',
+          title: 'Lista General de Ficha de Atención',
           exportOptions: { columns: [1, 2, 3, 4, 5] },
           customize: function (win) {
             $(win.document.body).addClass('white-bg');

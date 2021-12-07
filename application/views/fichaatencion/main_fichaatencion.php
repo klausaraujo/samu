@@ -514,7 +514,7 @@
 														<div class="form-group row">
 															<label class="modal-label col-sm-2 col-form-label py-10">Cabeza: </label>
 															<div class="col-sm-9">
-															<input type="text" class="form-control" name="patologias_previas" id="patologias_previas" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															<input type="text" class="form-control" name="examen_cabeza" id="examen_cabeza" onkeyup="javascript:this.value=this.value.toUpperCase();" />
 															</div>
 														</div>
 													</div>	
@@ -530,7 +530,7 @@
 														<div class="form-group row">
 															<label class="modal-label col-sm-2 col-form-label py-10">Cuello: </label>
 															<div class="col-sm-9">
-															<input type="text" class="form-control" name="patologias_previas" id="patologias_previas" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															<input type="text" class="form-control" name="examen_cuello" id="examen_cuello" onkeyup="javascript:this.value=this.value.toUpperCase();" />
 															</div>
 														</div>
 													</div>	
@@ -546,7 +546,7 @@
 														<div class="form-group row">
 															<label class="modal-label col-sm-2 col-form-label py-10">Piel y TCSC: </label>
 															<div class="col-sm-9">
-															<input type="text" class="form-control" name="patologias_previas" id="patologias_previas" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															<input type="text" class="form-control" name="examen_piel_tcsc" id="examen_piel_tcsc" onkeyup="javascript:this.value=this.value.toUpperCase();" />
 															</div>
 														</div>
 													</div>	
@@ -562,7 +562,7 @@
 														<div class="form-group row">
 															<label class="modal-label col-sm-2 col-form-label py-10">Aparato Respiratorio: </label>
 															<div class="col-sm-9">
-															<input type="text" class="form-control" name="patologias_previas" id="patologias_previas" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															<input type="text" class="form-control" name="examen_aparato_respiratorio" id="examen_aparato_respiratorio" onkeyup="javascript:this.value=this.value.toUpperCase();" />
 															</div>
 														</div>
 													</div>	
@@ -578,7 +578,7 @@
 														<div class="form-group row">
 															<label class="modal-label col-sm-2 col-form-label py-10">Aparato Cardiovascular: </label>
 															<div class="col-sm-9">
-															<input type="text" class="form-control" name="patologias_previas" id="patologias_previas" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															<input type="text" class="form-control" name="examen_aparato_cardiovascular" id="examen_aparato_cardiovascular" onkeyup="javascript:this.value=this.value.toUpperCase();" />
 															</div>
 														</div>
 													</div>	
@@ -594,7 +594,7 @@
 														<div class="form-group row">
 															<label class="modal-label col-sm-2 col-form-label py-10">Aparato Digestivo: </label>
 															<div class="col-sm-9">
-															<input type="text" class="form-control" name="patologias_previas" id="patologias_previas" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															<input type="text" class="form-control" name="examen_aparato_digestivo" id="examen_aparato_digestivo" onkeyup="javascript:this.value=this.value.toUpperCase();" />
 															</div>
 														</div>
 													</div>	
@@ -610,7 +610,7 @@
 														<div class="form-group row">
 															<label class="modal-label col-sm-2 col-form-label py-10">Genito-Urinario: </label>
 															<div class="col-sm-9">
-															<input type="text" class="form-control" name="patologias_previas" id="patologias_previas" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															<input type="text" class="form-control" name="examen_genito_urinario" id="examen_genito_urinario" onkeyup="javascript:this.value=this.value.toUpperCase();" />
 															</div>
 														</div>
 													</div>	
@@ -626,7 +626,7 @@
 														<div class="form-group row">
 															<label class="modal-label col-sm-2 col-form-label py-10">Sistema-Osteomioarticular: </label>
 															<div class="col-sm-9">
-															<input type="text" class="form-control" name="patologias_previas" id="patologias_previas" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															<input type="text" class="form-control" name="examen_sistema_osteomioaticular" id="examen_sistema_osteomioaticular" onkeyup="javascript:this.value=this.value.toUpperCase();" />
 															</div>
 														</div>
 													</div>	
@@ -642,7 +642,7 @@
 														<div class="form-group row">
 															<label class="modal-label col-sm-2 col-form-label py-10">Neurológico: </label>
 															<div class="col-sm-9">
-															<input type="text" class="form-control" name="patologias_previas" id="patologias_previas" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															<input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" />
 															</div>
 														</div>
 													</div>	

@@ -52,6 +52,18 @@ class Fichaatencion_model extends CI_Model
     private $enfermedad_curso;
     private $relato_evento;
 
+    private $examen_cabeza;
+    private $examen_cuello;
+    private $examen_piel_tcsc;
+    private $examen_aparato_respiratorio;
+    private $examen_aparato_cardiovascular;
+    private $examen_aparato_digestivo;
+    private $examen_genito_urinario;
+    private $examen_sistema_osteomioaticular;
+    private $examen_neurologico;
+
+
+
     public function setidfichaatencion($data){$this->idfichaatencion=$this->db->escape_str($data);}
     public function setidtiposeguro($data){$this->idtiposeguro=$this->db->escape_str($data);}
     public function setseguro($data){$this->seguro=$this->db->escape_str($data);}
@@ -99,6 +111,16 @@ class Fichaatencion_model extends CI_Model
     public function setenfermedad_inicio($data){$this->enfermedad_inicio=$this->db->escape_str($data);}
     public function setenfermedad_curso($data){$this->enfermedad_curso=$this->db->escape_str($data);}
     public function setrelato_evento($data){$this->relato_evento=$this->db->escape_str($data);}
+
+    public function setexamen_cabeza($data){$this->examen_cabeza=$this->db->escape_str($data);}
+    public function setexamen_cuello($data){$this->examen_cuello=$this->db->escape_str($data);}
+    public function setexamen_piel_tcsc($data){$this->examen_piel_tcsc=$this->db->escape_str($data);}
+    public function setexamen_aparato_respiratorio($data){$this->examen_aparato_respiratorio=$this->db->escape_str($data);}
+    public function setexamen_aparato_cardiovascular($data){$this->examen_aparato_cardiovascular=$this->db->escape_str($data);}
+    public function setexamen_aparato_digestivo($data){$this->examen_aparato_digestivo=$this->db->escape_str($data);}
+    public function setexamen_genito_urinario($data){$this->examen_genito_urinario=$this->db->escape_str($data);}
+    public function setexamen_sistema_osteomioaticular($data){$this->examen_sistema_osteomioaticular=$this->db->escape_str($data);}
+    public function setexamen_neurologico($data){$this->examen_neurologico=$this->db->escape_str($data);}
 
 
     public function obtenerFichaAtencion()
@@ -220,6 +242,30 @@ class Fichaatencion_model extends CI_Model
             return 0;
         }
     }
+
+    public function guardarFichaAtencion_examen_fisico()
+    {
+        $data = array(
+            
+            "idfichaatencion" => $this->idfichaatencion,
+            "examen_cabeza" => $this->examen_cabeza,
+            "examen_cuello" => $this->examen_cuello,
+            "examen_piel_tcsc" => $this->examen_piel_tcsc,
+            "examen_aparato_respiratorio" => $this->examen_aparato_respiratorio,
+            "examen_aparato_cardiovascular" => $this->examen_aparato_cardiovascular,
+            "examen_aparato_digestivo" => $this->examen_aparato_digestivo,
+            "examen_genito_urinario" => $this->examen_genito_urinario,
+            "examen_sistema_osteomioaticular" => $this->examen_sistema_osteomioaticular,
+            "examen_neurologico" => $this->examen_neurologico
+        );
+        if($this->db->insert("ficha_atencion_examen_fisico", $data)) {
+            return $this->db->insert_id();
+        }
+        else {
+            return 0;
+        }
+    }
+
     public function actualizarAmbulancia()
     {
         $data = array(

@@ -150,6 +150,18 @@ class Main extends CI_Controller
        $enfermedad_inicio = $this->input->post("enfermedad_inicio");
        $enfermedad_curso = $this->input->post("enfermedad_curso");       
 
+
+       $examen_cabeza = $this->input->post("examen_cabeza");
+       $examen_cuello = $this->input->post("examen_cuello");
+       $examen_piel_tcsc = $this->input->post("examen_piel_tcsc");
+       $examen_aparato_respiratorio = $this->input->post("examen_aparato_respiratorio");
+       $examen_aparato_cardiovascular = $this->input->post("examen_aparato_cardiovascular");
+       $examen_aparato_digestivo = $this->input->post("examen_aparato_digestivo");
+       $examen_genito_urinario = $this->input->post("examen_genito_urinario");
+       $examen_sistema_osteomioaticular = $this->input->post("examen_sistema_osteomioaticular");
+       $examen_neurologico = $this->input->post("examen_neurologico");
+ 
+
        $this->Fichaatencion_model->setidfichaatencion($idfichaatencion);
        $this->Fichaatencion_model->setidtiposeguro($idtiposeguro);
        $this->Fichaatencion_model->setseguro($seguro);
@@ -200,6 +212,17 @@ class Main extends CI_Controller
        $this->Fichaatencion_model->setrelato_evento($relato_evento);
 
 
+       $this->Fichaatencion_model->setexamen_cabeza($examen_cabeza);
+       $this->Fichaatencion_model->setexamen_cuello($examen_cuello);
+       $this->Fichaatencion_model->setexamen_piel_tcsc($examen_piel_tcsc);
+       $this->Fichaatencion_model->setexamen_aparato_respiratorio($examen_aparato_respiratorio);
+       $this->Fichaatencion_model->setexamen_aparato_cardiovascular($examen_aparato_cardiovascular);
+       $this->Fichaatencion_model->setexamen_aparato_digestivo($examen_aparato_digestivo);
+       $this->Fichaatencion_model->setexamen_genito_urinario($examen_genito_urinario);
+       $this->Fichaatencion_model->setexamen_sistema_osteomioaticular($examen_sistema_osteomioaticular);
+       $this->Fichaatencion_model->setexamen_neurologico($examen_neurologico);
+       
+
        //$fotografia = $_FILES["file"];
        
         $status = 500;
@@ -217,7 +240,7 @@ class Main extends CI_Controller
             if ($id > 0) {
                 $this->Fichaatencion_model->setidfichaatencion($id);
                 $this->Fichaatencion_model->guardarFichaAtencion_antecedentes();
-                //$this->Fichaatencion_model->guardarFichaAtencion_examen_fisico();
+                $this->Fichaatencion_model->guardarFichaAtencion_examen_fisico();
                 //$this->Fichaatencion_model->guardarFichaAtencion_momento_evaluacion();
                 $status = 200;
                 $message = "Ficha de Atención registrada exitosamente";

@@ -289,7 +289,7 @@
 													</div>
 													<div class="col-sm-4">
 														<div class="form-group row">
-															<label class="modal-label col-sm-5 col-form-label py-10">Dirección: </label>
+															<label class="modal-label col-sm-5 col-form-label py-10">Dirección de la Atención: </label>
 															<div class="col-sm-5">
 																<input type="text" class="form-control" name="direccion_atencion" id="direccion_atencion" onkeyup="javascript:this.value=this.value.toUpperCase();" />
 															</div>
@@ -460,15 +460,15 @@
 														<div class="form-group row">
 															<label class="modal-label col-sm-2 col-form-label py-10">Días: </label>
 															<div class="col-sm-2 py-1">
-																<input type="text" class="form-control" name="enfermedad_dias" id="enfermedad_dias" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+																<input type="text" class="form-control" name="enfermedad_dias" id="enfermedad_dias" onkeyup="javascript:this.value=this.value.toUpperCase();" value ="0" />
 															</div>
 															<label class="modal-label col-sm-2 col-form-label py-10">Horas: </label>
 															<div class="col-sm-2 py-1">
-																<input type="text" class="form-control" name="enfermedad_horas" id="enfermedad_horas" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+																<input type="text" class="form-control" name="enfermedad_horas" id="enfermedad_horas" onkeyup="javascript:this.value=this.value.toUpperCase();" value ="0" />
 															</div>
 															<label class="modal-label col-sm-2 col-form-label py-10">Minutos: </label>
 															<div class="col-sm-2 py-1">
-																<input type="text" class="form-control" name="enfermedad_minutos" id="enfermedad_minutos" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+																<input type="text" class="form-control" name="enfermedad_minutos" id="enfermedad_minutos" onkeyup="javascript:this.value=this.value.toUpperCase();" value ="0" />
 															</div>															
 														</div>
 													</div>
@@ -660,6 +660,143 @@
 																																
 												</div>
 
+												<hr/>
+
+												<div class="row">						
+													<div class="col-sm-8">
+														<div class="form-group row">					
+															
+														<table class="table table-bordered table-hover display nowrap margin-top-10 w-p100">
+															<colgroup>
+																<col style="width: 110px">
+																<col style="width: 68px">
+																<col style="width: 65px">
+																<col style="width: 86px">
+																<col style="width: 68px">
+																<col style="width: 60px">
+																<col style="width: 49px">
+																<col style="width: 59px">
+																<col style="width: 58px">
+																<col style="width: 61px">
+																<col style="width: 31px">
+																<col style="width: 66px">
+																<col style="width: 37px">
+																<col style="width: 37px">
+															</colgroup>
+															<thead>
+																<tr>
+																<th rowspan="3">MOMENTO DE LA EVALUACIÓN </th>
+																<th colspan="6">SIGNOS VITALES</th>
+																<th colspan="4">ESCALA DE COMA DE GLASGOW</th>
+																<th colspan="3">PUPILAS</th>
+																</tr>
+																<tr>
+																<th rowspan="2">Temperatura °C</th>
+																<th rowspan="2">Frecuencia Cardíaca /min</th>
+																<th>Presión Arterial</th>
+																<th rowspan="2">Frecuencia Respiratoria /min</th>
+																<th rowspan="2">Saturación de Oxígeno (%)</th>
+																<th rowspan="2">Glicemia</th>
+																<th rowspan="2">Apertura Ocular (4)</th>
+																<th rowspan="2">Respuesta Verbal (5)</th>
+																<th rowspan="2">Respuesta Motora (6)</th>
+																<th>Total</th>
+																<th rowspan="2">Tipo</th>
+																<th colspan="2" rowspan="2">Reactiva</th>
+																</tr>
+																<tr>
+																<th>mmHg</th>
+																<th>(15)</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																<td>
+																	<select class="form-control" name="sexo" id="sexo">
+																		<option value="1">Inicial</option>
+																		<option value="2">Traslado</option>															
+																		<option value="3">Llegada</option>
+																	</select>
+																
+																</td>
+																<td><input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
+																<td><input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
+																<td><input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
+																<td><input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
+																<td><input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
+																<td><input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
+																<td><input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
+																<td><input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
+																<td><input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
+																<td><input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
+																<td><input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
+																<td colspan="2">
+																	<select class="form-control" name="sexo" id="sexo">
+																		<option value="1">SI</option>
+																		<option value="2">NO</option>																
+																	</select>
+																</td>
+																</tr>
+																<tr>
+																<td>
+																	<select class="form-control" name="sexo" id="sexo">
+																		<option value="1">Inicial</option>
+																		<option value="2">Traslado</option>															
+																		<option value="3">Llegada</option>
+																	</select>
+																
+																</td>
+																<td><input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
+																<td><input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
+																<td><input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
+																<td><input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
+																<td><input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
+																<td><input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
+																<td><input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
+																<td><input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
+																<td><input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
+																<td><input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
+																<td><input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
+																<td colspan="2">
+																	<select class="form-control" name="sexo" id="sexo">
+																		<option value="1">SI</option>
+																		<option value="2">NO</option>																
+																	</select>
+																</td>
+																</tr>
+																<tr>
+																<td>
+																	<select class="form-control" name="sexo" id="sexo">
+																		<option value="1">Inicial</option>
+																		<option value="2">Traslado</option>															
+																		<option value="3">Llegada</option>
+																	</select>
+																
+																</td>
+																<td><input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
+																<td><input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
+																<td><input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
+																<td><input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
+																<td><input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
+																<td><input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
+																<td><input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
+																<td><input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
+																<td><input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
+																<td><input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
+																<td><input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
+																<td colspan="2">
+																	<select class="form-control" name="sexo" id="sexo">
+																		<option value="1">SI</option>
+																		<option value="2">NO</option>																
+																	</select>
+																</td>
+																</tr>
+															</tbody>
+														</table>
+
+														</div>
+													</div>
+												</div>
 												<hr/>
 										</div>
 										<div class="modal-footer">

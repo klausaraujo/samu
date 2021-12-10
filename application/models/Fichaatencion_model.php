@@ -62,8 +62,30 @@ class Fichaatencion_model extends CI_Model
     private $examen_sistema_osteomioaticular;
     private $examen_neurologico;
 
-
-
+    private $tipo;
+    private $temperaperatura;
+    private $frecuencia_cardiaca;
+    private $presion_arterial;
+    private $frecuencia_respiratoria;
+    private $saturacion_exigeno;
+    private $glicemia;
+    private $glasgow_ocular;
+    private $glasgow_verbal;
+    private $glasgow_motora;
+    private $glasgow_total;
+    private $pupilas_tipo;
+    private $pupilas_reactiva;
+        
+    private $tipo_victima;
+    private $tipo_vehiculo;
+    private $tipo_vehiculo_descripcion;
+    private $bolsa;
+    private $cinturon;
+    private $casco;
+    private $ropa;
+    private $cinamatica;
+    private $ubicacion;
+    
     public function setidfichaatencion($data){$this->idfichaatencion=$this->db->escape_str($data);}
     public function setidtiposeguro($data){$this->idtiposeguro=$this->db->escape_str($data);}
     public function setseguro($data){$this->seguro=$this->db->escape_str($data);}
@@ -122,6 +144,30 @@ class Fichaatencion_model extends CI_Model
     public function setexamen_sistema_osteomioaticular($data){$this->examen_sistema_osteomioaticular=$this->db->escape_str($data);}
     public function setexamen_neurologico($data){$this->examen_neurologico=$this->db->escape_str($data);}
 
+    public function settipo($data){$this->tipo=$this->db->escape_str($data);}
+    public function settemperaperatura($data){$this->temperaperatura=$this->db->escape_str($data);}
+    public function setfrecuencia_cardiaca($data){$this->frecuencia_cardiaca=$this->db->escape_str($data);}
+    public function setpresion_arterial($data){$this->presion_arterial=$this->db->escape_str($data);}
+    public function setfrecuencia_respiratoria($data){$this->frecuencia_respiratoria=$this->db->escape_str($data);}
+    public function setsaturacion_exigeno($data){$this->saturacion_exigeno=$this->db->escape_str($data);}
+    public function setglicemia($data){$this->glicemia=$this->db->escape_str($data);}
+    public function setglasgow_ocular($data){$this->glasgow_ocular=$this->db->escape_str($data);}
+    public function setglasgow_verbal($data){$this->glasgow_verbal=$this->db->escape_str($data);}
+    public function setglasgow_motora($data){$this->glasgow_motora=$this->db->escape_str($data);}
+    public function setglasgow_total($data){$this->glasgow_total=$this->db->escape_str($data);}
+    public function setpupilas_tipo($data){$this->pupilas_tipo=$this->db->escape_str($data);}
+    public function setpupilas_reactiva($data){$this->pupilas_reactiva=$this->db->escape_str($data);}
+    
+    public function settipo_victima($data){$this->tipo_victima=$this->db->escape_str($data);}
+    public function settipo_vehiculo($data){$this->tipo_vehiculo=$this->db->escape_str($data);}
+    public function settipo_vehiculo_descripcion($data){$this->tipo_vehiculo_descripcion=$this->db->escape_str($data);}
+    public function setbolsa($data){$this->bolsa=$this->db->escape_str($data);}
+    public function setcinturon($data){$this->cinturon=$this->db->escape_str($data);}
+    public function setcasco($data){$this->casco=$this->db->escape_str($data);}
+    public function setropa($data){$this->ropa=$this->db->escape_str($data);}
+    public function setcinamatica($data){$this->cinamatica=$this->db->escape_str($data);}
+    public function setubicacion($data){$this->ubicacion=$this->db->escape_str($data);}
+        
 
     public function obtenerFichaAtencion()
     {
@@ -260,6 +306,59 @@ class Fichaatencion_model extends CI_Model
             "examen_neurologico" => $this->examen_neurologico
         );
         if($this->db->insert("ficha_atencion_examen_fisico", $data)) {
+            return $this->db->insert_id();
+        }
+        else {
+            return 0;
+        }
+    }
+
+    public function guardarFichaAtencion_momento_evaluacion()
+    {
+        $data = array(
+            
+            "idfichaatencion" => $this->idfichaatencion,
+            "tipo" => $this->tipo,
+            "temperaperatura" => $this->temperaperatura,
+            "frecuencia_cardiaca" => $this->frecuencia_cardiaca,
+            "presion_arterial" => $this->presion_arterial,
+            "frecuencia_respiratoria" => $this->frecuencia_respiratoria,
+            "saturacion_exigeno" => $this->saturacion_exigeno,
+            "glicemia" => $this->glicemia,
+            "glasgow_ocular" => $this->glasgow_ocular,
+            "glasgow_verbal" => $this->glasgow_verbal,
+            "glasgow_motora" => $this->glasgow_motora,
+            "glasgow_total" => $this->glasgow_total,
+            "pupilas_tipo" => $this->pupilas_tipo,
+            "pupilas_reactiva" => $this->pupilas_reactiva
+
+        );
+        if($this->db->insert("ficha_atencion_momento_evaluacion", $data)) {
+            return $this->db->insert_id();
+        }
+        else {
+            return 0;
+        }
+    }
+
+    
+    public function guardarFichaAtencion_mecanismo_lesion()
+    {
+        $data = array(
+            
+            "idfichaatencion" => $this->idfichaatencion,
+            "tipo_victima" => $this->tipo_victima,
+            "tipo_vehiculo" => $this->tipo_vehiculo,
+            "tipo_vehiculo_descripcion" => $this->tipo_vehiculo_descripcion,
+            "bolsa" => $this->bolsa,
+            "cinturon" => $this->cinturon,
+            "casco" => $this->casco,
+            "ropa" => $this->ropa,
+            "cinamatica" => $this->cinamatica,
+            "ubicacion" => $this->ubicacion          
+                        
+        );
+        if($this->db->insert("ficha_atencion_mecanismo_lesion", $data)) {
             return $this->db->insert_id();
         }
         else {

@@ -30,6 +30,7 @@ function fichaatencion(URI) {
       form.submit();
     }
     
+    
     function loadData(table) {
       $.ajax({
         type: 'POST',

@@ -162,7 +162,31 @@ class Main extends CI_Controller
        $examen_sistema_osteomioaticular = $this->input->post("examen_sistema_osteomioaticular");
        $examen_neurologico = $this->input->post("examen_neurologico");
  
+       $tipo = $this->input->post("tipo");
+       $temperaperatura = $this->input->post("temperaperatura");
+       $frecuencia_cardiaca = $this->input->post("frecuencia_cardiaca");
+       $presion_arterial = $this->input->post("presion_arterial");
+       $frecuencia_respiratoria = $this->input->post("frecuencia_respiratoria");
+       $saturacion_exigeno = $this->input->post("saturacion_exigeno");
+       $glicemia = $this->input->post("glicemia");
+       $glasgow_ocular = $this->input->post("glasgow_ocular");
+       $glasgow_verbal = $this->input->post("glasgow_verbal");
+       $glasgow_motora = $this->input->post("glasgow_motora");
+       $glasgow_total = $this->input->post("glasgow_total");
+       $pupilas_tipo = $this->input->post("pupilas_tipo");
+       $pupilas_reactiva = $this->input->post("pupilas_reactiva");
 
+       $tipo_victima = $this->input->post("tipo_victima");
+       $tipo_vehiculo = $this->input->post("tipo_vehiculo");
+       $tipo_vehiculo_descripcion = $this->input->post("tipo_vehiculo_descripcion");
+       $bolsa = $this->input->post("bolsa");
+       $cinturon = $this->input->post("cinturon");
+       $casco = $this->input->post("casco");
+       $ropa = $this->input->post("ropa");
+       $cinamatica = $this->input->post("cinamatica");
+       $ubicacion = $this->input->post("ubicacion");
+
+       
        $this->Fichaatencion_model->setidfichaatencion($idfichaatencion);
        $this->Fichaatencion_model->setidtiposeguro($idtiposeguro);
        $this->Fichaatencion_model->setseguro($seguro);
@@ -223,7 +247,30 @@ class Main extends CI_Controller
        $this->Fichaatencion_model->setexamen_sistema_osteomioaticular($examen_sistema_osteomioaticular);
        $this->Fichaatencion_model->setexamen_neurologico($examen_neurologico);
        
-
+       $this->Fichaatencion_model->settipo($tipo);
+       $this->Fichaatencion_model->settemperaperatura($temperaperatura);
+       $this->Fichaatencion_model->setfrecuencia_cardiaca($frecuencia_cardiaca);
+       $this->Fichaatencion_model->setpresion_arterial($presion_arterial);
+       $this->Fichaatencion_model->setfrecuencia_respiratoria($frecuencia_respiratoria);
+       $this->Fichaatencion_model->setsaturacion_exigeno($saturacion_exigeno);
+       $this->Fichaatencion_model->setglicemia($glicemia);
+       $this->Fichaatencion_model->setglasgow_ocular($glasgow_ocular);
+       $this->Fichaatencion_model->setglasgow_verbal($glasgow_verbal);
+       $this->Fichaatencion_model->setglasgow_motora($glasgow_motora);
+       $this->Fichaatencion_model->setglasgow_total($glasgow_total);
+       $this->Fichaatencion_model->setpupilas_tipo($pupilas_tipo);
+       $this->Fichaatencion_model->setpupilas_reactiva($pupilas_reactiva);
+              
+       $this->Fichaatencion_model->settipo_victima($tipo_victima);
+       $this->Fichaatencion_model->settipo_vehiculo($tipo_vehiculo);
+       $this->Fichaatencion_model->settipo_vehiculo_descripcion($tipo_vehiculo_descripcion);
+       $this->Fichaatencion_model->setbolsa($bolsa);
+       $this->Fichaatencion_model->setcinturon($cinturon);
+       $this->Fichaatencion_model->setcasco($casco);
+       $this->Fichaatencion_model->setropa($ropa);
+       $this->Fichaatencion_model->setcinamatica($cinamatica);
+       $this->Fichaatencion_model->setubicacion($ubicacion);
+       
        //$fotografia = $_FILES["file"];
        
         $status = 500;
@@ -242,7 +289,8 @@ class Main extends CI_Controller
                 $this->Fichaatencion_model->setidfichaatencion($id);
                 $this->Fichaatencion_model->guardarFichaAtencion_antecedentes();
                 $this->Fichaatencion_model->guardarFichaAtencion_examen_fisico();
-                //$this->Fichaatencion_model->guardarFichaAtencion_momento_evaluacion();
+                $this->Fichaatencion_model->guardarFichaAtencion_momento_evaluacion();
+                $this->Fichaatencion_model->guardarFichaAtencion_mecanismo_lesion();
                 $status = 200;
                 $message = "Ficha de Atención registrada exitosamente";
             }

@@ -328,7 +328,7 @@ class Fichaatencion_model extends CI_Model
             "glasgow_ocular" => $this->glasgow_ocular,
             "glasgow_verbal" => $this->glasgow_verbal,
             "glasgow_motora" => $this->glasgow_motora,
-            "glasgow_total" => $this->glasgow_total,
+            //"glasgow_total" => $this->glasgow_total,
             "pupilas_tipo" => $this->pupilas_tipo,
             "pupilas_reactiva" => $this->pupilas_reactiva
 

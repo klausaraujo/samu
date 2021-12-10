@@ -246,7 +246,7 @@
 															</div>
 															<div class="col-sm-3">
 															<button type="button" id="btn-buscar" class="btn btn-primary">
-																<i class="fa fa-search" aria-hidden="true">&nbsp;Buscar</i>
+																<i class="fa fa-search" aria-hidden="true"></i>
 															</button>
 														</div>
 														</div>
@@ -300,7 +300,7 @@
 															<label class="modal-label col-sm-5 col-form-label py-10">Departamento: </label>
 															<div class="col-sm-5">
 																<select class="form-control" style="height:30px" name="departamento" id="departamento">
-																	<option value="0">-- Regi&oacute;n --</option>
+																	<option value="0">-- Departamento --</option>
 																	<?php foreach($listaDepartamentos as $row): ?>
 																	<option value="<?=$row->idregion?>"><?=$row->region?></option>
 																	<?php endforeach; ?>
@@ -715,7 +715,7 @@
 																<td><input type="text" class="form-control" name="saturacion_exigeno" id="saturacion_exigeno" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
 																<td><input type="text" class="form-control" name="glicemia" id="glicemia" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
 																<td>
-																	<select class="form-control" name="sexo" id="sexo">
+																	<select class="form-control" name="glasgow_ocular" id="glasgow_ocular">
 																		<option value="1">Ninguna</option>
 																		<option value="2">Dolor</option>															
 																		<option value="3">Voz</option>
@@ -723,7 +723,7 @@
 																	</select>																
 																</td>
 																<td>
-																	<select class="form-control" name="sexo" id="sexo">
+																	<select class="form-control" name="glasgow_verbal" id="glasgow_verbal">
 																		<option value="1">Ninguna</option>
 																		<option value="2">Sonidos</option>															
 																		<option value="3">Inapropiada</option>
@@ -732,7 +732,7 @@
 																	</select>																
 																</td>
 																<td>
-																	<select class="form-control" name="sexo" id="sexo">
+																	<select class="form-control" name="glasgow_motora" id="glasgow_motora">
 																		<option value="1">Ninguna</option>
 																		<option value="2">Extensión</option>															
 																		<option value="3">Flexión</option>
@@ -741,7 +741,7 @@
 																		<option value="6">Obedece</option>
 																	</select>																
 																</td>
-																<td><input type="text" class="form-control" name="glasgow_total" id="glasgow_total" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
+																<td><input type="text" class="form-control" name="glasgow_total" id="glasgow_total" onkeyup="javascript:this.value=this.value.toUpperCase();" disabled/></td>
 																<td>
 																	<select class="form-control" name="pupilas_tipo" id="pupilas_tipo">
 																		<option value="1">Izquierdo</option>

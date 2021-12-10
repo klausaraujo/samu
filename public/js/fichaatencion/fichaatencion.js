@@ -380,7 +380,7 @@ function fichaatencion(URI) {
                 $("#paciente_apellidos").prop("readonly", true);
               const { data } = response;
               const datos = data.attributes;
-              $("#btn-buscar").html('<i class="fa fa-search" aria-hidden="true"></i>&nbsp;&nbsp;Buscar');
+              $("#btn-buscar").html('<i class="fa fa-search" aria-hidden="true"></i>');
               $("#paciente_apellidos").val(datos.nombres+ " " +datos.apellido_paterno+ " " +datos.apellido_materno) ;
               $("#direccion_atencion").val(datos.domicilio_direccion);
               $("#fecha_nacimiento").val(datos.fecha_nacimiento);

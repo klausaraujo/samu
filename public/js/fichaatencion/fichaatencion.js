@@ -834,6 +834,229 @@ function fichaatencion(URI) {
         showModal(event, 'Editar Ficha Atención');
       });
 
+
+      $("#btn-buscarmed").on("click", function () {
+        var documento_numero = $("input[name=numero_documento_medico]").val();
+        var type = $("select#idtipodocumento_medico").children("option:selected").val();
+        if(documento_numero != "" && type != ""){
+          $.ajax({
+            url: URI + "fichaatencion/main/curl",
+            data: { type: type, document: documento_numero },
+            method: 'post',
+            dataType: 'json',
+            error: function (xhr) {
+              $("#btn-buscarmed").html('<i class="fa fa-search" aria-hidden="true"></Buscar>');
+            },
+            beforeSend: function () { $("#btn-buscarmed").html('<i class="fa fa-spinner fa-pulse"></i>'); },
+            success: function (response) {            
+              if(response.data){
+                if(!$("#nombapemed").prop("readonly"))
+                  $("#nombapemed").prop("readonly", true);
+                const { data } = response;
+                const datos = data.attributes;
+                $("#btn-buscarmed").html('<i class="fa fa-search" aria-hidden="true"></i>');
+                $("#nombapemed").val(datos.nombres+ " " +datos.apellido_paterno+ " " +datos.apellido_materno) ;
+                $("#datos").show();
+              }else{
+                $("#btn-buscarmed").html('<i class="fa fa-search" aria-hidden="true"></i>&nbsp;&nbsp;Buscar');
+                alert(response.errors[0].detail);
+                if($("#nombapemed").prop("readonly"))
+                  $("#nombapemed").prop("readonly", false);
+                if($("#datos").show())
+                  $("#datos").hide();
+              }
+            }
+          });
+        }else{
+          alert("Debe ingresar el numero de documento y el tipo");
+        }
+      });
+
+      $("#btn-buscarenf").on("click", function () {
+        var documento_numero = $("input[name=numero_documento_enfermero]").val();
+        var type = $("select#idtipodocumento_enfermero").children("option:selected").val();
+        if(documento_numero != "" && type != ""){
+          $.ajax({
+            url: URI + "fichaatencion/main/curl",
+            data: { type: type, document: documento_numero },
+            method: 'post',
+            dataType: 'json',
+            error: function (xhr) {
+              $("#btn-buscarenf").html('<i class="fa fa-search" aria-hidden="true"></Buscar>');
+            },
+            beforeSend: function () { $("#btn-buscarenf").html('<i class="fa fa-spinner fa-pulse"></i>'); },
+            success: function (response) {            
+              if(response.data){
+                if(!$("#nombapeenf").prop("readonly"))
+                  $("#nombapeenf").prop("readonly", true);
+                const { data } = response;
+                const datos = data.attributes;
+                $("#btn-buscarenf").html('<i class="fa fa-search" aria-hidden="true"></i>');
+                $("#nombapeenf").val(datos.nombres+ " " +datos.apellido_paterno+ " " +datos.apellido_materno) ;
+                $("#datos").show();
+              }else{
+                $("#btn-buscarenf").html('<i class="fa fa-search" aria-hidden="true"></i>&nbsp;&nbsp;Buscar');
+                alert(response.errors[0].detail);
+                if($("#nombapeenf").prop("readonly"))
+                  $("#nombapeenf").prop("readonly", false);
+                if($("#datos").show())
+                  $("#datos").hide();
+              }
+            }
+          });
+        }else{
+          alert("Debe ingresar el numero de documento y el tipo");
+        }
+      });
+
+      $("#btn-buscarpil").on("click", function () {
+        var documento_numero = $("input[name=numero_documento_piloto]").val();
+        var type = $("select#idtipodocumento_piloto").children("option:selected").val();
+        if(documento_numero != "" && type != ""){
+          $.ajax({
+            url: URI + "fichaatencion/main/curl",
+            data: { type: type, document: documento_numero },
+            method: 'post',
+            dataType: 'json',
+            error: function (xhr) {
+              $("#btn-buscarpil").html('<i class="fa fa-search" aria-hidden="true"></Buscar>');
+            },
+            beforeSend: function () { $("#btn-buscarpil").html('<i class="fa fa-spinner fa-pulse"></i>'); },
+            success: function (response) {            
+              if(response.data){
+                if(!$("#nombapepil").prop("readonly"))
+                  $("#nombapepil").prop("readonly", true);
+                const { data } = response;
+                const datos = data.attributes;
+                $("#btn-buscarpil").html('<i class="fa fa-search" aria-hidden="true"></i>');
+                $("#nombapepil").val(datos.nombres+ " " +datos.apellido_paterno+ " " +datos.apellido_materno) ;
+                $("#datos").show();
+              }else{
+                $("#btn-buscarpil").html('<i class="fa fa-search" aria-hidden="true"></i>&nbsp;&nbsp;Buscar');
+                alert(response.errors[0].detail);
+                if($("#nombapepil").prop("readonly"))
+                  $("#nombapepil").prop("readonly", false);
+                if($("#datos").show())
+                  $("#datos").hide();
+              }
+            }
+          });
+        }else{
+          alert("Debe ingresar el numero de documento y el tipo");
+        }
+      });
+
+      $("#btn-buscarmedreg").on("click", function () {
+        var documento_numero = $("input[name=numero_documento_medico_regulador]").val();
+        var type = $("select#idtipodocumento_medico_regulador").children("option:selected").val();
+        if(documento_numero != "" && type != ""){
+          $.ajax({
+            url: URI + "fichaatencion/main/curl",
+            data: { type: type, document: documento_numero },
+            method: 'post',
+            dataType: 'json',
+            error: function (xhr) {
+              $("#btn-buscarmedreg").html('<i class="fa fa-search" aria-hidden="true"></Buscar>');
+            },
+            beforeSend: function () { $("#btn-buscarmedreg").html('<i class="fa fa-spinner fa-pulse"></i>'); },
+            success: function (response) {            
+              if(response.data){
+                if(!$("#nombapemedreg").prop("readonly"))
+                  $("#nombapemedreg").prop("readonly", true);
+                const { data } = response;
+                const datos = data.attributes;
+                $("#btn-buscarmedreg").html('<i class="fa fa-search" aria-hidden="true"></i>');
+                $("#nombapemedreg").val(datos.nombres+ " " +datos.apellido_paterno+ " " +datos.apellido_materno) ;
+                $("#datos").show();
+              }else{
+                $("#btn-buscarmedreg").html('<i class="fa fa-search" aria-hidden="true"></i>&nbsp;&nbsp;Buscar');
+                alert(response.errors[0].detail);
+                if($("#nombapemedreg").prop("readonly"))
+                  $("#nombapemedreg").prop("readonly", false);
+                if($("#datos").show())
+                  $("#datos").hide();
+              }
+            }
+          });
+        }else{
+          alert("Debe ingresar el numero de documento y el tipo");
+        }
+      });
+
+      $("#btn-buscarprofr").on("click", function () {
+        var documento_numero = $("input[name=numero_documento_profesional_receptor]").val();
+        var type = $("select#idtipodocumento_profesional_receptor").children("option:selected").val();
+        if(documento_numero != "" && type != ""){
+          $.ajax({
+            url: URI + "fichaatencion/main/curl",
+            data: { type: type, document: documento_numero },
+            method: 'post',
+            dataType: 'json',
+            error: function (xhr) {
+              $("#btn-buscarprofr").html('<i class="fa fa-search" aria-hidden="true"></Buscar>');
+            },
+            beforeSend: function () { $("#btn-buscarprofr").html('<i class="fa fa-spinner fa-pulse"></i>'); },
+            success: function (response) {            
+              if(response.data){
+                if(!$("#nombapeprorec").prop("readonly"))
+                  $("#nombapeprorec").prop("readonly", true);
+                const { data } = response;
+                const datos = data.attributes;
+                $("#btn-buscarprofr").html('<i class="fa fa-search" aria-hidden="true"></i>');
+                $("#nombapeprorec").val(datos.nombres+ " " +datos.apellido_paterno+ " " +datos.apellido_materno) ;
+                $("#datos").show();
+              }else{
+                $("#btn-buscarprofr").html('<i class="fa fa-search" aria-hidden="true"></i>&nbsp;&nbsp;Buscar');
+                alert(response.errors[0].detail);
+                if($("#nombapeprorec").prop("readonly"))
+                  $("#nombapeprorec").prop("readonly", false);
+                if($("#datos").show())
+                  $("#datos").hide();
+              }
+            }
+          });
+        }else{
+          alert("Debe ingresar el numero de documento y el tipo");
+        }
+      });
+
+      $("#btn-buscarmedrec").on("click", function () {
+        var documento_numero = $("input[name=numero_documento_medico_receptor]").val();
+        var type = $("select#idtipodocumento_medico_receptor").children("option:selected").val();
+        if(documento_numero != "" && type != ""){
+          $.ajax({
+            url: URI + "fichaatencion/main/curl",
+            data: { type: type, document: documento_numero },
+            method: 'post',
+            dataType: 'json',
+            error: function (xhr) {
+              $("#btn-buscarmedrec").html('<i class="fa fa-search" aria-hidden="true"></Buscar>');
+            },
+            beforeSend: function () { $("#btn-buscarmedrec").html('<i class="fa fa-spinner fa-pulse"></i>'); },
+            success: function (response) {            
+              if(response.data){
+                if(!$("#nombapemedrec").prop("readonly"))
+                  $("#nombapemedrec").prop("readonly", true);
+                const { data } = response;
+                const datos = data.attributes;
+                $("#btn-buscarmedrec").html('<i class="fa fa-search" aria-hidden="true"></i>');
+                $("#nombapemedrec").val(datos.nombres+ " " +datos.apellido_paterno+ " " +datos.apellido_materno) ;
+                $("#datos").show();
+              }else{
+                $("#btn-buscarmedrec").html('<i class="fa fa-search" aria-hidden="true"></i>&nbsp;&nbsp;Buscar');
+                alert(response.errors[0].detail);
+                if($("#nombapemedrec").prop("readonly"))
+                  $("#nombapemedrec").prop("readonly", false);
+                if($("#datos").show())
+                  $("#datos").hide();
+              }
+            }
+          });
+        }else{
+          alert("Debe ingresar el numero de documento y el tipo");
+        }
+      });
+
     });
 
     $("#departamento").change(function () {

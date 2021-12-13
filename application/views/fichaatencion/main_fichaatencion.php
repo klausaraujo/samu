@@ -844,156 +844,537 @@
 												<div class="row">
 													<h3 class="box-title">Procedimiento (s) y Tratamiento (Plan de Atención)</h3>
 													<label class="modal-label col-sm-5 col-form-label py-10"></label>
-													<div class="col-sm-8">
+													<div class="col-sm-3">
 														<div class="form-group row">
-															<label class="modal-label col-sm-2 col-form-label py-10">Cabeza: </label>
-															<div class="col-sm-9">
-															<input type="text" class="form-control" name="examen_cabeza" id="examen_cabeza" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															<label class="modal-label col-sm-5 col-form-label py-10">Oxigenoterapia: </label>
+															<div class="col-sm-5">
+															<input type="text" class="form-control" name="oxigenoterapia" id="oxigenoterapia" onkeyup="javascript:this.value=this.value.toUpperCase();" />
 															</div>
 														</div>
 													</div>	
-													<div class="col-sm-4">
+													<div class="col-sm-3">
 														<div class="form-group row">
-															
-															<div class="col-sm-8">
-																
-															</div>
-														</div>
-													</div>
-													<div class="col-sm-8">
-														<div class="form-group row">
-															<label class="modal-label col-sm-2 col-form-label py-10">Cuello: </label>
-															<div class="col-sm-9">
-															<input type="text" class="form-control" name="examen_cuello" id="examen_cuello" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															<label class="modal-label col-sm-5 col-form-label py-10">Fluidoterapia: </label>
+															<div class="col-sm-5">
+															<input type="text" class="form-control" name="fluidoterapia" id="fluidoterapia" onkeyup="javascript:this.value=this.value.toUpperCase();" />
 															</div>
 														</div>
 													</div>	
-													<div class="col-sm-4">
+													<div class="col-sm-3">
 														<div class="form-group row">
-															
-															<div class="col-sm-8">
-																
-															</div>
-														</div>
-													</div>
-													<div class="col-sm-8">
-														<div class="form-group row">
-															<label class="modal-label col-sm-2 col-form-label py-10">Piel y TCSC: </label>
-															<div class="col-sm-9">
-															<input type="text" class="form-control" name="examen_piel_tcsc" id="examen_piel_tcsc" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															<label class="modal-label col-sm-5 col-form-label py-10">RCP: </label>
+															<div class="col-sm-5">
+																<select class="form-control" name="rcp" id="rcp">
+																	<option value="">-- Seleccione --</option>
+																	<option value="1">Exitoso</option>
+																	<option value="2">No Exitoso</option>																
+																</select>
 															</div>
 														</div>
 													</div>	
-													<div class="col-sm-4">
+													<div class="col-sm-3">
 														<div class="form-group row">
-															
-															<div class="col-sm-8">
-																
+															<label class="modal-label col-sm-5 col-form-label py-10">Uso de DEA: </label>
+															<div class="col-sm-5">
+																<select class="form-control" name="uso_dea" id="uso_dea">
+																	<option value="">-- Seleccione --</option>
+																	<option value="1">SI</option>
+																	<option value="2">NO</option>																
+																</select>
 															</div>
 														</div>
 													</div>
-													<div class="col-sm-8">
+													<div class="col-sm-12">
 														<div class="form-group row">
-															<label class="modal-label col-sm-2 col-form-label py-10">Aparato Respiratorio: </label>
-															<div class="col-sm-9">
-															<input type="text" class="form-control" name="examen_aparato_respiratorio" id="examen_aparato_respiratorio" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															<div class="col-sm-2">
+															<div class="checkbox checkbox-primary">
+																<input id="cardioversion" type="checkbox" name="cardioversion">
+																<label for="cardioversion">
+																Cardioversión
+																</label>
 															</div>
-														</div>
-													</div>	
-													<div class="col-sm-4">
-														<div class="form-group row">
-															
-															<div class="col-sm-8">
-																
 															</div>
-														</div>
-													</div>
-													<div class="col-sm-8">
-														<div class="form-group row">
-															<label class="modal-label col-sm-2 col-form-label py-10">Aparato Cardiovascular: </label>
-															<div class="col-sm-9">
-															<input type="text" class="form-control" name="examen_aparato_cardiovascular" id="examen_aparato_cardiovascular" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															<div class="col-sm-2">
+															<div class="checkbox checkbox-primary">
+																<input id="cardioversion_selectiva" type="checkbox" name="cardioversion_selectiva">
+																<label for="cardioversion_selectiva">
+																Cardioversión Selectiva
+																</label>
 															</div>
-														</div>
-													</div>	
-													<div class="col-sm-4">
-														<div class="form-group row">
-															
-															<div class="col-sm-8">
-																
 															</div>
-														</div>
-													</div>
-													<div class="col-sm-8">
-														<div class="form-group row">
-															<label class="modal-label col-sm-2 col-form-label py-10">Aparato Digestivo: </label>
-															<div class="col-sm-9">
-															<input type="text" class="form-control" name="examen_aparato_digestivo" id="examen_aparato_digestivo" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															<div class="col-sm-2">
+															<div class="checkbox checkbox-primary">
+																<input id="monitoreo_cardiaco" type="checkbox" name="monitoreo_cardiaco">
+																<label for="monitoreo_cardiaco">
+																Monitoreo Cardíaco
+																</label>
 															</div>
-														</div>
-													</div>	
-													<div class="col-sm-4">
-														<div class="form-group row">
-															
-															<div class="col-sm-8">
-																
 															</div>
-														</div>
-													</div>
-													<div class="col-sm-8">
-														<div class="form-group row">
-															<label class="modal-label col-sm-2 col-form-label py-10">Genito-Urinario: </label>
-															<div class="col-sm-9">
-															<input type="text" class="form-control" name="examen_genito_urinario" id="examen_genito_urinario" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															<div class="col-sm-2">
+															<div class="checkbox checkbox-primary">
+																<input id="ventilacion_mecanica" type="checkbox" name="ventilacion_mecanica">
+																<label for="ventilacion_mecanica">
+																Ventilación Mecánica
+																</label>
 															</div>
-														</div>
-													</div>	
-													<div class="col-sm-4">
-														<div class="form-group row">
-															
-															<div class="col-sm-8">
-																
 															</div>
-														</div>
-													</div>
-													<div class="col-sm-8">
-														<div class="form-group row">
-															<label class="modal-label col-sm-2 col-form-label py-10">Sistema-Osteomioarticular: </label>
-															<div class="col-sm-9">
-															<input type="text" class="form-control" name="examen_sistema_osteomioaticular" id="examen_sistema_osteomioaticular" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															<div class="col-sm-2">
+															<div class="checkbox checkbox-primary">
+																<input id="inmovilizacion_completa" type="checkbox" name="inmovilizacion_completa">
+																<label for="inmovilizacion_completa">
+																Inmovilización Completa
+																</label>
 															</div>
-														</div>
-													</div>	
-													<div class="col-sm-4">
-														<div class="form-group row">
-															
-															<div class="col-sm-8">
-																
 															</div>
-														</div>
-													</div>
-													<div class="col-sm-8">
-														<div class="form-group row">
-															<label class="modal-label col-sm-2 col-form-label py-10">Neurológico: </label>
-															<div class="col-sm-9">
-															<input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															<div class="col-sm-2">
+															<div class="checkbox checkbox-primary">
+																<input id="vendaje" type="checkbox" name="vendaje">
+																<label for="vendaje">
+																Vendaje
+																</label>
 															</div>
-														</div>
-													</div>	
-													<div class="col-sm-4">
-														<div class="form-group row">
-															
-															<div class="col-sm-8">
-																
 															</div>
-														</div>
-													</div>
-													
-																																
+															<div class="col-sm-2">
+															<div class="checkbox checkbox-primary">
+																<input id="sedacion" type="checkbox" name="sedacion">
+																<label for="sedacion">
+																Sedación
+																</label>
+															</div>
+															</div>
+															<div class="col-sm-2">
+															<div class="checkbox checkbox-primary">
+																<input id="curacion" type="checkbox" name="curacion">
+																<label for="curacion">
+																Curación
+																</label>
+															</div>
+															</div>
+															<div class="col-sm-2">
+															<div class="checkbox checkbox-primary">
+																<input id="hemostacia" type="checkbox" name="hemostacia">
+																<label for="hemostacia">
+																Hemostasia
+																</label>
+															</div>
+															</div>
+															<div class="col-sm-2">
+															<div class="checkbox checkbox-primary">
+																<input id="aspiracion_secreciones" type="checkbox" name="aspiracion_secreciones">
+																<label for="aspiracion_secreciones">
+																Aspiración de Secreciones
+																</label>
+															</div>
+															</div>
+															<div class="col-sm-2">
+															<div class="checkbox checkbox-primary">
+																<input id="ippb" type="checkbox" name="ippb">
+																<label for="ippb">
+																IPPB
+																</label>
+															</div>
+															</div>
+															<div class="col-sm-4">
+															<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">Inmovilización Parcial: </label>
+															<div class="col-sm-5">
+																<select class="form-control" name="inmovilizacion_parcial" id="inmovilizacion_parcial">
+																	<option value="">-- Seleccione --</option>
+																	<option value="1">MMSS</option>
+																	<option value="2">MMII</option>																
+																</select>
+															</div>
+															</div>
+															</div>
+															<div class="col-sm-4">
+															<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">Sondaje: </label>
+															<div class="col-sm-5">
+																<select class="form-control" name="sondaje" id="sondaje">
+																	<option value="">-- Seleccione --</option>
+																	<option value="1">Sondaje Nasogástrico</option>
+																	<option value="2">Sondaje Vesical</option>																
+																</select>
+															</div>
+															</div>
+															</div>
+															<div class="col-sm-2">
+															<div class="checkbox checkbox-primary">
+																<input id="intubacion" type="checkbox" name="intubacion">
+																<label for="intubacion">
+																Intubación
+																</label>
+															</div>
+															</div>
+															<div class="col-sm-2">
+															<div class="checkbox checkbox-primary">
+																<input id="satura" type="checkbox" name="satura">
+																<label for="satura">
+																Sutura
+																</label>
+															</div>
+															</div>
+															<div class="col-sm-2">
+															<div class="checkbox checkbox-primary">
+																<input id="taponamiento_nasal" type="checkbox" name="taponamiento_nasal">
+																<label for="taponamiento_nasal">
+																Taponamiento Nasal
+																</label>
+															</div>
+															</div>
+															<div class="col-sm-2">
+															<div class="checkbox checkbox-primary">
+																<input id="hemoglucotest" type="checkbox" name="hemoglucotest">
+																<label for="hemoglucotest">
+																Hemoglucotest
+																</label>
+															</div>
+															</div>
+															<div class="col-sm-2">
+															<div class="checkbox checkbox-primary">
+																<input id="tratamiento_inhalacion" type="checkbox" name="tratamiento_inhalacion">
+																<label for="tratamiento_inhalacion">
+																Tratamiento por Inhalación
+																</label>
+															</div>
+															</div>
+															<div class="col-sm-2">
+															<div class="checkbox checkbox-primary">
+																<input id="traqueostomia" type="checkbox" name="traqueostomia">
+																<label for="traqueostomia">
+																Traqueostomía
+																</label>
+															</div>
+															</div>
+															<div class="col-sm-2">
+															<div class="checkbox checkbox-primary">
+																<input id="cuerpo_extrano" type="checkbox" name="cuerpo_extrano">
+																<label for="cuerpo_extrano">
+																Cuerpo Extraño
+																</label>
+															</div>
+															</div>
+															<div class="col-sm-2">
+															<div class="checkbox checkbox-primary">
+																<input id="infusion_intraosea" type="checkbox" name="infusion_intraosea">
+																<label for="infusion_intraosea">
+																Infusión Intrósea
+																</label>
+															</div>
+															</div>
+															<div class="col-sm-2">
+															<div class="checkbox checkbox-primary">
+																<input id="nebulizacion" type="checkbox" name="nebulizacion">
+																<label for="nebulizacion">
+																Nebulización
+																</label>
+															</div>
+															</div>
+														</div>												
+													</div>																			
 												</div>
 
 												<hr/>
 
+
+												<hr/>
+												<h3 class="box-title">OCURRENCIAS DURANTE LA ATENCIÓN</h3>
+												<label class="modal-label col-sm-5 col-form-label py-10"></label>
+												<div class="row">
+												
+													<div class="col-sm-12">
+														<div class="form-group row">
+															<div class="col-sm-8">
+															<textarea class="form-control" name="ocurrencias_atencion" id="ocurrencias_atencion" onkeyup="javascript:this.value=this.value.toUpperCase();"  style= "height:158px"> </textarea>
+															</div>
+														</div>
+													</div>			
+													
+												</div>
+
+												<hr/>
+
+												<h3 class="box-title">Responsables de la Atención</h3>
+												<h4 class="box-title">Médico</h4>
+												<div class="row">
+													<div class="col-sm-4">
+														<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">Tipo de Documento: </label>
+															<div class="col-sm-5">
+																<select class="form-control" name="idtipodocumento_medico" id="idtipodocumento_medico">
+																	<?php foreach($listadocumento as $row): ?>
+																	<option value="<?=$row->idtipodocumento?>"><?=$row->tipo_documento?></option>
+																	<?php endforeach; ?>
+																</select>
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-4">
+														<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">Número de Documento: </label>
+															<div class="col-sm-4">
+																<input type="text" class="form-control" name="numero_documento_medico" id="numero_documento_medico" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+															<div class="col-sm-3">
+															<button type="button" id="btn-buscarmed" class="btn btn-primary">
+																<i class="fa fa-search" aria-hidden="true"></i>
+															</button>
+														</div>
+														</div>
+													</div>
+													<div class="col-sm-4">
+														<div class="form-group row">
+															<label class="modal-label col-sm-3 col-form-label py-10">Nombres y Apellidos: </label>
+															<div class="col-sm-8">
+																<input type="text" class="form-control" name="nombapemed" id="nombapemed" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+														</div>
+													</div>	
+													
+												</div>
+												<h4 class="box-title">Enfermero</h4>
+												<div class="row">
+													<div class="col-sm-4">
+														<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">Tipo de Documento: </label>
+															<div class="col-sm-5">
+																<select class="form-control" name="idtipodocumento_enfermero" id="idtipodocumento_enfermero">
+																	<?php foreach($listadocumento as $row): ?>
+																	<option value="<?=$row->idtipodocumento?>"><?=$row->tipo_documento?></option>
+																	<?php endforeach; ?>
+																</select>
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-4">
+														<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">Número de Documento: </label>
+															<div class="col-sm-4">
+																<input type="text" class="form-control" name="numero_documento_enfermero" id="numero_documento_enfermero" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+															<div class="col-sm-3">
+															<button type="button" id="btn-buscarenf" class="btn btn-primary">
+																<i class="fa fa-search" aria-hidden="true"></i>
+															</button>
+														</div>
+														</div>
+													</div>
+													<div class="col-sm-4">
+														<div class="form-group row">
+															<label class="modal-label col-sm-3 col-form-label py-10">Nombres y Apellidos: </label>
+															<div class="col-sm-8">
+																<input type="text" class="form-control" name="nombapeenf" id="nombapeenf" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+														</div>
+													</div>														
+												</div>
+												<h4 class="box-title">Piloto</h4>
+												<div class="row">
+													<div class="col-sm-4">
+														<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">Tipo de Documento: </label>
+															<div class="col-sm-5">
+																<select class="form-control" name="idtipodocumento_piloto" id="idtipodocumento_piloto">
+																	<?php foreach($listadocumento as $row): ?>
+																	<option value="<?=$row->idtipodocumento?>"><?=$row->tipo_documento?></option>
+																	<?php endforeach; ?>
+																</select>
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-4">
+														<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">Número de Documento: </label>
+															<div class="col-sm-4">
+																<input type="text" class="form-control" name="numero_documento_piloto" id="numero_documento_piloto" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+															<div class="col-sm-3">
+															<button type="button" id="btn-buscarpil" class="btn btn-primary">
+																<i class="fa fa-search" aria-hidden="true"></i>
+															</button>
+														</div>
+														</div>
+													</div>
+													<div class="col-sm-4">
+														<div class="form-group row">
+															<label class="modal-label col-sm-3 col-form-label py-10">Nombres y Apellidos: </label>
+															<div class="col-sm-8">
+																<input type="text" class="form-control" name="nombapepil" id="nombapepil" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+														</div>
+													</div>														
+												</div>
+												<h4 class="box-title">Médico Regulador</h4>
+												<div class="row">
+													<div class="col-sm-4">
+														<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">Tipo de Documento: </label>
+															<div class="col-sm-5">
+																<select class="form-control" name="idtipodocumento_medico_regulador" id="idtipodocumento_medico_regulador">
+																	<?php foreach($listadocumento as $row): ?>
+																	<option value="<?=$row->idtipodocumento?>"><?=$row->tipo_documento?></option>
+																	<?php endforeach; ?>
+																</select>
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-4">
+														<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">Número de Documento: </label>
+															<div class="col-sm-4">
+																<input type="text" class="form-control" name="numero_documento_medico_regulador" id="numero_documento_medico_regulador" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+															<div class="col-sm-3">
+															<button type="button" id="btn-buscarmedreg" class="btn btn-primary">
+																<i class="fa fa-search" aria-hidden="true"></i>
+															</button>
+														</div>
+														</div>
+													</div>
+													<div class="col-sm-4">
+														<div class="form-group row">
+															<label class="modal-label col-sm-3 col-form-label py-10">Nombres y Apellidos: </label>
+															<div class="col-sm-8">
+																<input type="text" class="form-control" name="nombapemedreg" id="nombapemedreg" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-8">
+														<div class="form-group row">
+															<label class="modal-label col-sm-3 col-form-label py-10">N° Ficha de Regulación: </label>
+															<div class="col-sm-8">
+																<input type="text" class="form-control" name="ficha_regulacion" id="ficha_regulacion" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-4">
+														<div class="form-group row">
+															<label class="modal-label col-sm-3 col-form-label py-10">Establecimiento de Salud de Destino: </label>
+															<div class="col-sm-8">
+																<input type="text" class="form-control" name="idrenipress" id="idrenipress" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+														</div>
+													</div>
+																											
+												</div>
+												<h4 class="box-title">Profesional Receptor</h4>
+												<div class="row">
+													<div class="col-sm-4">
+														<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">Tipo de Documento: </label>
+															<div class="col-sm-5">
+																<select class="form-control" name="idtipodocumento_profesional_receptor" id="idtipodocumento_profesional_receptor">
+																	<?php foreach($listadocumento as $row): ?>
+																	<option value="<?=$row->idtipodocumento?>"><?=$row->tipo_documento?></option>
+																	<?php endforeach; ?>
+																</select>
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-4">
+														<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">Número de Documento: </label>
+															<div class="col-sm-4">
+																<input type="text" class="form-control" name="numero_documento_profesional_receptor" id="numero_documento_profesional_receptor" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+															<div class="col-sm-3">
+															<button type="button" id="btn-buscarprofr" class="btn btn-primary">
+																<i class="fa fa-search" aria-hidden="true"></i>
+															</button>
+														</div>
+														</div>
+													</div>
+													<div class="col-sm-4">
+														<div class="form-group row">
+															<label class="modal-label col-sm-3 col-form-label py-10">Nombres y Apellidos: </label>
+															<div class="col-sm-8">
+																<input type="text" class="form-control" name="nombapeprorec" id="nombapeprorec" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+														</div>
+													</div>														
+												</div>
+												<h4 class="box-title">Médico Receptor</h4>
+												<div class="row">
+													<div class="col-sm-4">
+														<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">Tipo de Documento: </label>
+															<div class="col-sm-5">
+																<select class="form-control" name="idtipodocumento_medico_receptor" id="idtipodocumento_medico_receptor">
+																	<?php foreach($listadocumento as $row): ?>
+																	<option value="<?=$row->idtipodocumento?>"><?=$row->tipo_documento?></option>
+																	<?php endforeach; ?>
+																</select>
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-4">
+														<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">Número de Documento: </label>
+															<div class="col-sm-4">
+																<input type="text" class="form-control" name="numero_documento_medico_receptor" id="numero_documento_medico_receptor" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+															<div class="col-sm-3">
+															<button type="button" id="btn-buscarmedrec" class="btn btn-primary">
+																<i class="fa fa-search" aria-hidden="true"></i>
+															</button>
+														</div>
+														</div>
+													</div>
+													<div class="col-sm-4">
+														<div class="form-group row">
+															<label class="modal-label col-sm-3 col-form-label py-10">Nombres y Apellidos: </label>
+															<div class="col-sm-8">
+																<input type="text" class="form-control" name="nombapemedrec" id="nombapemedrec" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-sm-4">
+														<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">Hora Llegada al E.S.: </label>
+															<div class="col-sm-5">
+																<input type="time" class="form-control" required="required" id="hora_llegada_es" name="hora_llegada_es" value="<?=date(" H:i")?>" />
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-4">
+														<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">Hora Recepción del Paciente: </label>
+															<div class="col-sm-5">
+																<input type="time" class="form-control" required="required" id="hora_recepcion_paciente" name="hora_recepcion_paciente" value="<?=date(" H:i")?>" />
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-4">
+														<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">Hora Salida del E.S.: </label>
+															<div class="col-sm-5">
+																<input type="time" class="form-control" required="required" id="hora_salida_es" name="hora_salida_es" value="<?=date(" H:i")?>" />
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-4">
+														<div class="form-group row">
+															<label class="modal-label col-sm-5 col-form-label py-10">Camilla Retenida: </label>
+															<div class="col-sm-5">
+																<select class="form-control" name="camilla_retenida" id="camilla_retenida">
+																	<option value="">-- Seleccione --</option>
+																	<option value="1">SI</option>
+																	<option value="2">NO</option>
+																</select>
+															</div>															
+														</div>
+													</div>
+													<div class="col-sm-4">
+														<div class="form-group row">
+															<label class="modal-label col-sm-3 col-form-label py-10">Minutos Retenido: </label>
+															<div class="col-sm-4">
+																<input type="text" class="form-control" name="camilla_retenida_minutos" id="camilla_retenida_minutos" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+														</div>
+													</div>
+												</div>
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

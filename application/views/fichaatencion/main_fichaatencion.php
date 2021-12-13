@@ -651,114 +651,39 @@
 
 												<hr/>
 
+												<div class="row">
+													<div class="col-xs-12">
+														<button type="button" class="btn btn-primary d-block" id="btnClearFields">Agregar Registro</button>
+													</div>
+												</div>
+												<br />
 												<div class="row">						
 													<div class="col-sm-12">
-														<div class="form-group row">					
-															
-														<table class="table table-bordered table-hover display nowrap margin-top-10 w-p100">
-															<colgroup>
-																<col style="width: 110px">
-																<col style="width: 68px">
-																<col style="width: 65px">
-																<col style="width: 86px">
-																<col style="width: 68px">
-																<col style="width: 60px">
-																<col style="width: 49px">
-																<col style="width: 59px">
-																<col style="width: 58px">
-																<col style="width: 61px">
-																<col style="width: 31px">
-																<col style="width: 66px">
-																<col style="width: 37px">
-																<col style="width: 37px">
-															</colgroup>
-															<thead>
-																<tr>
-																<th rowspan="3">MOMENTO DE LA EVALUACIÓN </th>
-																<th colspan="6">SIGNOS VITALES</th>
-																<th colspan="4">ESCALA DE COMA DE GLASGOW</th>
-																<th colspan="3">PUPILAS</th>
-																</tr>
-																<tr>
-																<th rowspan="2">Temperatura °C</th>
-																<th rowspan="2">Frecuencia Cardíaca /min</th>
-																<th>Presión Arterial</th>
-																<th rowspan="2">Frecuencia Respiratoria /min</th>
-																<th rowspan="2">Saturación de Oxígeno (%)</th>
-																<th rowspan="2">Glicemia</th>
-																<th rowspan="2">Abertura Ocular (4)</th>
-																<th rowspan="2">Respuesta Verbal (5)</th>
-																<th rowspan="2">Respuesta Motora (6)</th>
-																<th>Total</th>
-																<th rowspan="2">Tipo</th>
-																<th colspan="2" rowspan="2">Reactiva</th>
-																</tr>
-																<tr>
-																<th>mmHg</th>
-																<th>(15)</th>
-																</tr>
-															</thead>
-															<tbody>
-																<tr>
-																<td>
-																	<select class="form-control" name="tipo" id="tipo">
-																		<option value="1">Inicial</option>
-																		<option value="2">Traslado</option>															
-																		<option value="3">Llegada</option>
-																	</select>
-																
-																</td>
-																<td><input type="text" class="form-control" name="temperaperatura" id="temperaperatura" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
-																<td><input type="text" class="form-control" name="frecuencia_cardiaca" id="frecuencia_cardiaca" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
-																<td><input type="text" class="form-control" name="presion_arterial" id="presion_arterial" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
-																<td><input type="text" class="form-control" name="frecuencia_respiratoria" id="frecuencia_respiratoria" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
-																<td><input type="text" class="form-control" name="saturacion_exigeno" id="saturacion_exigeno" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
-																<td><input type="text" class="form-control" name="glicemia" id="glicemia" onkeyup="javascript:this.value=this.value.toUpperCase();" /></td>
-																<td>
-																	<select class="form-control" name="glasgow_ocular" id="glasgow_ocular">
-																		<option value="1">Ninguna</option>
-																		<option value="2">Dolor</option>															
-																		<option value="3">Voz</option>
-																		<option value="4">Espontánea</option>
-																	</select>																
-																</td>
-																<td>
-																	<select class="form-control" name="glasgow_verbal" id="glasgow_verbal">
-																		<option value="1">Ninguna</option>
-																		<option value="2">Sonidos</option>															
-																		<option value="3">Inapropiada</option>
-																		<option value="4">Confusa</option>
-																		<option value="5">Orientada</option>
-																	</select>																
-																</td>
-																<td>
-																	<select class="form-control" name="glasgow_motora" id="glasgow_motora">
-																		<option value="1">Ninguna</option>
-																		<option value="2">Extensión</option>															
-																		<option value="3">Flexión</option>
-																		<option value="4">Retirada</option>
-																		<option value="5">Localiza</option>
-																		<option value="6">Obedece</option>
-																	</select>																
-																</td>
-																<td><input type="text" class="form-control" name="glasgow_total" id="glasgow_total" onkeyup="javascript:this.value=this.value.toUpperCase();" disabled/></td>
-																<td>
-																	<select class="form-control" name="pupilas_tipo" id="pupilas_tipo">
-																		<option value="1">Izquierdo</option>
-																		<option value="2">Derecho</option>																
-																	</select>
-																</td>
-																<td colspan="2">
-																	<select class="form-control" name="pupilas_reactiva" id="pupilas_reactiva">
-																		<option value="1">SI</option>
-																		<option value="2">NO</option>																
-																	</select>
-																</td>
-																</tr>
-																
-															</tbody>
-														</table>
-
+														<div class="form-group row">
+														<div class="table-responsive tb-responsive">	
+															<table id="tbListar" class="table table-bordered table-hover display nowrap margin-top-10 w-p100">
+																<thead>
+																	<th>MOMENTO DE LA EVALUACIÓN </th>
+																	<th>Temperatura °C</th>
+																	<th>Frecuencia Cardíaca /min</th>
+																	<th>Presión Arterial mmHg</th>
+																	<th>Frecuencia Respiratoria /min</th>
+																	<th>Saturación de Oxígeno (%)</th>
+																	<th>Glicemia</th>
+																	<th>Abertura Ocular (4)</th>
+																	<th>Respuesta Verbal (5)</th>
+																	<th>Respuesta Motora (6)</th>
+																	<th>Total (15)</th>
+																	<th>Tipo de Pupilas</th>
+																	<th>Reactiva</th>
+																	<th>&nbsp;</th>
+																	<th>&nbsp;</th>
+																	<th>&nbsp;</th>
+																</thead>
+																<tbody>
+																</tbody>
+															</table>
+														</div>
 														</div>
 													</div>
 												</div>
@@ -873,56 +798,198 @@
 													<h3 class="box-title">Diagnóstico(s) Presuntivo(s)</h3>
 													<label class="modal-label col-sm-5 col-form-label py-10"></label>
 												<div class="row">
-													<div class="col-sm-4">
-														<div class="form-group row">
-															<label class="modal-label col-sm-2 col-form-label py-10">CIE10: </label>
-															<div class="col-sm-9">
-															<input type="text" class="form-control" name="idcie10-1" id="idcie10-1" onkeyup="javascript:this.value=this.value.toUpperCase();" />
-															</div>
-														</div>
-													</div>	
-													<div class="col-sm-4">
-														<div class="form-group row">
-															<label class="modal-label col-sm-2 col-form-label py-10">CIE10: </label>
-															<div class="col-sm-9">
-															<input type="text" class="form-control" name="idcie10-2" id="idcie10-2" onkeyup="javascript:this.value=this.value.toUpperCase();" />
-															</div>
-														</div>
-													</div>	
-													<div class="col-sm-4">
-														<div class="form-group row">
-															<label class="modal-label col-sm-2 col-form-label py-10">CIE10: </label>
-															<div class="col-sm-9">
-															<input type="text" class="form-control" name="idcie10-3" id="idcie10-3" onkeyup="javascript:this.value=this.value.toUpperCase();" />
-															</div>
-														</div>
-													</div>	
-													<div class="col-sm-4">
-														<div class="form-group row">
-															<label class="modal-label col-sm-2 col-form-label py-10">CIE10: </label>
-															<div class="col-sm-9">
-															<input type="text" class="form-control" name="idcie10-4" id="idcie10-4" onkeyup="javascript:this.value=this.value.toUpperCase();" />
-															</div>
-														</div>
-													</div>	
-													<div class="col-sm-4">
-														<div class="form-group row">
-															<label class="modal-label col-sm-2 col-form-label py-10">CIE10: </label>
-															<div class="col-sm-9">
-															<input type="text" class="form-control" name="idcie10-5" id="idcie10-5" onkeyup="javascript:this.value=this.value.toUpperCase();" />
-															</div>
-														</div>
-													</div>	
-													<div class="col-sm-4">
-														<div class="form-group row">
-															<label class="modal-label col-sm-2 col-form-label py-10">CIE10: </label>
-															<div class="col-sm-9">
-															<input type="text" class="form-control" name="idcie10-6" id="idcie10-6" onkeyup="javascript:this.value=this.value.toUpperCase();" />
-															</div>
-														</div>
-													</div>	
 													
-																																									
+													<div class="col-xs-12 col-sm-6">
+														<div class="form-group">
+															<div class="input-group">
+																<input type="hidden" class="cLesionado_CIE10_Codigo" name="Lesionado_CIE10_Codigo" /> <input
+																	type="text" name="Lesionado_CIE10_Texto"
+																	class="form-control detalle-size" autocomplete="off"
+																	readonly /> 																	
+																	<span class="input-group-btn">
+																	<button type="button" class="btn btn-info detalle-size"
+																		data-toggle="modal" data-target="#tableEnfermedadesModal"
+																		style="color: white">
+																		<i class="fa fa-search" aria-hidden="true"></i>
+																	</button>
+																</span>
+															</div>
+														</div>
+													</div>
+													<br /><br /><br />
+													<div class="col-xs-12">
+														<button type="button" class="btn btn-primary d-block" id="btnClearFields1">Agregar CIE10</button>
+													</div>
+												</div>
+												<br />
+												<div class="row">						
+													<div class="col-sm-12">
+														<div class="form-group row">
+														<div class="table-responsive tb-responsive">	
+															<table id="tbListar1" class="table table-bordered table-hover display nowrap margin-top-10 w-p100">
+																<thead>
+																	<th>Descripción</th>
+																	<th>CIE 10</th>
+																</thead>
+																<tbody>
+																</tbody>
+															</table>
+														</div>
+														</div>
+													</div>
+												</div>
+
+												<hr/>
+
+												<div class="row">
+													<h3 class="box-title">Procedimiento (s) y Tratamiento (Plan de Atención)</h3>
+													<label class="modal-label col-sm-5 col-form-label py-10"></label>
+													<div class="col-sm-8">
+														<div class="form-group row">
+															<label class="modal-label col-sm-2 col-form-label py-10">Cabeza: </label>
+															<div class="col-sm-9">
+															<input type="text" class="form-control" name="examen_cabeza" id="examen_cabeza" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+														</div>
+													</div>	
+													<div class="col-sm-4">
+														<div class="form-group row">
+															
+															<div class="col-sm-8">
+																
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-8">
+														<div class="form-group row">
+															<label class="modal-label col-sm-2 col-form-label py-10">Cuello: </label>
+															<div class="col-sm-9">
+															<input type="text" class="form-control" name="examen_cuello" id="examen_cuello" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+														</div>
+													</div>	
+													<div class="col-sm-4">
+														<div class="form-group row">
+															
+															<div class="col-sm-8">
+																
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-8">
+														<div class="form-group row">
+															<label class="modal-label col-sm-2 col-form-label py-10">Piel y TCSC: </label>
+															<div class="col-sm-9">
+															<input type="text" class="form-control" name="examen_piel_tcsc" id="examen_piel_tcsc" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+														</div>
+													</div>	
+													<div class="col-sm-4">
+														<div class="form-group row">
+															
+															<div class="col-sm-8">
+																
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-8">
+														<div class="form-group row">
+															<label class="modal-label col-sm-2 col-form-label py-10">Aparato Respiratorio: </label>
+															<div class="col-sm-9">
+															<input type="text" class="form-control" name="examen_aparato_respiratorio" id="examen_aparato_respiratorio" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+														</div>
+													</div>	
+													<div class="col-sm-4">
+														<div class="form-group row">
+															
+															<div class="col-sm-8">
+																
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-8">
+														<div class="form-group row">
+															<label class="modal-label col-sm-2 col-form-label py-10">Aparato Cardiovascular: </label>
+															<div class="col-sm-9">
+															<input type="text" class="form-control" name="examen_aparato_cardiovascular" id="examen_aparato_cardiovascular" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+														</div>
+													</div>	
+													<div class="col-sm-4">
+														<div class="form-group row">
+															
+															<div class="col-sm-8">
+																
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-8">
+														<div class="form-group row">
+															<label class="modal-label col-sm-2 col-form-label py-10">Aparato Digestivo: </label>
+															<div class="col-sm-9">
+															<input type="text" class="form-control" name="examen_aparato_digestivo" id="examen_aparato_digestivo" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+														</div>
+													</div>	
+													<div class="col-sm-4">
+														<div class="form-group row">
+															
+															<div class="col-sm-8">
+																
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-8">
+														<div class="form-group row">
+															<label class="modal-label col-sm-2 col-form-label py-10">Genito-Urinario: </label>
+															<div class="col-sm-9">
+															<input type="text" class="form-control" name="examen_genito_urinario" id="examen_genito_urinario" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+														</div>
+													</div>	
+													<div class="col-sm-4">
+														<div class="form-group row">
+															
+															<div class="col-sm-8">
+																
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-8">
+														<div class="form-group row">
+															<label class="modal-label col-sm-2 col-form-label py-10">Sistema-Osteomioarticular: </label>
+															<div class="col-sm-9">
+															<input type="text" class="form-control" name="examen_sistema_osteomioaticular" id="examen_sistema_osteomioaticular" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+														</div>
+													</div>	
+													<div class="col-sm-4">
+														<div class="form-group row">
+															
+															<div class="col-sm-8">
+																
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-8">
+														<div class="form-group row">
+															<label class="modal-label col-sm-2 col-form-label py-10">Neurológico: </label>
+															<div class="col-sm-9">
+															<input type="text" class="form-control" name="examen_neurologico" id="examen_neurologico" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+															</div>
+														</div>
+													</div>	
+													<div class="col-sm-4">
+														<div class="form-group row">
+															
+															<div class="col-sm-8">
+																
+															</div>
+														</div>
+													</div>
+													
+																																
 												</div>
 
 												<hr/>
@@ -937,11 +1004,271 @@
 							</div>
 						
 						</div>
+						<!--
+						<div class="modal fade" id="momentoevaluacionModal1" tabindex="-1" role="dialog" aria-labelledby="momentoevaluacionModalLabel1" aria-hidden="true">
+							<div class="modal-dialog modal-lg" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-label="close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+										<h5 class="modal-title" id="registrarTableroModalLabel">Registrar Momento de Evaluación</h5>
+									</div>
+									<form id="formRegistrar1" name="formRegistrar1" action="" method="POST">
+										<div class="modal-body">
+											<div class="row">
+														<div class="col-sm-4">
+															<div class="form-group row">
+																<label class="modal-label col-sm-5 col-form-label py-10">Momento de la Evaluación: </label>
+																<div class="col-sm-5">
+																	<select class="form-control" name="idbase" id="idbase">
+																		<option value="1">Inicial</option>
+																		<option value="2">Traslado</option>
+																		<option value="3">Llegada</option>
+																	</select>
+																</div>															
+															</div>
+														</div>	
+														<div class="col-sm-4">
+															<div class="form-group row">
+																<label class="modal-label col-sm-5 col-form-label py-10">Temperatura °C: </label>
+																<div class="col-sm-5">
+																	<input type="text" class="form-control" name="temperaperatura" id="temperaperatura" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+																</div>															
+															</div>
+														</div>	
+														<div class="col-sm-4">
+															<div class="form-group row">
+																<label class="modal-label col-sm-5 col-form-label py-10">Frecuencia Cardíaca /min: </label>
+																<div class="col-sm-5">
+																	<input type="text" class="form-control" name="frecuencia_cardiaca" id="frecuencia_cardiaca" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+																</div>															
+															</div>
+														</div>													
+											</div>
+											<div class="row">
+														<div class="col-sm-4">
+															<div class="form-group row">
+																<label class="modal-label col-sm-5 col-form-label py-10">Presión Arterial: </label>
+																<div class="col-sm-5">
+																<input type="text" class="form-control" name="presion_arterial" id="presion_arterial" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+																</div>															
+															</div>
+														</div>	
+														<div class="col-sm-4">
+															<div class="form-group row">
+																<label class="modal-label col-sm-5 col-form-label py-10">Frecuencia Cardíaca: </label>
+																<div class="col-sm-5">
+																	<input type="text" class="form-control" name="frecuencia_respiratoria" id="frecuencia_respiratoria" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+																</div>															
+															</div>
+														</div>	
+														<div class="col-sm-4">
+															<div class="form-group row">
+																<label class="modal-label col-sm-5 col-form-label py-10">Saturación de Oxígeno: </label>
+																<div class="col-sm-5">
+																	<input type="text" class="form-control" name="saturacion_exigeno" id="saturacion_exigeno" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+																</div>															
+															</div>
+														</div>													
+											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-basic btn-clear-form d-block" data-dismiss="modal">Cerrar</button>
+											<button type="submit" class="btn btn-primary d-block">Guardar</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+						-->
+						<div class="modal fade modal-fullscreen" id="momentoevaluacionModal" tabindex="-1" role="dialog" aria-labelledby="momentoevaluacionModalLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="momentoevaluacionModalLabel">Registrar Momento de Evaluación</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<form id="formRegistrar1" name="formRegistrar1" action="" method="POST">
+								<div class="modal-body">
+												<div class="row">
+														<div class="col-sm-4">
+															<div class="form-group row">
+																<label class="modal-label col-sm-5 col-form-label py-10">Momento de la Evaluación: </label>
+																<div class="col-sm-5">
+																	<select class="form-control" name="idbase" id="idbase">
+																		<option value="1">Inicial</option>
+																		<option value="2">Traslado</option>
+																		<option value="3">Llegada</option>
+																	</select>
+																</div>															
+															</div>
+														</div>	
+														<div class="col-sm-4">
+															<div class="form-group row">
+																<label class="modal-label col-sm-5 col-form-label py-10">Temperatura °C: </label>
+																<div class="col-sm-5">
+																	<input type="text" class="form-control" name="temperaperatura" id="temperaperatura" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+																</div>															
+															</div>
+														</div>	
+														<div class="col-sm-4">
+															<div class="form-group row">
+																<label class="modal-label col-sm-5 col-form-label py-10">Frecuencia Cardíaca /min: </label>
+																<div class="col-sm-5">
+																	<input type="text" class="form-control" name="frecuencia_cardiaca" id="frecuencia_cardiaca" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+																</div>															
+															</div>
+														</div>													
+												</div>
+												<div class="row">
+														<div class="col-sm-4">
+															<div class="form-group row">
+																<label class="modal-label col-sm-5 col-form-label py-10">Presión Arterial: </label>
+																<div class="col-sm-5">
+																<input type="text" class="form-control" name="presion_arterial" id="presion_arterial" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+																</div>															
+															</div>
+														</div>	
+														<div class="col-sm-4">
+															<div class="form-group row">
+																<label class="modal-label col-sm-5 col-form-label py-10">Frecuencia Cardíaca: </label>
+																<div class="col-sm-5">
+																	<input type="text" class="form-control" name="frecuencia_respiratoria" id="frecuencia_respiratoria" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+																</div>															
+															</div>
+														</div>	
+														<div class="col-sm-4">
+															<div class="form-group row">
+																<label class="modal-label col-sm-5 col-form-label py-10">Saturación de Oxígeno: </label>
+																<div class="col-sm-5">
+																	<input type="text" class="form-control" name="saturacion_exigeno" id="saturacion_exigeno" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+																</div>															
+															</div>
+														</div>													
+												</div>
+												<div class="row">
+														<div class="col-sm-4">
+															<div class="form-group row">
+																<label class="modal-label col-sm-5 col-form-label py-10">Glicemia: </label>
+																<div class="col-sm-5">
+																<input type="text" class="form-control" name="glicemia" id="glicemia" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+																</div>															
+															</div>
+														</div>	
+														<div class="col-sm-4">
+															<div class="form-group row">
+																<label class="modal-label col-sm-5 col-form-label py-10">Abertura Ocular: </label>
+																<div class="col-sm-5">
+																		<select class="form-control" name="glasgow_ocular" id="glasgow_ocular">
+																			<option value="1">Ninguna</option>
+																			<option value="2">Dolor</option>															
+																			<option value="3">Voz</option>
+																			<option value="4">Espontánea</option>
+																		</select>	
+																</div>															
+															</div>
+														</div>	
+														<div class="col-sm-4">
+															<div class="form-group row">
+																<label class="modal-label col-sm-5 col-form-label py-10">Respuesta Verbal: </label>
+																<div class="col-sm-5">
+																		<select class="form-control" name="glasgow_verbal" id="glasgow_verbal">
+																			<option value="1">Ninguna</option>
+																			<option value="2">Sonidos</option>															
+																			<option value="3">Inapropiada</option>
+																			<option value="4">Confusa</option>
+																			<option value="5">Orientada</option>
+																		</select>	
+																</div>															
+															</div>
+														</div>													
+												</div>
+												<div class="row">
+														<div class="col-sm-4">
+															<div class="form-group row">
+																<label class="modal-label col-sm-5 col-form-label py-10">Respuesta Motora: </label>
+																<div class="col-sm-5">
+																		<select class="form-control" name="glasgow_motora" id="glasgow_motora">
+																			<option value="1">Ninguna</option>
+																			<option value="2">Extensión</option>															
+																			<option value="3">Flexión</option>
+																			<option value="4">Retirada</option>
+																			<option value="5">Localiza</option>
+																			<option value="6">Obedece</option>
+																		</select>		
+																</div>															
+															</div>
+														</div>	
+														<div class="col-sm-4">
+															<div class="form-group row">
+																<label class="modal-label col-sm-5 col-form-label py-10">Tipo: </label>
+																<div class="col-sm-5">
+																		<select class="form-control" name="pupilas_tipo" id="pupilas_tipo">
+																			<option value="0">Seleccione</option>
+																			<option value="1">Izquierdo</option>
+																			<option value="2">Derecho</option>																
+																		</select>
+																</div>															
+															</div>
+														</div>	
+														<div class="col-sm-4">
+															<div class="form-group row">
+																<label class="modal-label col-sm-5 col-form-label py-10">Reactiva: </label>
+																<div class="col-sm-5">
+																		<select class="form-control" name="pupilas_reactiva" id="pupilas_reactiva">
+																			<option value="0">Seleccione</option>
+																			<option value="1">SI</option>
+																			<option value="2">NO</option>																
+																		</select>
+																</div>															
+															</div>
+														</div>													
+												</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+									<button type="button" class="btn btn-primary">Agregar</button>
+								</div>
+								</form>
+								</div>
+							</div>
+						</div>
+						
+						<!-- MODAL BUSQUEDA -->
+						<div class="modal fade" id="tableEnfermedadesModal" tabindex="-1"
+							role="dialog" aria-labelledby="tableEnfermedadesModalLabel"
+							aria-hidden="true">
+							<div class="modal-dialog modal-md" role="document"
+								style="padding-top: 10px;">
+								<div class="modal-content">
+									<div class="modal-body">
+										<div class="table-responsive">
+											<table class="tableEnfermedades table table-striped table-bordered table-sm"
+												cellspacing="0" width="100%">
+												<thead>
+													<tr>
+														<th>C&oacute;digo</th>
+														<th>Descripci&oacute;n</th>
+				
+													</tr>
+												</thead>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- MODAL -->
 					</section>
+
 				</div>
 			</div>
 			<?php $this->load->view('layout/footer'); ?>
 		</div>
+
 		<script src="<?=base_url()?>public/js/vendors.min.js"></script>
 		<script src="<?=base_url()?>public/assets/icons/feather-icons/feather.min.js"></script>
 		<script src="<?=base_url()?>public/assets/vendor_components/datatable/datatables.min.js"></script>

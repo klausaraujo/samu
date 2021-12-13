@@ -187,6 +187,8 @@ class Main extends CI_Controller
        $ubicacion = $this->input->post("ubicacion");
 
        
+
+       
        $this->Fichaatencion_model->setidfichaatencion($idfichaatencion);
        $this->Fichaatencion_model->setidtiposeguro($idtiposeguro);
        $this->Fichaatencion_model->setseguro($seguro);
@@ -270,6 +272,8 @@ class Main extends CI_Controller
        $this->Fichaatencion_model->setropa($ropa);
        $this->Fichaatencion_model->setcinamatica($cinamatica);
        $this->Fichaatencion_model->setubicacion($ubicacion);
+
+
        
        //$fotografia = $_FILES["file"];
        

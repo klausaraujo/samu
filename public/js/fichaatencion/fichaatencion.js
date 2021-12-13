@@ -259,11 +259,12 @@ function fichaatencion(URI) {
     var table1 = $('#tbListar').DataTable(
 		{
 			dom: '<"html5buttons"B>lTfgitp',
-			columns: [{
-				"data": "tipo"
+			columns: [
+      {
+				"data": "tipo_text"
 			},
 			{
-				"data": "temperatura"
+				"data": "temperaperatura"
 			},
 			{
 				"data": "frecuencia_cardiaca"
@@ -281,6 +282,27 @@ function fichaatencion(URI) {
 				"data": "glicemia"
 			},
 			{
+				"data": "glasgow_ocular_text"
+			},
+			{
+				"data": "glasgow_verbal_text"
+			},
+			{
+				"data": "glasgow_motora_text"
+			},
+			{
+				"data": "glasgow_total"
+			},
+			{
+				"data": "pupilas_tipo_text"
+			},
+			{
+				"data": "pupilas_reactiva_text"
+			},
+      {
+				"data": "tipo"
+			},
+			{
 				"data": "glasgow_ocular"
 			},
 			{
@@ -290,26 +312,15 @@ function fichaatencion(URI) {
 				"data": "glasgow_motora"
 			},
 			{
-				"data": "glasgow_total"
-			},
-			{
 				"data": "pupilas_tipo"
 			},
 			{
 				"data": "pupilas_reactiva"
 			},
-			{
-				"data": "activo"
-			},
-			{
-				"data": "idmomento"
-			},
-			{
-				"data": "idfichaatencion"
-			}
+      
 			],
 			columnDefs: [{
-				"targets": [13, 14, 15],
+				"targets": [13,14,15,16,17,18],
 				"visible": false,
 				"searchable": false
 			}],
@@ -319,21 +330,21 @@ function fichaatencion(URI) {
 					extend: 'copy',
 					title: 'Lista de Momentos de Evaluación',
 					exportOptions: {
-						columns: [13, 14, 15]
+						columns: [1]
 					}
 				},
 				{
 					extend: 'csv',
 					title: 'Lista de Momentos de Evaluación',
 					exportOptions: {
-						columns: [13, 14, 15]
+						columns: [1]
 					}
 				},
 				{
 					extend: 'excel',
 					title: 'Lista de Momentos de Evaluación',
 					exportOptions: {
-						columns: [13, 14, 15]
+						columns: [1]
 					}
 				},
 				{
@@ -341,7 +352,7 @@ function fichaatencion(URI) {
 					title: 'Lista de Momentos de Evaluación',
 					orientation: 'landscape',
 					exportOptions: {
-						columns: [13, 14, 15]
+						columns: [1]
 					}
 				},
 
@@ -359,6 +370,71 @@ function fichaatencion(URI) {
 
 		});
 
+    var table2 = $('#tbListar1').DataTable(
+      {
+        dom: '<"html5buttons"B>lTfgitp',
+        columns: [{
+          "data": "descripcion"
+        },
+        {
+          "data": "cie10"
+        }
+        ,
+        {
+          "data": "editar"
+        }
+        ],
+        columnDefs: [{
+          "targets": [],
+          "visible": false,
+          "searchable": false
+        }],
+        order: [[0, "desc"]],
+        buttons: [
+          {
+            extend: 'copy',
+            title: 'Lista CIE10',
+            exportOptions: {
+              columns: [0,1]
+            }
+          },
+          {
+            extend: 'csv',
+            title: 'Lista CIE10',
+            exportOptions: {
+              columns: [0,1]
+            }
+          },
+          {
+            extend: 'excel',
+            title: 'Lista CIE10',
+            exportOptions: {
+              columns: [0,1]
+            }
+          },
+          {
+            extend: 'pdf',
+            title: 'Lista CIE10',
+            orientation: 'landscape',
+            exportOptions: {
+              columns: [0,1]
+            }
+          },
+  
+          {
+            extend: 'print',
+            title: 'Lista CIE10',
+            customize: function (win) {
+              $(win.document.body).addClass('white-bg');
+              $(win.document.body).css('font-size', '10px');
+  
+              $(win.document.body).find('table').addClass(
+                'compact').css('font-size', 'inherit');
+            }
+          }]
+  
+      });
+
     $(document).ready(function () {
 
     $('#momentoevaluacionModal').on('hidden.bs.modal', function () {
@@ -369,222 +445,44 @@ function fichaatencion(URI) {
       $(document.body).addClass('modal-open');
     });
 
-    
+    console.log("Paso por aquiiiiiiiiiiii");
+
     $('.tableEnfermedades tbody').on(
 			'click',
 			'tr',
 			function () {
-				var data = tableEnfermedades.row(this)
-					.data();
-				$("input[name=Lesionado_CIE10_Codigo]")
-					.val(data[0]);
-				$("input[name=Lesionado_CIE10_Texto]").val(
-					data[1]);
-				$('#tableEnfermedadesModal').modal('hide');
-			});
-      
-    $("#formRegistrar1")
-    .validate(
-      {
+				var data = tableEnfermedades.row(this).data();
+        var editar = '<div class="flex-buttons"><button class="btn btn-danger btn-circle actionDeleteL" title="ELIMINAR" type="button"><i class="fa fa-trash"></i></button></div>';
         /*
-        rules: {
-          Evento_Danios_Lesionados_Fecha_Atencion: {
-            required: true
-          },
-          Tipo_Documento_Codigo: {
-            required: false
-          },
-          Lesionado_Documento_Numero: {
-            digits: true
-          },
-          Lesionado_Apellidos: {
-            required: true,
-            lettersonly: true
-          },
-          Lesionado_Nombres: {
-            required: true,
-            lettersonly: true
-          },
-          Lesionado_Edad: {
-            required: false,
-            digits: true
-          },
-          Lesionado_Observaciones: {
-            required: true
-          },
-          Nivel_Gravedad_Codigo: {
-            required: true
-          },
-          Situacion_Codigo: {
-            required: true
-          },
-          Lesionado_CIE10_Codigo: {
-            required: true
-          },
-          Lesionado_Genero: {
-            required: true
-          },
-          Lesionado_Entidad_Salud_Codigo: {
-            min: 1
-          },
-          Lesionado_Entidad_Salud_Nombre: {
-            required: function () { if ($("select[name=Lesionado_Entidad_Salud_Codigo]").val() == "1") return false; else return true; }
-          }
-
-        },
-        messages: {
-          Evento_Danios_Lesionados_Fecha_Atencion: {
-            required: "Campo requerido"
-          },
-          Tipo_Documento_Codigo: {
-            required: "Campo requerido"
-          },
-          Lesionado_Documento_Numero: {
-            required: "Campo requerido",
-            digits: "Solo n\xfameros"
-          },
-          Lesionado_Apellidos: {
-            required: "Campo requerido"
-          },
-          Lesionado_Nombres: {
-            required: "Campo requerido"
-          },
-          Lesionado_Edad: {
-            required: "Campo requerido",
-            digits: "Solo n\xfameros"
-          },
-          Lesionado_Observaciones: {
-            required: "Campo requerido"
-          },
-          Nivel_Gravedad_Codigo: {
-            required: "Campo requerido"
-          },
-          Situacion_Codigo: {
-            required: "Campo requerido"
-          },
-          Lesionado_CIE10_Codigo: {
-            required: "Campo requerido"
-          },
-          Lesionado_Genero: {
-            required: "Campo requerido"
-          },
-          Lesionado_Entidad_Salud_Codigo: {
-            min: "Campo requerido"
-          },
-          Lesionado_Entidad_Salud_Nombre: {
-            required: "Campo requerido"
-          }
-        },*/
-        submitHandler: function (form, event) {
-          event.preventDefault();
-         
-          var tipo = $("#formRegistrar1 select[name=tipo]").val();
-          var temperaperatura = $("#formRegistrar1 input[name=temperaperatura]").val();
-          var frecuencia_cardiaca = $("#formRegistrar1 input[name=frecuencia_cardiaca]").val();
-          var presion_arterial = $("#formRegistrar1 input[name=presion_arterial]").val();
-          var frecuencia_respiratoria = $("#formRegistrar1 input[name=frecuencia_respiratoria]").val();
-          var saturacion_exigeno = $("#formRegistrar1 input[name=saturacion_exigeno]").val();
-          var glicemia = $("#formRegistrar1 input[name=glicemia]").val();
-          var glasgow_ocular = $("#formRegistrar1 select[name=glasgow_ocular]").val();
-          var glasgow_verbal = $("#formRegistrar1 select[name=glasgow_verbal]").val();
-          var glasgow_motora = $("#formRegistrar1 select[name=glasgow_motora]").val();
-          var glasgow_total = $("#formRegistrar1 input[name=glasgow_total]").val();
-          var pupilas_tipo = $("#formRegistrar1 select[name=pupilas_tipo]").val();
-          var pupilas_reactiva = $("#formRegistrar1 select[name=pupilas_reactiva]").val();
-          var idmomento = $("#formRegistrar1 input[name=idmomento]").val();
-          var idfichaatencion = $("#formRegistrar1 input[name=idfichaatencion]").val();
-
-
-          //var Lesionado_Gestante = "0";
-          /*
-          if ($(
-            "#formRegistrar input[name=Lesionado_Gestante]")
-            .prop("checked"))
-            Lesionado_Gestante = "1";
-          */
-          var editar = "";
-          /*
-          if (parseInt(Evento_Danios_Lesionados_Numero) > 0)
-            editar = '<button class="btn btn-warning btn-circle actionEdit" title="EDITAR" type="button"><i class="fa fa-pencil-square-o"></i></button>';
-
-          if (Lesionado_Entidad_Salud_Codigo == "1") Lesionado_Entidad_Salud_Nombre = "";
-
-          var Evento_Tipo_Entidad_Atencion_ID = ($("#formRegistrar select[name=Evento_Tipo_Entidad_Atencion_ID]").prop("disabled")) ? "0" : $("#formRegistrar select[name=Evento_Tipo_Entidad_Atencion_ID]").val();
-          */
-          var datos = {
+				$("input[name=CIE10_Codigo]")
+					.val(data[0]);
+				$("input[name=CIE10_Texto]").val(
+					data[1]);
+				*/
+        var datos = {
             
-            "tipo": tipo,
-            "temperaperatura": temperaperatura,
-            "frecuencia_cardiaca": frecuencia_cardiaca,
-            "presion_arterial": presion_arterial,
-            "frecuencia_respiratoria": frecuencia_respiratoria,
-            "saturacion_exigeno": saturacion_exigeno,
-            "glicemia": glicemia,
-            "glasgow_ocular": glasgow_ocular,
-            "glasgow_verbal": glasgow_verbal,
-            "glasgow_motora": glasgow_motora,
-            "glasgow_total": glasgow_total,
-            "pupilas_tipo": pupilas_tipo,
-            "pupilas_reactiva": pupilas_reactiva,
-            "idmomento": idmomento,
-            "idfichaatencion": idfichaatencion
-            /*
-            "Evento_Danios_Lesionados_Fecha_Atencion": Evento_Danios_Lesionados_Fecha_Atencion,
-            "Lesionado_Documento_Numero": Lesionado_Documento_Numero,
-            "Lesionado_Apellidos": Lesionado_Apellidos,
-            "Lesionado_Nombres": Lesionado_Nombres,
-            "Lesionado_Edad": Lesionado_Edad,
-            "Gravedad": Nivel_Gravedad_Texto,
-            "Situacion": Situacion_Texto,
-            "CIE": Lesionado_CIE10_Texto,
-            "Lesionado_Observaciones": Lesionado_Observaciones,
-            "Nivel_Gravedad_Codigo": Nivel_Gravedad_Codigo,
-            "Situacion_Codigo": Situacion_Codigo,
-            "Lesionado_CIE10_Codigo": Lesionado_CIE10_Codigo,
-            "Tipo_Documento_Codigo": Tipo_Documento_Codigo,
-            "Evento_Danios_Lesionados_Numero": Evento_Danios_Lesionados_Numero,
-            "Evento_Danios_Lesionados_ID": Evento_Danios_Lesionados_ID,
-            "Evento_Registro_Numero": ID_EVENTO_REGISTRO,
-            "editar": editar,
-            "activarEditar": '1',
-            "Lesionado_Genero": Lesionado_Genero,
-            "Lesionado_Entidad_Salud_Codigo": Lesionado_Entidad_Salud_Codigo,
-            "Lesionado_Personal_Salud": Lesionado_Personal_Salud,
-            "Lesionado_Entidad_Salud_Nombre": Lesionado_Entidad_Salud_Nombre,
-            "Lesionado_Gestante": Lesionado_Gestante,
-            "Evento_Tipo_Entidad_Atencion_ID": Evento_Tipo_Entidad_Atencion_ID
-            */
-
-          };
-          /*
-          if (parseInt(Evento_Danios_Lesionados_Numero) > 0) {
-
-            table.row(index).data(datos).draw();
-
-          } else {*/
-            table1.row.add(datos).draw();
-          //}
-
-          $("#formRegistrar1")[0].reset();
+          "descripcion": data[0],
+          "cie10": data[1],
+          "editar": editar
           
-          /*
-          $("#formRegistrar input[name=Evento_Danios_Lesionados_Fecha_Atencion]").val(Evento_Danios_Lesionados_Fecha_Atencion);
-          $("#formRegistrar input[name=Evento_Danios_Lesionados_Numero]").val("0");
-          $("#formRegistrar input[name=Evento_Danios_Lesionados_ID]").val(Evento_Danios_Lesionados_ID);
-          $("#formRegistrar input[name=index]").val("0");
-          $("#formRegistrar input[name=editar]").val("0");
-          $("#formRegistrar input[name=Lesionado_CIE10_Codigo]").val("");
-          $("#formRegistrar select[name=Lesionado_Entidad_Salud_Codigo]").val("");
+        };
+          table2.row.add(datos).draw();
+          $('#tableEnfermedadesModal').modal('hide');
 
-          $("#formRegistrar input[name=Lesionado_Entidad_Salud_Nombre]").val("");
-          */
+			});
 
-          $("#momentoevaluacionModal").modal("hide");
-
-        }
-
+      $("html, body").on("click", ".actionDeleteL", function () {
+        var tr = $(this).parents('tr');
+        var row = table2.row(tr);
+        data = row.data();
+        console.log(data);
+  
+        $("#idEliminar").val(data.cie10);
+        $("#condicionModal").modal("show");
+        $("#condicionModal .modal-title").text("Eliminar CIE10");
+        $("#condicionModal .modal-body p").html("Est\xe1 seguro de querer eliminar el CIE10 <b> " + data.cie10 + "</b>");
+  
       });
-
 
     var data;
     var validate = 1;
@@ -827,6 +725,167 @@ function fichaatencion(URI) {
         });
       }
     });
+
+    $("#formRegistrar1").validate(
+      {
+        
+        /*
+        rules: {
+          Evento_Danios_Lesionados_Fecha_Atencion: {
+            required: true
+          },
+          Tipo_Documento_Codigo: {
+            required: false
+          },
+          Lesionado_Documento_Numero: {
+            digits: true
+          },
+          Lesionado_Apellidos: {
+            required: true,
+            lettersonly: true
+          },
+          Lesionado_Nombres: {
+            required: true,
+            lettersonly: true
+          },
+          Lesionado_Edad: {
+            required: false,
+            digits: true
+          },
+          Lesionado_Observaciones: {
+            required: true
+          },
+          Nivel_Gravedad_Codigo: {
+            required: true
+          },
+          Situacion_Codigo: {
+            required: true
+          },
+          Lesionado_CIE10_Codigo: {
+            required: true
+          },
+          Lesionado_Genero: {
+            required: true
+          },
+          Lesionado_Entidad_Salud_Codigo: {
+            min: 1
+          },
+          Lesionado_Entidad_Salud_Nombre: {
+            required: function () { if ($("select[name=Lesionado_Entidad_Salud_Codigo]").val() == "1") return false; else return true; }
+          }
+
+        },
+        messages: {
+          Evento_Danios_Lesionados_Fecha_Atencion: {
+            required: "Campo requerido"
+          },
+          Tipo_Documento_Codigo: {
+            required: "Campo requerido"
+          },
+          Lesionado_Documento_Numero: {
+            required: "Campo requerido",
+            digits: "Solo n\xfameros"
+          },
+          Lesionado_Apellidos: {
+            required: "Campo requerido"
+          },
+          Lesionado_Nombres: {
+            required: "Campo requerido"
+          },
+          Lesionado_Edad: {
+            required: "Campo requerido",
+            digits: "Solo n\xfameros"
+          },
+          Lesionado_Observaciones: {
+            required: "Campo requerido"
+          },
+          Nivel_Gravedad_Codigo: {
+            required: "Campo requerido"
+          },
+          Situacion_Codigo: {
+            required: "Campo requerido"
+          },
+          Lesionado_CIE10_Codigo: {
+            required: "Campo requerido"
+          },
+          Lesionado_Genero: {
+            required: "Campo requerido"
+          },
+          Lesionado_Entidad_Salud_Codigo: {
+            min: "Campo requerido"
+          },
+          Lesionado_Entidad_Salud_Nombre: {
+            required: "Campo requerido"
+          }
+        },*/
+        
+        submitHandler: function (form, event) {
+          event.preventDefault();
+          
+          var tipo = $("#formRegistrar1 select[name=tipo]").val();
+          var temperaperatura = $("#formRegistrar1 input[name=temperaperatura]").val();
+          var frecuencia_cardiaca = $("#formRegistrar1 input[name=frecuencia_cardiaca]").val();
+          var presion_arterial = $("#formRegistrar1 input[name=presion_arterial]").val();
+          var frecuencia_respiratoria = $("#formRegistrar1 input[name=frecuencia_respiratoria]").val();
+          var saturacion_exigeno = $("#formRegistrar1 input[name=saturacion_exigeno]").val();
+          var glicemia = $("#formRegistrar1 input[name=glicemia]").val();
+          var glasgow_ocular = $("#formRegistrar1 select[name=glasgow_ocular]").val();
+          var glasgow_verbal = $("#formRegistrar1 select[name=glasgow_verbal]").val();
+          var glasgow_motora = $("#formRegistrar1 select[name=glasgow_motora]").val();
+          
+          var sumaglasgow = parseInt(glasgow_ocular) + parseInt(glasgow_verbal) + parseInt(glasgow_motora);
+
+          var glasgow_total = sumaglasgow;
+          var pupilas_tipo = $("#formRegistrar1 select[name=pupilas_tipo]").val();
+          var pupilas_reactiva = $("#formRegistrar1 select[name=pupilas_reactiva]").val();
+          
+          var tipotext = $("#formRegistrar1 select[name=tipo] option:selected").text();
+          var glasgow_oculartext = $("#formRegistrar1 select[name=glasgow_ocular] option:selected").text();
+          var glasgow_verbaltext = $("#formRegistrar1 select[name=glasgow_verbal] option:selected").text();
+          var glasgow_motoratext = $("#formRegistrar1 select[name=glasgow_motora] option:selected").text();
+          var pupilas_tipotext = $("#formRegistrar1 select[name=pupilas_tipo] option:selected").text();
+          var pupilas_reactivatext = $("#formRegistrar1 select[name=pupilas_reactiva] option:selected").text();
+          /*
+          var idmomento = $("#formRegistrar1 input[name=idmomento]").val();
+          var idfichaatencion = $("#formRegistrar1 input[name=idfichaatencion]").val();
+          */
+
+          var editar = "";
+          
+          var datos = {            
+            "tipo": tipo,
+            "temperaperatura": temperaperatura,
+            "frecuencia_cardiaca": frecuencia_cardiaca,
+            "presion_arterial": presion_arterial,
+            "frecuencia_respiratoria": frecuencia_respiratoria,
+            "saturacion_exigeno": saturacion_exigeno,
+            "glicemia": glicemia,
+            "glasgow_ocular": glasgow_ocular,
+            "glasgow_verbal": glasgow_verbal,
+            "glasgow_motora": glasgow_motora,
+            "glasgow_total": glasgow_total,
+            "pupilas_tipo": pupilas_tipo,
+            "pupilas_reactiva": pupilas_reactiva,
+            "tipo_text": tipotext,
+            "glasgow_ocular_text": glasgow_oculartext,
+            "glasgow_verbal_text": glasgow_verbaltext,
+            "glasgow_motora_text": glasgow_motoratext,
+            "pupilas_tipo_text": pupilas_tipotext,
+            "pupilas_reactiva_text": pupilas_reactivatext
+            /*,
+            "idmomento": idmomento,
+            "idfichaatencion": idfichaatencion*/            
+          };
+          
+            table1.row.add(datos).draw();
+           
+          $("#formRegistrar1")[0].reset();
+          
+          $("#momentoevaluacionModal").modal("hide");
+          
+        }
+
+      });
 
       $(".actionEdit").on('click', function (event) {
         const inp = this.previousSibling;

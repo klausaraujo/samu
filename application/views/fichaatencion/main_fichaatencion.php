@@ -76,6 +76,7 @@
 									<form id="formRegistrar" name="formRegistrar" method="post" action="" autocomplete="off" >
 										<div class="modal-body">
 											<input type="hidden" name="idfichaatencion" id="idfichaatencion">
+											<input type="hidden" id="idEliminar" />
 											<input type="hidden" name="act" id="act">
 												<div class="alert alert-warning ingresos__alert" role="alert" hidden>
 													<span class="alert__span"></span>
@@ -676,10 +677,13 @@
 																	<th>Total (15)</th>
 																	<th>Tipo de Pupilas</th>
 																	<th>Reactiva</th>
-																	<th>&nbsp;</th>
-																	<th>&nbsp;</th>
-																	<th>&nbsp;</th>
-																</thead>
+																	<th></th>
+																	<th></th>
+																	<th></th>
+																	<th></th>
+																	<th></th>
+																	<th></th>
+																</thead
 																<tbody>
 																</tbody>
 															</table>
@@ -802,8 +806,8 @@
 													<div class="col-xs-12 col-sm-6">
 														<div class="form-group">
 															<div class="input-group">
-																<input type="hidden" class="cLesionado_CIE10_Codigo" name="Lesionado_CIE10_Codigo" /> <input
-																	type="text" name="Lesionado_CIE10_Texto"
+																<input type="hidden" class="cLesionado_CIE10_Codigo" name="CIE10_Codigo" /> <input
+																	type="text" name="CIE10_Texto"
 																	class="form-control detalle-size" autocomplete="off"
 																	readonly /> 																	
 																	<span class="input-group-btn">
@@ -830,6 +834,7 @@
 																<thead>
 																	<th>Descripción</th>
 																	<th>CIE 10</th>
+																	<th>Opciones</th>
 																</thead>
 																<tbody>
 																</tbody>
@@ -1385,84 +1390,7 @@
 							</div>
 						
 						</div>
-						<!--
-						<div class="modal fade" id="momentoevaluacionModal1" tabindex="-1" role="dialog" aria-labelledby="momentoevaluacionModalLabel1" aria-hidden="true">
-							<div class="modal-dialog modal-lg" role="document">
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal" aria-label="close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-										<h5 class="modal-title" id="registrarTableroModalLabel">Registrar Momento de Evaluación</h5>
-									</div>
-									<form id="formRegistrar1" name="formRegistrar1" action="" method="POST">
-										<div class="modal-body">
-											<div class="row">
-														<div class="col-sm-4">
-															<div class="form-group row">
-																<label class="modal-label col-sm-5 col-form-label py-10">Momento de la Evaluación: </label>
-																<div class="col-sm-5">
-																	<select class="form-control" name="idbase" id="idbase">
-																		<option value="1">Inicial</option>
-																		<option value="2">Traslado</option>
-																		<option value="3">Llegada</option>
-																	</select>
-																</div>															
-															</div>
-														</div>	
-														<div class="col-sm-4">
-															<div class="form-group row">
-																<label class="modal-label col-sm-5 col-form-label py-10">Temperatura °C: </label>
-																<div class="col-sm-5">
-																	<input type="text" class="form-control" name="temperaperatura" id="temperaperatura" onkeyup="javascript:this.value=this.value.toUpperCase();" />
-																</div>															
-															</div>
-														</div>	
-														<div class="col-sm-4">
-															<div class="form-group row">
-																<label class="modal-label col-sm-5 col-form-label py-10">Frecuencia Cardíaca /min: </label>
-																<div class="col-sm-5">
-																	<input type="text" class="form-control" name="frecuencia_cardiaca" id="frecuencia_cardiaca" onkeyup="javascript:this.value=this.value.toUpperCase();" />
-																</div>															
-															</div>
-														</div>													
-											</div>
-											<div class="row">
-														<div class="col-sm-4">
-															<div class="form-group row">
-																<label class="modal-label col-sm-5 col-form-label py-10">Presión Arterial: </label>
-																<div class="col-sm-5">
-																<input type="text" class="form-control" name="presion_arterial" id="presion_arterial" onkeyup="javascript:this.value=this.value.toUpperCase();" />
-																</div>															
-															</div>
-														</div>	
-														<div class="col-sm-4">
-															<div class="form-group row">
-																<label class="modal-label col-sm-5 col-form-label py-10">Frecuencia Cardíaca: </label>
-																<div class="col-sm-5">
-																	<input type="text" class="form-control" name="frecuencia_respiratoria" id="frecuencia_respiratoria" onkeyup="javascript:this.value=this.value.toUpperCase();" />
-																</div>															
-															</div>
-														</div>	
-														<div class="col-sm-4">
-															<div class="form-group row">
-																<label class="modal-label col-sm-5 col-form-label py-10">Saturación de Oxígeno: </label>
-																<div class="col-sm-5">
-																	<input type="text" class="form-control" name="saturacion_exigeno" id="saturacion_exigeno" onkeyup="javascript:this.value=this.value.toUpperCase();" />
-																</div>															
-															</div>
-														</div>													
-											</div>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-basic btn-clear-form d-block" data-dismiss="modal">Cerrar</button>
-											<button type="submit" class="btn btn-primary d-block">Guardar</button>
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
-						-->
+
 						<div class="modal fade modal-fullscreen" id="momentoevaluacionModal" tabindex="-1" role="dialog" aria-labelledby="momentoevaluacionModalLabel" aria-hidden="true">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
@@ -1473,13 +1401,13 @@
 									</button>
 								</div>
 								<form id="formRegistrar1" name="formRegistrar1" action="" method="POST">
-								<div class="modal-body">
+									<div class="modal-body">
 												<div class="row">
 														<div class="col-sm-4">
 															<div class="form-group row">
 																<label class="modal-label col-sm-5 col-form-label py-10">Momento de la Evaluación: </label>
 																<div class="col-sm-5">
-																	<select class="form-control" name="idbase" id="idbase">
+																	<select class="form-control" name="tipo" id="tipo">
 																		<option value="1">Inicial</option>
 																		<option value="2">Traslado</option>
 																		<option value="3">Llegada</option>
@@ -1608,11 +1536,11 @@
 															</div>
 														</div>													
 												</div>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-									<button type="button" class="btn btn-primary">Agregar</button>
-								</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+										<button type="submit" class="btn btn-primary">Agregar</button>
+									</div>
 								</form>
 								</div>
 							</div>

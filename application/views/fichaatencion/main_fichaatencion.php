@@ -1082,6 +1082,30 @@
 
 												<hr/>
 
+												<div class="row">
+													<div class="col-xs-12">
+														<button type="button" class="btn btn-primary d-block" id="btnMedicamentos">Agregar Medicamento</button>
+													</div>
+												</div>
+												<br />
+												<div class="row">						
+													<div class="col-sm-12">
+														<div class="form-group row">
+														<div class="table-responsive tb-responsive">	
+															<table id="tbListarmedicamentos" class="table table-bordered table-hover display nowrap margin-top-10 w-p100">
+																<thead>
+																	<th>Medicación</th>
+																	<th>Dosis</th>
+																	<th>Hora</th>
+																	<th></th>
+																</thead
+																<tbody>
+																</tbody>
+															</table>
+														</div>
+														</div>
+													</div>
+												</div>
 
 												<hr/>
 												<h3 class="box-title">OCURRENCIAS DURANTE LA ATENCIÓN</h3>
@@ -1572,6 +1596,31 @@
 							</div>
 						</div>
 						<!-- MODAL -->
+
+						<!-- MODAL BUSQUEDA -->
+						<div class="modal fade" id="tableMedicamentosModal" tabindex="-1"
+							role="dialog" aria-labelledby="tableMedicamentosModalLabel"
+							aria-hidden="true">
+							<div class="modal-dialog modal-md" role="document"
+								style="padding-top: 10px;">
+								<div class="modal-content">
+									<div class="modal-body">
+										<div class="table-responsive">
+											<table id="tableMedicamentos" name="tableMedicamentos" class="tableMedicamentos table table-striped table-bordered table-sm"
+												cellspacing="0" width="100%">
+												<thead>
+													<tr>
+														<th>Descripci&oacute;n</th>				
+														<th></th>
+													</tr>
+												</thead>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- MODAL -->
 					</section>
 
 				</div>
@@ -1589,8 +1638,8 @@
 			const canEdit = "1";
 			var lista = JSON.parse('<?=$listaFichaAtencion?>');
 		</script>
-		<script>fichaatencion("<?=base_url()?>");</script>
 
+		<script>fichaatencion("<?=base_url()?>");</script>
 		<script src="<?=base_url()?>public//assets/vendor_components/apexcharts-bundle/dist/apexcharts.js"></script>
 		<script src="<?=base_url()?>public//assets/vendor_components/progressbar.js-master/dist/progressbar.js"></script>
 		<!-- Florence Admin App -->

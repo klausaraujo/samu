@@ -258,6 +258,177 @@ function fichaatencion(URI) {
 		}
 	});
 
+  $(".btnMedicamentos").on('click', function (event) {
+    $.ajax({
+      type: 'POST',
+      url: URI + 'fichaatencion/main/listaArticulos',
+      data: {},
+      dataType: 'json',
+      success: function (response) {
+        const { data: { listaArticulos } } = response;
+        tableMedicamentos.clear();
+        tableMedicamentos.rows.add(listaArticulos).draw();
+        $("#tableMedicamentosModal").modal('show');
+      }
+    });
+  });
+
+  
+  var tbListarmedicamentos = $('#tbListarmedicamentos').DataTable(
+		{
+			dom: '<"html5buttons"B>lTfgitp',
+			columns: [
+      {
+				"data": "descripcion"
+			},
+			{
+				"data": "dosis"
+			},
+			{
+				"data": "hora"
+			},
+			{
+				"data": "idarticulo"
+			}
+      
+			],
+			columnDefs: [{
+				"targets": [3],
+				"visible": false,
+				"searchable": false
+			}],
+			order: [[0, "desc"]],
+			buttons: [
+				{
+					extend: 'copy',
+					title: 'Lista de Momentos de Evaluación',
+					exportOptions: {
+						columns: [1]
+					}
+				},
+				{
+					extend: 'csv',
+					title: 'Lista de Momentos de Evaluación',
+					exportOptions: {
+						columns: [1]
+					}
+				},
+				{
+					extend: 'excel',
+					title: 'Lista de Momentos de Evaluación',
+					exportOptions: {
+						columns: [1]
+					}
+				},
+				{
+					extend: 'pdf',
+					title: 'Lista de Momentos de Evaluación',
+					orientation: 'landscape',
+					exportOptions: {
+						columns: [1]
+					}
+				},
+
+				{
+					extend: 'print',
+					title: 'Lista de Momentos de Evaluación',
+					customize: function (win) {
+						$(win.document.body).addClass('white-bg');
+						$(win.document.body).css('font-size', '10px');
+
+						$(win.document.body).find('table').addClass(
+							'compact').css('font-size', 'inherit');
+					}
+				}]
+
+		});
+
+  var tableMedicamentos = $('.tableMedicamentos').DataTable({
+    data: [],
+    pageLength: 10,
+    dom: 'Bfrt<"col-sm-12 inline"i> <"col-sm-12 inline"p>',
+    //language: languageDatatable,
+    autoWidth: true,
+    lengthMenu: [[10, 25, 50, 100, 500, -1], [10, 25, 50, 100, 500, 'Todas']],
+    columns: [
+      { data: "descripcion" },
+      { data: "idarticulo" }
+    ],
+    columnDefs: [{
+      "targets": [1],
+      "visible": false,
+      "searchable": false
+    }],
+    select: true,
+    buttons: {
+      dom: {
+        container: {
+          tag: 'div',
+          className: 'flexcontent'
+        },
+        buttonLiner: {
+          tag: null
+        }
+      },
+      buttons: [{
+        extend: 'copy',
+        title: 'Lista General de Ficha de Atención',
+        exportOptions: { columns: [1, 2, 3, 4, 5] },
+      },
+      {
+        extend: 'csv',
+        title: 'Lista General de Ficha de Atención',
+        exportOptions: { columns: [1, 2, 3, 4, 5] },
+      },
+      {
+        extend: 'excel',
+        title: 'Lista General de Ficha de Atención',
+        exportOptions: { columns: [1, 2, 3, 4, 5] },
+      },
+      {
+        extend: 'pdf',
+        title: 'Lista General de Ficha de Atención',
+        orientation: 'landscape',
+        exportOptions: { columns: [1, 2, 3, 4, 5] },
+      },
+      {
+        extend: 'print',
+        title: 'Lista General de Ficha de Atención',
+        exportOptions: { columns: [1, 2, 3, 4, 5] },
+        customize: function (win) {
+          $(win.document.body).addClass('white-bg');
+          $(win.document.body).css('font-size', '10px');
+
+          $(win.document.body).find('table')
+            .addClass('compact')
+            .css('font-size', 'inherit');
+
+          var css = '@page { size: landscape; }',
+            head = win.document.head || win.document.getElementsByTagName('head')[0],
+            style = win.document.createElement('style');
+
+          style.type = 'text/css';
+          style.media = 'print';
+
+          if (style.styleSheet) {
+            style.styleSheet.cssText = css;
+          }
+          else {
+            style.appendChild(win.document.createTextNode(css));
+          }
+
+          head.appendChild(style);
+        }
+      },
+      {
+        extend: 'pageLength',
+        titleAttr: 'Registros a Mostrar',
+        className: 'selectTable'
+      }]
+    }
+
+	});
+
     var table1 = $('#tbListar').DataTable(
 		{
 			dom: '<"html5buttons"B>lTfgitp',
@@ -447,6 +618,10 @@ function fichaatencion(URI) {
       $(document.body).addClass('modal-open');
     });
 
+    $('#tableMedicamentosModal').on('hidden.bs.modal', function () {
+      $(document.body).addClass('modal-open');
+    });
+
     $('#tableEnfermedades').on('click', 'tbody tr td', function () {
 				var data = tableEnfermedades.row(this).data();
         var editar = '<div class="flex-buttons"><button class="btn btn-danger btn-circle actionDeleteL" title="ELIMINAR" type="button"><i class="fa fa-trash"></i></button></div>';
@@ -607,6 +782,12 @@ function fichaatencion(URI) {
       //$("#registrarTableroModalLabel").html("Registrar Momento Evaluación");
     });
 
+    $("#btnMedicamentos").on("click", function () {
+      //habilitarCampos();
+      $("#tableMedicamentosModal").modal("show");
+      //$("#registrarTableroModalLabel").html("Registrar Momento Evaluación");
+    });
+
     $("#btn-buscar").on("click", function () {
 			var documento_numero = $("input[name=numero_documento]").val();
       var type = $("select#idtipodocumento").children("option:selected").val();
@@ -710,18 +891,28 @@ function fichaatencion(URI) {
           
 				});
 
-        var momentolista = '';
-        $.each(listaMomentoEvaluacion, function (i, e) {
 
-          if (i == 0) {
-            momentolista += e;
-          } else {
-            momentolista += "|" + e;
-          }   
-        });
+        const data = table1.rows().data().toArray();
+        if (data.length === 0) {
+           showAlertForm(`No hay ningún Registro, <a class="alert-link">Ingrese al menos 1 registro.</a>`);
+           return;
+        }
+
+        formData.append("tipo", data.map((item) => item.tipo).join('|'));
+        formData.append("temperaperatura", data.map((item) => item.temperaperatura).join('|'));
+        formData.append("frecuencia_cardiaca", data.map((item) => item.frecuencia_cardiaca).join('|'));
+        formData.append("presion_arterial", data.map((item) => item.presion_arterial).join('|'));
+        formData.append("frecuencia_respiratoria", data.map((item) => item.frecuencia_respiratoria).join('|'));
+        formData.append("saturacion_exigeno", data.map((item) => item.saturacion_exigeno).join('|'));
+        formData.append("glicemia", data.map((item) => item.glicemia).join('|'));
+        formData.append("glasgow_ocular", data.map((item) => item.glasgow_ocular).join('|'));
+        formData.append("glasgow_verbal", data.map((item) => item.glasgow_verbal).join('|'));
+        formData.append("glasgow_motora", data.map((item) => item.glasgow_motora).join('|'));
+        formData.append("pupilas_tipo", data.map((item) => item.pupilas_tipo).join('|'));
+        formData.append("pupilas_reactiva", data.map((item) => item.pupilas_reactiva).join('|'));
 
         formData.append("cie10lista", cie10lista);
-        formData.append("listaMomentoEvaluacion", listaMomentoEvaluacion);
+       
         $.ajax({
           type: 'POST',
           url: URI + 'fichaatencion/main/guardarFichaAtencion',
@@ -906,7 +1097,11 @@ function fichaatencion(URI) {
           
             table1.row.add(datos).draw();
             listaMomentoEvaluacion.push(datos);
-            console.log("Lista de Momento de Evaluación: " + listaMomentoEvaluacion);
+
+            console.log("Lista de Momento de Evaluación: " + listaMomentoEvaluacion.tipo);
+            console.log("Lista de Momento de Evaluación: " + datos.tipo);
+            console.log("Lista de Momento de Evaluación: " + listaMomentoEvaluacion.temperaperatura);
+            console.log("Lista de Momento de Evaluación: " + listaMomentoEvaluacion.frecuencia_cardiaca);
           $("#formRegistrar1")[0].reset();
           
           $("#momentoevaluacionModal").modal("hide");

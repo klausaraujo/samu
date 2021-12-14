@@ -135,6 +135,7 @@ class Fichaatencion_model extends CI_Model
     private $camilla_retenida_minutos;
 
     private $cie10;
+    private $momentolista;
     
     public function setidfichaatencion($data){$this->idfichaatencion=$this->db->escape_str($data);}
     public function setidtiposeguro($data){$this->idtiposeguro=$this->db->escape_str($data);}
@@ -267,6 +268,7 @@ class Fichaatencion_model extends CI_Model
     public function setcamilla_retenida_minutos($data){$this->camilla_retenida_minutos=$this->db->escape_str($data);}
 
     public function setcie10($data){$this->cie10=$this->db->escape_str($data);}
+    public function setmomentolista($data){$this->momentolista=$this->db->escape_str($data);}
     
 
     public function obtenerFichaAtencion()
@@ -317,6 +319,17 @@ class Fichaatencion_model extends CI_Model
         return $this->db->get();
         
     }
+
+    public function obtenerArticulosFarmacia()
+    {
+        $this->db->select("l.*");
+        $this->db->from("farmacia_articulo l");
+        $this->db->order_by("l.idarticulo ASC");
+        return $this->db->get();
+        
+    }
+
+
     public function guardarFichaAtencion()
     {
         $data = array(

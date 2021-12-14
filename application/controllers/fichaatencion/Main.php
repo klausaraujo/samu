@@ -60,6 +60,7 @@ class Main extends CI_Controller
         
 
         $listaFichaAtencion = $this->Fichaatencion_model->obtenerFichaAtencion();
+        $listaArticulos = $this->Fichaatencion_model->obtenerArticulosFarmacia();
         $listaMarcas = $this->Marcas_model->obtenerMarcas();
         $listaCombustibles = $this->Combustibles_model->obtenerTiposCombustibles();
         $listaTiposAmbulancias = $this->TipoAmbulancia_model->obtenerTiposAmbulancias();
@@ -76,8 +77,15 @@ class Main extends CI_Controller
             $listaFichaAtencion = array();
         }
 
+        if ($listaArticulos->num_rows() > 0) {
+            $listaArticulos = $listaArticulos->result();
+        } else {
+            $listaArticulos = array();
+        }
+
         $data = array(
             "listaFichaAtencion" => json_encode($listaFichaAtencion),
+            "listaArticulos" => json_encode($listaArticulos),
             "listaMarcas" => $listaMarcas->result(),
             "listaCombustibles" => $listaCombustibles->result(),
             "listaTiposAmbulancias" => $listaTiposAmbulancias->result(),
@@ -162,6 +170,7 @@ class Main extends CI_Controller
        $examen_sistema_osteomioaticular = $this->input->post("examen_sistema_osteomioaticular");
        $examen_neurologico = $this->input->post("examen_neurologico");
  
+       
        $tipo = $this->input->post("tipo");
        $temperaperatura = $this->input->post("temperaperatura");
        $frecuencia_cardiaca = $this->input->post("frecuencia_cardiaca");
@@ -172,9 +181,10 @@ class Main extends CI_Controller
        $glasgow_ocular = $this->input->post("glasgow_ocular");
        $glasgow_verbal = $this->input->post("glasgow_verbal");
        $glasgow_motora = $this->input->post("glasgow_motora");
-       $glasgow_total = $this->input->post("glasgow_total");
+       //$glasgow_total = $this->input->post("glasgow_total");
        $pupilas_tipo = $this->input->post("pupilas_tipo");
        $pupilas_reactiva = $this->input->post("pupilas_reactiva");
+       
 
        $tipo_victima = $this->input->post("tipo_victima");
        $tipo_vehiculo = $this->input->post("tipo_vehiculo");
@@ -237,7 +247,7 @@ class Main extends CI_Controller
        $camilla_retenida_minutos = $this->input->post("camilla_retenida_minutos");
 
        $cie10lista = $this->input->post("cie10lista");
-       
+       //$momentolista = $this->input->post("momentolista");
        
        $this->Fichaatencion_model->setidfichaatencion($idfichaatencion);
        $this->Fichaatencion_model->setidtiposeguro($idtiposeguro);
@@ -299,6 +309,7 @@ class Main extends CI_Controller
        $this->Fichaatencion_model->setexamen_sistema_osteomioaticular($examen_sistema_osteomioaticular);
        $this->Fichaatencion_model->setexamen_neurologico($examen_neurologico);
        
+       /*
        $this->Fichaatencion_model->settipo($tipo);
        $this->Fichaatencion_model->settemperaperatura($temperaperatura);
        $this->Fichaatencion_model->setfrecuencia_cardiaca($frecuencia_cardiaca);
@@ -312,7 +323,8 @@ class Main extends CI_Controller
        $this->Fichaatencion_model->setglasgow_total($glasgow_total);
        $this->Fichaatencion_model->setpupilas_tipo($pupilas_tipo);
        $this->Fichaatencion_model->setpupilas_reactiva($pupilas_reactiva);
-              
+        */  
+
        $this->Fichaatencion_model->settipo_victima($tipo_victima);
        $this->Fichaatencion_model->settipo_vehiculo($tipo_vehiculo);
        $this->Fichaatencion_model->settipo_vehiculo_descripcion($tipo_vehiculo_descripcion);
@@ -390,12 +402,15 @@ class Main extends CI_Controller
                 $this->Fichaatencion_model->setidfichaatencion($id);
                 $this->Fichaatencion_model->guardarFichaAtencion_antecedentes();
                 $this->Fichaatencion_model->guardarFichaAtencion_examen_fisico();
-                $this->Fichaatencion_model->guardarFichaAtencion_momento_evaluacion();
+                //$this->Fichaatencion_model->guardarFichaAtencion_momento_evaluacion();
                 $this->Fichaatencion_model->guardarFichaAtencion_mecanismo_lesion();
                 $this->Fichaatencion_model->guardarFichaAtencion_procedimientos();
                 $this->Fichaatencion_model->guardarFichaAtencion_tripulacion();
 
                 $generateId = $this->crearCIE10($cie10lista, $id);
+                //$generateId1 = $this->crearMomentoEvaluacion($momentolista, $id);
+                $generateId1 = $this->crearMomentoEvaluacion($id, $tipo, $temperaperatura, $frecuencia_cardiaca, $presion_arterial, $frecuencia_respiratoria,
+                $saturacion_exigeno, $glicemia, $glasgow_ocular, $glasgow_verbal, $glasgow_motora, $pupilas_tipo, $pupilas_reactiva);
 
                 $status = 200;
                 $message = "Ficha de Atención registrada exitosamente";
@@ -424,6 +439,95 @@ class Main extends CI_Controller
             $this->Fichaatencion_model->setidfichaatencion($id);
             $this->Fichaatencion_model->setcie10($cie10);
             $this->Fichaatencion_model->guardarFichaAtencion_cie10();
+            endforeach;
+
+            //$this->session->set_flashdata('messageOK', 'Aviso Registrado Correctamente');
+            //return $alertapro;
+        /*
+        } else {
+            $this->session->set_flashdata('messageError', 'No se pudo registrar el Aviso.');
+            return 0;
+        }*/
+
+    }
+
+    private function crearMomentoEvaluacion($id, $tipo, $temperaperatura, $frecuencia_cardiaca, $presion_arterial, $frecuencia_respiratoria,
+    $saturacion_exigeno, $glicemia, $glasgow_ocular,  $glasgow_verbal, $glasgow_motora, $pupilas_tipo, $pupilas_reactiva) {
+        //$alertapro = $this->Fichaatencion_model->crear2();
+        /*
+        if ( $alertapro > 0 ) 
+        {*/
+            $this->load->model("Fichaatencion_model");
+            
+            $tipo = explode("|", $tipo);
+            $temperaperatura = explode("|", $temperaperatura);
+            $frecuencia_cardiaca = explode("|", $frecuencia_cardiaca);
+            $presion_arterial = explode("|", $presion_arterial);
+            $frecuencia_respiratoria = explode("|", $frecuencia_respiratoria);
+            $saturacion_exigeno = explode("|", $saturacion_exigeno);
+            $glicemia = explode("|", $glicemia);
+            $glasgow_ocular = explode("|", $glasgow_ocular);
+            $glasgow_verbal = explode("|", $glasgow_verbal);
+            $glasgow_motora = explode("|", $glasgow_motora);
+            $pupilas_tipo = explode("|", $pupilas_tipo);
+            $pupilas_reactiva = explode("|", $pupilas_reactiva);
+
+            foreach($tipo as $key => $idmoment):
+
+            $this->Fichaatencion_model->setidfichaatencion($id);
+            $this->Fichaatencion_model->settipo($idmoment);
+            $this->Fichaatencion_model->settemperaperatura($temperaperatura[$key]);
+            $this->Fichaatencion_model->setfrecuencia_cardiaca($frecuencia_cardiaca[$key]);
+            $this->Fichaatencion_model->setpresion_arterial($presion_arterial[$key]);
+            $this->Fichaatencion_model->setfrecuencia_respiratoria($frecuencia_respiratoria[$key]);
+            $this->Fichaatencion_model->setsaturacion_exigeno($saturacion_exigeno[$key]);
+            $this->Fichaatencion_model->setglicemia($glicemia[$key]);
+            $this->Fichaatencion_model->setglasgow_ocular($glasgow_ocular[$key]);
+            $this->Fichaatencion_model->setglasgow_verbal($glasgow_verbal[$key]);
+            $this->Fichaatencion_model->setglasgow_motora($glasgow_motora[$key]);
+            $this->Fichaatencion_model->setpupilas_tipo($pupilas_tipo[$key]);
+            $this->Fichaatencion_model->setpupilas_reactiva($pupilas_reactiva[$key]);
+            $this->Fichaatencion_model->guardarFichaAtencion_momento_evaluacion();
+            endforeach;
+            
+            //$this->session->set_flashdata('messageOK', 'Aviso Registrado Correctamente');
+            //return $alertapro;
+        /*
+        } else {
+            $this->session->set_flashdata('messageError', 'No se pudo registrar el Aviso.');
+            return 0;
+        }*/
+
+    }
+
+    private function crearMomentoEvaluacion1($id, $tipo, $temperaperatura, $frecuencia_cardiaca, $presion_arterial, $frecuencia_respiratoria,
+    $saturacion_exigeno, $glicemia, $glasgow_ocular,  $glasgow_verbal, $glasgow_motora, $pupilas_tipo, $pupilas_reactiva) {
+        //$alertapro = $this->Fichaatencion_model->crear2();
+        /*
+        if ( $alertapro > 0 ) 
+        {*/
+            $this->load->model("Fichaatencion_model");
+            
+            $tipo = explode("|", $tipo);
+            foreach($tipo as $tipo):
+                $tipo = $tipo;
+            
+            $this->Fichaatencion_model->setidfichaatencion($id);
+            $this->Fichaatencion_model->settipo($tipo[0]);
+
+            $this->Fichaatencion_model->settemperaperatura($momentolista[1]);
+            $this->Fichaatencion_model->setfrecuencia_cardiaca($momentolista[2]);
+            $this->Fichaatencion_model->setpresion_arterial($momentolista[3]);
+            $this->Fichaatencion_model->setfrecuencia_respiratoria($momentolista[4]);
+            $this->Fichaatencion_model->setsaturacion_exigeno($momentolista[5]);
+            $this->Fichaatencion_model->setglicemia($momentolista[6]);
+            $this->Fichaatencion_model->setglasgow_ocular($momentolista[7]);
+            $this->Fichaatencion_model->setglasgow_verbal($momentolista[8]);
+            $this->Fichaatencion_model->setglasgow_motora($momentolista[9]);
+            $this->Fichaatencion_model->setpupilas_tipo($momentolista[10]);
+            $this->Fichaatencion_model->setpupilas_reactiva($momentolista[11]);
+
+            $this->Fichaatencion_model->guardarFichaAtencion_momento_evaluacion();
             endforeach;
 
             //$this->session->set_flashdata('messageOK', 'Aviso Registrado Correctamente');
@@ -579,6 +683,31 @@ class Main extends CI_Controller
 
         $detalle = array(
           "listaFichaAtencion" => $fichaatencion
+        );
+
+        $data = array(
+            "status" => 200,
+            "data" => $detalle
+        );
+
+        echo json_encode($data);
+                   
+    }
+
+    public function listaArticulos(){
+        
+        $this->load->model("Fichaatencion_model");
+
+        $listaArticulos = $this->Fichaatencion_model->obtenerArticulosFarmacia();
+       
+        if ($listaArticulos->num_rows() > 0) {
+            $listaArticulos = $listaArticulos->result();
+        } else {
+            $listaArticulos = array();
+        }
+
+        $detalle = array(
+          "listaArticulos" => $listaArticulos
         );
 
         $data = array(

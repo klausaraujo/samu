@@ -845,10 +845,11 @@
 												</div>
 
 												<hr/>
-
-												<div class="row">
+													
 													<h3 class="box-title">Procedimiento (s) y Tratamiento (Plan de Atención)</h3>
 													<label class="modal-label col-sm-5 col-form-label py-10"></label>
+												<div class="row">
+													
 													<div class="col-sm-3">
 														<div class="form-group row">
 															<label class="modal-label col-sm-5 col-form-label py-10">Oxigenoterapia: </label>
@@ -1555,7 +1556,7 @@
 								<div class="modal-content">
 									<div class="modal-body">
 										<div class="table-responsive">
-											<table class="tableEnfermedades table table-striped table-bordered table-sm"
+											<table id="tableEnfermedades" name="tableEnfermedades" class="tableEnfermedades table table-striped table-bordered table-sm"
 												cellspacing="0" width="100%">
 												<thead>
 													<tr>

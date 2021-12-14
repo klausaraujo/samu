@@ -1,5 +1,7 @@
 function fichaatencion(URI) {
     var table = null;
+    var listaCIE10 = [];
+    var listaMomentoEvaluacion = [];
 
     function showModal(event,title) {
         $("#editarModal").modal("show");
@@ -445,31 +447,24 @@ function fichaatencion(URI) {
       $(document.body).addClass('modal-open');
     });
 
-    console.log("Paso por aquiiiiiiiiiiii");
-
-    $('.tableEnfermedades tbody').on(
-			'click',
-			'tr',
-			function () {
+    $('#tableEnfermedades').on('click', 'tbody tr td', function () {
 				var data = tableEnfermedades.row(this).data();
         var editar = '<div class="flex-buttons"><button class="btn btn-danger btn-circle actionDeleteL" title="ELIMINAR" type="button"><i class="fa fa-trash"></i></button></div>';
-        /*
-				$("input[name=CIE10_Codigo]")
-					.val(data[0]);
-				$("input[name=CIE10_Texto]").val(
-					data[1]);
-				*/
+
+        var tr = $(this).parents('tr');
+			  var row = tableEnfermedades.row(tr);
+        
         var datos = {
-            
-          "descripcion": data[0],
-          "cie10": data[1],
+          "cie10": data[0],
+          "descripcion": data[1],
           "editar": editar
-          
         };
           table2.row.add(datos).draw();
+          datos2 = row.data();
+          listaCIE10.push(datos2[0]);
           $('#tableEnfermedadesModal').modal('hide');
 
-			});
+		});
 
       $("html, body").on("click", ".actionDeleteL", function () {
         var tr = $(this).parents('tr');
@@ -695,7 +690,38 @@ function fichaatencion(URI) {
       },
       */
       submitHandler: function (form, event) {
+        
+        if (listaCIE10.length == 0) {
+					return false;
+				}
+        if (listaMomentoEvaluacion.length == 0) {
+					return false;
+				}
         var formData = new FormData(document.getElementById("formRegistrar"));
+      
+        var cie10lista = '';
+				$.each(listaCIE10, function (i, e) {
+
+					if (i == 0) {
+						cie10lista += e;
+					} else {
+						cie10lista += "|" + e;
+					}     
+          
+				});
+
+        var momentolista = '';
+        $.each(listaMomentoEvaluacion, function (i, e) {
+
+          if (i == 0) {
+            momentolista += e;
+          } else {
+            momentolista += "|" + e;
+          }   
+        });
+
+        formData.append("cie10lista", cie10lista);
+        formData.append("listaMomentoEvaluacion", listaMomentoEvaluacion);
         $.ajax({
           type: 'POST',
           url: URI + 'fichaatencion/main/guardarFichaAtencion',
@@ -723,6 +749,7 @@ function fichaatencion(URI) {
             }, 1500);
           }
         });
+        $("#formRegistrar")[0].reset();
       }
     });
 
@@ -878,7 +905,8 @@ function fichaatencion(URI) {
           };
           
             table1.row.add(datos).draw();
-           
+            listaMomentoEvaluacion.push(datos);
+            console.log("Lista de Momento de Evaluación: " + listaMomentoEvaluacion);
           $("#formRegistrar1")[0].reset();
           
           $("#momentoevaluacionModal").modal("hide");

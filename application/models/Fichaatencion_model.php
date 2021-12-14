@@ -86,6 +86,56 @@ class Fichaatencion_model extends CI_Model
     private $cinamatica;
     private $ubicacion;
     
+    private $oxigenoterapia;
+    private $fluidoterapia;
+    private $rcp;
+    private $uso_dea;
+    private $cardioversion;
+    private $cardioversion_selectiva;
+    private $monitoreo_cardiaco;
+    private $ventilacion_mecanica;
+    private $ippb;
+    private $tratamiento_inhalacion;
+    private $inmovilizacion_completa;
+    private $inmovilizacion_parcial;
+    private $vendaje;
+    private $sondaje;
+    private $sedacion;
+    private $intubacion;
+    private $traqueostomia;
+    private $curacion;
+    private $satura;
+    private $cuerpo_extrano;
+    private $hemostacia;
+    private $taponamiento_nasal;
+    private $infusion_intraosea;
+    private $aspiracion_secreciones;
+    private $hemoglucotest;
+    private $nebulizacion;
+    private $ocurrencias_atencion;
+    
+    private $idtipodocumento_medico;
+    private $numero_documento_medico;
+    private $idtipodocumento_enfermero;
+    private $numero_documento_enfermero;
+    private $idtipodocumento_piloto;
+    private $numero_documento_piloto;
+    private $idtipodocumento_medico_regulador;
+    private $numero_documento_medico_regulador;
+    private $ficha_regulacion;
+    private $idtipodocumento_profesional_receptor;
+    private $numero_documento_profesional_receptor;
+    private $idtipodocumento_medico_receptor;
+    private $numero_documento_medico_receptor;
+    private $idrenipress;
+    private $hora_llegada_es;
+    private $hora_recepcion_paciente;
+    private $hora_salida_es;
+    private $camilla_retenida;
+    private $camilla_retenida_minutos;
+
+    private $cie10;
+    
     public function setidfichaatencion($data){$this->idfichaatencion=$this->db->escape_str($data);}
     public function setidtiposeguro($data){$this->idtiposeguro=$this->db->escape_str($data);}
     public function setseguro($data){$this->seguro=$this->db->escape_str($data);}
@@ -167,7 +217,57 @@ class Fichaatencion_model extends CI_Model
     public function setropa($data){$this->ropa=$this->db->escape_str($data);}
     public function setcinamatica($data){$this->cinamatica=$this->db->escape_str($data);}
     public function setubicacion($data){$this->ubicacion=$this->db->escape_str($data);}
+
+    public function setoxigenoterapia($data){$this->oxigenoterapia=$this->db->escape_str($data);}
+    public function setfluidoterapia($data){$this->fluidoterapia=$this->db->escape_str($data);}
+    public function setrcp($data){$this->rcp=$this->db->escape_str($data);}
+    public function setuso_dea($data){$this->uso_dea=$this->db->escape_str($data);}
+    public function setcardioversion($data){$this->cardioversion=$this->db->escape_str($data);}
+    public function setcardioversion_selectiva($data){$this->cardioversion_selectiva=$this->db->escape_str($data);}
+    public function setmonitoreo_cardiaco($data){$this->monitoreo_cardiaco=$this->db->escape_str($data);}
+    public function setventilacion_mecanica($data){$this->ventilacion_mecanica=$this->db->escape_str($data);}
+    public function setippb($data){$this->ippb=$this->db->escape_str($data);}
+    public function settratamiento_inhalacion($data){$this->tratamiento_inhalacion=$this->db->escape_str($data);}
+    public function setinmovilizacion_completa($data){$this->inmovilizacion_completa=$this->db->escape_str($data);}
+    public function setinmovilizacion_parcial($data){$this->inmovilizacion_parcial=$this->db->escape_str($data);}
+    public function setvendaje($data){$this->vendaje=$this->db->escape_str($data);}
+    public function setsondaje($data){$this->sondaje=$this->db->escape_str($data);}
+    public function setsedacion($data){$this->sedacion=$this->db->escape_str($data);}
+    public function setintubacion($data){$this->intubacion=$this->db->escape_str($data);}
+    public function settraqueostomia($data){$this->traqueostomia=$this->db->escape_str($data);}
+    public function setcuracion($data){$this->curacion=$this->db->escape_str($data);}
+    public function setsatura($data){$this->satura=$this->db->escape_str($data);}
+    public function setcuerpo_extrano($data){$this->cuerpo_extrano=$this->db->escape_str($data);}
+    public function sethemostacia($data){$this->hemostacia=$this->db->escape_str($data);}
+    public function settaponamiento_nasal($data){$this->taponamiento_nasal=$this->db->escape_str($data);}
+    public function setinfusion_intraosea($data){$this->infusion_intraosea=$this->db->escape_str($data);}
+    public function setaspiracion_secreciones($data){$this->aspiracion_secreciones=$this->db->escape_str($data);}
+    public function sethemoglucotest($data){$this->hemoglucotest=$this->db->escape_str($data);}
+    public function setnebulizacion($data){$this->nebulizacion=$this->db->escape_str($data);}
+    public function setocurrencias_atencion($data){$this->ocurrencias_atencion=$this->db->escape_str($data);}
         
+    public function setidtipodocumento_medico($data){$this->idtipodocumento_medico=$this->db->escape_str($data);}
+    public function setnumero_documento_medico($data){$this->numero_documento_medico=$this->db->escape_str($data);}
+    public function setidtipodocumento_enfermero($data){$this->idtipodocumento_enfermero=$this->db->escape_str($data);}
+    public function setnumero_documento_enfermero($data){$this->numero_documento_enfermero=$this->db->escape_str($data);}
+    public function setidtipodocumento_piloto($data){$this->idtipodocumento_piloto=$this->db->escape_str($data);}
+    public function setnumero_documento_piloto($data){$this->numero_documento_piloto=$this->db->escape_str($data);}
+    public function setidtipodocumento_medico_regulador($data){$this->idtipodocumento_medico_regulador=$this->db->escape_str($data);}
+    public function setnumero_documento_medico_regulador($data){$this->numero_documento_medico_regulador=$this->db->escape_str($data);}
+    public function setficha_regulacion($data){$this->ficha_regulacion=$this->db->escape_str($data);}
+    public function setidtipodocumento_profesional_receptor($data){$this->idtipodocumento_profesional_receptor=$this->db->escape_str($data);}
+    public function setnumero_documento_profesional_receptor($data){$this->numero_documento_profesional_receptor=$this->db->escape_str($data);}
+    public function setidtipodocumento_medico_receptor($data){$this->idtipodocumento_medico_receptor=$this->db->escape_str($data);}
+    public function setnumero_documento_medico_receptor($data){$this->numero_documento_medico_receptor=$this->db->escape_str($data);}
+    public function setidrenipress($data){$this->idrenipress=$this->db->escape_str($data);}
+    public function sethora_llegada_es($data){$this->hora_llegada_es=$this->db->escape_str($data);}
+    public function sethora_recepcion_paciente($data){$this->hora_recepcion_paciente=$this->db->escape_str($data);}
+    public function sethora_salida_es($data){$this->hora_salida_es=$this->db->escape_str($data);}
+    public function setcamilla_retenida($data){$this->camilla_retenida=$this->db->escape_str($data);}
+    public function setcamilla_retenida_minutos($data){$this->camilla_retenida_minutos=$this->db->escape_str($data);}
+
+    public function setcie10($data){$this->cie10=$this->db->escape_str($data);}
+    
 
     public function obtenerFichaAtencion()
     {
@@ -359,6 +459,98 @@ class Fichaatencion_model extends CI_Model
                         
         );
         if($this->db->insert("ficha_atencion_mecanismo_lesion", $data)) {
+            return $this->db->insert_id();
+        }
+        else {
+            return 0;
+        }
+    }
+
+    public function guardarFichaAtencion_procedimientos()
+    {
+        $data = array(
+            
+            "idfichaatencion" => $this->idfichaatencion,
+            "oxigenoterapia" => $this->oxigenoterapia,
+            "fluidoterapia" => $this->fluidoterapia,
+            "rcp" => $this->rcp,
+            "uso_dea" => $this->uso_dea,
+            "cardioversion" => $this->cardioversion,
+            "cardioversion_selectiva" => $this->cardioversion_selectiva,
+            "monitoreo_cardiaco" => $this->monitoreo_cardiaco,
+            "ventilacion_mecanica" => $this->ventilacion_mecanica,
+            "ippb" => $this->ippb,
+            "tratamiento_inhalacion" => $this->tratamiento_inhalacion,
+            "inmovilizacion_completa" => $this->inmovilizacion_completa,
+            "inmovilizacion_parcial" => $this->inmovilizacion_parcial,
+            "vendaje" => $this->vendaje,
+            "sondaje" => $this->sondaje,
+            "sedacion" => $this->sedacion,
+            "intubacion" => $this->intubacion,
+            "traqueostomia" => $this->traqueostomia,
+            "curacion" => $this->curacion,
+            "satura" => $this->satura,
+            "cuerpo_extrano" => $this->cuerpo_extrano,
+            "hemostacia" => $this->hemostacia,
+            "taponamiento_nasal" => $this->taponamiento_nasal,
+            "infusion_intraosea" => $this->infusion_intraosea,
+            "aspiracion_secreciones" => $this->aspiracion_secreciones,
+            "hemoglucotest" => $this->hemoglucotest,
+            "nebulizacion" => $this->nebulizacion,
+            "ocurrencias_atencion" => $this->ocurrencias_atencion                   
+                        
+        );
+        if($this->db->insert("ficha_atencion_procedimientos", $data)) {
+            return $this->db->insert_id();
+        }
+        else {
+            return 0;
+        }
+    }
+
+    public function guardarFichaAtencion_tripulacion()
+    {
+        $data = array(
+            
+            "idfichaatencion" => $this->idfichaatencion,
+            "idtipodocumento_medico" => $this->idtipodocumento_medico,
+            "numero_documento_medico" => $this->numero_documento_medico,
+            "idtipodocumento_enfermero" => $this->idtipodocumento_enfermero,
+            "numero_documento_enfermero" => $this->numero_documento_enfermero,
+            "idtipodocumento_piloto" => $this->idtipodocumento_piloto,
+            "numero_documento_piloto" => $this->numero_documento_piloto,
+            "idtipodocumento_medico_regulador" => $this->idtipodocumento_medico_regulador,
+            "numero_documento_medico_regulador" => $this->numero_documento_medico_regulador,
+            "ficha_regulacion" => $this->ficha_regulacion,
+            "idtipodocumento_profesional_receptor" => $this->idtipodocumento_profesional_receptor,
+            "numero_documento_profesional_receptor" => $this->numero_documento_profesional_receptor,
+            "idtipodocumento_medico_receptor" => $this->idtipodocumento_medico_receptor,
+            "numero_documento_medico_receptor" => $this->numero_documento_medico_receptor,
+            "idrenipress" => $this->idrenipress,
+            "hora_llegada_es" => $this->hora_llegada_es,
+            "hora_recepcion_paciente" => $this->hora_recepcion_paciente,
+            "hora_salida_es" => $this->hora_salida_es,
+            "camilla_retenida" => $this->camilla_retenida,
+            "camilla_retenida_minutos" => $this->camilla_retenida_minutos                            
+                        
+        );
+        if($this->db->insert("ficha_atencion_tripulacion", $data)) {
+            return $this->db->insert_id();
+        }
+        else {
+            return 0;
+        }
+    }
+
+    public function guardarFichaAtencion_cie10()
+    {
+        $data = array(
+            
+            "idfichaatencion" => $this->idfichaatencion,
+            "cie10" => $this->cie10  
+                        
+        );
+        if($this->db->insert("ficha_atencion_cie10", $data)) {
             return $this->db->insert_id();
         }
         else {

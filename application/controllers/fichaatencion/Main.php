@@ -186,8 +186,58 @@ class Main extends CI_Controller
        $cinamatica = $this->input->post("cinamatica");
        $ubicacion = $this->input->post("ubicacion");
 
-       
 
+
+       $oxigenoterapia = $this->input->post("oxigenoterapia");
+       $fluidoterapia = $this->input->post("fluidoterapia");
+       $rcp = $this->input->post("rcp");
+       $uso_dea = $this->input->post("uso_dea");
+       $cardioversion = $this->input->post("cardioversion");
+       $cardioversion_selectiva = $this->input->post("cardioversion_selectiva");
+       $monitoreo_cardiaco = $this->input->post("monitoreo_cardiaco");
+       $ventilacion_mecanica = $this->input->post("ventilacion_mecanica");
+       $ippb = $this->input->post("ippb");
+       $tratamiento_inhalacion = $this->input->post("tratamiento_inhalacion");
+       $inmovilizacion_completa = $this->input->post("inmovilizacion_completa");
+       $inmovilizacion_parcial = $this->input->post("inmovilizacion_parcial");
+       $vendaje = $this->input->post("vendaje");
+       $sondaje = $this->input->post("sondaje");
+       $sedacion = $this->input->post("sedacion");
+       $intubacion = $this->input->post("intubacion");
+       $traqueostomia = $this->input->post("traqueostomia");
+       $curacion = $this->input->post("curacion");
+       $satura = $this->input->post("satura");
+       $cuerpo_extrano = $this->input->post("cuerpo_extrano");
+       $hemostacia = $this->input->post("hemostacia");
+       $taponamiento_nasal = $this->input->post("taponamiento_nasal");
+       $infusion_intraosea = $this->input->post("infusion_intraosea");
+       $aspiracion_secreciones = $this->input->post("aspiracion_secreciones");
+       $hemoglucotest = $this->input->post("hemoglucotest");
+       $nebulizacion = $this->input->post("nebulizacion");
+       $ocurrencias_atencion = $this->input->post("ocurrencias_atencion");
+              
+       $idtipodocumento_medico = $this->input->post("idtipodocumento_medico");
+       $numero_documento_medico = $this->input->post("numero_documento_medico");
+       $idtipodocumento_enfermero = $this->input->post("idtipodocumento_enfermero");
+       $numero_documento_enfermero = $this->input->post("numero_documento_enfermero");
+       $idtipodocumento_piloto = $this->input->post("idtipodocumento_piloto");
+       $numero_documento_piloto = $this->input->post("numero_documento_piloto");
+       $idtipodocumento_medico_regulador = $this->input->post("idtipodocumento_medico_regulador");
+       $numero_documento_medico_regulador = $this->input->post("numero_documento_medico_regulador");
+       $ficha_regulacion = $this->input->post("ficha_regulacion");
+       $idtipodocumento_profesional_receptor = $this->input->post("idtipodocumento_profesional_receptor");
+       $numero_documento_profesional_receptor = $this->input->post("numero_documento_profesional_receptor");
+       $idtipodocumento_medico_receptor = $this->input->post("idtipodocumento_medico_receptor");
+       $numero_documento_medico_receptor = $this->input->post("numero_documento_medico_receptor");
+       $idrenipress = $this->input->post("idrenipress");
+       $hora_llegada_es = $this->input->post("hora_llegada_es");
+       $hora_recepcion_paciente = $this->input->post("hora_recepcion_paciente");
+       $hora_salida_es = $this->input->post("hora_salida_es");
+       $camilla_retenida = $this->input->post("camilla_retenida");
+       $camilla_retenida_minutos = $this->input->post("camilla_retenida_minutos");
+
+       $cie10lista = $this->input->post("cie10lista");
+       
        
        $this->Fichaatencion_model->setidfichaatencion($idfichaatencion);
        $this->Fichaatencion_model->setidtiposeguro($idtiposeguro);
@@ -273,7 +323,54 @@ class Main extends CI_Controller
        $this->Fichaatencion_model->setcinamatica($cinamatica);
        $this->Fichaatencion_model->setubicacion($ubicacion);
 
-
+       $this->Fichaatencion_model->setoxigenoterapia($oxigenoterapia);
+       $this->Fichaatencion_model->setfluidoterapia($fluidoterapia);
+       $this->Fichaatencion_model->setrcp($rcp);
+       $this->Fichaatencion_model->setuso_dea($uso_dea);
+       $this->Fichaatencion_model->setcardioversion($cardioversion);
+       $this->Fichaatencion_model->setcardioversion_selectiva($cardioversion_selectiva);
+       $this->Fichaatencion_model->setmonitoreo_cardiaco($monitoreo_cardiaco);
+       $this->Fichaatencion_model->setventilacion_mecanica($ventilacion_mecanica);
+       $this->Fichaatencion_model->setippb($ippb);
+       $this->Fichaatencion_model->settratamiento_inhalacion($tratamiento_inhalacion);
+       $this->Fichaatencion_model->setinmovilizacion_completa($inmovilizacion_completa);
+       $this->Fichaatencion_model->setinmovilizacion_parcial($inmovilizacion_parcial);
+       $this->Fichaatencion_model->setvendaje($vendaje);
+       $this->Fichaatencion_model->setsondaje($sondaje);
+       $this->Fichaatencion_model->setsedacion($sedacion);
+       $this->Fichaatencion_model->setintubacion($intubacion);
+       $this->Fichaatencion_model->settraqueostomia($traqueostomia);
+       $this->Fichaatencion_model->setcuracion($curacion);
+       $this->Fichaatencion_model->setsatura($satura);
+       $this->Fichaatencion_model->setcuerpo_extrano($cuerpo_extrano);
+       $this->Fichaatencion_model->sethemostacia($hemostacia);
+       $this->Fichaatencion_model->settaponamiento_nasal($taponamiento_nasal);
+       $this->Fichaatencion_model->setinfusion_intraosea($infusion_intraosea);
+       $this->Fichaatencion_model->setaspiracion_secreciones($aspiracion_secreciones);
+       $this->Fichaatencion_model->sethemoglucotest($hemoglucotest);
+       $this->Fichaatencion_model->setnebulizacion($nebulizacion);
+       $this->Fichaatencion_model->setocurrencias_atencion($ocurrencias_atencion);
+       
+       $this->Fichaatencion_model->setidtipodocumento_medico($idtipodocumento_medico);
+       $this->Fichaatencion_model->setnumero_documento_medico($numero_documento_medico);
+       $this->Fichaatencion_model->setidtipodocumento_enfermero($idtipodocumento_enfermero);
+       $this->Fichaatencion_model->setnumero_documento_enfermero($numero_documento_enfermero);
+       $this->Fichaatencion_model->setidtipodocumento_piloto($idtipodocumento_piloto);
+       $this->Fichaatencion_model->setnumero_documento_piloto($numero_documento_piloto);
+       $this->Fichaatencion_model->setidtipodocumento_medico_regulador($idtipodocumento_medico_regulador);
+       $this->Fichaatencion_model->setnumero_documento_medico_regulador($numero_documento_medico_regulador);
+       $this->Fichaatencion_model->setficha_regulacion($ficha_regulacion);
+       $this->Fichaatencion_model->setidtipodocumento_profesional_receptor($idtipodocumento_profesional_receptor);
+       $this->Fichaatencion_model->setnumero_documento_profesional_receptor($numero_documento_profesional_receptor);
+       $this->Fichaatencion_model->setidtipodocumento_medico_receptor($idtipodocumento_medico_receptor);
+       $this->Fichaatencion_model->setnumero_documento_medico_receptor($numero_documento_medico_receptor);
+       $this->Fichaatencion_model->setidrenipress($idrenipress);
+       $this->Fichaatencion_model->sethora_llegada_es($hora_llegada_es);
+       $this->Fichaatencion_model->sethora_recepcion_paciente($hora_recepcion_paciente);
+       $this->Fichaatencion_model->sethora_salida_es($hora_salida_es);
+       $this->Fichaatencion_model->setcamilla_retenida($camilla_retenida);
+       $this->Fichaatencion_model->setcamilla_retenida_minutos($camilla_retenida_minutos);
+       
        
        //$fotografia = $_FILES["file"];
        
@@ -295,6 +392,11 @@ class Main extends CI_Controller
                 $this->Fichaatencion_model->guardarFichaAtencion_examen_fisico();
                 $this->Fichaatencion_model->guardarFichaAtencion_momento_evaluacion();
                 $this->Fichaatencion_model->guardarFichaAtencion_mecanismo_lesion();
+                $this->Fichaatencion_model->guardarFichaAtencion_procedimientos();
+                $this->Fichaatencion_model->guardarFichaAtencion_tripulacion();
+
+                $generateId = $this->crearCIE10($cie10lista, $id);
+
                 $status = 200;
                 $message = "Ficha de Atención registrada exitosamente";
             }
@@ -307,6 +409,31 @@ class Main extends CI_Controller
         
         echo json_encode($data);
         
+    }
+
+    private function crearCIE10($cie10lista, $id) {
+        //$alertapro = $this->Fichaatencion_model->crear2();
+        /*
+        if ( $alertapro > 0 ) 
+        {*/
+            $this->load->model("Fichaatencion_model");
+            
+            $cie10lista = explode("|", $cie10lista);
+            foreach($cie10lista as $idcie10):
+                $cie10 = $idcie10;
+            $this->Fichaatencion_model->setidfichaatencion($id);
+            $this->Fichaatencion_model->setcie10($cie10);
+            $this->Fichaatencion_model->guardarFichaAtencion_cie10();
+            endforeach;
+
+            //$this->session->set_flashdata('messageOK', 'Aviso Registrado Correctamente');
+            //return $alertapro;
+        /*
+        } else {
+            $this->session->set_flashdata('messageError', 'No se pudo registrar el Aviso.');
+            return 0;
+        }*/
+
     }
 
     public function listaambulancias() {

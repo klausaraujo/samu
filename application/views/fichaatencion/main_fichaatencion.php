@@ -1094,7 +1094,7 @@
 														<div class="table-responsive tb-responsive">	
 															<table id="tbListarmedicamentos" class="table table-bordered table-hover display nowrap margin-top-10 w-p100">
 																<thead>
-																	<th>Medicación</th>
+																	<th>Descripcion</th>
 																	<th>Dosis</th>
 																	<th>Hora</th>
 																	<th></th>
@@ -1603,8 +1603,26 @@
 							aria-hidden="true">
 							<div class="modal-dialog modal-md" role="document"
 								style="padding-top: 10px;">
-								<div class="modal-content">
+								<div class="modal-content">			
 									<div class="modal-body">
+													<div class="row">
+														<div class="col-sm-12">
+															<div class="form-group row">
+																<label class="modal-label col-sm-5 col-form-label py-10">Dosis: </label>
+																<div class="col-sm-12">
+																	<input type="text" class="form-control" name="dosis" id="dosis" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+																</div>															
+															</div>
+														</div>
+														<div class="col-sm-12">
+															<div class="form-group row">
+																<label class="modal-label col-sm-5 col-form-label py-10">Hora: </label>
+																<div class="col-sm-12">
+																	<input type="text" class="form-control" name="hora" id="hora" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+																</div>															
+															</div>
+														</div>	
+													</div>
 										<div class="table-responsive">
 											<table id="tableMedicamentos" name="tableMedicamentos" class="tableMedicamentos table table-striped table-bordered table-sm"
 												cellspacing="0" width="100%">

@@ -134,6 +134,10 @@ class Fichaatencion_model extends CI_Model
     private $camilla_retenida;
     private $camilla_retenida_minutos;
 
+    private $idarticulo;
+    private $dosis;
+    private $hora;
+
     private $cie10;
     private $momentolista;
     
@@ -269,6 +273,10 @@ class Fichaatencion_model extends CI_Model
 
     public function setcie10($data){$this->cie10=$this->db->escape_str($data);}
     public function setmomentolista($data){$this->momentolista=$this->db->escape_str($data);}
+
+    public function setidarticulo($data){$this->idarticulo=$this->db->escape_str($data);}
+    public function setdosis($data){$this->dosis=$this->db->escape_str($data);}
+    public function sethora($data){$this->hora=$this->db->escape_str($data);}
     
 
     public function obtenerFichaAtencion()
@@ -455,6 +463,24 @@ class Fichaatencion_model extends CI_Model
     }
 
     
+    public function guardarFichaAtencion_medicacion()
+    {
+        $data = array(
+            
+            "idfichaatencion" => $this->idfichaatencion,
+            "dosis" => $this->dosis,
+            "hora" => $this->hora,
+            "idarticulo" => $this->idarticulo
+
+        );
+        if($this->db->insert("ficha_atencion_medicacion", $data)) {
+            return $this->db->insert_id();
+        }
+        else {
+            return 0;
+        }
+    }
+
     public function guardarFichaAtencion_mecanismo_lesion()
     {
         $data = array(

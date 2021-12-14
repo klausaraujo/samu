@@ -1,5 +1,6 @@
 function fichaatencion(URI) {
     var table = null;
+    
     var listaCIE10 = [];
     var listaMomentoEvaluacion = [];
 
@@ -258,21 +259,6 @@ function fichaatencion(URI) {
 		}
 	});
 
-  $(".btnMedicamentos").on('click', function (event) {
-    $.ajax({
-      type: 'POST',
-      url: URI + 'fichaatencion/main/listaArticulos',
-      data: {},
-      dataType: 'json',
-      success: function (response) {
-        const { data: { listaArticulos } } = response;
-        tableMedicamentos.clear();
-        tableMedicamentos.rows.add(listaArticulos).draw();
-        $("#tableMedicamentosModal").modal('show');
-      }
-    });
-  });
-
   
   var tbListarmedicamentos = $('#tbListarmedicamentos').DataTable(
 		{
@@ -297,7 +283,7 @@ function fichaatencion(URI) {
 				"visible": false,
 				"searchable": false
 			}],
-			order: [[0, "desc"]],
+			order: [],
 			buttons: [
 				{
 					extend: 'copy',
@@ -342,92 +328,6 @@ function fichaatencion(URI) {
 				}]
 
 		});
-
-  var tableMedicamentos = $('.tableMedicamentos').DataTable({
-    data: [],
-    pageLength: 10,
-    dom: 'Bfrt<"col-sm-12 inline"i> <"col-sm-12 inline"p>',
-    //language: languageDatatable,
-    autoWidth: true,
-    lengthMenu: [[10, 25, 50, 100, 500, -1], [10, 25, 50, 100, 500, 'Todas']],
-    columns: [
-      { data: "descripcion" },
-      { data: "idarticulo" }
-    ],
-    columnDefs: [{
-      "targets": [1],
-      "visible": false,
-      "searchable": false
-    }],
-    select: true,
-    buttons: {
-      dom: {
-        container: {
-          tag: 'div',
-          className: 'flexcontent'
-        },
-        buttonLiner: {
-          tag: null
-        }
-      },
-      buttons: [{
-        extend: 'copy',
-        title: 'Lista General de Ficha de Atención',
-        exportOptions: { columns: [1, 2, 3, 4, 5] },
-      },
-      {
-        extend: 'csv',
-        title: 'Lista General de Ficha de Atención',
-        exportOptions: { columns: [1, 2, 3, 4, 5] },
-      },
-      {
-        extend: 'excel',
-        title: 'Lista General de Ficha de Atención',
-        exportOptions: { columns: [1, 2, 3, 4, 5] },
-      },
-      {
-        extend: 'pdf',
-        title: 'Lista General de Ficha de Atención',
-        orientation: 'landscape',
-        exportOptions: { columns: [1, 2, 3, 4, 5] },
-      },
-      {
-        extend: 'print',
-        title: 'Lista General de Ficha de Atención',
-        exportOptions: { columns: [1, 2, 3, 4, 5] },
-        customize: function (win) {
-          $(win.document.body).addClass('white-bg');
-          $(win.document.body).css('font-size', '10px');
-
-          $(win.document.body).find('table')
-            .addClass('compact')
-            .css('font-size', 'inherit');
-
-          var css = '@page { size: landscape; }',
-            head = win.document.head || win.document.getElementsByTagName('head')[0],
-            style = win.document.createElement('style');
-
-          style.type = 'text/css';
-          style.media = 'print';
-
-          if (style.styleSheet) {
-            style.styleSheet.cssText = css;
-          }
-          else {
-            style.appendChild(win.document.createTextNode(css));
-          }
-
-          head.appendChild(style);
-        }
-      },
-      {
-        extend: 'pageLength',
-        titleAttr: 'Registros a Mostrar',
-        className: 'selectTable'
-      }]
-    }
-
-	});
 
     var table1 = $('#tbListar').DataTable(
 		{
@@ -609,6 +509,74 @@ function fichaatencion(URI) {
       });
 
     $(document).ready(function () {
+      var data;
+
+      $(".btnMedicamentoss").on('click', function (event) {
+        $.ajax({
+          type: 'POST',
+          url: URI + 'fichaatencion/main/listaArticulos',
+          data: {},
+          dataType: 'json',
+          success: function (response) {
+            const { data: { listaArticulos } } = response;
+            tableMedicamentos.clear();
+            tableMedicamentos.rows.add(listaArticulos).draw();
+            $("#tableMedicamentosModal").modal('show');
+          }
+        });
+      });
+
+      $("#btnMedicamentos").on("click", function () {
+        $.ajax({
+          type: 'POST',
+          url: URI + 'fichaatencion/main/listaArticulos',
+          data: {},
+          dataType: 'json',
+          success: function (response) {
+            const { data: { listaArticulos } } = response;
+            tableMedicamentos.clear();
+            tableMedicamentos.rows.add(listaArticulos).draw();
+            $("#tableMedicamentosModal").modal('show');
+          }
+        });
+      });
+
+
+      var tableMedicamentos = $('.tableMedicamentos').DataTable({
+        data: [],
+        pageLength: 10,
+        dom: 'Bfrt<"col-sm-12 inline"i> <"col-sm-12 inline"p>',
+        //language: languageDatatable,
+        autoWidth: true,
+        lengthMenu: [[10, 25, 50, 100, 500, -1], [10, 25, 50, 100, 500, 'Todas']],
+        columns: [
+          { data: "descripcion" },
+          { data: "idarticulo" }
+        ],
+        columnDefs: [{
+          "targets": [1],
+          "visible": false,
+          "searchable": false
+        }],
+        select: true,
+        buttons: {
+          dom: {
+            container: {
+              tag: 'div',
+              className: 'flexcontent'
+            },
+            buttonLiner: {
+              tag: null
+            }
+          },
+          buttons: [{
+            extend: 'pageLength',
+            titleAttr: 'Registros a mostrar',
+            className: 'selectTable'
+          }]
+        }
+    
+      });
 
     $('#momentoevaluacionModal').on('hidden.bs.modal', function () {
       $(document.body).addClass('modal-open');
@@ -625,7 +593,7 @@ function fichaatencion(URI) {
     $('#tableEnfermedades').on('click', 'tbody tr td', function () {
 				var data = tableEnfermedades.row(this).data();
         var editar = '<div class="flex-buttons"><button class="btn btn-danger btn-circle actionDeleteL" title="ELIMINAR" type="button"><i class="fa fa-trash"></i></button></div>';
-
+        
         var tr = $(this).parents('tr');
 			  var row = tableEnfermedades.row(tr);
         
@@ -640,6 +608,27 @@ function fichaatencion(URI) {
           $('#tableEnfermedadesModal').modal('hide');
 
 		});
+
+    $('.tableMedicamentos tbody').on('click', 'tr', function () {
+      var tr = $(this);
+      var row = tableMedicamentos.row(tr);
+      var dosis = document.getElementById("dosis").value;
+      var hora = document.getElementById("hora").value;
+      //const rowTable = tableArticuloIngresos.rows().data().toArray();
+      index = row.index();
+      data = row.data();
+      //var data = tableMedicamentos.row(this).data();
+
+      console.log(data);
+      var datos = {
+        "descripcion": data.descripcion,
+        "dosis": dosis,
+        "hora": hora,
+        "idarticulo": data.idarticulo
+      };
+      tbListarmedicamentos.row.add(datos).draw();
+      $("#tableMedicamentosModal").modal('hide');
+      });
 
       $("html, body").on("click", ".actionDeleteL", function () {
         var tr = $(this).parents('tr');
@@ -782,11 +771,6 @@ function fichaatencion(URI) {
       //$("#registrarTableroModalLabel").html("Registrar Momento Evaluación");
     });
 
-    $("#btnMedicamentos").on("click", function () {
-      //habilitarCampos();
-      $("#tableMedicamentosModal").modal("show");
-      //$("#registrarTableroModalLabel").html("Registrar Momento Evaluación");
-    });
 
     $("#btn-buscar").on("click", function () {
 			var documento_numero = $("input[name=numero_documento]").val();
@@ -898,6 +882,8 @@ function fichaatencion(URI) {
            return;
         }
 
+        const data1 = tbListarmedicamentos.rows().data().toArray();
+
         formData.append("tipo", data.map((item) => item.tipo).join('|'));
         formData.append("temperaperatura", data.map((item) => item.temperaperatura).join('|'));
         formData.append("frecuencia_cardiaca", data.map((item) => item.frecuencia_cardiaca).join('|'));
@@ -910,6 +896,10 @@ function fichaatencion(URI) {
         formData.append("glasgow_motora", data.map((item) => item.glasgow_motora).join('|'));
         formData.append("pupilas_tipo", data.map((item) => item.pupilas_tipo).join('|'));
         formData.append("pupilas_reactiva", data.map((item) => item.pupilas_reactiva).join('|'));
+
+        formData.append("dosis", data1.map((item) => item.dosis).join('|'));
+        formData.append("hora", data1.map((item) => item.hora).join('|'));
+        formData.append("idarticulo", data1.map((item) => item.idarticulo).join('|'));
 
         formData.append("cie10lista", cie10lista);
        
@@ -940,7 +930,6 @@ function fichaatencion(URI) {
             }, 1500);
           }
         });
-        $("#formRegistrar")[0].reset();
       }
     });
 

@@ -196,8 +196,6 @@ class Main extends CI_Controller
        $cinamatica = $this->input->post("cinamatica");
        $ubicacion = $this->input->post("ubicacion");
 
-
-
        $oxigenoterapia = $this->input->post("oxigenoterapia");
        $fluidoterapia = $this->input->post("fluidoterapia");
        $rcp = $this->input->post("rcp");
@@ -245,6 +243,10 @@ class Main extends CI_Controller
        $hora_salida_es = $this->input->post("hora_salida_es");
        $camilla_retenida = $this->input->post("camilla_retenida");
        $camilla_retenida_minutos = $this->input->post("camilla_retenida_minutos");
+
+       $dosis = $this->input->post("dosis");
+       $hora = $this->input->post("hora");
+       $idarticulo = $this->input->post("idarticulo");
 
        $cie10lista = $this->input->post("cie10lista");
        //$momentolista = $this->input->post("momentolista");
@@ -411,7 +413,7 @@ class Main extends CI_Controller
                 //$generateId1 = $this->crearMomentoEvaluacion($momentolista, $id);
                 $generateId1 = $this->crearMomentoEvaluacion($id, $tipo, $temperaperatura, $frecuencia_cardiaca, $presion_arterial, $frecuencia_respiratoria,
                 $saturacion_exigeno, $glicemia, $glasgow_ocular, $glasgow_verbal, $glasgow_motora, $pupilas_tipo, $pupilas_reactiva);
-
+                $generateId2 = $this->crearFichaMedicamentos($id, $dosis, $hora,$idarticulo);
                 $status = 200;
                 $message = "Ficha de Atención registrada exitosamente";
             }
@@ -488,6 +490,37 @@ class Main extends CI_Controller
             $this->Fichaatencion_model->setpupilas_tipo($pupilas_tipo[$key]);
             $this->Fichaatencion_model->setpupilas_reactiva($pupilas_reactiva[$key]);
             $this->Fichaatencion_model->guardarFichaAtencion_momento_evaluacion();
+            endforeach;
+            
+            //$this->session->set_flashdata('messageOK', 'Aviso Registrado Correctamente');
+            //return $alertapro;
+        /*
+        } else {
+            $this->session->set_flashdata('messageError', 'No se pudo registrar el Aviso.');
+            return 0;
+        }*/
+
+    }
+
+    private function crearFichaMedicamentos($id, $dosis, $hora, $idarticulo) {
+        //$alertapro = $this->Fichaatencion_model->crear2();
+        /*
+        if ( $alertapro > 0 ) 
+        {*/
+            $this->load->model("Fichaatencion_model");
+            
+            $idarticulo = explode("|", $idarticulo);
+            $dosis = explode("|", $dosis);
+            $hora = explode("|", $hora);
+
+            foreach($idarticulo as $key => $idficmed):
+
+            $this->Fichaatencion_model->setidfichaatencion($id);
+            $this->Fichaatencion_model->setidarticulo($idficmed);
+            $this->Fichaatencion_model->setdosis($dosis[$key]);
+            $this->Fichaatencion_model->sethora($hora[$key]);
+
+            $this->Fichaatencion_model->guardarFichaAtencion_medicacion();
             endforeach;
             
             //$this->session->set_flashdata('messageOK', 'Aviso Registrado Correctamente');

@@ -133,6 +133,12 @@ class Fichaatencion_model extends CI_Model
     private $hora_salida_es;
     private $camilla_retenida;
     private $camilla_retenida_minutos;
+    private $numero_colegiatura_medico;
+    private $numero_colegiatura_enfermero;
+    private $numero_licencia_piloto;
+    private $numero_colegiatura_medico_regulador;
+    private $numero_colegiatura_medico_receptor;
+        
 
     private $idarticulo;
     private $dosis;
@@ -270,6 +276,11 @@ class Fichaatencion_model extends CI_Model
     public function sethora_salida_es($data){$this->hora_salida_es=$this->db->escape_str($data);}
     public function setcamilla_retenida($data){$this->camilla_retenida=$this->db->escape_str($data);}
     public function setcamilla_retenida_minutos($data){$this->camilla_retenida_minutos=$this->db->escape_str($data);}
+    public function setnumero_colegiatura_medico($data){$this->numero_colegiatura_medico=$this->db->escape_str($data);}
+    public function setnumero_colegiatura_enfermero($data){$this->numero_colegiatura_enfermero=$this->db->escape_str($data);}
+    public function setnumero_licencia_piloto($data){$this->numero_licencia_piloto=$this->db->escape_str($data);}
+    public function setnumero_colegiatura_medico_regulador($data){$this->numero_colegiatura_medico_regulador=$this->db->escape_str($data);}
+    public function setnumero_colegiatura_medico_receptor($data){$this->numero_colegiatura_medico_receptor=$this->db->escape_str($data);}       
 
     public function setcie10($data){$this->cie10=$this->db->escape_str($data);}
     public function setmomentolista($data){$this->momentolista=$this->db->escape_str($data);}
@@ -281,9 +292,10 @@ class Fichaatencion_model extends CI_Model
 
     public function obtenerFichaAtencion()
     {
-        $this->db->select("l.*");
-        $this->db->from("ficha_atencion l");
-        $this->db->order_by("l.idfichaatencion desc");
+        $this->db->select("fa.*, if(fa.activo = 1, 'Activo', 'Inactivo') as estado, td.tipo_documento ");
+        $this->db->from("ficha_atencion fa, tipo_documento td");
+        $this->db->where("fa.idtipodocumento = td.idtipodocumento");
+        $this->db->order_by("fa.idfichaatencion desc");
         return $this->db->get();
         
     }
@@ -536,7 +548,7 @@ class Fichaatencion_model extends CI_Model
             "aspiracion_secreciones" => $this->aspiracion_secreciones,
             "hemoglucotest" => $this->hemoglucotest,
             "nebulizacion" => $this->nebulizacion,
-            "ocurrencias_atencion" => $this->ocurrencias_atencion                   
+            "ocurrencias_atencion" => $this->ocurrencias_atencion
                         
         );
         if($this->db->insert("ficha_atencion_procedimientos", $data)) {
@@ -570,8 +582,12 @@ class Fichaatencion_model extends CI_Model
             "hora_recepcion_paciente" => $this->hora_recepcion_paciente,
             "hora_salida_es" => $this->hora_salida_es,
             "camilla_retenida" => $this->camilla_retenida,
-            "camilla_retenida_minutos" => $this->camilla_retenida_minutos                            
-                        
+            "camilla_retenida_minutos" => $this->camilla_retenida_minutos,
+            "numero_colegiatura_medico" => $this->numero_colegiatura_medico,
+            "numero_colegiatura_enfermero" => $this->numero_colegiatura_enfermero,
+            "numero_licencia_piloto" => $this->numero_licencia_piloto,
+            "numero_colegiatura_medico_regulador" => $this->numero_colegiatura_medico_regulador,
+            "numero_colegiatura_medico_receptor" => $this->numero_colegiatura_medico_receptor
         );
         if($this->db->insert("ficha_atencion_tripulacion", $data)) {
             return $this->db->insert_id();

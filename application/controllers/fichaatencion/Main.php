@@ -3,49 +3,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Main extends CI_Controller
 {
-    /*
-    private $permisos = null;
-    
-    function __construct() {
-
-      parent::__construct();
-    
-      $token = $this->session->userdata("token");
-    
-      (strlen($token)>0)?$token = JWT::decode($token,getenv("SECRET_SERVER_KEY"),false):redirect("login");
-    
-      $this->session->set_userdata("idmodulo", 2);
-    
-      ($this->session->userdata("idusuario"))?$usuario=$this->session->userdata("idusuario"):redirect("login");
-    
-      if(sha1($usuario)==$token->usuario){
-    
-          if (count($token->modulos)>0) {
-    
-              $listaModulos = $token->modulos;
-    
-              $permanecer = false;
-    
-              foreach ($listaModulos as $row) :
-              if ($row->idmodulo == 14 and $row->estado == 1)
-                  $permanecer = true;
-                  endforeach
-                  ;
-    
-                  if ($permanecer == false)
-                      redirect('errores/accesoDenegado');
-          } else {
-              redirect("login");
-          }
-
-          if($this->permisos==null){ if($this->session->userdata("menu")) $this->permisos = $this->session->userdata("menu");}
-    
-      }else{
-          redirect("login");
-      }
-      
-    }*/
-
     public function index() {
         /*
         $nivel = 1;
@@ -243,6 +200,12 @@ class Main extends CI_Controller
        $hora_salida_es = $this->input->post("hora_salida_es");
        $camilla_retenida = $this->input->post("camilla_retenida");
        $camilla_retenida_minutos = $this->input->post("camilla_retenida_minutos");
+       $numero_colegiatura_medico = $this->input->post("numero_colegiatura_medico");
+       $numero_colegiatura_enfermero = $this->input->post("numero_colegiatura_enfermero");
+       $numero_licencia_piloto = $this->input->post("numero_licencia_piloto");
+       $numero_colegiatura_medico_regulador = $this->input->post("numero_colegiatura_medico_regulador");
+       $numero_colegiatura_medico_receptor = $this->input->post("numero_colegiatura_medico_receptor");
+              
 
        $dosis = $this->input->post("dosis");
        $hora = $this->input->post("hora");
@@ -311,22 +274,6 @@ class Main extends CI_Controller
        $this->Fichaatencion_model->setexamen_sistema_osteomioaticular($examen_sistema_osteomioaticular);
        $this->Fichaatencion_model->setexamen_neurologico($examen_neurologico);
        
-       /*
-       $this->Fichaatencion_model->settipo($tipo);
-       $this->Fichaatencion_model->settemperaperatura($temperaperatura);
-       $this->Fichaatencion_model->setfrecuencia_cardiaca($frecuencia_cardiaca);
-       $this->Fichaatencion_model->setpresion_arterial($presion_arterial);
-       $this->Fichaatencion_model->setfrecuencia_respiratoria($frecuencia_respiratoria);
-       $this->Fichaatencion_model->setsaturacion_exigeno($saturacion_exigeno);
-       $this->Fichaatencion_model->setglicemia($glicemia);
-       $this->Fichaatencion_model->setglasgow_ocular($glasgow_ocular);
-       $this->Fichaatencion_model->setglasgow_verbal($glasgow_verbal);
-       $this->Fichaatencion_model->setglasgow_motora($glasgow_motora);
-       $this->Fichaatencion_model->setglasgow_total($glasgow_total);
-       $this->Fichaatencion_model->setpupilas_tipo($pupilas_tipo);
-       $this->Fichaatencion_model->setpupilas_reactiva($pupilas_reactiva);
-        */  
-
        $this->Fichaatencion_model->settipo_victima($tipo_victima);
        $this->Fichaatencion_model->settipo_vehiculo($tipo_vehiculo);
        $this->Fichaatencion_model->settipo_vehiculo_descripcion($tipo_vehiculo_descripcion);
@@ -384,6 +331,12 @@ class Main extends CI_Controller
        $this->Fichaatencion_model->sethora_salida_es($hora_salida_es);
        $this->Fichaatencion_model->setcamilla_retenida($camilla_retenida);
        $this->Fichaatencion_model->setcamilla_retenida_minutos($camilla_retenida_minutos);
+       $this->Fichaatencion_model->setnumero_colegiatura_medico($numero_colegiatura_medico);
+       $this->Fichaatencion_model->setnumero_colegiatura_enfermero($numero_colegiatura_enfermero);
+       $this->Fichaatencion_model->setnumero_licencia_piloto($numero_licencia_piloto);
+       $this->Fichaatencion_model->setnumero_colegiatura_medico_regulador($numero_colegiatura_medico_regulador);
+       $this->Fichaatencion_model->setnumero_colegiatura_medico_receptor($numero_colegiatura_medico_receptor);
+              
        
        
        //$fotografia = $_FILES["file"];

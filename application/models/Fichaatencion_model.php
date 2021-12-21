@@ -292,7 +292,7 @@ class Fichaatencion_model extends CI_Model
 
     public function obtenerFichaAtencion()
     {
-        $this->db->select("fa.*, if(fa.activo = 1, 'Activo', 'Inactivo') as estado, td.tipo_documento ");
+        $this->db->select("fa.*, if(fa.activo = 1, 'Activo', 'Inactivo') as estado, td.tipo_documento, DATE_FORMAT(fa.fecha_nacimiento,'%d/%m/%Y') as fecha_nacimiento, DATE_FORMAT(fa.fecha_ocurrencia,'%d/%m/%Y') as fecha_ocurrencia ");
         $this->db->from("ficha_atencion fa, tipo_documento td");
         $this->db->where("fa.idtipodocumento = td.idtipodocumento");
         $this->db->order_by("fa.idfichaatencion desc");
@@ -648,6 +648,108 @@ class Fichaatencion_model extends CI_Model
         $this->db->from("lista_departamentos");
         return $this->db->get();
     }
+
+    /* Inicio de obtención de info para Edición */
+
+    public function obtener_Principal_Ficha()
+    {
+        $this->db->select("fa.*");
+        $this->db->from("ficha_atencion fa");
+        //$this->db->join("");
+        $this->db->where("fa.idfichaatencion", $this->idfichaatencion);
+        return $this->db->get();
+    }
+
+    public function obtener_Antecedentes_Ficha()
+    {
+        $this->db->select("faa.*");
+        $this->db->from("ficha_atencion_antecedentes faa");
+        //$this->db->join("lista_articulos_busqueda_farmacia iar","fid.idarticulo = iar.idarticulo");
+        $this->db->where("faa.idfichaatencion", $this->idfichaatencion);
+        return $this->db->get();
+    }
+
+    public function obtener_Examen_Fisico_Ficha()
+    {
+        $this->db->select("faef.*");
+        $this->db->from("ficha_atencion_examen_fisico faef");
+        //$this->db->join("lista_articulos_busqueda_farmacia iar","fid.idarticulo = iar.idarticulo");
+        $this->db->where("faef.idfichaatencion", $this->idfichaatencion);
+        return $this->db->get();
+    }
+
+    public function obtener_CIE10_Ficha()
+    {
+        $this->db->select("fac.*, c1.descripcion_cie10 as descripcion, activo as editar");
+        $this->db->from("ficha_atencion_cie10 fac");
+        $this->db->join("cie10 c1","c1.cie10 = fac.cie10");
+        $this->db->where("fac.idfichaatencion", $this->idfichaatencion);
+        return $this->db->get();
+    }
+
+    public function obtener_Mecanismo_Lesion_Ficha()
+    {
+        $this->db->select("faml.*");
+        $this->db->from("ficha_atencion_mecanismo_lesion faml");
+        //$this->db->join("lista_articulos_busqueda_farmacia iar","fid.idarticulo = iar.idarticulo");
+        $this->db->where("faml.idfichaatencion", $this->idfichaatencion);
+        return $this->db->get();
+    }
+
+    public function obtener_Medicacion_Ficha()
+    {
+        $this->db->select("fam.*, fa.descripcion, fp.descripcion as via");
+        $this->db->from("ficha_atencion_medicacion fam");
+        $this->db->join("farmacia_articulo fa","fa.idarticulo = fam.idarticulo");
+        $this->db->join("farmacia_presentacion fp","fa.idpresentacion = fp.idpresentacion");
+        $this->db->where("fam.idfichaatencion", $this->idfichaatencion);
+        return $this->db->get();
+    }
+
+    public function obtener_Momento_Evaluacion_Ficha()
+    {
+        $this->db->select("fame.*, case fame.tipo when '1' then 'Inicial' when '2' then 'Traslado' when '3' then 'Llegada' end as tipo_text, ");
+        $this->db->select("case fame.glasgow_ocular when '1' then 'Ninguna' when '2' then 'Dolor' when '3' then 'Voz' when '4' then 'Espontánea' end as glasgow_ocular_text,");
+        $this->db->select("case fame.glasgow_verbal when '1' then 'Ninguna' when '2' then 'Sonidos' when '3' then 'Inapropiada' when '4' then 'Confusa' when '5' then 'Orientada' end as glasgow_verbal_text,");
+        $this->db->select("case fame.glasgow_motora when '1' then 'Ninguna' when '2' then 'Extensión' when '3' then 'Flexión' when '4' then 'Retirada' when '5' then 'Localiza' when '6' then 'Obedece' end as glasgow_motora_text,");
+        $this->db->select("case fame.pupilas_tipo when '1' then 'Izquierdo' when '2' then 'Derecho' end as pupilas_tipo_text,");
+        $this->db->select("case fame.pupilas_reactiva when '1' then 'SI' when '2' then 'NO' end as pupilas_reactiva_text");
+        $this->db->from("ficha_atencion_momento_evaluacion fame");
+        //$this->db->join("lista_articulos_busqueda_farmacia iar","fid.idarticulo = iar.idarticulo");
+        $this->db->where("fame.idfichaatencion", $this->idfichaatencion);
+        return $this->db->get();
+    }
+
+    public function obtener_Procedimientos_Ficha()
+    {
+        $this->db->select("fap.*");
+        $this->db->from("ficha_atencion_procedimientos fap");
+        //$this->db->join("lista_articulos_busqueda_farmacia iar","fid.idarticulo = iar.idarticulo");
+        $this->db->where("fap.idfichaatencion", $this->idfichaatencion);
+        return $this->db->get();
+    }
+
+    public function obtener_Tripulacion_Ficha()
+    {
+        $this->db->select("fat.*");
+        $this->db->from("ficha_atencion_tripulacion fat");
+        //$this->db->join("lista_articulos_busqueda_farmacia iar","fid.idarticulo = iar.idarticulo");
+        $this->db->where("fat.idfichaatencion", $this->idfichaatencion);
+        return $this->db->get();
+    }
+
+    public function obtener_Zona_Afectada_Ficha()
+    {
+        $this->db->select("faza.*");
+        $this->db->from("ficha_atencion_zona_afecada faza");
+        //$this->db->join("lista_articulos_busqueda_farmacia iar","fid.idarticulo = iar.idarticulo");
+        $this->db->where("faza.idfichaatencion", $this->idfichaatencion);
+        return $this->db->get();
+    }
+
+    /* Fin de Obtención de Datps */
+
+
 }
 
 

@@ -704,5 +704,146 @@ class Main extends CI_Controller
         echo json_encode($data);
                    
     }
+
+    /* Inicio de obtención de info para Edición */
+
+    public function obtener_Antecedentes_Ficha(){
+        $this->load->model("Fichaatencion_model");
+        $this->Fichaatencion_model->setidfichaatencion($this->input->post("idfichaatencion"));
+
+        $lista = $this->Fichaatencion_model->obtener_Antecedentes_Ficha();
+        $detalle = array(
+            "lista" => $lista->num_rows()? $lista->result() : array()
+        );
+
+        $data = array(
+            "status" => 200,
+            "data" => $detalle
+        );
+
+        echo json_encode($data);
+    }
+
+    public function obtener_Examen_Fisico_Ficha(){
+        $this->load->model("Fichaatencion_model");
+        $this->Fichaatencion_model->setidfichaatencion($this->input->post("idfichaatencion"));
+
+        $lista = $this->Fichaatencion_model->obtener_Examen_Fisico_Ficha();
+        $detalle = array(
+            "lista" => $lista->num_rows()? $lista->result() : array()
+        );
+
+        $data = array(
+            "status" => 200,
+            "data" => $detalle
+        );
+
+        echo json_encode($data);
+    }
+
+    public function obtener_Momento_Evaluacion_Ficha(){
+        $this->load->model("Fichaatencion_model");
+        $this->Fichaatencion_model->setidfichaatencion($this->input->post("idfichaatencion"));
+
+        $lista = $this->Fichaatencion_model->obtener_Momento_Evaluacion_Ficha();
+        $detalle = array(
+            "lista" => $lista->num_rows()? $lista->result() : array()
+        );
+
+        $data = array(
+            "status" => 200,
+            "data" => $detalle
+        );
+
+        echo json_encode($data);
+    }
+
+    public function obtener_Mecanismo_Lesion_Ficha(){
+        $this->load->model("Fichaatencion_model");
+        $this->Fichaatencion_model->setidfichaatencion($this->input->post("idfichaatencion"));
+
+        $lista = $this->Fichaatencion_model->obtener_Mecanismo_Lesion_Ficha();
+        $detalle = array(
+            "lista" => $lista->num_rows()? $lista->result() : array()
+        );
+
+        $data = array(
+            "status" => 200,
+            "data" => $detalle
+        );
+
+        echo json_encode($data);
+    }
+
+    public function obtener_CIE10_Ficha(){
+        $this->load->model("Fichaatencion_model");
+        $this->Fichaatencion_model->setidfichaatencion($this->input->post("idfichaatencion"));
+
+        $lista = $this->Fichaatencion_model->obtener_CIE10_Ficha();
+        $detalle = array(
+            "lista" => $lista->num_rows()? $lista->result() : array()
+        );
+
+        $data = array(
+            "status" => 200,
+            "data" => $detalle
+        );
+
+        echo json_encode($data);
+    }
+
+    public function obtener_Procedimientos_Ficha(){
+        $this->load->model("Fichaatencion_model");
+        $this->Fichaatencion_model->setidfichaatencion($this->input->post("idfichaatencion"));
+
+        $lista = $this->Fichaatencion_model->obtener_Procedimientos_Ficha();
+        $detalle = array(
+            "lista" => $lista->num_rows()? $lista->result() : array()
+        );
+
+        $data = array(
+            "status" => 200,
+            "data" => $detalle
+        );
+
+        echo json_encode($data);
+    }
+
+    public function obtener_Medicacion_Ficha(){
+        $this->load->model("Fichaatencion_model");
+        $this->Fichaatencion_model->setidfichaatencion($this->input->post("idfichaatencion"));
+
+        $lista = $this->Fichaatencion_model->obtener_Medicacion_Ficha();
+        $detalle = array(
+            "lista" => $lista->num_rows()? $lista->result() : array()
+        );
+
+        $data = array(
+            "status" => 200,
+            "data" => $detalle
+        );
+
+        echo json_encode($data);
+    }
+
+    public function obtener_Tripulacion_Ficha(){
+        $this->load->model("Fichaatencion_model");
+        $this->Fichaatencion_model->setidfichaatencion($this->input->post("idfichaatencion"));
+
+        $lista = $this->Fichaatencion_model->obtener_Tripulacion_Ficha();
+        $detalle = array(
+            "lista" => $lista->num_rows()? $lista->result() : array()
+        );
+
+        $data = array(
+            "status" => 200,
+            "data" => $detalle
+        );
+
+        echo json_encode($data);
+    }
+
+    /* Fin de Obtención de Datps */
+
 	
 }

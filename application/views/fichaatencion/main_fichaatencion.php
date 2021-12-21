@@ -79,11 +79,35 @@
 										<span aria-hidden="true">&times;</span>
 										</button>
 									</div>
+									<!--
+									<div class="col-12 col-md-offset-2 col-md-8 margin-auto">
+										<div class="stepwizard">
+											<div class="stepwizard-row setup-panel">
+												<div class="stepwizard-step">
+													<a href="#step-1" type="button" class="btn btn-circle active">1</a>
+													<p>Paso 1</p>
+												</div>
+												<div class="stepwizard-line"></div>
+												<div class="stepwizard-step">
+													<a href="#step-2" type="button" class="btn btn-circle disable">2</a>
+													<p>Paso 2</p>
+												</div>
+											</div>
+										</div>
+									</div>
+									-->									
 									<form id="formRegistrar" name="formRegistrar" method="post" action="" autocomplete="off" >
 										<div class="modal-body">
 											<input type="hidden" name="idfichaatencion" id="idfichaatencion">
+											<input type="hidden" name="idantedecentes" id="idantedecentes">
+											<input type="hidden" name="idexamen" id="idexamen">
+											<input type="hidden" name="idmecanismo" id="idmecanismo">
+											<input type="hidden" name="idprocedimiento" id="idprocedimiento">
+											<input type="hidden" name="idtripulacion" id="idtripulacion">
+
 											<input type="hidden" id="idEliminar" />
 											<input type="hidden" name="act" id="act">
+											<div class="setup-content" id="step-1">
 												<h3 class="box-title">Datos de la Base y la Unidad Operativa</h3>												
 												<label class="modal-label col-sm-5 col-form-label py-10"></label>
 												<div class="row">
@@ -117,7 +141,7 @@
 														<div class="form-group row">
 															<label class="modal-label col-sm-5 col-form-label py-10">Fecha de Ocurrencia: </label>
 															<div class="col-sm-5">
-																<input type="date" class="form-control" name="fecha_ocurrencia" id="fecha_ocurrencia" value=""/>
+																<input type="date" class="form-control" name="fecha_ocurrencia" id="fecha_ocurrencia"/>
 															</div>
 														</div>
 													</div>																					
@@ -204,6 +228,8 @@
 												</div>
 
 												<hr />
+											</div>
+											<div class="setup-content" id="step-2">
 												<h3 class="box-title">Datos de la Emergencia</h3>						
 												<label class="modal-label col-sm-5 col-form-label py-10"></label>
 												<div class="row">
@@ -1452,6 +1478,7 @@
 														</div>
 													</div>
 												</div>
+											</div>
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

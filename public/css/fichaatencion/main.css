@@ -1,3 +1,70 @@
+.stepwizard-step p {
+	margin-top: 10px;
+}
+
+.stepwizard-row {
+	display: table-row;
+}
+
+.stepwizard {
+	display: table;
+	width: 100%;
+	position: relative;
+}
+
+.stepwizard-step button[disabled] {
+	opacity: 1 !important;
+	filter: alpha(opacity = 100) !important;
+}
+
+.stepwizard-row:before {
+	top: 25px;
+	bottom: 0;
+	position: absolute;
+	content: " ";
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+	left: 25%;
+	height: 1px;
+	background-color: #ccc;
+	z-order: 0;
+}
+
+.stepwizard-step {
+	display: table-cell;
+	text-align: center;
+	position: relative;
+	z-index: 1;
+}
+
+.stepwizard-line {
+	top: 25px;
+	bottom: 0;
+	position: absolute;
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+	left: 25%;
+	height: 1px;
+	background-color: #ccc;
+	z-index: 0;
+}
+
+.stepwizard-step a {
+	-webkit-appearance: none;
+	background: white;
+	border: 1px solid #ccc;
+	width: 56px;
+	height: 56px;
+	line-height: 41px;
+	border-radius: 50%;
+}
+
+.stepwizard-step a.btn-primary {
+	background: #1976D2;
+}
+
 .custom-file{
   display: initial;
 }

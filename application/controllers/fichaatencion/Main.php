@@ -183,17 +183,23 @@ class Main extends CI_Controller
               
        $idtipodocumento_medico = $this->input->post("idtipodocumento_medico");
        $numero_documento_medico = $this->input->post("numero_documento_medico");
+       $nombre_completo_medico = $this->input->post("nombre_completo_medico");
        $idtipodocumento_enfermero = $this->input->post("idtipodocumento_enfermero");
        $numero_documento_enfermero = $this->input->post("numero_documento_enfermero");
+       $nombre_completo_enfermero = $this->input->post("nombre_completo_enfermero");
        $idtipodocumento_piloto = $this->input->post("idtipodocumento_piloto");
        $numero_documento_piloto = $this->input->post("numero_documento_piloto");
+       $nombre_completo_piloto = $this->input->post("nombre_completo_piloto");
        $idtipodocumento_medico_regulador = $this->input->post("idtipodocumento_medico_regulador");
        $numero_documento_medico_regulador = $this->input->post("numero_documento_medico_regulador");
+       $nombre_completo_medico_regulador = $this->input->post("nombre_completo_medico_regulador");
        $ficha_regulacion = $this->input->post("ficha_regulacion");
        $idtipodocumento_profesional_receptor = $this->input->post("idtipodocumento_profesional_receptor");
        $numero_documento_profesional_receptor = $this->input->post("numero_documento_profesional_receptor");
+       $nombre_completo_profesional_receptor = $this->input->post("nombre_completo_profesional_receptor");
        $idtipodocumento_medico_receptor = $this->input->post("idtipodocumento_medico_receptor");
        $numero_documento_medico_receptor = $this->input->post("numero_documento_medico_receptor");
+       $nombre_completo_medico_receptor = $this->input->post("nombre_completo_medico_receptor");
        $idrenipress = $this->input->post("idrenipress");
        $hora_llegada_es = $this->input->post("hora_llegada_es");
        $hora_recepcion_paciente = $this->input->post("hora_recepcion_paciente");
@@ -336,6 +342,13 @@ class Main extends CI_Controller
        $this->Fichaatencion_model->setnumero_licencia_piloto($numero_licencia_piloto);
        $this->Fichaatencion_model->setnumero_colegiatura_medico_regulador($numero_colegiatura_medico_regulador);
        $this->Fichaatencion_model->setnumero_colegiatura_medico_receptor($numero_colegiatura_medico_receptor);
+
+       $this->Fichaatencion_model->setnombre_completo_medico($nombre_completo_medico);
+       $this->Fichaatencion_model->setnombre_completo_enfermero($nombre_completo_enfermero);
+       $this->Fichaatencion_model->setnombre_completo_piloto($nombre_completo_piloto);
+       $this->Fichaatencion_model->setnombre_completo_medico_regulador($nombre_completo_medico_regulador);
+       $this->Fichaatencion_model->setnombre_completo_profesional_receptor($nombre_completo_profesional_receptor);
+       $this->Fichaatencion_model->setnombre_completo_medico_receptor($nombre_completo_medico_receptor);
               
        
        

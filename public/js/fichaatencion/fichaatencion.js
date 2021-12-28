@@ -68,453 +68,205 @@ function fichaatencion(URI) {
       });
     }
 
+  
   function buscar(valor) {
     var idEm = valor;
     $("#idem").val(idEm);
     var opt = '<option value="" class="lista">---Seleccione---</option>';
     $("#formRegistrar")[0].reset();
     $("#act").val(1);
-    $("#enviar").text("Actualizar");
+    //$("#enviar").text("Actualizar");
     $("#formRegistrar select").prop('selectedIndex',0);
-    
-    $.ajax({
-      type: 'POST',
-      url: URI + 'emergencias/main/extraeEmergencia',
-      data: {id:idEm},
-      dataType: 'json',
-      success: function (response) {
-        if (response.status === 200) {
-          const { data } = response;
-          const { priori } = response;
-          const { incid } = response;
-          const { tipo } = response;
-          const { prov } = response;
-          const { dist } = response; 
-          var k = 0; j = 0;
-          var reg, idreg, tipod;
-          var html = "";
-          var dep = (data.ubigeo).substr(0,2);
-          var pro = (data.ubigeo).substr(2,2);
-          var dis = (data.ubigeo).substr(4,2);
-          var fecha = (data.fecha_incidente).substr(0,10);
-          $("#fechaIncid").val(fecha);
-          
-          $("#departamento option").each(function(){
-            if ($(this).val() == dep ){        
-              $(this).prop("selected",true);
-            }
-          });
 
-          $("#tipoDoc option").each(function(){
-            if ($(this).val() == data.tipo_documento ){        
-              $(this).prop("selected",true);
-            }
-          });
-
-          html = opt;
-          for(k in incid) {
-            reg = incid[k].tipo_incidente;
-            idreg = incid[k].idtipoincidente;
-            if(idreg == data.idtipoincidente){
-              html += '<option value="'+idreg+'" selected>'+reg+'</option>';
-            }else
-              html += '<option value="' + idreg + '">' + reg + '</option>';
-          }
-          $("#incidente").html(html);
-          html = opt; k = 0;
-          for(k in tipo) {
-            reg = tipo[k].tipo_llamada;
-            idreg = tipo[k].idtipollamada;
-            if(idreg == data.idtipollamada){
-              html += '<option value="'+idreg+'" selected>'+reg+'</option>';
-            }else
-              html += '<option value="' + idreg + '">' + reg + '</option>';
-          }
-          $("#tipoLl").html(html);
-          html = opt; k = 0;
-          for(k in priori) {
-            reg = priori[k].prioridad_emergencia;
-            idreg = priori[k].idprioridademergencia;
-            if(idreg == data.idprioridademergencia){
-              html += '<option value="'+idreg+'" selected>'+reg+'</option>';
-            }else
-              html += '<option value="' + idreg + '">' + reg + '</option>';
-          }
-          $("#prioridad").html(html);
-          html = opt; k = 0;
-          for(k in prov) {
-            reg = prov[k].provincia;
-            idreg = prov[k].cod_pro;
-            if(idreg == pro){
-              html += '<option value="'+idreg+'" selected>'+reg+'</option>';
-            }else
-              html += '<option value="' + idreg + '">' + reg + '</option>';
-          }
-          $("#provincia").html(html);
-          html = opt; k = 0;
-          for(k in dist) {
-            reg = dist[k].distrito;
-            idreg = dist[k].cod_dis;
-            if(idreg == dis){
-              html += '<option value="'+idreg+'" selected>'+reg+'</option>';
-            }else
-              html += '<option value="' + idreg + '">' + reg + '</option>';
-          }
-          $("#distrito").html(html);
-          
-          $("#tlf2").val(data.telefono02);
-          if(data.es_paciente == 1)
-            $('#sipaciente').prop('checked', true);
-          if(data.masivo == 1)
-            $('#simasivo').prop('checked', true);
-          $("#direccion").val(data.direccion_emergencia);
-          $("#apellidos").val(data.apellidos);
-          $("#nombres").val(data.nombres);
-          $("#doc").val(data.numero_documento);
-          $("#doc").prop("disabled", true);
-          $("#direccion").val(data.direccion_emergencia);
-          $("#tlf").val(data.telefono01);
-          $("#btn-buscar").hide();
-          $("#datos").hide();          
-
-          var latitud = data.latitud;
-          var longitud = data.longitud;
-
-          $("#latitud").val(latitud);
-          $("#longitud").val(longitud);
-          
-          initialize(latitud,longitud,15, "");
-          var marker = new google.maps.Marker({
-            map: map,
-            anchorPoint: new google.maps.Point(0, -29),
-            draggable: true,
-            position: new google.maps.LatLng(latitud, longitud)
-          });
-          
-          google.maps.event.addListener(marker, "dragend", function (event) {
-
-            lat = marker.getPosition().lat();
-            lng = marker.getPosition().lng();
-        
-            document.getElementById("latitud").value = lat;
-            document.getElementById("longitud").value = lng;
-            });
-          
-            var distrito = document.getElementById("distrito");
-
-            google.maps.event
-              .addDomListener(
-                distrito,
-                "change",
-                function () {
-          
-                  var geocoder = new google.maps.Geocoder();
-          
-                  var distritoV = distrito.value;
-                  if (distritoV.length > 1) {
-                    var departamentoT = document
-                      .getElementById('departamento').options[document
-                        .getElementById('departamento').selectedIndex].text;
-                    var distritoT = document.getElementById('distrito').options[document
-                      .getElementById('distrito').selectedIndex].text;
-                    var ubicacion = distritoT + ", " + departamentoT
-                      + ", Peru";
-                    geocoder
-                      .geocode(
-                        {
-                          "address": ubicacion
-                        },
-                        function (data) {
-                          var lat = data[0].geometry.location
-                            .lat();
-                          var lng = data[0].geometry.location
-                            .lng();
-                          var origin = new google.maps.LatLng(
-                            lat, lng);
-                          document
-                            .getElementById('latitud').value = lat;
-                          document
-                            .getElementById('longitud').value = lng;
-                          marker.setPosition(origin);
-                          map.setCenter(origin);
-                          map.setZoom(15);
-          
-                        });
-                  }
-          
-                });
-
-        } else {
-          alert("No existe la Emergencia");
-        }
-      }
-    });
   }
 
-  var tableEnfermedades = $('.tableEnfermedades').DataTable({
-		"pageLength": 7,
-		"bLengthChange": false,
-		"info": false,
-		"ajax": {
-			url: URI + "public/js/fichaatencion/enfermedades.txt",
-			method: "POST"
-		}
-	});
-
-  
-  var tbListarmedicamentos = $('#tbListarmedicamentos').DataTable(
-		{
-			dom: '<"html5buttons"B>lTfgitp',
-			columns: [
-      {
-				"data": "descripcion"
-			},
-			{
-				"data": "dosis"
-			},
-			{
-				"data": "hora"
-			},
-			{
-				"data": "idarticulo"
-			}
-      
-			],
-			columnDefs: [{
-				"targets": [3],
-				"visible": false,
-				"searchable": false
-			}],
-			order: [],
-			buttons: [
-				{
-					extend: 'copy',
-					title: 'Lista de Momentos de Evaluación',
-					exportOptions: {
-						columns: [1]
-					}
-				},
-				{
-					extend: 'csv',
-					title: 'Lista de Momentos de Evaluación',
-					exportOptions: {
-						columns: [1]
-					}
-				},
-				{
-					extend: 'excel',
-					title: 'Lista de Momentos de Evaluación',
-					exportOptions: {
-						columns: [1]
-					}
-				},
-				{
-					extend: 'pdf',
-					title: 'Lista de Momentos de Evaluación',
-					orientation: 'landscape',
-					exportOptions: {
-						columns: [1]
-					}
-				},
-
-				{
-					extend: 'print',
-					title: 'Lista de Momentos de Evaluación',
-					customize: function (win) {
-						$(win.document.body).addClass('white-bg');
-						$(win.document.body).css('font-size', '10px');
-
-						$(win.document.body).find('table').addClass(
-							'compact').css('font-size', 'inherit');
-					}
-				}]
-
-		});
-
-    var table1 = $('#tbListar').DataTable(
-		{
-			dom: '<"html5buttons"B>lTfgitp',
-			columns: [
-      {
-				"data": "tipo_text"
-			},
-			{
-				"data": "temperaperatura"
-			},
-			{
-				"data": "frecuencia_cardiaca"
-			},
-			{
-				"data": "presion_arterial"
-			},
-			{
-				"data": "frecuencia_respiratoria"
-			},
-			{
-				"data": "saturacion_exigeno"
-			},
-			{
-				"data": "glicemia"
-			},
-			{
-				"data": "glasgow_ocular_text"
-			},
-			{
-				"data": "glasgow_verbal_text"
-			},
-			{
-				"data": "glasgow_motora_text"
-			},
-			{
-				"data": "glasgow_total"
-			},
-			{
-				"data": "pupilas_tipo_text"
-			},
-			{
-				"data": "pupilas_reactiva_text"
-			},
-      {
-				"data": "tipo"
-			},
-			{
-				"data": "glasgow_ocular"
-			},
-			{
-				"data": "glasgow_verbal"
-			},
-			{
-				"data": "glasgow_motora"
-			},
-			{
-				"data": "pupilas_tipo"
-			},
-			{
-				"data": "pupilas_reactiva"
-			},
-      
-			],
-			columnDefs: [{
-				"targets": [13,14,15,16,17,18],
-				"visible": false,
-				"searchable": false
-			}],
-			order: [[0, "desc"]],
-			buttons: [
-				{
-					extend: 'copy',
-					title: 'Lista de Momentos de Evaluación',
-					exportOptions: {
-						columns: [1]
-					}
-				},
-				{
-					extend: 'csv',
-					title: 'Lista de Momentos de Evaluación',
-					exportOptions: {
-						columns: [1]
-					}
-				},
-				{
-					extend: 'excel',
-					title: 'Lista de Momentos de Evaluación',
-					exportOptions: {
-						columns: [1]
-					}
-				},
-				{
-					extend: 'pdf',
-					title: 'Lista de Momentos de Evaluación',
-					orientation: 'landscape',
-					exportOptions: {
-						columns: [1]
-					}
-				},
-
-				{
-					extend: 'print',
-					title: 'Lista de Momentos de Evaluación',
-					customize: function (win) {
-						$(win.document.body).addClass('white-bg');
-						$(win.document.body).css('font-size', '10px');
-
-						$(win.document.body).find('table').addClass(
-							'compact').css('font-size', 'inherit');
-					}
-				}]
-
-		});
-
-    var table2 = $('#tbListar1').DataTable(
-      {
-        dom: '<"html5buttons"B>lTfgitp',
-        columns: [{
-          "data": "descripcion"
-        },
-        {
-          "data": "cie10"
-        },
-        {
-          data: null,
-          className: "center",
-          defaultContent: `<button class="btn btn-danger btn-circle actionDelete" title="ELIMINAR" type="button">
-            <i class="fa fa-trash" aria-hidden="true"></i>
-          </button>`,
-          orderable: false
-        }
-        ],
-        columnDefs: [{
-          "targets": [],
-          "visible": false,
-          "searchable": false
-        }],
-        order: [[0, "desc"]],
-        buttons: [
-          {
-            extend: 'copy',
-            title: 'Lista CIE10',
-            exportOptions: {
-              columns: [0,1]
-            }
-          },
-          {
-            extend: 'csv',
-            title: 'Lista CIE10',
-            exportOptions: {
-              columns: [0,1]
-            }
-          },
-          {
-            extend: 'excel',
-            title: 'Lista CIE10',
-            exportOptions: {
-              columns: [0,1]
-            }
-          },
-          {
-            extend: 'pdf',
-            title: 'Lista CIE10',
-            orientation: 'landscape',
-            exportOptions: {
-              columns: [0,1]
-            }
-          },
-  
-          {
-            extend: 'print',
-            title: 'Lista CIE10',
-            customize: function (win) {
-              $(win.document.body).addClass('white-bg');
-              $(win.document.body).css('font-size', '10px');
-  
-              $(win.document.body).find('table').addClass(
-                'compact').css('font-size', 'inherit');
-            }
-          }]
-  
-      });
-
     $(document).ready(function () {
+      
+      var tableEnfermedades = $('.tableEnfermedades').DataTable({
+        "pageLength": 7,
+        "bLengthChange": false,
+        "info": false,
+        "ajax": {
+          url: URI + "public/js/fichaatencion/enfermedades.txt",
+          method: "POST"
+        }
+      });
+    
+      
+      var tbListarmedicamentos = $('#tbListarmedicamentos').DataTable(
+        {
+          dom: '<"html5buttons"B>lTfgitp',
+          columns: [
+          {
+            "data": "descripcion"
+          },
+          {
+            "data": "dosis"
+          },
+          {
+            "data": "hora"
+          },
+          {
+            "data": "idarticulo"
+          }
+          
+          ],
+          columnDefs: [{
+            "targets": [3],
+            "visible": false,
+            "searchable": false
+          }],
+          order: [],
+          buttons: [
+            {
+              extend: 'excel',
+              title: 'Lista de Momentos de Evaluación',
+              exportOptions: {
+                columns: [1]
+              }
+            },
+            {
+              extend: 'pdf',
+              title: 'Lista de Momentos de Evaluación',
+              orientation: 'landscape',
+              exportOptions: {
+                columns: [1]
+              }
+            }]
+    
+        });
+    
+        var table1 = $('#tbListar').DataTable(
+        {
+          dom: '<"html5buttons"B>lTfgitp',
+          columns: [
+          {
+            "data": "tipo_text"
+          },
+          {
+            "data": "temperaperatura"
+          },
+          {
+            "data": "frecuencia_cardiaca"
+          },
+          {
+            "data": "presion_arterial"
+          },
+          {
+            "data": "frecuencia_respiratoria"
+          },
+          {
+            "data": "saturacion_exigeno"
+          },
+          {
+            "data": "glicemia"
+          },
+          {
+            "data": "glasgow_ocular_text"
+          },
+          {
+            "data": "glasgow_verbal_text"
+          },
+          {
+            "data": "glasgow_motora_text"
+          },
+          {
+            "data": "glasgow_total"
+          },
+          {
+            "data": "pupilas_tipo_text"
+          },
+          {
+            "data": "pupilas_reactiva_text"
+          },
+          {
+            "data": "tipo"
+          },
+          {
+            "data": "glasgow_ocular"
+          },
+          {
+            "data": "glasgow_verbal"
+          },
+          {
+            "data": "glasgow_motora"
+          },
+          {
+            "data": "pupilas_tipo"
+          },
+          {
+            "data": "pupilas_reactiva"
+          },
+          
+          ],
+          columnDefs: [{
+            "targets": [13,14,15,16,17,18],
+            "visible": false,
+            "searchable": false
+          }],
+          order: [[0, "desc"]],
+          buttons: [
+            {
+              extend: 'excel',
+              title: 'Lista de Momentos de Evaluación',
+              exportOptions: {
+                columns: [1]
+              }
+            },
+            {
+              extend: 'pdf',
+              title: 'Lista de Momentos de Evaluación',
+              orientation: 'landscape',
+              exportOptions: {
+                columns: [1]
+              }
+            }]
+    
+        });
+    
+        var table2 = $('#tbListar1').DataTable(
+          {
+            dom: '<"html5buttons"B>lTfgitp',
+            columns: [{
+              "data": "descripcion"
+            },
+            {
+              "data": "cie10"
+            },
+            {
+              data: null,
+              className: "center",
+              defaultContent: `<button class="btn btn-danger btn-circle actionDelete" title="ELIMINAR" type="button">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              </button>`,
+              orderable: false
+            }
+            ],
+            columnDefs: [{
+              "targets": [],
+              "visible": false,
+              "searchable": false
+            }],
+            order: [[0, "desc"]],
+            buttons: [
+              {
+                extend: 'excel',
+                title: 'Lista CIE10',
+                exportOptions: {
+                  columns: [0,1]
+                }
+              },
+              {
+                extend: 'pdf',
+                title: 'Lista CIE10',
+                orientation: 'landscape',
+                exportOptions: {
+                  columns: [0,1]
+                }
+              }]
+      
+          });
+
       var data;
 
       $(".btnMedicamentoss").on('click', function (event) {
@@ -731,16 +483,7 @@ function fichaatencion(URI) {
             tag: null
           }
         },
-        buttons: [{
-          extend: 'copy',
-          title: 'Lista General de Ficha de Atención',
-          exportOptions: { columns: [1, 2, 3, 4, 5] },
-        },
-        {
-          extend: 'csv',
-          title: 'Lista General de Ficha de Atención',
-          exportOptions: { columns: [1, 2, 3, 4, 5] },
-        },
+        buttons: [
         {
           extend: 'excel',
           title: 'Lista General de Ficha de Atención',
@@ -753,39 +496,25 @@ function fichaatencion(URI) {
           exportOptions: { columns: [1, 2, 3, 4, 5] },
         },
         {
-          extend: 'print',
-          title: 'Lista General de Ficha de Atención',
-          exportOptions: { columns: [1, 2, 3, 4, 5] },
-          customize: function (win) {
-            $(win.document.body).addClass('white-bg');
-            $(win.document.body).css('font-size', '10px');
-  
-            $(win.document.body).find('table')
-              .addClass('compact')
-              .css('font-size', 'inherit');
-  
-            var css = '@page { size: landscape; }',
-              head = win.document.head || win.document.getElementsByTagName('head')[0],
-              style = win.document.createElement('style');
-  
-            style.type = 'text/css';
-            style.media = 'print';
-  
-            if (style.styleSheet) {
-              style.styleSheet.cssText = css;
-            }
-            else {
-              style.appendChild(win.document.createTextNode(css));
-            }
-  
-            head.appendChild(style);
-          }
-        },
-        {
           extend: 'pageLength',
           titleAttr: 'Registros a Mostrar',
           className: 'selectTable'
-        }]
+        }],
+        language:
+        {
+           search: "Buscar:",
+           lengthMenu: "Mostrando _MENU_ registros por página",
+           zeroRecords: "Sin registros",
+           info: "Mostrando página  _PAGE_ de _PAGES_",
+           infoEmpty: "No hay registros disponibles",
+           infoFiltered: "(filrado de _MAX_ registros totales)",
+           paginate: {
+              first: "Primero",
+              last: "Último",
+              next: "Siguiente",
+              previous: "Anterior"
+           },
+        }
       }
   
     });
@@ -809,31 +538,6 @@ function fichaatencion(URI) {
 
     $("#btnClearFields").on("click", function () {
 
-      
-      /*
-      const rowTable = table1.rows().data().toArray();
-      console.log(rowTable);
-      console.log(rowTable.tipo);
-      */
-      //var tr = $(this).parents('tr');
-      //var row = tableEnfermedades.row(tr);
-      //var x = document.getElementById("tipo");
-      //formData.append("dosis", data1.map((item) => item.dosis).join('|'));
-      //$('#tipo option').removeAttr('selected');
-      //if (x.length > 0) {
-       // x.remove(x.length-1);
-      //}
-
-      //var selectobject = document.getElementById("tipo");
-      //for (var i=0; i<=selectobject.length; i++) {
-        //      console.log(i);
-          //if (selectobject.options[i].value == 'A')
-        //      selectobject.remove(0);
-        //      selectobject.remove(1);
-         //     selectobject.remove(2);
-          //    selectobject.remove(3);
-         //     console.log(selectobject.remove(i));
-     // }
      var valores = [];
      var sele = document.getElementById("tipo");
       var length = sele.options.length;
@@ -1280,16 +984,7 @@ function fichaatencion(URI) {
 
       });
 
-      /*
-      $(".actionEdit").on('click', function (event) {
-        const inp = this.previousSibling;
-        buscar(inp.value);
-        showModal(event, 'Editar Ficha Atención');
-      });
-
-      */
-
-      $("body").on("click", ".actionEdit", function (event) {
+      $("body").on("click", ".actionEdit", function () {
         var tr = $(this).parents('tr');
         var row = table.row(tr);
     
@@ -1334,7 +1029,7 @@ function fichaatencion(URI) {
           longitud,
           activo          
         } = data;
-    
+        /*
         $('#idfichaatencion').val(idfichaatencion);
         $('#idtiposeguro').val(idtiposeguro);
         $('#seguro').val(seguro);
@@ -1362,7 +1057,53 @@ function fichaatencion(URI) {
         $('#referencia').val(referencia); 
         $('#activo').val(activo); 
         //$('#fecha_nacimiento').val(fecha_nacimiento); 
+        */
+        $.ajax({
+          type: 'POST',
+          url: URI + 'fichaatencion/main/obtener_Principal_Ficha',
+          data: { idfichaatencion: idfichaatencion },
+          dataType: 'json',
+          success: function (response) {
+            const { data: { lista } } = response;
+            //console.log(lista[0]);
+            
+            $('#idfichaatencion').val(lista[0].idfichaatencion);
+            $('#idtiposeguro').val(lista[0].idtiposeguro);
+            $('#seguro').val(lista[0].seguro);
+            $('#idbase').val(lista[0].idbase);
+            $('#idambulancia').val(lista[0].idambulancia);
+            //$('#fecha_emision').val(fecha_emision); 
+            $('#fecha_ocurrencia').val(lista[0].fecha_ocurrencia); 
+            $('#despacho_ambulancia').val(lista[0].despacho_ambulancia); 
+            $('#salida_base').val(lista[0].salida_base); 
+            $('#llegada_foco').val(lista[0].llegada_foco); 
+            $('#salida_foco').val(lista[0].salida_foco); 
+            $('#llegada_base').val(lista[0].llegada_base); 
+            $('#lugar_atencion').val(lista[0].lugar_atencion); 
+            $('#motivo_emergencia').val(lista[0].motivo_emergencia);
+            $('#idprioridademergencia').val(lista[0].idprioridademergencia); 
+            $('#fallecido').val(lista[0].fallecido); 
+            $('#idtipodocumento').val(lista[0].idtipodocumento); 
+            $('#numero_documento').val(lista[0].numero_documento); 
+            $('#paciente_apellidos').val(lista[0].paciente_apellidos); 
+            $('#paciente_nombes').val(lista[0].paciente_nombes); 
+            $('#fecha_nacimiento').val(lista[0].fecha_nacimiento); 
+            $('#edad_actual').val(lista[0].edad_actual); 
+            $('#sexo').val(lista[0].sexo); 
+            $('#direccion_atencion').val(lista[0].direccion_atencion); 
+            $('#referencia').val(lista[0].referencia); 
+            $('#activo').val(lista[0].activo); 
+                 
+          }
+        });
 
+        if(sexo==1)
+        {
+          disableTxt();
+        }
+        else{
+          undisableTxt();
+        }        
 
         /*
         if (fecha_ocurrencia) {
@@ -1371,8 +1112,6 @@ function fichaatencion(URI) {
           //$('#fechaEmision').attr("disabled", "disabled");
         }
         */
-
-        showModal(event, 'Editar Ficha Atención');
         
         $.ajax({
           type: 'POST',
@@ -1381,7 +1120,7 @@ function fichaatencion(URI) {
           dataType: 'json',
           success: function (response) {
             const { data: { lista } } = response;
-            console.log(lista[0]);
+            //console.log(lista[0]);
             
               //$('.btn-buscar').attr("disabled", "disabled");
               $('#idantedecentes').val(lista[0].idantedecentes); 
@@ -1403,14 +1142,7 @@ function fichaatencion(URI) {
               $('#enfermedad_inicio').val(lista[0].enfermedad_inicio);
               $('#enfermedad_curso').val(lista[0].enfermedad_curso);
               $('#relato_evento').val(lista[0].relato_evento);
-              
-              if(sexo==1)
-              {
-                disableTxt();
-              }
-              else{
-                undisableTxt();
-              }           
+                 
           }
         });
 
@@ -1421,7 +1153,7 @@ function fichaatencion(URI) {
           dataType: 'json',
           success: function (response) {
             const { data: { lista } } = response;
-            console.log(lista[0]);
+            //console.log(lista[0]);
 
               $('#idexamen').val(lista[0].idexamen); 
               $('#examen_cabeza').val(lista[0].examen_cabeza); 
@@ -1446,7 +1178,7 @@ function fichaatencion(URI) {
             const { data: { lista } } = response;
             table1.clear();
             table1.rows.add(lista).draw();
-            console.log(lista[0]);
+           // console.log(lista[0]);
           }
         });
 
@@ -1457,7 +1189,7 @@ function fichaatencion(URI) {
           dataType: 'json',
           success: function (response) {
             const { data: { lista } } = response;
-            console.log(lista[0]);
+            //console.log(lista[0]);
 
               $('#idmecanismo').val(lista[0].idmecanismo); 
               $('#tipo_victima').val(lista[0].tipo_victima); 
@@ -1492,7 +1224,7 @@ function fichaatencion(URI) {
           dataType: 'json',
           success: function (response) {
             const { data: { lista } } = response;
-            console.log(lista[0]);
+            //console.log(lista[0]);
 
               $('#idprocedimiento').val(lista[0].idprocedimiento); 
               $('#oxigenoterapia').val(lista[0].oxigenoterapia); 
@@ -1547,26 +1279,32 @@ function fichaatencion(URI) {
           dataType: 'json',
           success: function (response) {
             const { data: { lista } } = response;
-            console.log(lista[0]);
+            //console.log(lista[0]);
 
             $('#idtripulacion').val(lista[0].idtripulacion);
             $('#idtipodocumento_medico').val(lista[0].idtipodocumento_medico);
             $('#numero_documento_medico').val(lista[0].numero_documento_medico);
+            $('#nombre_completo_medico').val(lista[0].nombre_completo_medico);
             $('#numero_colegiatura_medico').val(lista[0].numero_colegiatura_medico);
             $('#idtipodocumento_enfermero').val(lista[0].idtipodocumento_enfermero);
             $('#numero_documento_enfermero').val(lista[0].numero_documento_enfermero);
+            $('#nombre_completo_enfermero').val(lista[0].nombre_completo_enfermero);
             $('#numero_colegiatura_enfermero').val(lista[0].numero_colegiatura_enfermero);
             $('#idtipodocumento_piloto').val(lista[0].idtipodocumento_piloto);
             $('#numero_documento_piloto').val(lista[0].numero_documento_piloto);
+            $('#nombre_completo_piloto').val(lista[0].nombre_completo_piloto);
             $('#numero_licencia_piloto').val(lista[0].numero_licencia_piloto);
             $('#idtipodocumento_medico_regulador').val(lista[0].idtipodocumento_medico_regulador);
             $('#numero_documento_medico_regulador').val(lista[0].numero_documento_medico_regulador);
+            $('#nombre_completo_medico_regulador').val(lista[0].nombre_completo_medico_regulador);
             $('#numero_colegiatura_medico_regulador').val(lista[0].numero_colegiatura_medico_regulador);
             $('#ficha_regulacion').val(lista[0].ficha_regulacion);
             $('#idtipodocumento_profesional_receptor').val(lista[0].idtipodocumento_profesional_receptor);
             $('#numero_documento_profesional_receptor').val(lista[0].numero_documento_profesional_receptor);
+            $('#nombre_completo_profesional_receptor').val(lista[0].nombre_completo_profesional_receptor);
             $('#idtipodocumento_medico_receptor').val(lista[0].idtipodocumento_medico_receptor);
             $('#numero_documento_medico_receptor').val(lista[0].numero_documento_medico_receptor);
+            $('#nombre_completo_medico_receptor').val(lista[0].nombre_completo_medico_receptor);
             $('#numero_colegiatura_medico_receptor').val(lista[0].numero_colegiatura_medico_receptor);
             $('#idrenipress').val(lista[0].idrenipress);
             $('#hora_llegada_es').val(lista[0].hora_llegada_es);
@@ -1579,6 +1317,9 @@ function fichaatencion(URI) {
           }
         });   
 
+        const inp = this.previousSibling;
+        console.log(inp.value);
+        //buscar(inp.value);
         showModal(event, 'Editar Ficha Atención');
       });
       
@@ -1599,18 +1340,18 @@ function fichaatencion(URI) {
             beforeSend: function () { $("#btn-buscarmed").html('<i class="fa fa-spinner fa-pulse"></i>'); },
             success: function (response) {            
               if(response.data){
-                if(!$("#nombapemed").prop("readonly"))
-                  $("#nombapemed").prop("readonly", true);
+                if(!$("#nombre_completo_medico").prop("readonly"))
+                  $("#nombre_completo_medico").prop("readonly", true);
                 const { data } = response;
                 const datos = data.attributes;
                 $("#btn-buscarmed").html('<i class="fa fa-search" aria-hidden="true"></i>');
-                $("#nombapemed").val(datos.nombres+ " " +datos.apellido_paterno+ " " +datos.apellido_materno) ;
+                $("#nombre_completo_medico").val(datos.nombres+ " " +datos.apellido_paterno+ " " +datos.apellido_materno) ;
                 $("#datos").show();
               }else{
                 $("#btn-buscarmed").html('<i class="fa fa-search" aria-hidden="true"></i>&nbsp;&nbsp;Buscar');
                 alert(response.errors[0].detail);
-                if($("#nombapemed").prop("readonly"))
-                  $("#nombapemed").prop("readonly", false);
+                if($("#nombre_completo_medico").prop("readonly"))
+                  $("#nombre_completo_medico").prop("readonly", false);
                 if($("#datos").show())
                   $("#datos").hide();
               }
@@ -1636,18 +1377,18 @@ function fichaatencion(URI) {
             beforeSend: function () { $("#btn-buscarenf").html('<i class="fa fa-spinner fa-pulse"></i>'); },
             success: function (response) {            
               if(response.data){
-                if(!$("#nombapeenf").prop("readonly"))
-                  $("#nombapeenf").prop("readonly", true);
+                if(!$("#nombre_completo_enfermero").prop("readonly"))
+                  $("#nombre_completo_enfermero").prop("readonly", true);
                 const { data } = response;
                 const datos = data.attributes;
                 $("#btn-buscarenf").html('<i class="fa fa-search" aria-hidden="true"></i>');
-                $("#nombapeenf").val(datos.nombres+ " " +datos.apellido_paterno+ " " +datos.apellido_materno) ;
+                $("#nombre_completo_enfermero").val(datos.nombres+ " " +datos.apellido_paterno+ " " +datos.apellido_materno) ;
                 $("#datos").show();
               }else{
                 $("#btn-buscarenf").html('<i class="fa fa-search" aria-hidden="true"></i>&nbsp;&nbsp;Buscar');
                 alert(response.errors[0].detail);
-                if($("#nombapeenf").prop("readonly"))
-                  $("#nombapeenf").prop("readonly", false);
+                if($("#nombre_completo_enfermero").prop("readonly"))
+                  $("#nombre_completo_enfermero").prop("readonly", false);
                 if($("#datos").show())
                   $("#datos").hide();
               }
@@ -1673,18 +1414,18 @@ function fichaatencion(URI) {
             beforeSend: function () { $("#btn-buscarpil").html('<i class="fa fa-spinner fa-pulse"></i>'); },
             success: function (response) {            
               if(response.data){
-                if(!$("#nombapepil").prop("readonly"))
-                  $("#nombapepil").prop("readonly", true);
+                if(!$("#nombre_completo_piloto").prop("readonly"))
+                  $("#nombre_completo_piloto").prop("readonly", true);
                 const { data } = response;
                 const datos = data.attributes;
                 $("#btn-buscarpil").html('<i class="fa fa-search" aria-hidden="true"></i>');
-                $("#nombapepil").val(datos.nombres+ " " +datos.apellido_paterno+ " " +datos.apellido_materno) ;
+                $("#nombre_completo_piloto").val(datos.nombres+ " " +datos.apellido_paterno+ " " +datos.apellido_materno) ;
                 $("#datos").show();
               }else{
                 $("#btn-buscarpil").html('<i class="fa fa-search" aria-hidden="true"></i>&nbsp;&nbsp;Buscar');
                 alert(response.errors[0].detail);
-                if($("#nombapepil").prop("readonly"))
-                  $("#nombapepil").prop("readonly", false);
+                if($("#nombre_completo_piloto").prop("readonly"))
+                  $("#nombre_completo_piloto").prop("readonly", false);
                 if($("#datos").show())
                   $("#datos").hide();
               }
@@ -1710,18 +1451,18 @@ function fichaatencion(URI) {
             beforeSend: function () { $("#btn-buscarmedreg").html('<i class="fa fa-spinner fa-pulse"></i>'); },
             success: function (response) {            
               if(response.data){
-                if(!$("#nombapemedreg").prop("readonly"))
-                  $("#nombapemedreg").prop("readonly", true);
+                if(!$("#nombre_completo_medico_regulador").prop("readonly"))
+                  $("#nombre_completo_medico_regulador").prop("readonly", true);
                 const { data } = response;
                 const datos = data.attributes;
                 $("#btn-buscarmedreg").html('<i class="fa fa-search" aria-hidden="true"></i>');
-                $("#nombapemedreg").val(datos.nombres+ " " +datos.apellido_paterno+ " " +datos.apellido_materno) ;
+                $("#nombre_completo_medico_regulador").val(datos.nombres+ " " +datos.apellido_paterno+ " " +datos.apellido_materno) ;
                 $("#datos").show();
               }else{
                 $("#btn-buscarmedreg").html('<i class="fa fa-search" aria-hidden="true"></i>&nbsp;&nbsp;Buscar');
                 alert(response.errors[0].detail);
-                if($("#nombapemedreg").prop("readonly"))
-                  $("#nombapemedreg").prop("readonly", false);
+                if($("#nombre_completo_medico_regulador").prop("readonly"))
+                  $("#nombre_completo_medico_regulador").prop("readonly", false);
                 if($("#datos").show())
                   $("#datos").hide();
               }
@@ -1747,18 +1488,18 @@ function fichaatencion(URI) {
             beforeSend: function () { $("#btn-buscarprofr").html('<i class="fa fa-spinner fa-pulse"></i>'); },
             success: function (response) {            
               if(response.data){
-                if(!$("#nombapeprorec").prop("readonly"))
-                  $("#nombapeprorec").prop("readonly", true);
+                if(!$("#nombre_completo_profesional_receptor").prop("readonly"))
+                  $("#nombre_completo_profesional_receptor").prop("readonly", true);
                 const { data } = response;
                 const datos = data.attributes;
                 $("#btn-buscarprofr").html('<i class="fa fa-search" aria-hidden="true"></i>');
-                $("#nombapeprorec").val(datos.nombres+ " " +datos.apellido_paterno+ " " +datos.apellido_materno) ;
+                $("#nombre_completo_profesional_receptor").val(datos.nombres+ " " +datos.apellido_paterno+ " " +datos.apellido_materno) ;
                 $("#datos").show();
               }else{
                 $("#btn-buscarprofr").html('<i class="fa fa-search" aria-hidden="true"></i>&nbsp;&nbsp;Buscar');
                 alert(response.errors[0].detail);
-                if($("#nombapeprorec").prop("readonly"))
-                  $("#nombapeprorec").prop("readonly", false);
+                if($("#nombre_completo_profesional_receptor").prop("readonly"))
+                  $("#nombre_completo_profesional_receptor").prop("readonly", false);
                 if($("#datos").show())
                   $("#datos").hide();
               }
@@ -1784,18 +1525,18 @@ function fichaatencion(URI) {
             beforeSend: function () { $("#btn-buscarmedrec").html('<i class="fa fa-spinner fa-pulse"></i>'); },
             success: function (response) {            
               if(response.data){
-                if(!$("#nombapemedrec").prop("readonly"))
-                  $("#nombapemedrec").prop("readonly", true);
+                if(!$("#nombre_completo_medico_receptor").prop("readonly"))
+                  $("#nombre_completo_medico_receptor").prop("readonly", true);
                 const { data } = response;
                 const datos = data.attributes;
                 $("#btn-buscarmedrec").html('<i class="fa fa-search" aria-hidden="true"></i>');
-                $("#nombapemedrec").val(datos.nombres+ " " +datos.apellido_paterno+ " " +datos.apellido_materno) ;
+                $("#nombre_completo_medico_receptor").val(datos.nombres+ " " +datos.apellido_paterno+ " " +datos.apellido_materno) ;
                 $("#datos").show();
               }else{
                 $("#btn-buscarmedrec").html('<i class="fa fa-search" aria-hidden="true"></i>&nbsp;&nbsp;Buscar');
                 alert(response.errors[0].detail);
-                if($("#nombapemedrec").prop("readonly"))
-                  $("#nombapemedrec").prop("readonly", false);
+                if($("#nombre_completo_medico_receptor").prop("readonly"))
+                  $("#nombre_completo_medico_receptor").prop("readonly", false);
                 if($("#datos").show())
                   $("#datos").hide();
               }

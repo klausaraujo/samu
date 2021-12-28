@@ -116,17 +116,23 @@ class Fichaatencion_model extends CI_Model
     
     private $idtipodocumento_medico;
     private $numero_documento_medico;
+    private $nombre_completo_medico;
     private $idtipodocumento_enfermero;
     private $numero_documento_enfermero;
+    private $nombre_completo_enfermero;    
     private $idtipodocumento_piloto;
     private $numero_documento_piloto;
+    private $nombre_completo_piloto;
     private $idtipodocumento_medico_regulador;
     private $numero_documento_medico_regulador;
+    private $nombre_completo_medico_regulador;
     private $ficha_regulacion;
     private $idtipodocumento_profesional_receptor;
     private $numero_documento_profesional_receptor;
+    private $nombre_completo_profesional_receptor;
     private $idtipodocumento_medico_receptor;
     private $numero_documento_medico_receptor;
+    private $nombre_completo_medico_receptor;
     private $idrenipress;
     private $hora_llegada_es;
     private $hora_recepcion_paciente;
@@ -259,17 +265,23 @@ class Fichaatencion_model extends CI_Model
         
     public function setidtipodocumento_medico($data){$this->idtipodocumento_medico=$this->db->escape_str($data);}
     public function setnumero_documento_medico($data){$this->numero_documento_medico=$this->db->escape_str($data);}
+    public function setnombre_completo_medico($data){$this->nombre_completo_medico=$this->db->escape_str($data);}
     public function setidtipodocumento_enfermero($data){$this->idtipodocumento_enfermero=$this->db->escape_str($data);}
     public function setnumero_documento_enfermero($data){$this->numero_documento_enfermero=$this->db->escape_str($data);}
+    public function setnombre_completo_enfermero($data){$this->nombre_completo_enfermero=$this->db->escape_str($data);}
     public function setidtipodocumento_piloto($data){$this->idtipodocumento_piloto=$this->db->escape_str($data);}
     public function setnumero_documento_piloto($data){$this->numero_documento_piloto=$this->db->escape_str($data);}
+    public function setnombre_completo_piloto($data){$this->nombre_completo_piloto=$this->db->escape_str($data);}
     public function setidtipodocumento_medico_regulador($data){$this->idtipodocumento_medico_regulador=$this->db->escape_str($data);}
     public function setnumero_documento_medico_regulador($data){$this->numero_documento_medico_regulador=$this->db->escape_str($data);}
+    public function setnombre_completo_medico_regulador($data){$this->nombre_completo_medico_regulador=$this->db->escape_str($data);}
     public function setficha_regulacion($data){$this->ficha_regulacion=$this->db->escape_str($data);}
     public function setidtipodocumento_profesional_receptor($data){$this->idtipodocumento_profesional_receptor=$this->db->escape_str($data);}
     public function setnumero_documento_profesional_receptor($data){$this->numero_documento_profesional_receptor=$this->db->escape_str($data);}
+    public function setnombre_completo_profesional_receptor($data){$this->nombre_completo_profesional_receptor=$this->db->escape_str($data);}
     public function setidtipodocumento_medico_receptor($data){$this->idtipodocumento_medico_receptor=$this->db->escape_str($data);}
     public function setnumero_documento_medico_receptor($data){$this->numero_documento_medico_receptor=$this->db->escape_str($data);}
+    public function setnombre_completo_medico_receptor($data){$this->nombre_completo_medico_receptor=$this->db->escape_str($data);}
     public function setidrenipress($data){$this->idrenipress=$this->db->escape_str($data);}
     public function sethora_llegada_es($data){$this->hora_llegada_es=$this->db->escape_str($data);}
     public function sethora_recepcion_paciente($data){$this->hora_recepcion_paciente=$this->db->escape_str($data);}
@@ -566,17 +578,23 @@ class Fichaatencion_model extends CI_Model
             "idfichaatencion" => $this->idfichaatencion,
             "idtipodocumento_medico" => $this->idtipodocumento_medico,
             "numero_documento_medico" => $this->numero_documento_medico,
+            "nombre_completo_medico" => $this->nombre_completo_medico,
             "idtipodocumento_enfermero" => $this->idtipodocumento_enfermero,
             "numero_documento_enfermero" => $this->numero_documento_enfermero,
+            "nombre_completo_enfermero" => $this->nombre_completo_enfermero,
             "idtipodocumento_piloto" => $this->idtipodocumento_piloto,
             "numero_documento_piloto" => $this->numero_documento_piloto,
+            "nombre_completo_piloto" => $this->nombre_completo_piloto,
             "idtipodocumento_medico_regulador" => $this->idtipodocumento_medico_regulador,
             "numero_documento_medico_regulador" => $this->numero_documento_medico_regulador,
+            "nombre_completo_medico_regulador" => $this->nombre_completo_medico_regulador,
             "ficha_regulacion" => $this->ficha_regulacion,
             "idtipodocumento_profesional_receptor" => $this->idtipodocumento_profesional_receptor,
             "numero_documento_profesional_receptor" => $this->numero_documento_profesional_receptor,
+            "nombre_completo_profesional_receptor" => $this->nombre_completo_profesional_receptor,
             "idtipodocumento_medico_receptor" => $this->idtipodocumento_medico_receptor,
             "numero_documento_medico_receptor" => $this->numero_documento_medico_receptor,
+            "nombre_completo_medico_receptor" => $this->nombre_completo_medico_receptor,
             "idrenipress" => $this->idrenipress,
             "hora_llegada_es" => $this->hora_llegada_es,
             "hora_recepcion_paciente" => $this->hora_recepcion_paciente,

@@ -707,6 +707,23 @@ class Main extends CI_Controller
 
     /* Inicio de obtención de info para Edición */
 
+    public function obtener_Principal_Ficha(){
+        $this->load->model("Fichaatencion_model");
+        $this->Fichaatencion_model->setidfichaatencion($this->input->post("idfichaatencion"));
+
+        $lista = $this->Fichaatencion_model->obtener_Principal_Ficha();
+        $detalle = array(
+            "lista" => $lista->num_rows()? $lista->result() : array()
+        );
+
+        $data = array(
+            "status" => 200,
+            "data" => $detalle
+        );
+
+        echo json_encode($data);
+    }
+
     public function obtener_Antecedentes_Ficha(){
         $this->load->model("Fichaatencion_model");
         $this->Fichaatencion_model->setidfichaatencion($this->input->post("idfichaatencion"));

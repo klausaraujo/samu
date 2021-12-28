@@ -1182,7 +1182,7 @@
 														<div class="form-group row">
 															<label class="modal-label col-sm-3 col-form-label py-10">Nombres y Apellidos: </label>
 															<div class="col-sm-8">
-																<input type="text" class="form-control" name="nombapemed" id="nombapemed" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+																<input type="text" class="form-control" name="nombre_completo_medico" id="nombre_completo_medico" onkeyup="javascript:this.value=this.value.toUpperCase();" />
 															</div>
 														</div>
 													</div>
@@ -1227,7 +1227,7 @@
 														<div class="form-group row">
 															<label class="modal-label col-sm-3 col-form-label py-10">Nombres y Apellidos: </label>
 															<div class="col-sm-8">
-																<input type="text" class="form-control" name="nombapeenf" id="nombapeenf" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+																<input type="text" class="form-control" name="nombre_completo_enfermero" id="nombre_completo_enfermero" onkeyup="javascript:this.value=this.value.toUpperCase();" />
 															</div>
 														</div>
 													</div>
@@ -1271,7 +1271,7 @@
 														<div class="form-group row">
 															<label class="modal-label col-sm-3 col-form-label py-10">Nombres y Apellidos: </label>
 															<div class="col-sm-8">
-																<input type="text" class="form-control" name="nombapepil" id="nombapepil" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+																<input type="text" class="form-control" name="nombre_completo_piloto" id="nombre_completo_piloto" onkeyup="javascript:this.value=this.value.toUpperCase();" />
 															</div>
 														</div>
 													</div>	
@@ -1315,7 +1315,7 @@
 														<div class="form-group row">
 															<label class="modal-label col-sm-3 col-form-label py-10">Nombres y Apellidos: </label>
 															<div class="col-sm-8">
-																<input type="text" class="form-control" name="nombapemedreg" id="nombapemedreg" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+																<input type="text" class="form-control" name="nombre_completo_medico_regulador" id="nombre_completo_medico_regulador" onkeyup="javascript:this.value=this.value.toUpperCase();" />
 															</div>
 														</div>
 													</div>
@@ -1375,7 +1375,7 @@
 														<div class="form-group row">
 															<label class="modal-label col-sm-3 col-form-label py-10">Nombres y Apellidos: </label>
 															<div class="col-sm-8">
-																<input type="text" class="form-control" name="nombapeprorec" id="nombapeprorec" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+																<input type="text" class="form-control" name="nombre_completo_profesional_receptor" id="nombre_completo_profesional_receptor" onkeyup="javascript:this.value=this.value.toUpperCase();" />
 															</div>
 														</div>
 													</div>	
@@ -1419,7 +1419,7 @@
 														<div class="form-group row">
 															<label class="modal-label col-sm-3 col-form-label py-10">Nombres y Apellidos: </label>
 															<div class="col-sm-8">
-																<input type="text" class="form-control" name="nombapemedrec" id="nombapemedrec" onkeyup="javascript:this.value=this.value.toUpperCase();" />
+																<input type="text" class="form-control" name="nombre_completo_medico_receptor" id="nombre_completo_medico_receptor" onkeyup="javascript:this.value=this.value.toUpperCase();" />
 															</div>
 														</div>
 													</div>
@@ -1482,7 +1482,7 @@
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-											<button id="enviar" type="submit" class="btn btn-primary">Guardar</button>
+											<button type="submit" class="btn btn-primary">Guardar</button>
 										</div>	
 									</form>
 								</div>

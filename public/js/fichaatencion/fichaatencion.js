@@ -415,18 +415,38 @@ function fichaatencion(URI) {
       $("#tableMedicamentosModal").modal('hide');
       });
 
+      /*
+      $('body').on('click', 'td button.actionDeleteL', function (e) {
+        debugger;
+        e.preventDefault();
+        table2.row($(this).parents('tr')).remove().draw(false);
+        //const data = table2.rows().data();
+        /*if (data.length === 0) {
+          $('#almacen').removeAttr("disabled");
+          $('.btn-buscar').removeAttr("disabled");
+        }
+      });
+      */
+    
       $("html, body").on("click", ".actionDeleteL", function () {
+       
+        debugger;
+        e.preventDefault();
+        table2.row($(this).parents('tr')).remove().draw(false);
+        
+        /*
         var tr = $(this).parents('tr');
         var row = table2.row(tr);
         data = row.data();
         console.log(data);
-  
+        
         $("#idEliminar").val(data.cie10);
         $("#condicionModal").modal("show");
         $("#condicionModal .modal-title").text("Eliminar CIE10");
         $("#condicionModal .modal-body p").html("Est\xe1 seguro de querer eliminar el CIE10 <b> " + data.cie10 + "</b>");
-  
+        */
       });
+      
 
     var data;
     var validate = 1;

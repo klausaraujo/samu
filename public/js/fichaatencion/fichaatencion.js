@@ -647,7 +647,7 @@ function fichaatencion(URI) {
       $("#paciente_apellidos").prop("readonly", false);
       $("#fecha_nacimiento").prop("readonly", false); 
       $("#edad_actual").prop("readonly", false);
-      $("#sexo").attr("disabled", false); 
+      $("#sexo").attr("readonly", false);
 
       document.getElementById('numero_documento').value = '';
       document.getElementById('paciente_apellidos').value = '';
@@ -682,7 +682,7 @@ function fichaatencion(URI) {
               if(!$("#edad_actual").prop("readonly"))
                 $("#edad_actual").prop("readonly", true);
               //if(!$("#sexo").prop("readonly"))
-                $("#sexo").attr("disabled", true); 
+                $("#sexo").attr("readonly", true); 
               const { data } = response;
               const datos = data.attributes;
               $("#btn-buscar").html('<i class="fa fa-search" aria-hidden="true"></i>');
@@ -759,13 +759,15 @@ function fichaatencion(URI) {
       },
       */
       submitHandler: function (form, event) {
-        
+        //debugger;
+        /*
         if (listaCIE10.length == 0) {
 					return false;
 				}
         if (listaMomentoEvaluacion.length == 0) {
 					return false;
-				}
+				}*/
+        
         var formData = new FormData(document.getElementById("formRegistrar"));
       
         var cie10lista = '';
@@ -985,14 +987,15 @@ function fichaatencion(URI) {
       });
 
       $("body").on("click", ".actionEdit", function () {
+        
         var tr = $(this).parents('tr');
         var row = table.row(tr);
     
         index = row.index();
         data = row.data();
     
-        console.log(index);
-        console.log(data);
+        //console.log(index);
+        //console.log(data);
         
         //validate.resetForm();
         
@@ -1029,8 +1032,9 @@ function fichaatencion(URI) {
           longitud,
           activo          
         } = data;
-        /*
+        
         $('#idfichaatencion').val(idfichaatencion);
+        /*
         $('#idtiposeguro').val(idtiposeguro);
         $('#seguro').val(seguro);
         $('#idbase').val(idbase);
@@ -1065,8 +1069,9 @@ function fichaatencion(URI) {
           dataType: 'json',
           success: function (response) {
             const { data: { lista } } = response;
-            //console.log(lista[0]);
-            
+            console.log("Retorno de Data");
+            console.log(lista[0]);
+            //debugger;
             $('#idfichaatencion').val(lista[0].idfichaatencion);
             $('#idtiposeguro').val(lista[0].idtiposeguro);
             $('#seguro').val(lista[0].seguro);
@@ -1093,6 +1098,9 @@ function fichaatencion(URI) {
             $('#direccion_atencion').val(lista[0].direccion_atencion); 
             $('#referencia').val(lista[0].referencia); 
             $('#activo').val(lista[0].activo); 
+            $('#departamento').val((lista[0].ubigeo).substr(0,2));
+            $('#provincia').val((lista[0].ubigeo).substr(2,2));
+            $('#distrito').val((lista[0].ubigeo).substr(4,5)); 
                  
           }
         });

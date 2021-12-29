@@ -349,18 +349,30 @@ class Main extends CI_Controller
        $this->Fichaatencion_model->setnombre_completo_medico_regulador($nombre_completo_medico_regulador);
        $this->Fichaatencion_model->setnombre_completo_profesional_receptor($nombre_completo_profesional_receptor);
        $this->Fichaatencion_model->setnombre_completo_medico_receptor($nombre_completo_medico_receptor);
-              
-       
-       
-       //$fotografia = $_FILES["file"];
-       
+
         $status = 500;
         $message = "Error al registrar, vuelva a intentar";
         
         if ($idfichaatencion > 0) {
             if ($this->Fichaatencion_model->actualizarFichaAtencion()) {
+                
+                $this->Fichaatencion_model->actualizarFichaAtencion_antecedentes();
+                $this->Fichaatencion_model->actualizarFichaAtencion_examen_fisico();
+                $this->Fichaatencion_model->actualizarFichaAtencion_mecanismo_lesion();
+                $this->Fichaatencion_model->actualizarFichaAtencion_procedimientos();
+                $this->Fichaatencion_model->actualizarFichaAtencion_tripulacion();
+
+                $rptaeliminarMomeva = $this->Fichaatencion_model->eliminarMomentoEvaluacion();
+                $this->crearMomentoEvaluacion($idfichaatencion, $tipo, $temperaperatura, $frecuencia_cardiaca, $presion_arterial, $frecuencia_respiratoria,
+                $saturacion_exigeno, $glicemia, $glasgow_ocular, $glasgow_verbal, $glasgow_motora, $pupilas_tipo, $pupilas_reactiva);
+                $rptaeliminarCIE10 = $this->Fichaatencion_model->eliminarCIE10();
+                $this->crearCIE10($cie10lista, $id);
+                $rptaeliminarFichaMed = $this->Fichaatencion_model->eliminarFichaMedicamentos();
+                $this->crearFichaMedicamentos($id, $dosis, $hora,$idarticulo);
+
                 $status = 200;
                 $message = "Ficha de Atención actualizada exitosamente";
+
             }
         } else {
             
@@ -873,7 +885,7 @@ class Main extends CI_Controller
         echo json_encode($data);
     }
 
-    /* Fin de Obtención de Datps */
+    /* Fin de Obtención de Datos */
 
 	
 }

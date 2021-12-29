@@ -631,6 +631,198 @@ class Fichaatencion_model extends CI_Model
         }
     }
 
+    public function actualizarFichaAtencion()
+    {
+        $data = array(
+
+            "idtiposeguro" => $this->idtiposeguro,
+            "seguro" => $this->seguro,
+            "idbase" => $this->idbase,
+            "idambulancia" => $this->idambulancia,
+            "fecha_emision" => $this->fecha_emision,
+            "fecha_ocurrencia" => $this->fecha_ocurrencia,
+            "despacho_ambulancia" => $this->despacho_ambulancia,
+            "salida_base" => $this->salida_base,
+            "llegada_foco" => $this->llegada_foco,
+            "salida_foco" => $this->salida_foco,
+            "llegada_base" => $this->llegada_base,
+            "lugar_atencion" => $this->lugar_atencion,
+            "motivo_emergencia" => $this->motivo_emergencia,
+            "idprioridademergencia" => $this->idprioridademergencia,
+            "fallecido" => $this->fallecido,
+            "idtipodocumento" => $this->idtipodocumento,
+            "numero_documento" => $this->numero_documento,
+            "paciente_apellidos" => $this->paciente_apellidos,
+            "paciente_nombes" => $this->paciente_nombes,
+            "fecha_nacimiento" => $this->fecha_nacimiento,
+            "edad_actual" => $this->edad_actual,
+            "sexo" => $this->sexo,
+            "direccion_atencion" => $this->direccion_atencion,
+            "ubigeo" => $this->ubigeo,
+            "referencia" => $this->referencia,
+            "latitud" => $this->latitud,
+            "longitud" => $this->longitud
+        );
+        $this->db->where("idfichaatencion",$this->idfichaatencion);
+        $result = $this->db->update("ficha_atencion", $data);
+        if($result) return true;
+        else return false;
+    }
+
+    public function actualizarFichaAtencion_antecedentes()
+    {
+        $data = array(
+
+            "patologias_previas" => $this->patologias_previas,
+            "fur" => $this->fur,
+            "fpp" => $this->fpp,
+            "medicacion" => $this->medicacion,
+            "fug" => $this->fug,
+            "g" => $this->g,
+            "p1" => $this->p1,
+            "p2" => $this->p2,
+            "p3" => $this->p3,
+            "p4" => $this->p4,
+            "alergias" => $this->alergias,
+            "otros" => $this->otros,
+            "enfermedad_dias" => $this->enfermedad_dias,
+            "enfermedad_horas" => $this->enfermedad_horas,
+            "enfermedad_minutos" => $this->enfermedad_minutos,
+            "enfermedad_inicio" => $this->enfermedad_inicio,
+            "enfermedad_curso" => $this->enfermedad_curso,
+            "relato_evento" => $this->relato_evento
+
+        );
+        $this->db->where("idfichaatencion",$this->idfichaatencion);
+        $result = $this->db->update("ficha_atencion_antecedentes", $data);
+        if($result) return true;
+        else return false;
+    }
+
+    public function actualizarFichaAtencion_examen_fisico()
+    {
+        $data = array(
+
+            "examen_cabeza" => $this->examen_cabeza,
+            "examen_cuello" => $this->examen_cuello,
+            "examen_piel_tcsc" => $this->examen_piel_tcsc,
+            "examen_aparato_respiratorio" => $this->examen_aparato_respiratorio,
+            "examen_aparato_cardiovascular" => $this->examen_aparato_cardiovascular,
+            "examen_aparato_digestivo" => $this->examen_aparato_digestivo,
+            "examen_genito_urinario" => $this->examen_genito_urinario,
+            "examen_sistema_osteomioaticular" => $this->examen_sistema_osteomioaticular,
+            "examen_neurologico" => $this->examen_neurologico
+
+        );
+        $this->db->where("idfichaatencion",$this->idfichaatencion);
+        $result = $this->db->update("ficha_atencion_examen_fisico", $data);
+        if($result) return true;
+        else return false;
+    }
+
+    public function actualizarFichaAtencion_mecanismo_lesion()
+    {
+        $data = array(
+
+            "tipo_victima" => $this->tipo_victima,
+            "tipo_vehiculo" => $this->tipo_vehiculo,
+            "tipo_vehiculo_descripcion" => $this->tipo_vehiculo_descripcion,
+            "bolsa" => $this->bolsa,
+            "cinturon" => $this->cinturon,
+            "casco" => $this->casco,
+            "ropa" => $this->ropa,
+            "cinamatica" => $this->cinamatica,
+            "ubicacion" => $this->ubicacion 
+
+        );
+        $this->db->where("idfichaatencion",$this->idfichaatencion);
+        $result = $this->db->update("ficha_atencion_mecanismo_lesion", $data);
+        if($result) return true;
+        else return false;
+    }
+
+    
+    public function actualizarFichaAtencion_procedimientos()
+    {
+        $data = array(
+
+            "oxigenoterapia" => $this->oxigenoterapia,
+            "fluidoterapia" => $this->fluidoterapia,
+            "rcp" => $this->rcp,
+            "uso_dea" => $this->uso_dea,
+            "cardioversion" => $this->cardioversion,
+            "cardioversion_selectiva" => $this->cardioversion_selectiva,
+            "monitoreo_cardiaco" => $this->monitoreo_cardiaco,
+            "ventilacion_mecanica" => $this->ventilacion_mecanica,
+            "ippb" => $this->ippb,
+            "tratamiento_inhalacion" => $this->tratamiento_inhalacion,
+            "inmovilizacion_completa" => $this->inmovilizacion_completa,
+            "inmovilizacion_parcial" => $this->inmovilizacion_parcial,
+            "vendaje" => $this->vendaje,
+            "sondaje" => $this->sondaje,
+            "sedacion" => $this->sedacion,
+            "intubacion" => $this->intubacion,
+            "traqueostomia" => $this->traqueostomia,
+            "curacion" => $this->curacion,
+            "satura" => $this->satura,
+            "cuerpo_extrano" => $this->cuerpo_extrano,
+            "hemostacia" => $this->hemostacia,
+            "taponamiento_nasal" => $this->taponamiento_nasal,
+            "infusion_intraosea" => $this->infusion_intraosea,
+            "aspiracion_secreciones" => $this->aspiracion_secreciones,
+            "hemoglucotest" => $this->hemoglucotest,
+            "nebulizacion" => $this->nebulizacion,
+            "ocurrencias_atencion" => $this->ocurrencias_atencion 
+
+        );
+        $this->db->where("idfichaatencion",$this->idfichaatencion);
+        $result = $this->db->update("ficha_atencion_procedimientos", $data);
+        if($result) return true;
+        else return false;
+    }
+
+    public function actualizarFichaAtencion_tripulacion()
+    {
+        $data = array(
+
+            "idtipodocumento_medico" => $this->idtipodocumento_medico,
+            "numero_documento_medico" => $this->numero_documento_medico,
+            "nombre_completo_medico" => $this->nombre_completo_medico,
+            "idtipodocumento_enfermero" => $this->idtipodocumento_enfermero,
+            "numero_documento_enfermero" => $this->numero_documento_enfermero,
+            "nombre_completo_enfermero" => $this->nombre_completo_enfermero,
+            "idtipodocumento_piloto" => $this->idtipodocumento_piloto,
+            "numero_documento_piloto" => $this->numero_documento_piloto,
+            "nombre_completo_piloto" => $this->nombre_completo_piloto,
+            "idtipodocumento_medico_regulador" => $this->idtipodocumento_medico_regulador,
+            "numero_documento_medico_regulador" => $this->numero_documento_medico_regulador,
+            "nombre_completo_medico_regulador" => $this->nombre_completo_medico_regulador,
+            "ficha_regulacion" => $this->ficha_regulacion,
+            "idtipodocumento_profesional_receptor" => $this->idtipodocumento_profesional_receptor,
+            "numero_documento_profesional_receptor" => $this->numero_documento_profesional_receptor,
+            "nombre_completo_profesional_receptor" => $this->nombre_completo_profesional_receptor,
+            "idtipodocumento_medico_receptor" => $this->idtipodocumento_medico_receptor,
+            "numero_documento_medico_receptor" => $this->numero_documento_medico_receptor,
+            "nombre_completo_medico_receptor" => $this->nombre_completo_medico_receptor,
+            "idrenipress" => $this->idrenipress,
+            "hora_llegada_es" => $this->hora_llegada_es,
+            "hora_recepcion_paciente" => $this->hora_recepcion_paciente,
+            "hora_salida_es" => $this->hora_salida_es,
+            "camilla_retenida" => $this->camilla_retenida,
+            "camilla_retenida_minutos" => $this->camilla_retenida_minutos,
+            "numero_colegiatura_medico" => $this->numero_colegiatura_medico,
+            "numero_colegiatura_enfermero" => $this->numero_colegiatura_enfermero,
+            "numero_licencia_piloto" => $this->numero_licencia_piloto,
+            "numero_colegiatura_medico_regulador" => $this->numero_colegiatura_medico_regulador,
+            "numero_colegiatura_medico_receptor" => $this->numero_colegiatura_medico_receptor
+
+        );
+        $this->db->where("idfichaatencion",$this->idfichaatencion);
+        $result = $this->db->update("ficha_atencion_tripulacion", $data);
+        if($result) return true;
+        else return false;
+    }
+
     public function actualizarAmbulancia()
     {
         $data = array(
@@ -671,9 +863,9 @@ class Fichaatencion_model extends CI_Model
 
     public function obtener_Principal_Ficha()
     {
-        $this->db->select("fa.*");
-        $this->db->from("ficha_atencion fa");
-        //$this->db->join("");
+        $this->db->select("fa.*, if(fa.activo = 1, 'Activo', 'Inactivo') as estado, td.tipo_documento, DATE_FORMAT(fa.fecha_nacimiento,'%Y/%m/%d') as fecha_nacimiento, DATE_FORMAT(fa.fecha_ocurrencia,'%Y/%m/%d') as fecha_ocurrencia ");
+        $this->db->from("ficha_atencion fa, tipo_documento td");
+        $this->db->where("fa.idtipodocumento = td.idtipodocumento");
         $this->db->where("fa.idfichaatencion", $this->idfichaatencion);
         return $this->db->get();
     }
@@ -767,7 +959,44 @@ class Fichaatencion_model extends CI_Model
 
     /* Fin de Obtención de Datps */
 
+    public function eliminarMomentoEvaluacion()
+    {
+        $this->db->db_debug = FALSE;
+        $this->db->where("idfichaatencion", $this->idfichaatencion);
+        $error = array();
+        if ($this->db->delete('ficha_atencion_momento_evaluacion'))
+            return 1;
+            else {
+                $error = $this->db->error();
+                return $error["code"];
+            }
+    }
 
+    public function eliminarCIE10()
+    {
+        $this->db->db_debug = FALSE;
+        $this->db->where("idfichaatencion", $this->idfichaatencion);
+        $error = array();
+        if ($this->db->delete('ficha_atencion_cie10'))
+            return 1;
+            else {
+                $error = $this->db->error();
+                return $error["code"];
+            }
+    }
+
+    public function eliminarFichaMedicamentos()
+    {
+        $this->db->db_debug = FALSE;
+        $this->db->where("idfichaatencion", $this->idfichaatencion);
+        $error = array();
+        if ($this->db->delete('ficha_atencion_medicacion'))
+            return 1;
+            else {
+                $error = $this->db->error();
+                return $error["code"];
+            }
+    }
 }
 
 

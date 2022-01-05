@@ -366,9 +366,9 @@ class Main extends CI_Controller
                 $this->crearMomentoEvaluacion($idfichaatencion, $tipo, $temperaperatura, $frecuencia_cardiaca, $presion_arterial, $frecuencia_respiratoria,
                 $saturacion_exigeno, $glicemia, $glasgow_ocular, $glasgow_verbal, $glasgow_motora, $pupilas_tipo, $pupilas_reactiva);
                 $rptaeliminarCIE10 = $this->Fichaatencion_model->eliminarCIE10();
-                $this->crearCIE10($cie10lista, $id);
+                $this->crearCIE10($cie10lista, $idfichaatencion);
                 $rptaeliminarFichaMed = $this->Fichaatencion_model->eliminarFichaMedicamentos();
-                $this->crearFichaMedicamentos($id, $dosis, $hora,$idarticulo);
+                $this->crearFichaMedicamentos($idfichaatencion, $dosis, $hora,$idarticulo);
 
                 $status = 200;
                 $message = "Ficha de Atención actualizada exitosamente";
